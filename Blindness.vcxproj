@@ -19,60 +19,60 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="_MVSI\_\Audio.hpp" />
-    <ClInclude Include="_MVSI\_\Audio\Music.hpp" />
-    <ClInclude Include="_MVSI\_\Audio\Sound.hpp" />
-    <ClInclude Include="_MVSI\_\Debug.hpp" />
-    <ClInclude Include="_MVSI\_\Debug\Assert.hpp" />
-    <ClInclude Include="_MVSI\_\Debug\Assert\Error.hpp" />
-    <ClInclude Include="_MVSI\_\Debug\Assert\Error\SimpleDirectMediaLayer.hpp" />
-    <ClInclude Include="_MVSI\_\Debug\Assert\Information.hpp" />
-    <ClInclude Include="_MVSI\_\Debug\Assert\Information\SimpleDirectMediaLayer.hpp" />
-    <ClInclude Include="_MVSI\_\Debug\Assert\Warning.hpp" />
-    <ClInclude Include="_MVSI\_\Debug\Assert\Warning\SimpleDirectMediaLayer.hpp" />
-    <ClInclude Include="_MVSI\_\Input.hpp" />
-    <ClInclude Include="_MVSI\_\Input\Keyboard.hpp" />
-    <ClInclude Include="_MVSI\_\Input\Mouse.hpp" />
-    <ClInclude Include="_MVSI\_\Input\Mouse\Button.hpp" />
-    <ClInclude Include="_MVSI\_\Input\Mouse\Cursor.hpp" />
-    <ClInclude Include="_MVSI\_\Input\Mouse\Cursor\X.hpp" />
-    <ClInclude Include="_MVSI\_\Input\Mouse\Cursor\Y.hpp" />
-    <ClInclude Include="_MVSI\_\Input\Mouse\Wheel.hpp" />
-    <ClInclude Include="_MVSI\_\Interface.hpp" />
-    <ClInclude Include="_MVSI\_\Level.hpp" />
-    <ClInclude Include="_MVSI\_\Level\Rotation.hpp" />
-    <ClInclude Include="_MVSI\_\Level\Translation.hpp" />
-    <ClInclude Include="_MVSI\_\Blindness.hpp" />
-    <ClInclude Include="_MVSI\_\Time.hpp" />
-    <ClInclude Include="_MVSI\_\Video.hpp" />
+    <ClInclude Include="_Input\_\Audio.hpp" />
+    <ClInclude Include="_Input\_\Audio\Music.hpp" />
+    <ClInclude Include="_Input\_\Audio\Sound.hpp" />
+    <ClInclude Include="_Input\_\Blindness.hpp" />
+    <ClInclude Include="_Input\_\Debug.hpp" />
+    <ClInclude Include="_Input\_\Debug\Assert.hpp" />
+    <ClInclude Include="_Input\_\Debug\Assert\Error.hpp" />
+    <ClInclude Include="_Input\_\Debug\Assert\Error\SimpleDirectMediaLayer.hpp" />
+    <ClInclude Include="_Input\_\Debug\Assert\Information.hpp" />
+    <ClInclude Include="_Input\_\Debug\Assert\Information\SimpleDirectMediaLayer.hpp" />
+    <ClInclude Include="_Input\_\Debug\Assert\Warning.hpp" />
+    <ClInclude Include="_Input\_\Debug\Assert\Warning\SimpleDirectMediaLayer.hpp" />
+    <ClInclude Include="_Input\_\Input.hpp" />
+    <ClInclude Include="_Input\_\Input\Keyboard.hpp" />
+    <ClInclude Include="_Input\_\Input\Mouse.hpp" />
+    <ClInclude Include="_Input\_\Input\Mouse\Button.hpp" />
+    <ClInclude Include="_Input\_\Input\Mouse\Cursor.hpp" />
+    <ClInclude Include="_Input\_\Input\Mouse\Cursor\X.hpp" />
+    <ClInclude Include="_Input\_\Input\Mouse\Cursor\Y.hpp" />
+    <ClInclude Include="_Input\_\Input\Mouse\Wheel.hpp" />
+    <ClInclude Include="_Input\_\Interface.hpp" />
+    <ClInclude Include="_Input\_\Level.hpp" />
+    <ClInclude Include="_Input\_\Level\Rotation.hpp" />
+    <ClInclude Include="_Input\_\Level\Translation.hpp" />
+    <ClInclude Include="_Input\_\Time.hpp" />
+    <ClInclude Include="_Input\_\Video.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="_MVSI\_\Audio.cpp" />
-    <ClCompile Include="_MVSI\_\Audio\Music.cpp" />
-    <ClCompile Include="_MVSI\_\Audio\Sound.cpp" />
-    <ClCompile Include="_MVSI\_\Debug.cpp" />
-    <ClCompile Include="_MVSI\_\Debug\Assert.cpp" />
-    <ClCompile Include="_MVSI\_\Debug\Assert\Error.cpp" />
-    <ClCompile Include="_MVSI\_\Debug\Assert\Error\SimpleDirectMediaLayer.cpp" />
-    <ClCompile Include="_MVSI\_\Debug\Assert\Information.cpp" />
-    <ClCompile Include="_MVSI\_\Debug\Assert\Information\SimpleDirectMediaLayer.cpp" />
-    <ClCompile Include="_MVSI\_\Debug\Assert\Warning.cpp" />
-    <ClCompile Include="_MVSI\_\Debug\Assert\Warning\SimpleDirectMediaLayer.cpp" />
-    <ClCompile Include="_MVSI\_\Input.cpp" />
-    <ClCompile Include="_MVSI\_\Input\Keyboard.cpp" />
-    <ClCompile Include="_MVSI\_\Input\Mouse.cpp" />
-    <ClCompile Include="_MVSI\_\Input\Mouse\Button.cpp" />
-    <ClCompile Include="_MVSI\_\Input\Mouse\Cursor.cpp" />
-    <ClCompile Include="_MVSI\_\Input\Mouse\Cursor\X.cpp" />
-    <ClCompile Include="_MVSI\_\Input\Mouse\Cursor\Y.cpp" />
-    <ClCompile Include="_MVSI\_\Input\Mouse\Wheel.cpp" />
-    <ClCompile Include="_MVSI\_\Interface.cpp" />
-    <ClCompile Include="_MVSI\_\Level.cpp" />
-    <ClCompile Include="_MVSI\_\Level\Rotation.cpp" />
-    <ClCompile Include="_MVSI\_\Level\Translation.cpp" />
-    <ClCompile Include="_MVSI\_\Blindness.cpp" />
-    <ClCompile Include="_MVSI\_\Time.cpp" />
-    <ClCompile Include="_MVSI\_\Video.cpp" />
+    <ClCompile Include="_Input\_\Audio.cpp" />
+    <ClCompile Include="_Input\_\Audio\Music.cpp" />
+    <ClCompile Include="_Input\_\Audio\Sound.cpp" />
+    <ClCompile Include="_Input\_\Blindness.cpp" />
+    <ClCompile Include="_Input\_\Debug.cpp" />
+    <ClCompile Include="_Input\_\Debug\Assert.cpp" />
+    <ClCompile Include="_Input\_\Debug\Assert\Error.cpp" />
+    <ClCompile Include="_Input\_\Debug\Assert\Error\SimpleDirectMediaLayer.cpp" />
+    <ClCompile Include="_Input\_\Debug\Assert\Information.cpp" />
+    <ClCompile Include="_Input\_\Debug\Assert\Information\SimpleDirectMediaLayer.cpp" />
+    <ClCompile Include="_Input\_\Debug\Assert\Warning.cpp" />
+    <ClCompile Include="_Input\_\Debug\Assert\Warning\SimpleDirectMediaLayer.cpp" />
+    <ClCompile Include="_Input\_\Input.cpp" />
+    <ClCompile Include="_Input\_\Input\Keyboard.cpp" />
+    <ClCompile Include="_Input\_\Input\Mouse.cpp" />
+    <ClCompile Include="_Input\_\Input\Mouse\Button.cpp" />
+    <ClCompile Include="_Input\_\Input\Mouse\Cursor.cpp" />
+    <ClCompile Include="_Input\_\Input\Mouse\Cursor\X.cpp" />
+    <ClCompile Include="_Input\_\Input\Mouse\Cursor\Y.cpp" />
+    <ClCompile Include="_Input\_\Input\Mouse\Wheel.cpp" />
+    <ClCompile Include="_Input\_\Interface.cpp" />
+    <ClCompile Include="_Input\_\Level.cpp" />
+    <ClCompile Include="_Input\_\Level\Rotation.cpp" />
+    <ClCompile Include="_Input\_\Level\Translation.cpp" />
+    <ClCompile Include="_Input\_\Time.cpp" />
+    <ClCompile Include="_Input\_\Video.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -127,20 +127,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>_MVSO\$(Platform)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)_MVSO\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>_Output\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)_Output\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>_MVSO\$(Platform)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)_MVSO\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>_Output\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)_Output\$(Platform)\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)_MVSO\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>_MVSO\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)_Output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>_Output\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)_MVSO\$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>_MVSO\$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)_Output\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>_Output\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -148,7 +148,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)_MVSI\_\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)_Input\_\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -161,7 +161,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)_MVSI\_\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)_Input\_\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -172,7 +172,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)_MVSI\_\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)_Input\_\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -187,7 +187,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)_MVSI\_\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)_Input\_\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -196,7 +196,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)_MVSI\_\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)_Input\_\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -209,7 +209,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)_MVSI\_\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)_Input\_\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -220,7 +220,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)_MVSI\_\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)_Input\_\</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -235,7 +235,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)_MVSI\_\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)_Input\_\</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
