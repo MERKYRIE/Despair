@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="_MVSI\_\Audio.hpp" />
+    <ClInclude Include="_MVSI\_\Debug.hpp" />
+    <ClInclude Include="_MVSI\_\Input.hpp" />
+    <ClInclude Include="_MVSI\_\Interface.hpp" />
+    <ClInclude Include="_MVSI\_\Level.hpp" />
+    <ClInclude Include="_MVSI\_\Blindness.hpp" />
+    <ClInclude Include="_MVSI\_\Time.hpp" />
+    <ClInclude Include="_MVSI\_\Video.hpp" />
+    <ClInclude Include="_MVSI\_\Audio\Music.hpp">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Audio\Sound.hpp">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Input\Keyboard.hpp">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Input\Mouse.hpp">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Input\Mouse\Button.hpp">
+      <Filter>Input\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Input\Mouse\Cursor.hpp">
+      <Filter>Input\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Input\Mouse\Wheel.hpp">
+      <Filter>Input\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Input\Mouse\Cursor\X.hpp">
+      <Filter>Input\Mouse\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Input\Mouse\Cursor\Y.hpp">
+      <Filter>Input\Mouse\Cursor</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Level\Rotation.hpp">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Level\Translation.hpp">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Debug\Assert.hpp">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Debug\Assert\Error.hpp">
+      <Filter>Debug\Assert</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Debug\Assert\Information.hpp">
+      <Filter>Debug\Assert</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Debug\Assert\Warning.hpp">
+      <Filter>Debug\Assert</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Debug\Assert\Error\SimpleDirectMediaLayer.hpp">
+      <Filter>Debug\Assert\Error</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Debug\Assert\Information\SimpleDirectMediaLayer.hpp">
+      <Filter>Debug\Assert\Information</Filter>
+    </ClInclude>
+    <ClInclude Include="_MVSI\_\Debug\Assert\Warning\SimpleDirectMediaLayer.hpp">
+      <Filter>Debug\Assert\Warning</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="_MVSI\_\Audio.cpp" />
+    <ClCompile Include="_MVSI\_\Debug.cpp" />
+    <ClCompile Include="_MVSI\_\Input.cpp" />
+    <ClCompile Include="_MVSI\_\Interface.cpp" />
+    <ClCompile Include="_MVSI\_\Level.cpp" />
+    <ClCompile Include="_MVSI\_\Blindness.cpp" />
+    <ClCompile Include="_MVSI\_\Time.cpp" />
+    <ClCompile Include="_MVSI\_\Video.cpp" />
+    <ClCompile Include="_MVSI\_\Audio\Music.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Audio\Sound.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Input\Keyboard.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Input\Mouse.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Input\Mouse\Button.cpp">
+      <Filter>Input\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Input\Mouse\Cursor.cpp">
+      <Filter>Input\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Input\Mouse\Wheel.cpp">
+      <Filter>Input\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Input\Mouse\Cursor\X.cpp">
+      <Filter>Input\Mouse\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Input\Mouse\Cursor\Y.cpp">
+      <Filter>Input\Mouse\Cursor</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Level\Rotation.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Level\Translation.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Debug\Assert.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Debug\Assert\Error.cpp">
+      <Filter>Debug\Assert</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Debug\Assert\Information.cpp">
+      <Filter>Debug\Assert</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Debug\Assert\Warning.cpp">
+      <Filter>Debug\Assert</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Debug\Assert\Error\SimpleDirectMediaLayer.cpp">
+      <Filter>Debug\Assert\Error</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Debug\Assert\Information\SimpleDirectMediaLayer.cpp">
+      <Filter>Debug\Assert\Information</Filter>
+    </ClCompile>
+    <ClCompile Include="_MVSI\_\Debug\Assert\Warning\SimpleDirectMediaLayer.cpp">
+      <Filter>Debug\Assert\Warning</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{35fbefcf-1c5f-4369-9166-b0883398eb38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{46d65883-0d98-46f9-b016-d8825e09bcc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{54140fa3-003e-4f5e-95c9-d5a2643fac57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{d5cc8401-16dc-4b9b-8a6c-7c84123770b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Mouse">
+      <UniqueIdentifier>{d20faeb9-7edf-4462-a6c2-dda9fde801cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Mouse\Cursor">
+      <UniqueIdentifier>{9ba30faa-b12b-48de-ad8c-7cb495e0b752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug\Assert">
+      <UniqueIdentifier>{e3756810-8199-4c7f-bbd8-cf0929ffb0d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug\Assert\Error">
+      <UniqueIdentifier>{1fe0b0ea-d73d-49e2-badd-4720388e0047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug\Assert\Information">
+      <UniqueIdentifier>{cacbe58e-188d-4622-96ce-a5d3f866f550}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug\Assert\Warning">
+      <UniqueIdentifier>{8bb306ac-2aac-4b39-8f33-a21949a52824}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

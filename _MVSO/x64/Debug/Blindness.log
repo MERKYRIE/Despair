@@ -1,0 +1,34 @@
+﻿  Audio.cpp
+  Debug.cpp
+  Input.cpp
+  Interface.cpp
+  Level.cpp
+  Blindness.cpp
+  Time.cpp
+  Video.cpp
+  Generating Code...
+  Music.cpp
+  Sound.cpp
+  Generating Code...
+  Assert.cpp
+  Error.cpp
+  Information.cpp
+  Warning.cpp
+  Generating Code...
+  SimpleDirectMediaLayer.cpp
+  SimpleDirectMediaLayer.cpp
+  SimpleDirectMediaLayer.cpp
+  Keyboard.cpp
+  Mouse.cpp
+  Generating Code...
+  Button.cpp
+  Cursor.cpp
+  Wheel.cpp
+  Generating Code...
+  X.cpp
+  Y.cpp
+  Generating Code...
+  Rotation.cpp
+  Translation.cpp
+  Generating Code...
+  Blindness.vcxproj -> D:\Programs\_Studio\Projects\Blindness\_MVSO\x64\Debug\Blindness.exe
