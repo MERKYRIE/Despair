@@ -1,5 +1,7 @@
 #include"Video.hpp"
 
+#include"Video\\Atlas.hpp"
+
 #include"Debug\\Assert\\Error.hpp"
 #include"Debug\\Assert\\Error\\SimpleDirectMediaLayer.hpp"
 
@@ -20,6 +22,7 @@ namespace NBlindness{
         glEnable(GL_CULL_FACE);
         glCullFace(GL_FRONT);
         NDebug::NAssert::GError.FOpenGraphicsLibrary();
+        NVideo::GAtlas.FInitialize();
     }
 
     void CVideo::FPreupdate(){
@@ -31,6 +34,7 @@ namespace NBlindness{
     }
 
     void CVideo::FDeinitialize(){
+        NVideo::GAtlas.FDeinitialize();
         SDL_GL_DeleteContext(VContext);
         SDL_DestroyWindow(VWindow);
     }

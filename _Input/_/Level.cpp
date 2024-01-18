@@ -3,44 +3,47 @@
 #include"Level\\Rotation.hpp"
 #include"Level\\Translation.hpp"
 
-#include"Debug\\Assert\\Error.hpp"
-#include"Debug\\Assert\\Error\\SimpleDirectMediaLayer.hpp"
 #include"Video.hpp"
+#include"Video\\Atlas.hpp"
 
 namespace NBlindness{
     void CLevel::FInitialize(){
         NLevel::GRotation.FInitialize();
         NLevel::GTranslation.FInitialize();
-        NDebug::NAssert::NError::GSimpleDirectMediaLayer.FFlags(IMG_Init(IMG_INIT_PNG));
-        SDL_Surface* LSurface{IMG_Load("Textures\\edoor01_1.png")};
-        NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(LSurface);
-        std::uint32_t LTexture;
-        glGenTextures(1 , &LTexture);
-        glBindTexture(GL_TEXTURE_2D , LTexture);
-        glTexImage2D(GL_TEXTURE_2D , 0 , GL_RGB , LSurface->w , LSurface->h , 0 , GL_RGB , GL_UNSIGNED_BYTE , LSurface->pixels);
-        glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MIN_FILTER , GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MAG_FILTER , GL_NEAREST);
-        NDebug::NAssert::GError.FOpenGraphicsLibrary();
-        SDL_FreeSurface(LSurface);
+        std::uint32_t LFloor{NVideo::GAtlas.FTexture("\\sfloor4_5.png")};
+        std::uint32_t LWall000{NVideo::GAtlas.FTexture("\\twall2_3.png")};
+        std::uint32_t LWall010{NVideo::GAtlas.FTexture("\\twall2_5.png")};
+        std::uint32_t LWall020{NVideo::GAtlas.FTexture("\\twall2_6.png")};
+        std::uint32_t LWall110{NVideo::GAtlas.FTexture("\\twall5_3.png")};
+        std::uint32_t LWall210{NVideo::GAtlas.FTexture("\\uwall1_2.png")};
+        std::uint32_t LCeiling{NVideo::GAtlas.FTexture("\\plat_top1.png")};
         for(std::uintmax_t LX{0} ; LX < VSpace.size() ; LX++){
             for(std::uintmax_t LY{0} ; LY < VSpace[0].size() ; LY++){
                 for(std::uintmax_t LZ{0} ; LZ < VSpace[0][0].size() ; LZ++){
-                    VSpace[LX][LY][LZ].VLeftward = LTexture;
-                    VSpace[LX][LY][LZ].VRightward = LTexture;
-                    VSpace[LX][LY][LZ].VBackward = LTexture;
-                    VSpace[LX][LY][LZ].VForward = LTexture;
-                    VSpace[LX][LY][LZ].VDownward = LTexture;
-                    VSpace[LX][LY][LZ].VUpward = LTexture;
+                    VSpace[LX][LY][LZ].VLeftward = LWall000;
+                    VSpace[LX][LY][LZ].VRightward = LWall000;
+                    VSpace[LX][LY][LZ].VBackward = LWall000;
+                    VSpace[LX][LY][LZ].VForward = LWall000;
+                    VSpace[LX][LY][LZ].VDownward = LFloor;
+                    VSpace[LX][LY][LZ].VUpward = LCeiling;
                 }
             }
         }
+        VSpace[0][2][0].VForward = LWall020;
+        VSpace[0][2][0].VLeftward = LWall020;
+        VSpace[0][2][0].VRightward = LWall020;
         VSpace[0][2][0].VBackward = 0;
 
-        VSpace[0][1][0].VForward = 0;
-        VSpace[0][1][0].VRightward = 0; VSpace[1][1][0].VLeftward = 0; VSpace[1][1][0].VRightward = 0; VSpace[2][1][0].VLeftward = 0;
-        VSpace[0][1][0].VBackward = 0;
+        VSpace[0][1][0].VForward = 0;         VSpace[1][1][0].VForward = LWall110;  VSpace[2][1][0].VForward = LWall210;
+        VSpace[0][1][0].VLeftward = LWall010; VSpace[1][1][0].VLeftward = 0;        VSpace[2][1][0].VLeftward = 0;
+        VSpace[0][1][0].VRightward = 0;       VSpace[1][1][0].VRightward = 0;       VSpace[2][1][0].VRightward = LWall210;
+                                              VSpace[1][1][0].VBackward = LWall110; VSpace[2][1][0].VBackward = LWall210;
+        VSpace[0][1][0].VBackward = 0;        
 
         VSpace[0][0][0].VForward = 0;
+        VSpace[0][0][0].VLeftward = LWall000;
+        VSpace[0][0][0].VRightward = LWall000;
+        VSpace[0][0][0].VBackward = LWall000;
         VList = glGenLists(1);
         glNewList(VList , GL_COMPILE);
         for(std::uintmax_t LX{0} ; LX < VSpace.size() ; LX++){
@@ -145,7 +148,6 @@ namespace NBlindness{
 
     void CLevel::FDeinitialize(){
         glDeleteLists(VList , 1);
-        IMG_Quit();
     }
 
     bool CLevel::FCollision(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){

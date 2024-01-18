@@ -41,14 +41,14 @@ namespace NBlindness::NLevel{
     }
 
     std::uintmax_t CTranslation::FX(){
-        return static_cast<std::uintmax_t>(VX - 0.5);
+        return static_cast<std::uintmax_t>(std::round(VX - 0.5));
     }
 
     std::uintmax_t CTranslation::FY(){
-        return static_cast<std::uintmax_t>(VY - 0.5);
+        return static_cast<std::uintmax_t>(std::round(VY - 0.5));
     }
 
     std::uintmax_t CTranslation::FZ(){
-        return static_cast<std::uintmax_t>(VZ - 0.5);
+        return static_cast<std::uintmax_t>(std::round(VZ - 0.5));
     }
 }

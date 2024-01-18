@@ -45,6 +45,8 @@
     <ClInclude Include="_Input\_\Level\Translation.hpp" />
     <ClInclude Include="_Input\_\Time.hpp" />
     <ClInclude Include="_Input\_\Video.hpp" />
+    <ClInclude Include="_Input\_\Video\Atlas.hpp" />
+    <ClInclude Include="_Input\_\Video\Atlas\Texture.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
@@ -73,6 +75,8 @@
     <ClCompile Include="_Input\_\Level\Translation.cpp" />
     <ClCompile Include="_Input\_\Time.cpp" />
     <ClCompile Include="_Input\_\Video.cpp" />
+    <ClCompile Include="_Input\_\Video\Atlas.cpp" />
+    <ClCompile Include="_Input\_\Video\Atlas\Texture.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

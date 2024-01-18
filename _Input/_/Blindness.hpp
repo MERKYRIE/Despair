@@ -1,10 +1,12 @@
 #pragma once
 
 #include<array>
+#include<filesystem>
 #include<iostream>
 #include<numbers>
 #include<source_location>
 #include<string>
+#include<vector>
 
 #pragma warning(push)
 #pragma warning(disable : 4267 6385 26451 26495 26819 33010)

@@ -63,6 +63,12 @@
     <ClInclude Include="_Input\_\Debug\Assert\Warning\SimpleDirectMediaLayer.hpp">
       <Filter>Debug\Assert\Warning</Filter>
     </ClInclude>
+    <ClInclude Include="_Input\_\Video\Atlas.hpp">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Video\Atlas\Texture.hpp">
+      <Filter>Video\Atlas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
@@ -127,6 +133,12 @@
     <ClCompile Include="_Input\_\Debug\Assert\Warning\SimpleDirectMediaLayer.cpp">
       <Filter>Debug\Assert\Warning</Filter>
     </ClCompile>
+    <ClCompile Include="_Input\_\Video\Atlas.cpp">
+      <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Video\Atlas\Texture.cpp">
+      <Filter>Video\Atlas</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -158,6 +170,12 @@
     </Filter>
     <Filter Include="Audio">
       <UniqueIdentifier>{11b354de-f084-4c52-9052-1c1d0e113caa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Video">
+      <UniqueIdentifier>{e2c279e3-21f1-4ace-a7c3-772b84c57d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Video\Atlas">
+      <UniqueIdentifier>{6eef4b2b-ae9e-4c0d-be00-6e206492ae58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
