@@ -1,33 +1,37 @@
-#include"Music.hpp"
+#include"Track.hpp"
 
 #include"Debug\\Assert\\Error\\SimpleDirectMediaLayer.hpp"
 
-namespace NBlindness::NAudio{
-    CMusic::CMusic(const std::string& PPath){
+namespace NBlindness::NAudio::NSoundtrack{
+    CTrack::CTrack(const std::string& PPath){
         NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(VData = Mix_LoadMUS(PPath.c_str()));
     }
 
-    CMusic& CMusic::FPlay(){
+    std::string CTrack::FPath() const{
+        return VPath;
+    }
+
+    CTrack& CTrack::FPlay(){
         NDebug::NAssert::NError::GSimpleDirectMediaLayer.FCode(Mix_PlayMusic(VData , 0));
         return *this;
     }
 
-    CMusic& CMusic::FPause(){
+    CTrack& CTrack::FPause(){
         Mix_PauseMusic();
         return *this;
     }
 
-    CMusic& CMusic::FResume(){
+    CTrack& CTrack::FResume(){
         Mix_ResumeMusic();
         return *this;
     }
 
-    CMusic& CMusic::FStop(){
+    CTrack& CTrack::FStop(){
         Mix_HaltMusic();
         return *this;
     }
 
-    CMusic::~CMusic(){
+    CTrack::~CTrack(){
         Mix_FreeMusic(VData);
     }
 }

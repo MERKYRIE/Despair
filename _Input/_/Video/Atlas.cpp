@@ -2,8 +2,6 @@
 
 #include"Atlas\\Texture.hpp"
 
-#include"Debug\\Assert.hpp"
-#include"Debug\\Assert\\Error.hpp"
 #include"Debug\\Assert\\Error\\SimpleDirectMediaLayer.hpp"
 
 namespace NBlindness::NVideo{

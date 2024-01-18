@@ -1,5 +1,7 @@
 #include"Audio.hpp"
 
+#include"Audio\\Soundtrack.hpp"
+
 #include"Debug\\Assert.hpp"
 #include"Debug\\Assert\\Error\\SimpleDirectMediaLayer.hpp"
 
@@ -13,9 +15,11 @@ namespace NBlindness{
         NDebug::GAssert.FError(!Mix_QuerySpec(&LFrequency , &LFormat , &LChannels));
         NDebug::GAssert.FError(LFrequency != MIX_DEFAULT_FREQUENCY || LFormat != MIX_DEFAULT_FORMAT || LChannels != MIX_DEFAULT_CHANNELS);
         NDebug::GAssert.FError(Mix_AllocateChannels(0));
+        NAudio::GSoundtrack.FInitialize();
     }
 
     void CAudio::FDeinitialize(){
+        NAudio::GSoundtrack.FDeinitialize();
         Mix_CloseAudio();
         Mix_Quit();
     }

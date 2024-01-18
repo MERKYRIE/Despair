@@ -20,8 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_Input\_\Audio.hpp" />
-    <ClInclude Include="_Input\_\Audio\Music.hpp" />
     <ClInclude Include="_Input\_\Audio\Sound.hpp" />
+    <ClInclude Include="_Input\_\Audio\Soundtrack.hpp" />
+    <ClInclude Include="_Input\_\Audio\Soundtrack\Track.hpp" />
     <ClInclude Include="_Input\_\Blindness.hpp" />
     <ClInclude Include="_Input\_\Debug.hpp" />
     <ClInclude Include="_Input\_\Debug\Assert.hpp" />
@@ -50,8 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
-    <ClCompile Include="_Input\_\Audio\Music.cpp" />
     <ClCompile Include="_Input\_\Audio\Sound.cpp" />
+    <ClCompile Include="_Input\_\Audio\Soundtrack.cpp" />
+    <ClCompile Include="_Input\_\Audio\Soundtrack\Track.cpp" />
     <ClCompile Include="_Input\_\Blindness.cpp" />
     <ClCompile Include="_Input\_\Debug.cpp" />
     <ClCompile Include="_Input\_\Debug\Assert.cpp" />

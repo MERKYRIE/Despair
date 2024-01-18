@@ -9,9 +9,6 @@
     <ClInclude Include="_Input\_\Level.hpp" />
     <ClInclude Include="_Input\_\Time.hpp" />
     <ClInclude Include="_Input\_\Video.hpp" />
-    <ClInclude Include="_Input\_\Audio\Music.hpp">
-      <Filter>Audio</Filter>
-    </ClInclude>
     <ClInclude Include="_Input\_\Audio\Sound.hpp">
       <Filter>Audio</Filter>
     </ClInclude>
@@ -69,6 +66,12 @@
     <ClInclude Include="_Input\_\Video\Atlas\Texture.hpp">
       <Filter>Video\Atlas</Filter>
     </ClInclude>
+    <ClInclude Include="_Input\_\Audio\Soundtrack.hpp">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Audio\Soundtrack\Track.hpp">
+      <Filter>Audio\Soundtrack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
@@ -79,9 +82,6 @@
     <ClCompile Include="_Input\_\Level.cpp" />
     <ClCompile Include="_Input\_\Time.cpp" />
     <ClCompile Include="_Input\_\Video.cpp" />
-    <ClCompile Include="_Input\_\Audio\Music.cpp">
-      <Filter>Audio</Filter>
-    </ClCompile>
     <ClCompile Include="_Input\_\Audio\Sound.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
@@ -139,6 +139,12 @@
     <ClCompile Include="_Input\_\Video\Atlas\Texture.cpp">
       <Filter>Video\Atlas</Filter>
     </ClCompile>
+    <ClCompile Include="_Input\_\Audio\Soundtrack.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Audio\Soundtrack\Track.cpp">
+      <Filter>Audio\Soundtrack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -176,6 +182,9 @@
     </Filter>
     <Filter Include="Video\Atlas">
       <UniqueIdentifier>{6eef4b2b-ae9e-4c0d-be00-6e206492ae58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio\Soundtrack">
+      <UniqueIdentifier>{6b4696ed-6f46-4183-89dd-097447a19fed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
