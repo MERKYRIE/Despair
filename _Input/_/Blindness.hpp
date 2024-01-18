@@ -7,7 +7,7 @@
 #include<string>
 
 #pragma warning(push)
-#pragma warning(disable : 4267 6385 26495 26819 33010)
+#pragma warning(disable : 4267 6385 26451 26495 26819 33010)
 //#include"..\\CGALOSP\\Simple_cartesian.h"
 #include"..\\OpenAssetImportLibrary\\scene.h"
 #include"..\\OpenAssetImportLibrary\\cimport.h"

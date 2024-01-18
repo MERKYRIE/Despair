@@ -34,78 +34,97 @@ namespace NBlindness{
                 }
             }
         }
+        VSpace[0][2][0].VBackward = 0;
+
+        VSpace[0][1][0].VForward = 0;
+        VSpace[0][1][0].VRightward = 0; VSpace[1][1][0].VLeftward = 0; VSpace[1][1][0].VRightward = 0; VSpace[2][1][0].VLeftward = 0;
+        VSpace[0][1][0].VBackward = 0;
+
+        VSpace[0][0][0].VForward = 0;
         VList = glGenLists(1);
         glNewList(VList , GL_COMPILE);
         for(std::uintmax_t LX{0} ; LX < VSpace.size() ; LX++){
             for(std::uintmax_t LY{0} ; LY < VSpace[0].size() ; LY++){
                 for(std::uintmax_t LZ{0} ; LZ < VSpace[0][0].size() ; LZ++){
                     glColor4ub(255 , 255 , 255 , 255);
-                    glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VLeftward);
-                    glBegin(GL_QUADS);
-                        glTexCoord2f(0.0F , 1.0F);
-                        glVertex3f(LX + 0.0F , LY + 0.0F , LZ + 0.0F);
-                        glTexCoord2f(0.0F , 0.0F);
-                        glVertex3f(LX + 0.0F , LY + 0.0F , LZ + 1.0F);
-                        glTexCoord2f(1.0F , 0.0F);
-                        glVertex3f(LX + 0.0F , LY + 1.0F , LZ + 1.0F);
-                        glTexCoord2f(1.0F , 1.0F);
-                        glVertex3f(LX + 0.0F , LY + 1.0F , LZ + 0.0F);
-                    glEnd();
-                    glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VRightward);
-                    glBegin(GL_QUADS);
-                        glTexCoord2f(0.0F , 1.0F);
-                        glVertex3f(LX + 1.0F , LY + 1.0F , LZ + 0.0F);
-                        glTexCoord2f(0.0F , 0.0F);
-                        glVertex3f(LX + 1.0F , LY + 1.0F , LZ + 1.0F);
-                        glTexCoord2f(1.0F , 0.0F);
-                        glVertex3f(LX + 1.0F , LY + 0.0F , LZ + 1.0F);
-                        glTexCoord2f(1.0F , 1.0F);
-                        glVertex3f(LX + 1.0F , LY + 0.0F , LZ + 0.0F);
-                    glEnd();
-                    glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VBackward);
-                    glBegin(GL_QUADS);
-                        glTexCoord2f(0.0F , 1.0F);
-                        glVertex3f(LX + 1.0F , LY + 0.0F , LZ + 0.0F);
-                        glTexCoord2f(0.0F , 0.0F);
-                        glVertex3f(LX + 1.0F , LY + 0.0F , LZ + 1.0F);
-                        glTexCoord2f(1.0F , 0.0F);
-                        glVertex3f(LX + 0.0F , LY + 0.0F , LZ + 1.0F);
-                        glTexCoord2f(1.0F , 1.0F);
-                        glVertex3f(LX + 0.0F , LY + 0.0F , LZ + 0.0F);
-                    glEnd();
-                    glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VForward);
-                    glBegin(GL_QUADS);
-                        glTexCoord2f(0.0F , 1.0F);
-                        glVertex3f(LX + 0.0F , LY + 1.0F , LZ + 0.0F);
-                        glTexCoord2f(0.0F , 0.0F);
-                        glVertex3f(LX + 0.0F , LY + 1.0F , LZ + 1.0F);
-                        glTexCoord2f(1.0F , 0.0F);
-                        glVertex3f(LX + 1.0F , LY + 1.0F , LZ + 1.0F);
-                        glTexCoord2f(1.0F , 1.0F);
-                        glVertex3f(LX + 1.0F , LY + 1.0F , LZ + 0.0F);
-                    glEnd();
-                    glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VDownward);
-                    glBegin(GL_QUADS);
-                        glTexCoord2f(0.0F , 1.0F);
-                        glVertex3f(LX + 0.0F , LY + 0.0F , LZ + 0.0F);
-                        glTexCoord2f(0.0F , 0.0F);
-                        glVertex3f(LX + 0.0F , LY + 1.0F , LZ + 0.0F);
-                        glTexCoord2f(1.0F , 0.0F);
-                        glVertex3f(LX + 1.0F , LY + 1.0F , LZ + 0.0F);
-                        glTexCoord2f(1.0F , 1.0F);
-                        glVertex3f(LX + 1.0F , LY + 0.0F , LZ + 0.0F);
-                    glEnd();
-                    glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VUpward);
-                    glBegin(GL_QUADS);
-                        glTexCoord2f(0.0F , 1.0F);
-                        glVertex3f(LX + 0.0F , LY + 0.0F , LZ + 1.0F);
-                        glTexCoord2f(0.0F , 0.0F);
-                        glVertex3f(LX + 0.0F , LY + 1.0F , LZ + 1.0F);
-                        glTexCoord2f(1.0F , 0.0F);
-                        glVertex3f(LX + 1.0F , LY + 1.0F , LZ + 1.0F);
-                        glTexCoord2f(1.0F , 1.0F);
-                        glVertex3f(LX + 1.0F , LY + 0.0F , LZ + 1.0F);
-                    glEnd();
+                    if(VSpace[LX][LY][LZ].VLeftward){
+                        glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VLeftward);
+                        glBegin(GL_QUADS);
+                            glTexCoord2d(0.0 , 1.0);
+                            glVertex3d(LX + 0.0 , LY + 0.0 , LZ + 0.0);
+                            glTexCoord2d(0.0 , 0.0);
+                            glVertex3d(LX + 0.0 , LY + 0.0 , LZ + 1.0);
+                            glTexCoord2d(1.0 , 0.0);
+                            glVertex3d(LX + 0.0 , LY + 1.0 , LZ + 1.0);
+                            glTexCoord2d(1.0 , 1.0);
+                            glVertex3d(LX + 0.0 , LY + 1.0 , LZ + 0.0);
+                        glEnd();
+                    }
+                    if(VSpace[LX][LY][LZ].VRightward){
+                        glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VRightward);
+                        glBegin(GL_QUADS);
+                            glTexCoord2d(0.0 , 1.0);
+                            glVertex3d(LX + 1.0 , LY + 1.0 , LZ + 0.0);
+                            glTexCoord2d(0.0 , 0.0);
+                            glVertex3d(LX + 1.0 , LY + 1.0 , LZ + 1.0);
+                            glTexCoord2d(1.0 , 0.0);
+                            glVertex3d(LX + 1.0 , LY + 0.0 , LZ + 1.0);
+                            glTexCoord2d(1.0 , 1.0);
+                            glVertex3d(LX + 1.0 , LY + 0.0 , LZ + 0.0);
+                        glEnd();
+                    }
+                    if(VSpace[LX][LY][LZ].VBackward){
+                        glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VBackward);
+                        glBegin(GL_QUADS);
+                            glTexCoord2d(0.0 , 1.0);
+                            glVertex3d(LX + 1.0 , LY + 0.0 , LZ + 0.0);
+                            glTexCoord2d(0.0 , 0.0);
+                            glVertex3d(LX + 1.0 , LY + 0.0 , LZ + 1.0);
+                            glTexCoord2d(1.0 , 0.0);
+                            glVertex3d(LX + 0.0 , LY + 0.0 , LZ + 1.0);
+                            glTexCoord2d(1.0 , 1.0);
+                            glVertex3d(LX + 0.0 , LY + 0.0 , LZ + 0.0);
+                        glEnd();
+                    }
+                    if(VSpace[LX][LY][LZ].VForward){
+                        glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VForward);
+                        glBegin(GL_QUADS);
+                            glTexCoord2d(0.0 , 1.0);
+                            glVertex3d(LX + 0.0 , LY + 1.0 , LZ + 0.0);
+                            glTexCoord2d(0.0 , 0.0);
+                            glVertex3d(LX + 0.0 , LY + 1.0 , LZ + 1.0);
+                            glTexCoord2d(1.0 , 0.0);
+                            glVertex3d(LX + 1.0 , LY + 1.0 , LZ + 1.0);
+                            glTexCoord2d(1.0 , 1.0);
+                            glVertex3d(LX + 1.0 , LY + 1.0 , LZ + 0.0);
+                        glEnd();
+                    }
+                    if(VSpace[LX][LY][LZ].VDownward){
+                        glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VDownward);
+                        glBegin(GL_QUADS);
+                            glTexCoord2d(0.0 , 1.0);
+                            glVertex3d(LX + 0.0 , LY + 0.0 , LZ + 0.0);
+                            glTexCoord2d(0.0 , 0.0);
+                            glVertex3d(LX + 0.0 , LY + 1.0 , LZ + 0.0);
+                            glTexCoord2d(1.0 , 0.0);
+                            glVertex3d(LX + 1.0 , LY + 1.0 , LZ + 0.0);
+                            glTexCoord2d(1.0 , 1.0);
+                            glVertex3d(LX + 1.0 , LY + 0.0 , LZ + 0.0);
+                        glEnd();
+                    }
+                    if(VSpace[LX][LY][LZ].VUpward){
+                        glBindTexture(GL_TEXTURE_2D , VSpace[LX][LY][LZ].VUpward);
+                        glBegin(GL_QUADS);
+                            glTexCoord2d(0.0 , 1.0);
+                            glVertex3d(LX + 0.0 , LY + 1.0 , LZ + 1.0);
+                            glTexCoord2d(0.0 , 0.0);
+                            glVertex3d(LX + 0.0 , LY + 0.0 , LZ + 1.0);
+                            glTexCoord2d(1.0 , 0.0);
+                            glVertex3d(LX + 1.0 , LY + 0.0 , LZ + 1.0);
+                            glTexCoord2d(1.0 , 1.0);
+                            glVertex3d(LX + 1.0 , LY + 1.0 , LZ + 1.0);
+                        glEnd();
+                    }
                 }
             }
         }
@@ -116,7 +135,7 @@ namespace NBlindness{
         glEnable(GL_DEPTH_TEST);
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(90.0F , GVideo.FRatio() , 0.25F , 1'000.0F);
+        gluPerspective(90.0 , GVideo.FRatio() , 0.25 , 1'000.0);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         NLevel::GRotation.FUpdate();
@@ -127,5 +146,36 @@ namespace NBlindness{
     void CLevel::FDeinitialize(){
         glDeleteLists(VList , 1);
         IMG_Quit();
+    }
+
+    bool CLevel::FCollision(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
+        if(
+            PX != std::clamp<std::uintmax_t>(PX , 0 , VSpace.size() - 1) ||
+            PY != std::clamp<std::uintmax_t>(PY , 0 , VSpace[0].size() - 1) ||
+            PZ != std::clamp<std::uintmax_t>(PZ , 0 , VSpace[0][0].size() - 1)
+        ){
+            return false;
+        }
+        if(PX - NLevel::GTranslation.FX()){
+            switch(PX - NLevel::GTranslation.FX()){
+                case -1:
+                    return !VSpace[NLevel::GTranslation.FX()][NLevel::GTranslation.FY()][NLevel::GTranslation.FZ()].VLeftward && !VSpace[PX][PY][PZ].VRightward;
+                break;
+                case +1:
+                    return !VSpace[NLevel::GTranslation.FX()][NLevel::GTranslation.FY()][NLevel::GTranslation.FZ()].VRightward && !VSpace[PX][PY][PZ].VLeftward;
+                break;
+            }
+        }
+        if(PY - NLevel::GTranslation.FY()){
+            switch(PY - NLevel::GTranslation.FY()){
+                case -1:
+                    return !VSpace[NLevel::GTranslation.FX()][NLevel::GTranslation.FY()][NLevel::GTranslation.FZ()].VBackward && !VSpace[PX][PY][PZ].VForward;
+                break;
+                case +1:
+                    return !VSpace[NLevel::GTranslation.FX()][NLevel::GTranslation.FY()][NLevel::GTranslation.FZ()].VForward && !VSpace[PX][PY][PZ].VBackward;
+                break;
+            }
+        }
+        return false;
     }
 }

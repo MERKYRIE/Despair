@@ -16,12 +16,14 @@ namespace NBlindness{
                 std::uint32_t VUpward;
             };
 
-        private : std::array<std::array<std::array<SPartition , 1> , 1> , 1> VSpace;
+        private : std::array<std::array<std::array<SPartition , 5> , 5> , 5> VSpace;
         private : std::uint32_t VList;
 
         private : void FInitialize();
         private : void FUpdate();
         private : void FDeinitialize();
+
+        public : bool FCollision(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
     }
     GLevel;
 }

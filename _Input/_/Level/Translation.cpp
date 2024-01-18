@@ -7,28 +7,48 @@
 
 namespace NBlindness::NLevel{
     void CTranslation::FInitialize(){
-        VX = 0.5F;
-        VY = 0.5F;
-        VZ = 0.5F;
+        VX = 0.5;
+        VY = 0.5;
+        VZ = 0.5;
     }
 
     void CTranslation::FUpdate(){
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_A)){
-            VX += GRotation.FLeftX();
-            VY += GRotation.FLeftY();
+            if(GLevel.FCollision(FX() + GRotation.FIntegerLeftwardX() , FY() + GRotation.FIntegerLeftwardY() , FZ())){
+                VX += GRotation.FRealLeftwardX();
+                VY += GRotation.FRealLeftwardY();
+            }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_D)){
-            VX += GRotation.FRightX();
-            VY += GRotation.FRightY();
+            if(GLevel.FCollision(FX() + GRotation.FIntegerRightwardX() , FY() + GRotation.FIntegerRightwardY() , FZ())){
+                VX += GRotation.FRealRightwardX();
+                VY += GRotation.FRealRightwardY();
+            }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_S)){
-            VX += GRotation.FBackwardX();
-            VY += GRotation.FBackwardY();
+            if(GLevel.FCollision(FX() + GRotation.FIntegerBackwardX() , FY() + GRotation.FIntegerBackwardY() , FZ())){
+                VX += GRotation.FRealBackwardX();
+                VY += GRotation.FRealBackwardY();
+            }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_W)){
-            VX += GRotation.FForwardX();
-            VY += GRotation.FForwardY();
+            if(GLevel.FCollision(FX() + GRotation.FIntegerForwardX() , FY() + GRotation.FIntegerForwardY() , FZ())){
+                VX += GRotation.FRealForwardX();
+                VY += GRotation.FRealForwardY();
+            }
         }
-        glTranslatef(-VX , -VY , -VZ);
+        glTranslated(-VX , -VY , -VZ);
+    }
+
+    std::uintmax_t CTranslation::FX(){
+        return static_cast<std::uintmax_t>(VX - 0.5);
+    }
+
+    std::uintmax_t CTranslation::FY(){
+        return static_cast<std::uintmax_t>(VY - 0.5);
+    }
+
+    std::uintmax_t CTranslation::FZ(){
+        return static_cast<std::uintmax_t>(VZ - 0.5);
     }
 }
