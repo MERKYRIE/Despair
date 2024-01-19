@@ -2,6 +2,7 @@
 
 #include"Translation.hpp"
 #include"Translation\\X.hpp"
+#include"Translation\\Y.hpp"
 
 #include"Video\\Atlas.hpp"
 
@@ -70,20 +71,20 @@ namespace NBlindness::NLevel{
         if(PX - NTranslation::GX.FValue()){
             switch(PX - NTranslation::GX.FValue()){
                 case -1:
-                    return !VValue[NTranslation::GX.FValue()][GTranslation.FY()][GTranslation.FZ()].VLeftward && !VValue[PX][PY][PZ].VRightward;
+                    return !VValue[NTranslation::GX.FValue()][NTranslation::GY.FValue()][GTranslation.FZ()].VLeftward && !VValue[PX][PY][PZ].VRightward;
                 break;
                 case +1:
-                    return !VValue[NTranslation::GX.FValue()][GTranslation.FY()][GTranslation.FZ()].VRightward && !VValue[PX][PY][PZ].VLeftward;
+                    return !VValue[NTranslation::GX.FValue()][NTranslation::GY.FValue()][GTranslation.FZ()].VRightward && !VValue[PX][PY][PZ].VLeftward;
                 break;
             }
         }
-        if(PY - GTranslation.FY()){
-            switch(PY - GTranslation.FY()){
+        if(PY - NTranslation::GY.FValue()){
+            switch(PY - NTranslation::GY.FValue()){
                 case -1:
-                    return !VValue[NTranslation::GX.FValue()][GTranslation.FY()][GTranslation.FZ()].VBackward && !VValue[PX][PY][PZ].VForward;
+                    return !VValue[NTranslation::GX.FValue()][NTranslation::GY.FValue()][GTranslation.FZ()].VBackward && !VValue[PX][PY][PZ].VForward;
                 break;
                 case +1:
-                    return !VValue[NTranslation::GX.FValue()][GTranslation.FY()][GTranslation.FZ()].VForward && !VValue[PX][PY][PZ].VBackward;
+                    return !VValue[NTranslation::GX.FValue()][NTranslation::GY.FValue()][GTranslation.FZ()].VForward && !VValue[PX][PY][PZ].VBackward;
                 break;
             }
         }

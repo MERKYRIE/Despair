@@ -93,6 +93,9 @@
     <ClInclude Include="_Input\_\Level\Translation\X.hpp">
       <Filter>Level\Translation</Filter>
     </ClInclude>
+    <ClInclude Include="_Input\_\Level\Translation\Y.hpp">
+      <Filter>Level\Translation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
@@ -185,6 +188,9 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="_Input\_\Level\Translation\X.cpp">
+      <Filter>Level\Translation</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Level\Translation\Y.cpp">
       <Filter>Level\Translation</Filter>
     </ClCompile>
   </ItemGroup>

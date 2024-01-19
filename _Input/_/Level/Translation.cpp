@@ -3,46 +3,43 @@
 #include"Rotation.hpp"
 #include"Space.hpp"
 #include"Translation\\X.hpp"
+#include"Translation\\Y.hpp"
 
 #include"Input\\Keyboard.hpp"
 
 namespace NBlindness::NLevel{
     void CTranslation::FInitialize(){
         NTranslation::GX.FInitialize();
-        VY = 0.5;
+        NTranslation::GY.FInitialize();
         VZ = 0.5;
     }
 
     void CTranslation::FUpdate(){
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_A)){
-            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerLeftwardX() , FY() + GRotation.FIntegerLeftwardY() , FZ())){
+            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerLeftwardX() , NTranslation::GY.FValue() + GRotation.FIntegerLeftwardY() , FZ())){
                 NTranslation::GX += GRotation.FRealLeftwardX();
-                VY += GRotation.FRealLeftwardY();
+                NTranslation::GY += GRotation.FRealLeftwardY();
             }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_D)){
-            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerRightwardX() , FY() + GRotation.FIntegerRightwardY() , FZ())){
+            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerRightwardX() , NTranslation::GY.FValue() + GRotation.FIntegerRightwardY() , FZ())){
                 NTranslation::GX += GRotation.FRealRightwardX();
-                VY += GRotation.FRealRightwardY();
+                NTranslation::GY += GRotation.FRealRightwardY();
             }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_S)){
-            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerBackwardX() , FY() + GRotation.FIntegerBackwardY() , FZ())){
+            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerBackwardX() , NTranslation::GY.FValue() + GRotation.FIntegerBackwardY() , FZ())){
                 NTranslation::GX += GRotation.FRealBackwardX();
-                VY += GRotation.FRealBackwardY();
+                NTranslation::GY += GRotation.FRealBackwardY();
             }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_W)){
-            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerForwardX() , FY() + GRotation.FIntegerForwardY() , FZ())){
+            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerForwardX() , NTranslation::GY.FValue() + GRotation.FIntegerForwardY() , FZ())){
                 NTranslation::GX += GRotation.FRealForwardX();
-                VY += GRotation.FRealForwardY();
+                NTranslation::GY += GRotation.FRealForwardY();
             }
         }
-        glTranslated(-NTranslation::GX , -VY , -VZ);
-    }
-
-    std::uintmax_t CTranslation::FY(){
-        return static_cast<std::uintmax_t>(std::round(VY - 0.5));
+        glTranslated(-NTranslation::GX , -NTranslation::GY , -VZ);
     }
 
     std::uintmax_t CTranslation::FZ(){
