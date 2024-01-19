@@ -1,9 +1,9 @@
 #include"Translation.hpp"
 
 #include"Rotation.hpp"
+#include"Space.hpp"
 
 #include"Input\\Keyboard.hpp"
-#include"Level.hpp"
 
 namespace NBlindness::NLevel{
     void CTranslation::FInitialize(){
@@ -14,25 +14,25 @@ namespace NBlindness::NLevel{
 
     void CTranslation::FUpdate(){
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_A)){
-            if(GLevel.FCollision(FX() + GRotation.FIntegerLeftwardX() , FY() + GRotation.FIntegerLeftwardY() , FZ())){
+            if(GSpace.FCollision(FX() + GRotation.FIntegerLeftwardX() , FY() + GRotation.FIntegerLeftwardY() , FZ())){
                 VX += GRotation.FRealLeftwardX();
                 VY += GRotation.FRealLeftwardY();
             }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_D)){
-            if(GLevel.FCollision(FX() + GRotation.FIntegerRightwardX() , FY() + GRotation.FIntegerRightwardY() , FZ())){
+            if(GSpace.FCollision(FX() + GRotation.FIntegerRightwardX() , FY() + GRotation.FIntegerRightwardY() , FZ())){
                 VX += GRotation.FRealRightwardX();
                 VY += GRotation.FRealRightwardY();
             }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_S)){
-            if(GLevel.FCollision(FX() + GRotation.FIntegerBackwardX() , FY() + GRotation.FIntegerBackwardY() , FZ())){
+            if(GSpace.FCollision(FX() + GRotation.FIntegerBackwardX() , FY() + GRotation.FIntegerBackwardY() , FZ())){
                 VX += GRotation.FRealBackwardX();
                 VY += GRotation.FRealBackwardY();
             }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_W)){
-            if(GLevel.FCollision(FX() + GRotation.FIntegerForwardX() , FY() + GRotation.FIntegerForwardY() , FZ())){
+            if(GSpace.FCollision(FX() + GRotation.FIntegerForwardX() , FY() + GRotation.FIntegerForwardY() , FZ())){
                 VX += GRotation.FRealForwardX();
                 VY += GRotation.FRealForwardY();
             }

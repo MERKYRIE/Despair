@@ -6,7 +6,7 @@ namespace NBlindness::NLevel{
     inline class CRotation{
         private : friend class CLevel;
 
-        private : double VAngle;
+        private : double VValue;
 
         private : void FInitialize();
         private : void FUpdate();
