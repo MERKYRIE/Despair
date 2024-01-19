@@ -49,6 +49,9 @@
     <ClInclude Include="_Input\_\Video.hpp" />
     <ClInclude Include="_Input\_\Video\Atlas.hpp" />
     <ClInclude Include="_Input\_\Video\Atlas\Texture.hpp" />
+    <ClInclude Include="_Input\_\Video\Typeface.hpp" />
+    <ClInclude Include="_Input\_\Video\Typeface\Font.hpp" />
+    <ClInclude Include="_Input\_\Video\Typeface\Font\Character.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
@@ -81,6 +84,9 @@
     <ClCompile Include="_Input\_\Video.cpp" />
     <ClCompile Include="_Input\_\Video\Atlas.cpp" />
     <ClCompile Include="_Input\_\Video\Atlas\Texture.cpp" />
+    <ClCompile Include="_Input\_\Video\Typeface.cpp" />
+    <ClCompile Include="_Input\_\Video\Typeface\Font.cpp" />
+    <ClCompile Include="_Input\_\Video\Typeface\Font\Character.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

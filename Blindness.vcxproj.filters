@@ -10,10 +10,10 @@
     <ClInclude Include="_Input\_\Time.hpp" />
     <ClInclude Include="_Input\_\Video.hpp" />
     <ClInclude Include="_Input\_\Level\Rotation.hpp">
-      <Filter>Level</Filter>
+      <Filter>Input\Level</Filter>
     </ClInclude>
     <ClInclude Include="_Input\_\Level\Translation.hpp">
-      <Filter>Level</Filter>
+      <Filter>Input\Level</Filter>
     </ClInclude>
     <ClInclude Include="_Input\_\Input\Keyboard.hpp">
       <Filter>Input</Filter>
@@ -75,6 +75,15 @@
     <ClInclude Include="_Input\_\Audio\Soundpack\Sound.hpp">
       <Filter>Audio\Soundpack</Filter>
     </ClInclude>
+    <ClInclude Include="_Input\_\Video\Typeface.hpp">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Video\Typeface\Font.hpp">
+      <Filter>Video\Typeface</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Video\Typeface\Font\Character.hpp">
+      <Filter>Video\Typeface\Font</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
@@ -86,10 +95,10 @@
     <ClCompile Include="_Input\_\Time.cpp" />
     <ClCompile Include="_Input\_\Video.cpp" />
     <ClCompile Include="_Input\_\Level\Rotation.cpp">
-      <Filter>Level</Filter>
+      <Filter>Input\Level</Filter>
     </ClCompile>
     <ClCompile Include="_Input\_\Level\Translation.cpp">
-      <Filter>Level</Filter>
+      <Filter>Input\Level</Filter>
     </ClCompile>
     <ClCompile Include="_Input\_\Input\Keyboard.cpp">
       <Filter>Input</Filter>
@@ -151,6 +160,15 @@
     <ClCompile Include="_Input\_\Audio\Soundpack\Sound.cpp">
       <Filter>Audio\Soundpack</Filter>
     </ClCompile>
+    <ClCompile Include="_Input\_\Video\Typeface.cpp">
+      <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Video\Typeface\Font.cpp">
+      <Filter>Video\Typeface</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Video\Typeface\Font\Character.cpp">
+      <Filter>Video\Typeface\Font</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -158,9 +176,6 @@
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{6af9df4f-56f4-4189-a6d3-29f99a231ed0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level">
-      <UniqueIdentifier>{37badcea-5a20-4d69-98c3-a8ef8967a604}</UniqueIdentifier>
     </Filter>
     <Filter Include="Debug\Assert">
       <UniqueIdentifier>{7622bc6c-eaee-4ebd-b8b8-d4d35c44aeb0}</UniqueIdentifier>
@@ -194,6 +209,15 @@
     </Filter>
     <Filter Include="Audio\Soundpack">
       <UniqueIdentifier>{6d625132-cace-4617-aa20-7156803b657f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Level">
+      <UniqueIdentifier>{37badcea-5a20-4d69-98c3-a8ef8967a604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Video\Typeface">
+      <UniqueIdentifier>{812b4d2f-e949-4c8d-83b9-348fc74c003b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Video\Typeface\Font">
+      <UniqueIdentifier>{be8debe4-8e2e-48cc-87e1-5ad06a12cbc2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

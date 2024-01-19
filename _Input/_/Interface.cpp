@@ -5,55 +5,11 @@
 #include"Input\\Keyboard.hpp"
 #include"Level\\Rotation.hpp"
 #include"Level\\Translation.hpp"
+#include"Video\\Typeface.hpp"
+#include"Video\\Typeface\\Font.hpp"
+#include"Video\\Typeface\\Font\\Character.hpp"
 
 namespace NBlindness{
-    void CInterface::FInitialize(){
-        NDebug::NAssert::NError::GSimpleDirectMediaLayer.FCode(TTF_Init());
-        TTF_Font* LFont{TTF_OpenFont("Fonts\\Consolas.ttf" , 64)};
-        NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(LFont);
-        for(char LDigit{'0'} ; LDigit <= '9' ; LDigit++){
-            SDL_Surface* LUnsuitable{TTF_RenderText_Blended(LFont , std::string{LDigit}.c_str() , SDL_Color{.r{100} , .g{100} , .b{100} , .a{SDL_ALPHA_OPAQUE}})};
-            NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(LUnsuitable);
-            SDL_Surface* LSuitable{SDL_ConvertSurfaceFormat(LUnsuitable , SDL_PIXELFORMAT_RGBA32 , 0)};
-            NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(LSuitable);
-            glGenTextures(1 , &VDigits[LDigit - '0']);
-            glBindTexture(GL_TEXTURE_2D , VDigits[LDigit - '0']);
-            glTexImage2D(GL_TEXTURE_2D , 0 , GL_RGBA , LSuitable->w , LSuitable->h , 0 , GL_RGBA , GL_UNSIGNED_BYTE , LSuitable->pixels);
-            glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MIN_FILTER , GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MAG_FILTER , GL_NEAREST);
-            NDebug::NAssert::GError.FOpenGraphicsLibrary();
-            SDL_FreeSurface(LSuitable);
-            SDL_FreeSurface(LUnsuitable);
-        }
-        for(std::uint8_t LLetter{0} ; LLetter <= 25 ; LLetter++){
-            SDL_Surface* LUnsuitable{TTF_RenderText_Blended(LFont , std::string{static_cast<char>('a' + LLetter)}.c_str() , SDL_Color{.r{100} , .g{100} , .b{100} , .a{SDL_ALPHA_OPAQUE}})};
-            NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(LUnsuitable);
-            SDL_Surface* LSuitable{SDL_ConvertSurfaceFormat(LUnsuitable , SDL_PIXELFORMAT_RGBA32 , 0)};
-            NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(LSuitable);
-            glGenTextures(1 , &VLetters[false][LLetter]);
-            glBindTexture(GL_TEXTURE_2D , VLetters[false][LLetter]);
-            glTexImage2D(GL_TEXTURE_2D , 0 , GL_RGBA , LSuitable->w , LSuitable->h , 0 , GL_RGBA , GL_UNSIGNED_BYTE , LSuitable->pixels);
-            glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MIN_FILTER , GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MAG_FILTER , GL_NEAREST);
-            NDebug::NAssert::GError.FOpenGraphicsLibrary();
-            SDL_FreeSurface(LSuitable);
-            SDL_FreeSurface(LUnsuitable);
-            LUnsuitable = TTF_RenderText_Blended(LFont , std::string{static_cast<char>('A' + LLetter)}.c_str() , SDL_Color{.r{100} , .g{100} , .b{100} , .a{SDL_ALPHA_OPAQUE}});
-            NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(LUnsuitable);
-            LSuitable = SDL_ConvertSurfaceFormat(LUnsuitable , SDL_PIXELFORMAT_RGBA32 , 0);
-            NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(LSuitable);
-            glGenTextures(1 , &VLetters[true][LLetter]);
-            glBindTexture(GL_TEXTURE_2D , VLetters[true][LLetter]);
-            glTexImage2D(GL_TEXTURE_2D , 0 , GL_RGBA , LSuitable->w , LSuitable->h , 0 , GL_RGBA , GL_UNSIGNED_BYTE , LSuitable->pixels);
-            glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MIN_FILTER , GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D , GL_TEXTURE_MAG_FILTER , GL_NEAREST);
-            NDebug::NAssert::GError.FOpenGraphicsLibrary();
-            SDL_FreeSurface(LSuitable);
-            SDL_FreeSurface(LUnsuitable);
-        }
-        TTF_CloseFont(LFont);
-    }
-    
     void CInterface::FUpdate(){
         if(VCommand.length() < 49){
             for(std::uint16_t LKey{SDL_SCANCODE_1} ; LKey <= SDL_SCANCODE_0 ; LKey++){
@@ -116,12 +72,18 @@ namespace NBlindness{
         glVertex2f(100.0F , 96.0F + 0.0F);
         glEnd();
         glColor4ub(255 , 255 , 255 , 255);
+        static NVideo::NTypeface::CFont LFont{NVideo::GTypeface.FFont("\\Consolas.ttf")};
         for(std::uintmax_t LCharacter{0} ; LCharacter < VCommand.length() ; LCharacter++){
             if(std::isdigit(VCommand[LCharacter])){
-                glBindTexture(GL_TEXTURE_2D , VDigits[VCommand[LCharacter] - '0']);
+                glBindTexture(GL_TEXTURE_2D , LFont.FDigit(VCommand[LCharacter]).FIdentifier());
             }
             else{
-                glBindTexture(GL_TEXTURE_2D , VLetters[std::isupper(VCommand[LCharacter])][VCommand[LCharacter] - (!std::isupper(VCommand[LCharacter]) ? 'a' : 'A')]);
+                if(std::isupper(VCommand[LCharacter])){
+                    glBindTexture(GL_TEXTURE_2D , LFont.FUppercase(VCommand[LCharacter]).FIdentifier());
+                }
+                else{
+                    glBindTexture(GL_TEXTURE_2D , LFont.FLowercase(VCommand[LCharacter]).FIdentifier());
+                }
             }
             glBegin(GL_QUADS);
             glTexCoord2f(0.0F , 0.0F);
@@ -134,9 +96,5 @@ namespace NBlindness{
             glVertex2f(2.0F * LCharacter + 2.0F , 96.0F + 0.0F);
             glEnd();
         }
-    }
-
-    void CInterface::FDeinitialize(){
-        TTF_Quit();
     }
 }

@@ -4,14 +4,17 @@
 
 namespace NBlindness::NAudio::NSoundpack{
     class CSound{
+        private : friend class CSoundpack;
+        
         private : std::string VPath;
         private : Mix_Chunk* VHandle;
         private : std::int32_t VChannel;
 
+        private : bool operator==(const std::string& PPath) const;
+
         public : CSound(const std::string& PPath);
-        public : std::string FPath() const;
-        public : CSound& FPlay();
-        public : bool FPlaying();
+        public : const CSound& FPlay() const;
+        public : bool FPlaying() const;
         public : ~CSound();
     };
 }

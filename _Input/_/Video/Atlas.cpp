@@ -7,7 +7,7 @@
 namespace NBlindness::NVideo{
     void CAtlas::FInitialize(){
         NDebug::NAssert::NError::GSimpleDirectMediaLayer.FFlags(IMG_Init(IMG_INIT_PNG));
-        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Textures"}){
+        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Atlas"}){
             if(LEntry.path().extension() == ".png"){
                 VTextures.emplace_back(new NAtlas::CTexture{LEntry.path().string()});
             }
@@ -22,7 +22,7 @@ namespace NBlindness::NVideo{
 
     std::uint32_t CAtlas::FTexture(const std::string& PPath){
         std::vector<std::shared_ptr<NAtlas::CTexture>>::iterator LIterator{
-            std::find_if(VTextures.begin() , VTextures.end() , [&PPath](const std::shared_ptr<NAtlas::CTexture>& LPointer){return LPointer->FPath() == PPath;})
+            std::find_if(VTextures.begin() , VTextures.end() , [&PPath](const std::shared_ptr<NAtlas::CTexture>& LPointer){return *LPointer == PPath;})
         };
         if(LIterator != VTextures.end()){
             return LIterator->get()->FIdentifier();

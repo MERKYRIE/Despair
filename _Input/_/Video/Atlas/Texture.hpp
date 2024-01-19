@@ -4,11 +4,14 @@
 
 namespace NBlindness::NVideo::NAtlas{
     class CTexture{
+        private : friend class CAtlas;
+        
         private : std::string VPath;
         private : std::uint32_t VIdentifier;
 
+        private : bool operator==(const std::string& PPath) const;
+
         public : CTexture(const std::string& PPath);
-        public : std::string FPath() const;
         public : std::uint32_t FIdentifier() const;
         public : ~CTexture();
     };

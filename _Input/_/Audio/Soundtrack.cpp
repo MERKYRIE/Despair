@@ -20,9 +20,9 @@ namespace NBlindness::NAudio{
 
     const NSoundtrack::CTrack& CSoundtrack::FTrack(const std::string& PPath){
         std::vector<std::shared_ptr<NSoundtrack::CTrack>>::iterator LIterator{
-            std::find_if(VTracks.begin() , VTracks.end() , [&PPath](const std::shared_ptr<NSoundtrack::CTrack>& LPointer){return LPointer->FPath() == PPath;})
+            std::find_if(VTracks.begin() , VTracks.end() , [&PPath](const std::shared_ptr<NSoundtrack::CTrack>& LPointer){return *LPointer == PPath;})
         };
         NDebug::GAssert.FError(LIterator == VTracks.end());
-        return *LIterator->get();
+        return **LIterator;
     }
 }

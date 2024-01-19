@@ -17,5 +17,5 @@ namespace NBlindness::NAudio{
 
         public : const NSoundpack::CSound& FSound(const std::string& PPath);
     }
-    GSoundtrack;
+    GSoundpack;
 }

@@ -1,16 +1,11 @@
-#include"Texture.hpp"
+#include"Character.hpp"
 
 #include"Debug\\Assert\\Error.hpp"
 #include"Debug\\Assert\\Error\\SimpleDirectMediaLayer.hpp"
 
-namespace NBlindness::NVideo::NAtlas{
-    bool CTexture::operator==(const std::string& PPath) const{
-        return VPath == PPath;
-    }
-    
-    CTexture::CTexture(const std::string& PPath){
-        VPath = PPath.substr(PPath.find('\\'));
-        SDL_Surface* LSurface{IMG_Load(PPath.c_str())};
+namespace NBlindness::NVideo::NTypeface::NFont{
+    CCharacter::CCharacter(TTF_Font* PFont , char PCode){
+        SDL_Surface* LSurface{TTF_RenderText_Blended(PFont , std::string{PCode}.c_str() , SDL_Color{.r{100} , .g{100} , .b{100} , .a{SDL_ALPHA_OPAQUE}})};
         NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(LSurface);
         SDL_Surface* LConverted{SDL_ConvertSurfaceFormat(LSurface , SDL_PIXELFORMAT_RGBA32 , 0)};
         NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(LConverted);
@@ -24,11 +19,11 @@ namespace NBlindness::NVideo::NAtlas{
         SDL_FreeSurface(LSurface);
     }
 
-    std::uint32_t CTexture::FIdentifier() const{
+    std::uint32_t CCharacter::FIdentifier() const{
         return VIdentifier;
     }
 
-    CTexture::~CTexture(){
+    CCharacter::~CCharacter(){
         glDeleteTextures(1 , &VIdentifier);
         NDebug::NAssert::GError.FOpenGraphicsLibrary();
     }

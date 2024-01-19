@@ -25,7 +25,6 @@ std::int32_t main(std::int32_t , char**){
     NBlindness::GInput.FInitialize();
     NBlindness::GVideo.FInitialize();
     NBlindness::GLevel.FInitialize();
-    //NMRKOGL::GInterface.FInitialize();
     while(!NBlindness::NInput::GKeyboard.FHeld(SDL_SCANCODE_ESCAPE)){
         NBlindness::GInput.FUpdate();
         NBlindness::GTime.FUpdate();
@@ -34,7 +33,6 @@ std::int32_t main(std::int32_t , char**){
         //NMRKOGL::GInterface.FUpdate();
         NBlindness::GVideo.FPostupdate();
     };
-    //NMRKOGL::GInterface.FDeinitialize();
     NBlindness::GLevel.FDeinitialize();
     NBlindness::GVideo.FDeinitialize();
     NBlindness::GAudio.FDeinitialize();
