@@ -1,6 +1,7 @@
 #include"Space.hpp"
 
 #include"Translation.hpp"
+#include"Translation\\X.hpp"
 
 #include"Video\\Atlas.hpp"
 
@@ -66,23 +67,23 @@ namespace NBlindness::NLevel{
         ){
             return false;
         }
-        if(PX - NLevel::GTranslation.FX()){
-            switch(PX - NLevel::GTranslation.FX()){
+        if(PX - NTranslation::GX.FValue()){
+            switch(PX - NTranslation::GX.FValue()){
                 case -1:
-                    return !VValue[NLevel::GTranslation.FX()][NLevel::GTranslation.FY()][NLevel::GTranslation.FZ()].VLeftward && !VValue[PX][PY][PZ].VRightward;
+                    return !VValue[NTranslation::GX.FValue()][GTranslation.FY()][GTranslation.FZ()].VLeftward && !VValue[PX][PY][PZ].VRightward;
                 break;
                 case +1:
-                    return !VValue[NLevel::GTranslation.FX()][NLevel::GTranslation.FY()][NLevel::GTranslation.FZ()].VRightward && !VValue[PX][PY][PZ].VLeftward;
+                    return !VValue[NTranslation::GX.FValue()][GTranslation.FY()][GTranslation.FZ()].VRightward && !VValue[PX][PY][PZ].VLeftward;
                 break;
             }
         }
-        if(PY - NLevel::GTranslation.FY()){
-            switch(PY - NLevel::GTranslation.FY()){
+        if(PY - GTranslation.FY()){
+            switch(PY - GTranslation.FY()){
                 case -1:
-                    return !VValue[NLevel::GTranslation.FX()][NLevel::GTranslation.FY()][NLevel::GTranslation.FZ()].VBackward && !VValue[PX][PY][PZ].VForward;
+                    return !VValue[NTranslation::GX.FValue()][GTranslation.FY()][GTranslation.FZ()].VBackward && !VValue[PX][PY][PZ].VForward;
                 break;
                 case +1:
-                    return !VValue[NLevel::GTranslation.FX()][NLevel::GTranslation.FY()][NLevel::GTranslation.FZ()].VForward && !VValue[PX][PY][PZ].VBackward;
+                    return !VValue[NTranslation::GX.FValue()][GTranslation.FY()][GTranslation.FZ()].VForward && !VValue[PX][PY][PZ].VBackward;
                 break;
             }
         }

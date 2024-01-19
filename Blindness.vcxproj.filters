@@ -90,6 +90,9 @@
     <ClInclude Include="_Input\_\Level\Translation.hpp">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="_Input\_\Level\Translation\X.hpp">
+      <Filter>Level\Translation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
@@ -181,6 +184,9 @@
     <ClCompile Include="_Input\_\Level\Translation.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="_Input\_\Level\Translation\X.cpp">
+      <Filter>Level\Translation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -233,6 +239,9 @@
     </Filter>
     <Filter Include="Level">
       <UniqueIdentifier>{070afbd2-2943-4cff-8a87-f75196364ef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Translation">
+      <UniqueIdentifier>{93814051-f47f-4a9f-9285-edb84e131c22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -2,46 +2,43 @@
 
 #include"Rotation.hpp"
 #include"Space.hpp"
+#include"Translation\\X.hpp"
 
 #include"Input\\Keyboard.hpp"
 
 namespace NBlindness::NLevel{
     void CTranslation::FInitialize(){
-        VX = 0.5;
+        NTranslation::GX.FInitialize();
         VY = 0.5;
         VZ = 0.5;
     }
 
     void CTranslation::FUpdate(){
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_A)){
-            if(GSpace.FCollision(FX() + GRotation.FIntegerLeftwardX() , FY() + GRotation.FIntegerLeftwardY() , FZ())){
-                VX += GRotation.FRealLeftwardX();
+            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerLeftwardX() , FY() + GRotation.FIntegerLeftwardY() , FZ())){
+                NTranslation::GX += GRotation.FRealLeftwardX();
                 VY += GRotation.FRealLeftwardY();
             }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_D)){
-            if(GSpace.FCollision(FX() + GRotation.FIntegerRightwardX() , FY() + GRotation.FIntegerRightwardY() , FZ())){
-                VX += GRotation.FRealRightwardX();
+            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerRightwardX() , FY() + GRotation.FIntegerRightwardY() , FZ())){
+                NTranslation::GX += GRotation.FRealRightwardX();
                 VY += GRotation.FRealRightwardY();
             }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_S)){
-            if(GSpace.FCollision(FX() + GRotation.FIntegerBackwardX() , FY() + GRotation.FIntegerBackwardY() , FZ())){
-                VX += GRotation.FRealBackwardX();
+            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerBackwardX() , FY() + GRotation.FIntegerBackwardY() , FZ())){
+                NTranslation::GX += GRotation.FRealBackwardX();
                 VY += GRotation.FRealBackwardY();
             }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_W)){
-            if(GSpace.FCollision(FX() + GRotation.FIntegerForwardX() , FY() + GRotation.FIntegerForwardY() , FZ())){
-                VX += GRotation.FRealForwardX();
+            if(GSpace.FCollision(NTranslation::GX.FValue() + GRotation.FIntegerForwardX() , FY() + GRotation.FIntegerForwardY() , FZ())){
+                NTranslation::GX += GRotation.FRealForwardX();
                 VY += GRotation.FRealForwardY();
             }
         }
-        glTranslated(-VX , -VY , -VZ);
-    }
-
-    std::uintmax_t CTranslation::FX(){
-        return static_cast<std::uintmax_t>(std::round(VX - 0.5));
+        glTranslated(-NTranslation::GX , -VY , -VZ);
     }
 
     std::uintmax_t CTranslation::FY(){
