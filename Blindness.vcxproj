@@ -20,7 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_Input\_\Audio.hpp" />
-    <ClInclude Include="_Input\_\Audio\Sound.hpp" />
+    <ClInclude Include="_Input\_\Audio\Soundpack.hpp" />
+    <ClInclude Include="_Input\_\Audio\Soundpack\Sound.hpp" />
     <ClInclude Include="_Input\_\Audio\Soundtrack.hpp" />
     <ClInclude Include="_Input\_\Audio\Soundtrack\Track.hpp" />
     <ClInclude Include="_Input\_\Blindness.hpp" />
@@ -51,7 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
-    <ClCompile Include="_Input\_\Audio\Sound.cpp" />
+    <ClCompile Include="_Input\_\Audio\Soundpack.cpp" />
+    <ClCompile Include="_Input\_\Audio\Soundpack\Sound.cpp" />
     <ClCompile Include="_Input\_\Audio\Soundtrack.cpp" />
     <ClCompile Include="_Input\_\Audio\Soundtrack\Track.cpp" />
     <ClCompile Include="_Input\_\Blindness.cpp" />

@@ -2,12 +2,14 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness::NAudio{
+namespace NBlindness::NAudio::NSoundpack{
     class CSound{
-        private : Mix_Chunk* VData;
-        private : std::int32_t VTrack;
+        private : std::string VPath;
+        private : Mix_Chunk* VHandle;
+        private : std::int32_t VChannel;
 
         public : CSound(const std::string& PPath);
+        public : std::string FPath() const;
         public : CSound& FPlay();
         public : bool FPlaying();
         public : ~CSound();

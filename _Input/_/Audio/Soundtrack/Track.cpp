@@ -4,7 +4,8 @@
 
 namespace NBlindness::NAudio::NSoundtrack{
     CTrack::CTrack(const std::string& PPath){
-        NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(VData = Mix_LoadMUS(PPath.c_str()));
+        VPath = PPath;
+        NDebug::NAssert::NError::GSimpleDirectMediaLayer.FHandle(VHandle = Mix_LoadMUS(PPath.c_str()));
     }
 
     std::string CTrack::FPath() const{
@@ -12,7 +13,7 @@ namespace NBlindness::NAudio::NSoundtrack{
     }
 
     CTrack& CTrack::FPlay(){
-        NDebug::NAssert::NError::GSimpleDirectMediaLayer.FCode(Mix_PlayMusic(VData , 0));
+        NDebug::NAssert::NError::GSimpleDirectMediaLayer.FCode(Mix_PlayMusic(VHandle , 0));
         return *this;
     }
 
@@ -32,6 +33,6 @@ namespace NBlindness::NAudio::NSoundtrack{
     }
 
     CTrack::~CTrack(){
-        Mix_FreeMusic(VData);
+        Mix_FreeMusic(VHandle);
     }
 }

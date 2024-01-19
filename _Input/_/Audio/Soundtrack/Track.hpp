@@ -5,7 +5,7 @@
 namespace NBlindness::NAudio::NSoundtrack{
     class CTrack{
         private : std::string VPath;
-        private : Mix_Music* VData;
+        private : Mix_Music* VHandle;
 
         public : CTrack(const std::string& PPath);
         public : std::string FPath() const;
