@@ -1,8 +1,9 @@
 #include"Space.hpp"
 
-#include"Translation.hpp"
+#include"Space\\Partition.hpp"
 #include"Translation\\X.hpp"
 #include"Translation\\Y.hpp"
+#include"Translation\\Z.hpp"
 
 #include"Video\\Atlas.hpp"
 
@@ -15,79 +16,36 @@ namespace NBlindness::NLevel{
         std::uint32_t LWall110{NVideo::GAtlas.FTexture("\\twall5_3.png")};
         std::uint32_t LWall210{NVideo::GAtlas.FTexture("\\uwall1_2.png")};
         std::uint32_t LCeiling{NVideo::GAtlas.FTexture("\\plat_top1.png")};
-        for(std::uintmax_t LX{0} ; LX < VValue.size() ; LX++){
-            for(std::uintmax_t LY{0} ; LY < VValue[0].size() ; LY++){
-                for(std::uintmax_t LZ{0} ; LZ < VValue[0][0].size() ; LZ++){
-                    VValue[LX][LY][LZ].VLeftward = LWall000;
-                    VValue[LX][LY][LZ].VRightward = LWall000;
-                    VValue[LX][LY][LZ].VBackward = LWall000;
-                    VValue[LX][LY][LZ].VForward = LWall000;
-                    VValue[LX][LY][LZ].VDownward = LFloor;
-                    VValue[LX][LY][LZ].VUpward = LCeiling;
+        for(std::uintmax_t LX{0} ; LX < VWidth ; LX++){
+            VValue.emplace_back();
+            for(std::uintmax_t LY{0} ; LY < VHeight ; LY++){
+                VValue[LX].emplace_back();
+                for(std::uintmax_t LZ{0} ; LZ < VDepth ; LZ++){
+                    VValue[LX][LY].emplace_back(new NSpace::CPartition{LWall000 , LWall000 , LWall000 , LWall000 , LFloor , LCeiling});
                 }
+                VValue[LX][LY].shrink_to_fit();
             }
+            VValue[LX].shrink_to_fit();
         }
-        VValue[0][2][0].VForward = LWall020;
-        VValue[0][2][0].VLeftward = LWall020;
-        VValue[0][2][0].VRightward = LWall020;
-        VValue[0][2][0].VBackward = 0;
-
-        VValue[0][1][0].VForward = 0;         VValue[1][1][0].VForward = LWall110;  VValue[2][1][0].VForward = LWall210;
-        VValue[0][1][0].VLeftward = LWall010; VValue[1][1][0].VLeftward = 0;        VValue[2][1][0].VLeftward = 0;
-        VValue[0][1][0].VRightward = 0;       VValue[1][1][0].VRightward = 0;       VValue[2][1][0].VRightward = LWall210;
-                                              VValue[1][1][0].VBackward = LWall110; VValue[2][1][0].VBackward = LWall210;
-        VValue[0][1][0].VBackward = 0;        
-
-        VValue[0][0][0].VForward = 0;
-        VValue[0][0][0].VLeftward = LWall000;
-        VValue[0][0][0].VRightward = LWall000;
-        VValue[0][0][0].VBackward = LWall000;
+        VValue.shrink_to_fit();
+        VValue[0][2][0]->FPartition(LWall020 , LWall020 , 0 , LWall020 , LFloor , LCeiling);
+        VValue[0][1][0]->FPartition(LWall010 , 0 , 0 , 0 , LFloor , LCeiling);               VValue[1][1][0]->FPartition(0 , 0 , LWall110 , LWall110 , LFloor , LCeiling); VValue[2][1][0]->FPartition(0 , LWall210 , LWall210 , LWall210 , LFloor , LCeiling);
+        VValue[0][0][0]->FPartition(LWall000 , LWall000 , LWall000 , 0 , LFloor , LCeiling);
     }
 
     std::uintmax_t CSpace::FWidth(){
-        return VValue.size();
+        return VWidth;
     }
 
     std::uintmax_t CSpace::FDepth(){
-        return VValue[0].size();
+        return VDepth;
     }
 
     std::uintmax_t CSpace::FHeight(){
-        return VValue[0][0].size();
+        return VHeight;
     }
 
-    const CSpace::SPartition& CSpace::FPartition(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
-        return VValue[PX][PY][PZ];
-    }
-
-    bool CSpace::FCollision(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
-        if(
-            PX != std::clamp<std::uintmax_t>(PX , 0 , VValue.size() - 1) ||
-            PY != std::clamp<std::uintmax_t>(PY , 0 , VValue[0].size() - 1) ||
-            PZ != std::clamp<std::uintmax_t>(PZ , 0 , VValue[0][0].size() - 1)
-        ){
-            return false;
-        }
-        if(PX - NTranslation::GX.FValue()){
-            switch(PX - NTranslation::GX.FValue()){
-                case -1:
-                    return !VValue[NTranslation::GX.FValue()][NTranslation::GY.FValue()][GTranslation.FZ()].VLeftward && !VValue[PX][PY][PZ].VRightward;
-                break;
-                case +1:
-                    return !VValue[NTranslation::GX.FValue()][NTranslation::GY.FValue()][GTranslation.FZ()].VRightward && !VValue[PX][PY][PZ].VLeftward;
-                break;
-            }
-        }
-        if(PY - NTranslation::GY.FValue()){
-            switch(PY - NTranslation::GY.FValue()){
-                case -1:
-                    return !VValue[NTranslation::GX.FValue()][NTranslation::GY.FValue()][GTranslation.FZ()].VBackward && !VValue[PX][PY][PZ].VForward;
-                break;
-                case +1:
-                    return !VValue[NTranslation::GX.FValue()][NTranslation::GY.FValue()][GTranslation.FZ()].VForward && !VValue[PX][PY][PZ].VBackward;
-                break;
-            }
-        }
-        return false;
+    const NSpace::CPartition& CSpace::FPartition(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
+        return *VValue[PX][PY][PZ];
     }
 }

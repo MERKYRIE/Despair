@@ -15,15 +15,15 @@ namespace NBlindness::NVideo::NTypeface{
         for(char LDigit{'0'} ; LDigit <= '9' ; LDigit++){
             VDigits.emplace_back(new NFont::CCharacter{LFont , LDigit});
         }
+        VDigits.shrink_to_fit();
         for(char LUppercase{'A'} ; LUppercase <= 'Z' ; LUppercase++){
             VUppercases.emplace_back(new NFont::CCharacter{LFont , LUppercase});
         }
-        for(char LUppercase{'A'} ; LUppercase <= 'Z' ; LUppercase++){
-            VUppercases.emplace_back(new NFont::CCharacter{LFont , LUppercase});
-        }
+        VUppercases.shrink_to_fit();
         for(char LLowercase{'a'} ; LLowercase <= 'z' ; LLowercase++){
             VLowercases.emplace_back(new NFont::CCharacter{LFont , LLowercase});
         }
+        VLowercases.shrink_to_fit();
         TTF_CloseFont(LFont);
     }
 

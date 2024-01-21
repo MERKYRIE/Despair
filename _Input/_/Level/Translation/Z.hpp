@@ -3,7 +3,7 @@
 #include"Blindness.hpp"
 
 namespace NBlindness::NLevel::NTranslation{
-    inline class CY{
+    inline class CZ{
         private : friend class CTranslation;
 
         private : double VValue;
@@ -13,5 +13,5 @@ namespace NBlindness::NLevel::NTranslation{
 
         public : std::uintmax_t FInteger();
     }
-    GY;
+    GZ;
 }

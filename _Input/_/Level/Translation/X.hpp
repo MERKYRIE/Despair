@@ -9,10 +9,9 @@ namespace NBlindness::NLevel::NTranslation{
         private : double VValue;
 
         private : void FInitialize();
-        private : operator double();
-        private : void operator+=(double PValue);
+        private : void FUpdate();
 
-        public : std::uintmax_t FValue();
+        public : std::uintmax_t FInteger();
     }
     GX;
 }

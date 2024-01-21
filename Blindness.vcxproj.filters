@@ -96,6 +96,12 @@
     <ClInclude Include="_Input\_\Level\Translation\Y.hpp">
       <Filter>Level\Translation</Filter>
     </ClInclude>
+    <ClInclude Include="_Input\_\Level\Translation\Z.hpp">
+      <Filter>Level\Translation</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Space\Partition.hpp">
+      <Filter>Level\Space</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
@@ -193,6 +199,12 @@
     <ClCompile Include="_Input\_\Level\Translation\Y.cpp">
       <Filter>Level\Translation</Filter>
     </ClCompile>
+    <ClCompile Include="_Input\_\Level\Translation\Z.cpp">
+      <Filter>Level\Translation</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Level\Space\Partition.cpp">
+      <Filter>Level\Space</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -248,6 +260,9 @@
     </Filter>
     <Filter Include="Level\Translation">
       <UniqueIdentifier>{93814051-f47f-4a9f-9285-edb84e131c22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Space">
+      <UniqueIdentifier>{b24f43dc-43e2-4db2-94f1-26d9d916b8c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
