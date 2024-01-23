@@ -3,13 +3,17 @@
 #include"Blindness.hpp"
 
 namespace NBlindness::NLevel::NSpace{
+    namespace NPartition{
+        class CForward;
+    }
+    
     class CPartition{
         private : friend class CSpace;
         
         private : std::uint32_t VLeftward;
         private : std::uint32_t VRightward;
         private : std::uint32_t VBackward;
-        private : std::uint32_t VForward;
+        private : std::shared_ptr<NPartition::CForward> VForward;
         private : std::uint32_t VDownward;
         private : std::uint32_t VUpward;
 

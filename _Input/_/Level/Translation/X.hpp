@@ -2,16 +2,14 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness::NLevel::NTranslation{
-    inline class CX{
-        private : friend class CTranslation;
+#include"Level\\Coordinate.hpp"
 
-        private : double VValue;
+namespace NBlindness::NLevel::NTranslation{
+    inline class CX : public CCoordinate{
+        private : friend class CTranslation;
 
         private : void FInitialize();
         private : void FUpdate();
-
-        public : std::uintmax_t FInteger();
     }
     GX;
 }

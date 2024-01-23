@@ -8,8 +8,4 @@ namespace NBlindness::NLevel::NTranslation{
     void CZ::FUpdate(){
         glTranslated(0.0 , 0.0 , -VValue);
     }
-
-    std::uintmax_t CZ::FInteger(){
-        return static_cast<std::uintmax_t>(std::round(VValue - 0.5));
-    }
 }

@@ -102,6 +102,48 @@
     <ClInclude Include="_Input\_\Level\Space\Partition.hpp">
       <Filter>Level\Space</Filter>
     </ClInclude>
+    <ClInclude Include="_Input\_\Level\Light.hpp">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Light\Model.hpp">
+      <Filter>Level\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Light\Shade.hpp">
+      <Filter>Level\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\List\Material.hpp">
+      <Filter>Level\List</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Coordinate.hpp">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Coordinate.inl">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Dimension.hpp">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Dimension.inl">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Space\Width.hpp">
+      <Filter>Level\Space</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Space\Depth.hpp">
+      <Filter>Level\Space</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Space\Height.hpp">
+      <Filter>Level\Space</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Space\Side.hpp">
+      <Filter>Level\Space</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Space\Side.inl">
+      <Filter>Level\Space</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Level\Space\Partition\Forward.hpp">
+      <Filter>Level\Space\Partition</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
@@ -205,6 +247,30 @@
     <ClCompile Include="_Input\_\Level\Space\Partition.cpp">
       <Filter>Level\Space</Filter>
     </ClCompile>
+    <ClCompile Include="_Input\_\Level\Light.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Level\Light\Model.cpp">
+      <Filter>Level\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Level\Light\Shade.cpp">
+      <Filter>Level\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Level\List\Material.cpp">
+      <Filter>Level\List</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Level\Space\Width.cpp">
+      <Filter>Level\Space</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Level\Space\Depth.cpp">
+      <Filter>Level\Space</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Level\Space\Height.cpp">
+      <Filter>Level\Space</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Level\Space\Partition\Forward.cpp">
+      <Filter>Level\Space\Partition</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -263,6 +329,15 @@
     </Filter>
     <Filter Include="Level\Space">
       <UniqueIdentifier>{b24f43dc-43e2-4db2-94f1-26d9d916b8c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Light">
+      <UniqueIdentifier>{1db8b1bf-c108-4a16-85f2-932c0515c66d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\List">
+      <UniqueIdentifier>{c811c916-ad85-4eb9-b9bd-ce90b156b0f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Space\Partition">
+      <UniqueIdentifier>{6efa4da5-d944-4a1f-a818-aa384a62486e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

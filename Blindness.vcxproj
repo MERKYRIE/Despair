@@ -43,10 +43,21 @@
     <ClInclude Include="_Input\_\Input\Mouse\Wheel.hpp" />
     <ClInclude Include="_Input\_\Interface.hpp" />
     <ClInclude Include="_Input\_\Level.hpp" />
+    <ClInclude Include="_Input\_\Level\Coordinate.hpp" />
+    <ClInclude Include="_Input\_\Level\Dimension.hpp" />
+    <ClInclude Include="_Input\_\Level\Light.hpp" />
+    <ClInclude Include="_Input\_\Level\Light\Model.hpp" />
+    <ClInclude Include="_Input\_\Level\Light\Shade.hpp" />
     <ClInclude Include="_Input\_\Level\List.hpp" />
+    <ClInclude Include="_Input\_\Level\List\Material.hpp" />
     <ClInclude Include="_Input\_\Level\Rotation.hpp" />
     <ClInclude Include="_Input\_\Level\Space.hpp" />
+    <ClInclude Include="_Input\_\Level\Space\Depth.hpp" />
+    <ClInclude Include="_Input\_\Level\Space\Height.hpp" />
     <ClInclude Include="_Input\_\Level\Space\Partition.hpp" />
+    <ClInclude Include="_Input\_\Level\Space\Partition\Forward.hpp" />
+    <ClInclude Include="_Input\_\Level\Space\Side.hpp" />
+    <ClInclude Include="_Input\_\Level\Space\Width.hpp" />
     <ClInclude Include="_Input\_\Level\Translation.hpp" />
     <ClInclude Include="_Input\_\Level\Translation\X.hpp" />
     <ClInclude Include="_Input\_\Level\Translation\Y.hpp" />
@@ -84,10 +95,21 @@
     <ClCompile Include="_Input\_\Input\Mouse\Wheel.cpp" />
     <ClCompile Include="_Input\_\Interface.cpp" />
     <ClCompile Include="_Input\_\Level.cpp" />
+    <ClInclude Include="_Input\_\Level\Coordinate.inl">
+      <FileType>Document</FileType>
+    </ClInclude>
+    <ClCompile Include="_Input\_\Level\Light.cpp" />
+    <ClCompile Include="_Input\_\Level\Light\Model.cpp" />
+    <ClCompile Include="_Input\_\Level\Light\Shade.cpp" />
     <ClCompile Include="_Input\_\Level\List.cpp" />
+    <ClCompile Include="_Input\_\Level\List\Material.cpp" />
     <ClCompile Include="_Input\_\Level\Rotation.cpp" />
     <ClCompile Include="_Input\_\Level\Space.cpp" />
+    <ClCompile Include="_Input\_\Level\Space\Depth.cpp" />
+    <ClCompile Include="_Input\_\Level\Space\Height.cpp" />
     <ClCompile Include="_Input\_\Level\Space\Partition.cpp" />
+    <ClCompile Include="_Input\_\Level\Space\Partition\Forward.cpp" />
+    <ClCompile Include="_Input\_\Level\Space\Width.cpp" />
     <ClCompile Include="_Input\_\Level\Translation.cpp" />
     <ClCompile Include="_Input\_\Level\Translation\X.cpp" />
     <ClCompile Include="_Input\_\Level\Translation\Y.cpp" />
@@ -99,6 +121,16 @@
     <ClCompile Include="_Input\_\Video\Typeface.cpp" />
     <ClCompile Include="_Input\_\Video\Typeface\Font.cpp" />
     <ClCompile Include="_Input\_\Video\Typeface\Font\Character.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="_Input\_\Level\Dimension.inl">
+      <FileType>Document</FileType>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="_Input\_\Level\Space\Side.inl">
+      <FileType>Document</FileType>
+    </ClInclude>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
