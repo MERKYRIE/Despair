@@ -15,23 +15,25 @@ namespace NBlindness::NLevel::NTranslation{
 
     void CY::FUpdate(){
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_S)){
-            if(GSpace.FPartition(NTranslation::GX.FValue<std::uintmax_t>() , FValue<std::uintmax_t>() , NTranslation::GZ.FValue<std::uintmax_t>()).FCollision(
-                NTranslation::GX.FValue<std::uintmax_t>() + GRotation.FBackwardX<std::int8_t>() ,
-                FValue<std::uintmax_t>() + GRotation.FBackwardY<std::int8_t>() ,
-                NTranslation::GZ.FValue<std::uintmax_t>()
-            )){
-                VValue += GRotation.FBackwardY<double>();
+            if(
+                GSpace.FPartition(NTranslation::GX.FInteger() , FInteger() , NTranslation::GZ.FInteger())
+                .FCollision(NTranslation::GX.FInteger() + GRotation.FIntegerBackwardX() , FInteger() + GRotation.FIntegerBackwardY() , NTranslation::GZ.FInteger())
+            ){
+                VValue += GRotation.FRealBackwardY();
             }
         }
         if(NInput::GKeyboard.FPressed(SDL_SCANCODE_W)){
-            if(GSpace.FPartition(NTranslation::GX.FValue<std::uintmax_t>() , FValue<std::uintmax_t>() , NTranslation::GZ.FValue<std::uintmax_t>()).FCollision(
-                NTranslation::GX.FValue<std::uintmax_t>() + GRotation.FForwardX<std::int8_t>() ,
-                FValue<std::uintmax_t>() + GRotation.FForwardY<std::int8_t>() ,
-                NTranslation::GZ.FValue<std::uintmax_t>()
-            )){
-                VValue += GRotation.FForwardY<double>();
+            if(
+                GSpace.FPartition(NTranslation::GX.FInteger() , FInteger() , NTranslation::GZ.FInteger())
+                .FCollision(NTranslation::GX.FInteger() + GRotation.FIntegerForwardX() , FInteger() + GRotation.FIntegerForwardY() , NTranslation::GZ.FInteger())
+            ){
+                VValue += GRotation.FRealForwardY();
             }
         }
         glTranslated(0.0 , -VValue , 0.0);
+    }
+
+    std::uintmax_t CY::FInteger(){
+        return static_cast<std::uintmax_t>(std::round(VValue - 0.5));
     }
 }

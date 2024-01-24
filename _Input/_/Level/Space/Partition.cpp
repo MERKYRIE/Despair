@@ -1,9 +1,5 @@
 #include"Partition.hpp"
 
-#include"Depth.hpp"
-#include"Height.hpp"
-#include"Width.hpp"
-
 #include"Level\\Space.hpp"
 #include"Level\\Translation\\X.hpp"
 #include"Level\\Translation\\Y.hpp"
@@ -114,14 +110,14 @@ namespace NBlindness::NLevel::NSpace{
 
     bool CPartition::FCollision(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ) const{
         if(
-            PX != std::clamp<std::uintmax_t>(PX , 0 , GWidth.FValue<std::uintmax_t>() - 1) ||
-            PY != std::clamp<std::uintmax_t>(PY , 0 , GDepth.FValue<std::uintmax_t>() - 1) ||
-            PZ != std::clamp<std::uintmax_t>(PZ , 0 , GHeight.FValue<std::uintmax_t>() - 1)
+            PX != std::clamp<std::uintmax_t>(PX , 0 , GSpace.FWidth() - 1) ||
+            PY != std::clamp<std::uintmax_t>(PY , 0 , GSpace.FDepth() - 1) ||
+            PZ != std::clamp<std::uintmax_t>(PZ , 0 , GSpace.FHeight() - 1)
         ){
             return false;
         }
-        if(PX - NTranslation::GX.FValue<std::uintmax_t>()){
-            switch(PX - NTranslation::GX.FValue<std::uintmax_t>()){
+        if(PX - NTranslation::GX.FInteger()){
+            switch(PX - NTranslation::GX.FInteger()){
                 case -1:
                     return !VLeftward && !GSpace.FPartition(PX , PY , PZ).VRightward;
                 break;
@@ -130,8 +126,8 @@ namespace NBlindness::NLevel::NSpace{
                 break;
             }
         }
-        if(PY - NTranslation::GY.FValue<std::uintmax_t>()){
-            switch(PY - NTranslation::GY.FValue<std::uintmax_t>()){
+        if(PY - NTranslation::GY.FInteger()){
+            switch(PY - NTranslation::GY.FInteger()){
                 case -1:
                     return !VBackward && !GSpace.FPartition(PX , PY , PZ).VForward;
                 break;
