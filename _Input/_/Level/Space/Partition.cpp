@@ -1,9 +1,7 @@
 #include"Partition.hpp"
 
 #include"Level\\Space.hpp"
-#include"Level\\Translation\\X.hpp"
-#include"Level\\Translation\\Y.hpp"
-#include"Level\\Translation\\Z.hpp"
+#include"Level\\Translation.hpp"
 #include"Video\\Atlas.hpp"
 
 namespace NBlindness::NLevel::NSpace{
@@ -116,8 +114,8 @@ namespace NBlindness::NLevel::NSpace{
         ){
             return false;
         }
-        if(PX - NTranslation::GX.FInteger()){
-            switch(PX - NTranslation::GX.FInteger()){
+        if(PX - GTranslation.FX()){
+            switch(PX - GTranslation.FX()){
                 case -1:
                     return !VLeftward && !GSpace.FPartition(PX , PY , PZ).VRightward;
                 break;
@@ -126,8 +124,8 @@ namespace NBlindness::NLevel::NSpace{
                 break;
             }
         }
-        if(PY - NTranslation::GY.FInteger()){
-            switch(PY - NTranslation::GY.FInteger()){
+        if(PY - GTranslation.FY()){
+            switch(PY - GTranslation.FY()){
                 case -1:
                     return !VBackward && !GSpace.FPartition(PX , PY , PZ).VForward;
                 break;

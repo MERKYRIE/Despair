@@ -24,35 +24,19 @@ namespace NBlindness::NLevel{
         glRotated(-VValue , 0.0 , 0.0 , 1.0);
     }
 
-    double CRotation::FRealBackwardX(){
-        return -std::cos((90.0 + VValue) * std::numbers::pi_v<double> / 180.0);
-    }
-
-    double CRotation::FRealBackwardY(){
-        return -std::sin((90.0 + VValue) * std::numbers::pi_v<double> / 180.0);
-    }
-
-    double CRotation::FRealForwardX(){
-        return +std::cos((90.0 + VValue) * std::numbers::pi_v<double> / 180.0);
-    }
-
-    double CRotation::FRealForwardY(){
-        return +std::sin((90.0 + VValue) * std::numbers::pi_v<double> / 180.0);
-    }
-
-    std::int8_t CRotation::FIntegerBackwardX(){
+    std::int8_t CRotation::FBackwardX(){
         return static_cast<std::int8_t>(std::round(-std::cos((90.0 + VValue) * std::numbers::pi_v<double> / 180.0)));
     }
 
-    std::int8_t CRotation::FIntegerBackwardY(){
+    std::int8_t CRotation::FBackwardY(){
         return static_cast<std::int8_t>(std::round(-std::sin((90.0 + VValue) * std::numbers::pi_v<double> / 180.0)));
     }
 
-    std::int8_t CRotation::FIntegerForwardX(){
+    std::int8_t CRotation::FForwardX(){
         return static_cast<std::int8_t>(std::round(+std::cos((90.0 + VValue) * std::numbers::pi_v<double> / 180.0)));
     }
 
-    std::int8_t CRotation::FIntegerForwardY(){
+    std::int8_t CRotation::FForwardY(){
         return static_cast<std::int8_t>(std::round(+std::sin((90.0 + VValue) * std::numbers::pi_v<double> / 180.0)));
     }
 }

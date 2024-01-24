@@ -1,9 +1,6 @@
 #include"Space.hpp"
 
 #include"Space\\Partition.hpp"
-#include"Translation\\X.hpp"
-#include"Translation\\Y.hpp"
-#include"Translation\\Z.hpp"
 
 #include"Video\\Atlas.hpp"
 
@@ -18,9 +15,9 @@ namespace NBlindness::NLevel{
         std::uint32_t LCeiling{NVideo::GAtlas.FTexture("\\plat_top1.png")};
         for(std::uintmax_t LX{0} ; LX < VWidth ; LX++){
             VValue.emplace_back();
-            for(std::uintmax_t LY{0} ; LY < VHeight ; LY++){
+            for(std::uintmax_t LY{0} ; LY < VDepth ; LY++){
                 VValue[LX].emplace_back();
-                for(std::uintmax_t LZ{0} ; LZ < VDepth ; LZ++){
+                for(std::uintmax_t LZ{0} ; LZ < VHeight ; LZ++){
                     VValue[LX][LY].emplace_back(new NSpace::CPartition{LWall000 , LWall000 , LWall000 , LWall000 , LFloor , LCeiling});
                 }
                 VValue[LX][LY].shrink_to_fit();

@@ -11,14 +11,10 @@ namespace NBlindness::NLevel{
         private : void FInitialize();
         private : void FUpdate();
 
-        public : double FRealBackwardX();
-        public : double FRealBackwardY();
-        public : double FRealForwardX();
-        public : double FRealForwardY();
-        public : std::int8_t FIntegerBackwardX();
-        public : std::int8_t FIntegerBackwardY();
-        public : std::int8_t FIntegerForwardX();
-        public : std::int8_t FIntegerForwardY();
+        public : std::int8_t FBackwardX();
+        public : std::int8_t FBackwardY();
+        public : std::int8_t FForwardX();
+        public : std::int8_t FForwardY();
     }
     GRotation;
 }
