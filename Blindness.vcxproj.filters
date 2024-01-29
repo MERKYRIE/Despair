@@ -1,268 +1,280 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="_Input\_\Audio.hpp" />
-    <ClInclude Include="_Input\_\Blindness.hpp" />
-    <ClInclude Include="_Input\_\Debug.hpp" />
-    <ClInclude Include="_Input\_\Input.hpp" />
-    <ClInclude Include="_Input\_\Interface.hpp" />
-    <ClInclude Include="_Input\_\Level.hpp" />
-    <ClInclude Include="_Input\_\Time.hpp" />
-    <ClInclude Include="_Input\_\Video.hpp" />
-    <ClInclude Include="_Input\_\Input\Keyboard.hpp">
-      <Filter>Input</Filter>
+    <ClInclude Include="_Input\_\Engine\Input\Keyboard.hpp">
+      <Filter>Engine\Input</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Input\Mouse.hpp">
-      <Filter>Input</Filter>
+    <ClInclude Include="_Input\_\Engine\Input\Mouse.hpp">
+      <Filter>Engine\Input</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Input\Mouse\Button.hpp">
-      <Filter>Input\Mouse</Filter>
+    <ClInclude Include="_Input\_\Engine\Input\Mouse\Button.hpp">
+      <Filter>Engine\Input\Mouse</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Input\Mouse\Cursor.hpp">
-      <Filter>Input\Mouse</Filter>
+    <ClInclude Include="_Input\_\Engine\Input\Mouse\Cursor.hpp">
+      <Filter>Engine\Input\Mouse</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Input\Mouse\Wheel.hpp">
-      <Filter>Input\Mouse</Filter>
+    <ClInclude Include="_Input\_\Engine\Input\Mouse\Wheel.hpp">
+      <Filter>Engine\Input\Mouse</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Input\Mouse\Cursor\X.hpp">
-      <Filter>Input\Mouse\Cursor</Filter>
+    <ClInclude Include="_Input\_\Engine\Input\Mouse\Cursor\X.hpp">
+      <Filter>Engine\Input\Mouse\Cursor</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Input\Mouse\Cursor\Y.hpp">
-      <Filter>Input\Mouse\Cursor</Filter>
+    <ClInclude Include="_Input\_\Engine\Input\Mouse\Cursor\Y.hpp">
+      <Filter>Engine\Input\Mouse\Cursor</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Debug\Assert.hpp">
-      <Filter>Debug</Filter>
+    <ClInclude Include="_Input\_\Engine\Debug\Assert.hpp">
+      <Filter>Engine\Debug</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Debug\Assert\Error.hpp">
-      <Filter>Debug\Assert</Filter>
+    <ClInclude Include="_Input\_\Engine\Debug\Assert\Error.hpp">
+      <Filter>Engine\Debug\Assert</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Debug\Assert\Information.hpp">
-      <Filter>Debug\Assert</Filter>
+    <ClInclude Include="_Input\_\Engine\Debug\Assert\Information.hpp">
+      <Filter>Engine\Debug\Assert</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Debug\Assert\Warning.hpp">
-      <Filter>Debug\Assert</Filter>
+    <ClInclude Include="_Input\_\Engine\Debug\Assert\Warning.hpp">
+      <Filter>Engine\Debug\Assert</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Debug\Assert\Error\SimpleDirectMediaLayer.hpp">
-      <Filter>Debug\Assert\Error</Filter>
+    <ClInclude Include="_Input\_\Engine\Debug\Assert\Error\SimpleDirectMediaLayer.hpp">
+      <Filter>Engine\Debug\Assert\Error</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Debug\Assert\Information\SimpleDirectMediaLayer.hpp">
-      <Filter>Debug\Assert\Information</Filter>
+    <ClInclude Include="_Input\_\Engine\Debug\Assert\Information\SimpleDirectMediaLayer.hpp">
+      <Filter>Engine\Debug\Assert\Information</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Debug\Assert\Warning\SimpleDirectMediaLayer.hpp">
-      <Filter>Debug\Assert\Warning</Filter>
+    <ClInclude Include="_Input\_\Engine\Debug\Assert\Warning\SimpleDirectMediaLayer.hpp">
+      <Filter>Engine\Debug\Assert\Warning</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Video\Atlas.hpp">
-      <Filter>Video</Filter>
+    <ClInclude Include="_Input\_\Engine\Video\Atlas.hpp">
+      <Filter>Engine\Video</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Video\Atlas\Texture.hpp">
-      <Filter>Video\Atlas</Filter>
+    <ClInclude Include="_Input\_\Engine\Video\Atlas\Texture.hpp">
+      <Filter>Engine\Video\Atlas</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Audio\Soundtrack.hpp">
-      <Filter>Audio</Filter>
+    <ClInclude Include="_Input\_\Engine\Audio\Soundtrack.hpp">
+      <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Audio\Soundtrack\Track.hpp">
-      <Filter>Audio\Soundtrack</Filter>
+    <ClInclude Include="_Input\_\Engine\Audio\Soundtrack\Track.hpp">
+      <Filter>Engine\Audio\Soundtrack</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Audio\Soundpack.hpp">
-      <Filter>Audio</Filter>
+    <ClInclude Include="_Input\_\Engine\Audio\Soundpack.hpp">
+      <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Audio\Soundpack\Sound.hpp">
-      <Filter>Audio\Soundpack</Filter>
+    <ClInclude Include="_Input\_\Engine\Audio\Soundpack\Sound.hpp">
+      <Filter>Engine\Audio\Soundpack</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Video\Typeface.hpp">
-      <Filter>Video</Filter>
+    <ClInclude Include="_Input\_\Engine\Video\Typeface.hpp">
+      <Filter>Engine\Video</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Video\Typeface\Font.hpp">
-      <Filter>Video\Typeface</Filter>
+    <ClInclude Include="_Input\_\Engine\Video\Typeface\Font.hpp">
+      <Filter>Engine\Video\Typeface</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Video\Typeface\Font\Character.hpp">
-      <Filter>Video\Typeface\Font</Filter>
+    <ClInclude Include="_Input\_\Engine\Video\Typeface\Font\Character.hpp">
+      <Filter>Engine\Video\Typeface\Font</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Level\List.hpp">
-      <Filter>Level</Filter>
+    <ClInclude Include="_Input\_\Engine\Level\List.hpp">
+      <Filter>Engine\Level</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Level\Rotation.hpp">
-      <Filter>Level</Filter>
+    <ClInclude Include="_Input\_\Engine\Level\Rotation.hpp">
+      <Filter>Engine\Level</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Level\Space.hpp">
-      <Filter>Level</Filter>
+    <ClInclude Include="_Input\_\Engine\Level\Space.hpp">
+      <Filter>Engine\Level</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Level\Translation.hpp">
-      <Filter>Level</Filter>
+    <ClInclude Include="_Input\_\Engine\Level\Translation.hpp">
+      <Filter>Engine\Level</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Level\Translation\X.hpp">
-      <Filter>Level\Translation</Filter>
+    <ClInclude Include="_Input\_\Engine\Level\Space\Partition.hpp">
+      <Filter>Engine\Level\Space</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Level\Translation\Y.hpp">
-      <Filter>Level\Translation</Filter>
+    <ClInclude Include="_Input\_\Engine\Audio.hpp">
+      <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Level\Translation\Z.hpp">
-      <Filter>Level\Translation</Filter>
+    <ClInclude Include="_Input\_\Engine\Debug.hpp">
+      <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Level\Space\Partition.hpp">
-      <Filter>Level\Space</Filter>
+    <ClInclude Include="_Input\_\Engine\Input.hpp">
+      <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="_Input\_\Engine\Level.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Engine\Time.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Engine\Video.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Engine.hpp" />
+    <ClInclude Include="_Input\_\Game.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="_Input\_\Audio.cpp" />
-    <ClCompile Include="_Input\_\Blindness.cpp" />
-    <ClCompile Include="_Input\_\Debug.cpp" />
-    <ClCompile Include="_Input\_\Input.cpp" />
-    <ClCompile Include="_Input\_\Interface.cpp" />
-    <ClCompile Include="_Input\_\Level.cpp" />
-    <ClCompile Include="_Input\_\Time.cpp" />
-    <ClCompile Include="_Input\_\Video.cpp" />
-    <ClCompile Include="_Input\_\Input\Keyboard.cpp">
-      <Filter>Input</Filter>
+    <ClCompile Include="_Input\_\Engine\Input\Keyboard.cpp">
+      <Filter>Engine\Input</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Input\Mouse.cpp">
-      <Filter>Input</Filter>
+    <ClCompile Include="_Input\_\Engine\Input\Mouse.cpp">
+      <Filter>Engine\Input</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Input\Mouse\Button.cpp">
-      <Filter>Input\Mouse</Filter>
+    <ClCompile Include="_Input\_\Engine\Input\Mouse\Button.cpp">
+      <Filter>Engine\Input\Mouse</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Input\Mouse\Cursor.cpp">
-      <Filter>Input\Mouse</Filter>
+    <ClCompile Include="_Input\_\Engine\Input\Mouse\Cursor.cpp">
+      <Filter>Engine\Input\Mouse</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Input\Mouse\Wheel.cpp">
-      <Filter>Input\Mouse</Filter>
+    <ClCompile Include="_Input\_\Engine\Input\Mouse\Wheel.cpp">
+      <Filter>Engine\Input\Mouse</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Input\Mouse\Cursor\X.cpp">
-      <Filter>Input\Mouse\Cursor</Filter>
+    <ClCompile Include="_Input\_\Engine\Input\Mouse\Cursor\X.cpp">
+      <Filter>Engine\Input\Mouse\Cursor</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Input\Mouse\Cursor\Y.cpp">
-      <Filter>Input\Mouse\Cursor</Filter>
+    <ClCompile Include="_Input\_\Engine\Input\Mouse\Cursor\Y.cpp">
+      <Filter>Engine\Input\Mouse\Cursor</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Debug\Assert.cpp">
-      <Filter>Debug</Filter>
+    <ClCompile Include="_Input\_\Engine\Debug\Assert.cpp">
+      <Filter>Engine\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Debug\Assert\Error.cpp">
-      <Filter>Debug\Assert</Filter>
+    <ClCompile Include="_Input\_\Engine\Debug\Assert\Error.cpp">
+      <Filter>Engine\Debug\Assert</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Debug\Assert\Information.cpp">
-      <Filter>Debug\Assert</Filter>
+    <ClCompile Include="_Input\_\Engine\Debug\Assert\Information.cpp">
+      <Filter>Engine\Debug\Assert</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Debug\Assert\Warning.cpp">
-      <Filter>Debug\Assert</Filter>
+    <ClCompile Include="_Input\_\Engine\Debug\Assert\Warning.cpp">
+      <Filter>Engine\Debug\Assert</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Debug\Assert\Error\SimpleDirectMediaLayer.cpp">
-      <Filter>Debug\Assert\Error</Filter>
+    <ClCompile Include="_Input\_\Engine\Debug\Assert\Error\SimpleDirectMediaLayer.cpp">
+      <Filter>Engine\Debug\Assert\Error</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Debug\Assert\Information\SimpleDirectMediaLayer.cpp">
-      <Filter>Debug\Assert\Information</Filter>
+    <ClCompile Include="_Input\_\Engine\Debug\Assert\Information\SimpleDirectMediaLayer.cpp">
+      <Filter>Engine\Debug\Assert\Information</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Debug\Assert\Warning\SimpleDirectMediaLayer.cpp">
-      <Filter>Debug\Assert\Warning</Filter>
+    <ClCompile Include="_Input\_\Engine\Debug\Assert\Warning\SimpleDirectMediaLayer.cpp">
+      <Filter>Engine\Debug\Assert\Warning</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Video\Atlas.cpp">
-      <Filter>Video</Filter>
+    <ClCompile Include="_Input\_\Engine\Video\Atlas.cpp">
+      <Filter>Engine\Video</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Video\Atlas\Texture.cpp">
-      <Filter>Video\Atlas</Filter>
+    <ClCompile Include="_Input\_\Engine\Video\Atlas\Texture.cpp">
+      <Filter>Engine\Video\Atlas</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Audio\Soundtrack.cpp">
-      <Filter>Audio</Filter>
+    <ClCompile Include="_Input\_\Engine\Audio\Soundtrack.cpp">
+      <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Audio\Soundtrack\Track.cpp">
-      <Filter>Audio\Soundtrack</Filter>
+    <ClCompile Include="_Input\_\Engine\Audio\Soundtrack\Track.cpp">
+      <Filter>Engine\Audio\Soundtrack</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Audio\Soundpack.cpp">
-      <Filter>Audio</Filter>
+    <ClCompile Include="_Input\_\Engine\Audio\Soundpack.cpp">
+      <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Audio\Soundpack\Sound.cpp">
-      <Filter>Audio\Soundpack</Filter>
+    <ClCompile Include="_Input\_\Engine\Audio\Soundpack\Sound.cpp">
+      <Filter>Engine\Audio\Soundpack</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Video\Typeface.cpp">
-      <Filter>Video</Filter>
+    <ClCompile Include="_Input\_\Engine\Video\Typeface.cpp">
+      <Filter>Engine\Video</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Video\Typeface\Font.cpp">
-      <Filter>Video\Typeface</Filter>
+    <ClCompile Include="_Input\_\Engine\Video\Typeface\Font.cpp">
+      <Filter>Engine\Video\Typeface</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Video\Typeface\Font\Character.cpp">
-      <Filter>Video\Typeface\Font</Filter>
+    <ClCompile Include="_Input\_\Engine\Video\Typeface\Font\Character.cpp">
+      <Filter>Engine\Video\Typeface\Font</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Level\List.cpp">
-      <Filter>Level</Filter>
+    <ClCompile Include="_Input\_\Engine\Level\List.cpp">
+      <Filter>Engine\Level</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Level\Rotation.cpp">
-      <Filter>Level</Filter>
+    <ClCompile Include="_Input\_\Engine\Level\Rotation.cpp">
+      <Filter>Engine\Level</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Level\Space.cpp">
-      <Filter>Level</Filter>
+    <ClCompile Include="_Input\_\Engine\Level\Space.cpp">
+      <Filter>Engine\Level</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Level\Translation.cpp">
-      <Filter>Level</Filter>
+    <ClCompile Include="_Input\_\Engine\Level\Translation.cpp">
+      <Filter>Engine\Level</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Level\Translation\X.cpp">
-      <Filter>Level\Translation</Filter>
+    <ClCompile Include="_Input\_\Engine\Level\Space\Partition.cpp">
+      <Filter>Engine\Level\Space</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Level\Translation\Y.cpp">
-      <Filter>Level\Translation</Filter>
+    <ClCompile Include="_Input\_\Engine\Audio.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Level\Translation\Z.cpp">
-      <Filter>Level\Translation</Filter>
+    <ClCompile Include="_Input\_\Engine\Debug.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Level\Space\Partition.cpp">
-      <Filter>Level\Space</Filter>
+    <ClCompile Include="_Input\_\Engine\Input.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="_Input\_\Engine\Level.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Engine\Time.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Engine\Video.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Engine.cpp" />
+    <ClCompile Include="_Input\_\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Debug">
-      <UniqueIdentifier>{8b39bba5-20d5-44a5-b2cc-d5b53247d68e}</UniqueIdentifier>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{c12fa761-dc42-4998-91ae-0dfb4446dad6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{6af9df4f-56f4-4189-a6d3-29f99a231ed0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Debug\Assert">
-      <UniqueIdentifier>{7622bc6c-eaee-4ebd-b8b8-d4d35c44aeb0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Debug\Assert\Error">
-      <UniqueIdentifier>{68140e11-4469-4934-8831-a780377ccc00}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Debug\Assert\Warning">
-      <UniqueIdentifier>{59e678d8-e74a-4a31-90e8-350dc10ebf36}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Debug\Assert\Information">
-      <UniqueIdentifier>{c8365d59-c509-42d9-b611-df59dfded9f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Input\Mouse">
-      <UniqueIdentifier>{8dfe9da1-8d53-4150-820f-b31bc5e1b2c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Input\Mouse\Cursor">
-      <UniqueIdentifier>{60621bcf-5a32-405a-81e7-aa63ba04d8f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Audio">
+    <Filter Include="Engine\Audio">
       <UniqueIdentifier>{11b354de-f084-4c52-9052-1c1d0e113caa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Video">
-      <UniqueIdentifier>{e2c279e3-21f1-4ace-a7c3-772b84c57d9e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Video\Atlas">
-      <UniqueIdentifier>{6eef4b2b-ae9e-4c0d-be00-6e206492ae58}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Audio\Soundtrack">
+    <Filter Include="Engine\Audio\Soundtrack">
       <UniqueIdentifier>{6b4696ed-6f46-4183-89dd-097447a19fed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Audio\Soundpack">
+    <Filter Include="Engine\Audio\Soundpack">
       <UniqueIdentifier>{6d625132-cace-4617-aa20-7156803b657f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input\Level">
+    <Filter Include="Engine\Debug">
+      <UniqueIdentifier>{8b39bba5-20d5-44a5-b2cc-d5b53247d68e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Debug\Assert">
+      <UniqueIdentifier>{7622bc6c-eaee-4ebd-b8b8-d4d35c44aeb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Debug\Assert\Error">
+      <UniqueIdentifier>{68140e11-4469-4934-8831-a780377ccc00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Debug\Assert\Warning">
+      <UniqueIdentifier>{59e678d8-e74a-4a31-90e8-350dc10ebf36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Debug\Assert\Information">
+      <UniqueIdentifier>{c8365d59-c509-42d9-b611-df59dfded9f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{6af9df4f-56f4-4189-a6d3-29f99a231ed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input\Mouse">
+      <UniqueIdentifier>{8dfe9da1-8d53-4150-820f-b31bc5e1b2c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input\Mouse\Cursor">
+      <UniqueIdentifier>{60621bcf-5a32-405a-81e7-aa63ba04d8f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input\Level">
       <UniqueIdentifier>{37badcea-5a20-4d69-98c3-a8ef8967a604}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Video\Typeface">
-      <UniqueIdentifier>{812b4d2f-e949-4c8d-83b9-348fc74c003b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Video\Typeface\Font">
-      <UniqueIdentifier>{be8debe4-8e2e-48cc-87e1-5ad06a12cbc2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level">
+    <Filter Include="Engine\Level">
       <UniqueIdentifier>{070afbd2-2943-4cff-8a87-f75196364ef5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Translation">
+    <Filter Include="Engine\Level\Translation">
       <UniqueIdentifier>{93814051-f47f-4a9f-9285-edb84e131c22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Space">
+    <Filter Include="Engine\Level\Space">
       <UniqueIdentifier>{b24f43dc-43e2-4db2-94f1-26d9d916b8c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Video">
+      <UniqueIdentifier>{e2c279e3-21f1-4ace-a7c3-772b84c57d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Video\Atlas">
+      <UniqueIdentifier>{6eef4b2b-ae9e-4c0d-be00-6e206492ae58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Video\Typeface">
+      <UniqueIdentifier>{812b4d2f-e949-4c8d-83b9-348fc74c003b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Video\Typeface\Font">
+      <UniqueIdentifier>{be8debe4-8e2e-48cc-87e1-5ad06a12cbc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{4dd6af32-7c2e-455e-87bb-454e9e739b52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
