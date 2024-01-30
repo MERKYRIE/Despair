@@ -1,6 +1,8 @@
 #include"Video.hpp"
 
-#include"Engine\\Debug.hpp"
+#include"Debug.hpp"
+#include"Font.hpp"
+#include"Texture.hpp"
 
 namespace NBlindness::NEngine{
     void CVideo::FInitialize(){
@@ -57,6 +59,20 @@ namespace NBlindness::NEngine{
         std::array<float , 1> LMaterialShininess{0.0F};
         glMaterialfv(GL_FRONT , GL_SHININESS , LMaterialShininess.data());
         GDebug.FOpenGraphicsLibraryError();
+        GDebug.FSimpleDirectMediaLayerCodeError(TTF_Init());
+        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Typeface"}){
+            if(LEntry.path().extension() == ".ttf"){
+                VFonts.emplace_back(new CFont{LEntry.path().string()});
+            }
+        }
+        VFonts.shrink_to_fit();
+        GDebug.FSimpleDirectMediaLayerFlagsError(IMG_Init(IMG_INIT_PNG));
+        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Atlas"}){
+            if(LEntry.path().extension() == ".png"){
+                VTextures.emplace_back(new CTexture{LEntry.path().string()});
+            }
+        }
+        VTextures.shrink_to_fit();
     }
 
     void CVideo::FPreupdate(){
@@ -68,6 +84,10 @@ namespace NBlindness::NEngine{
     }
 
     void CVideo::FDeinitialize(){
+        VTextures.clear();
+        IMG_Quit();
+        VFonts.clear();
+        TTF_Quit();
         SDL_GL_DeleteContext(VContext);
         SDL_DestroyWindow(VWindow);
     }
@@ -78,5 +98,21 @@ namespace NBlindness::NEngine{
 
     float CVideo::FInversedRatio(){
         return VInversedRatio;
+    }
+
+    const CFont& CVideo::FFont(const std::string& PPath){
+        std::vector<std::shared_ptr<CFont>>::iterator LIterator{
+            std::find_if(VFonts.begin() , VFonts.end() , [&PPath](const std::shared_ptr<CFont>& LPointer){return *LPointer == PPath;})
+        };
+        GDebug.FError(LIterator == VFonts.end());
+        return **LIterator;
+    }
+
+    const CTexture& CVideo::FTexture(const std::string& PPath){
+        std::vector<std::shared_ptr<CTexture>>::iterator LIterator{
+            std::find_if(VTextures.begin() , VTextures.end() , [&PPath](const std::shared_ptr<CTexture>& LPointer){return *LPointer == PPath;})
+        };
+        GDebug.FError(LIterator == VTextures.end());
+        return **LIterator;
     }
 }

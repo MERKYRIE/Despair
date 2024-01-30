@@ -6,7 +6,7 @@ namespace NBlindness::NEngine{
     class CCharacter;
     
     class CFont{
-        private : friend class CTypeface;
+        private : friend class CVideo;
         
         private : std::string VPath;
         private : std::vector<std::shared_ptr<CCharacter>> VDigits;
@@ -15,7 +15,7 @@ namespace NBlindness::NEngine{
 
         private : bool operator==(const std::string& PPath) const;
 
-        public : CFont(const std::string& PPath);
+        private : CFont(const std::string& PPath);
         public : const CCharacter& FDigit(char PCode) const;
         public : const CCharacter& FUppercase(char PCode) const;
         public : const CCharacter& FLowercase(char PCode) const;

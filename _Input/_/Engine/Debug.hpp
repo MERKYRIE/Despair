@@ -4,13 +4,12 @@
 
 namespace NBlindness::NEngine{
     inline class CDebug{
-        public :
-            void FAssert(
-                bool PCondition = true ,
-                const std::string& PMessage = "" ,
-                SDL_MessageBoxFlags PFlags = SDL_MESSAGEBOX_ERROR ,
-                const std::source_location& PLocation = std::source_location::current()
-            );
+        public : void FAssert(
+            bool PCondition = true ,
+            const std::string& PMessage = "" ,
+            SDL_MessageBoxFlags PFlags = SDL_MESSAGEBOX_ERROR ,
+            const std::source_location& PLocation = std::source_location::current()
+        );
         public : void FError(bool PCondition = true , const std::string& PMessage = "" , const std::source_location& PLocation = std::source_location::current());
         public : bool FWarning(bool PCondition = true , const std::string& PMessage = "" , const std::source_location& PLocation = std::source_location::current());
         public : bool FInformation(bool PCondition = true , const std::string& PMessage = "" , const std::source_location& PLocation = std::source_location::current());

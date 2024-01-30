@@ -4,7 +4,7 @@
 
 namespace NBlindness::NEngine{
     class CSound{
-        private : friend class CSoundpack;
+        private : friend class CAudio;
         
         private : std::string VPath;
         private : Mix_Chunk* VHandle;
@@ -12,7 +12,7 @@ namespace NBlindness::NEngine{
 
         private : bool operator==(const std::string& PPath) const;
 
-        public : CSound(const std::string& PPath);
+        private : CSound(const std::string& PPath);
         public : const CSound& FPlay() const;
         public : bool FPlaying() const;
         public : ~CSound();

@@ -20,53 +20,33 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_Input\_\Engine.hpp" />
-    <ClInclude Include="_Input\_\Engine\Atlas.hpp" />
     <ClInclude Include="_Input\_\Engine\Audio.hpp" />
     <ClInclude Include="_Input\_\Engine\Character.hpp" />
     <ClInclude Include="_Input\_\Engine\Debug.hpp" />
     <ClInclude Include="_Input\_\Engine\Font.hpp" />
     <ClInclude Include="_Input\_\Engine\Input.hpp" />
-    <ClInclude Include="_Input\_\Engine\Keyboard.hpp" />
-    <ClInclude Include="_Input\_\Engine\Level.hpp" />
-    <ClInclude Include="_Input\_\Engine\Level\List.hpp" />
-    <ClInclude Include="_Input\_\Engine\Level\Rotation.hpp" />
-    <ClInclude Include="_Input\_\Engine\Level\Space.hpp" />
-    <ClInclude Include="_Input\_\Engine\Level\Space\Partition.hpp" />
-    <ClInclude Include="_Input\_\Engine\Level\Translation.hpp" />
-    <ClInclude Include="_Input\_\Engine\Mouse.hpp" />
+    <ClInclude Include="_Input\_\Engine\World.hpp" />
+    <ClInclude Include="_Input\_\Engine\Partition.hpp" />
     <ClInclude Include="_Input\_\Engine\Sound.hpp" />
-    <ClInclude Include="_Input\_\Engine\Soundpack.hpp" />
-    <ClInclude Include="_Input\_\Engine\Soundtrack.hpp" />
     <ClInclude Include="_Input\_\Engine\Texture.hpp" />
     <ClInclude Include="_Input\_\Engine\Time.hpp" />
     <ClInclude Include="_Input\_\Engine\Track.hpp" />
-    <ClInclude Include="_Input\_\Engine\Typeface.hpp" />
     <ClInclude Include="_Input\_\Engine\Video.hpp" />
     <ClInclude Include="_Input\_\Game.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Engine.cpp" />
-    <ClCompile Include="_Input\_\Engine\Atlas.cpp" />
     <ClCompile Include="_Input\_\Engine\Audio.cpp" />
     <ClCompile Include="_Input\_\Engine\Character.cpp" />
     <ClCompile Include="_Input\_\Engine\Debug.cpp" />
     <ClCompile Include="_Input\_\Engine\Font.cpp" />
     <ClCompile Include="_Input\_\Engine\Input.cpp" />
-    <ClCompile Include="_Input\_\Engine\Keyboard.cpp" />
-    <ClCompile Include="_Input\_\Engine\Level.cpp" />
-    <ClCompile Include="_Input\_\Engine\Level\List.cpp" />
-    <ClCompile Include="_Input\_\Engine\Level\Rotation.cpp" />
-    <ClCompile Include="_Input\_\Engine\Level\Space.cpp" />
-    <ClCompile Include="_Input\_\Engine\Level\Space\Partition.cpp" />
-    <ClCompile Include="_Input\_\Engine\Level\Translation.cpp" />
-    <ClCompile Include="_Input\_\Engine\Mouse.cpp" />
+    <ClCompile Include="_Input\_\Engine\World.cpp" />
+    <ClCompile Include="_Input\_\Engine\Partition.cpp" />
     <ClCompile Include="_Input\_\Engine\Sound.cpp" />
-    <ClCompile Include="_Input\_\Engine\Soundpack.cpp" />
-    <ClCompile Include="_Input\_\Engine\Soundtrack.cpp" />
     <ClCompile Include="_Input\_\Engine\Texture.cpp" />
     <ClCompile Include="_Input\_\Engine\Time.cpp" />
     <ClCompile Include="_Input\_\Engine\Track.cpp" />
-    <ClCompile Include="_Input\_\Engine\Typeface.cpp" />
     <ClCompile Include="_Input\_\Engine\Video.cpp" />
     <ClCompile Include="_Input\_\Game.cpp" />
   </ItemGroup>

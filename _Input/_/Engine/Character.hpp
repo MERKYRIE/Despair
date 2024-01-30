@@ -8,7 +8,7 @@ namespace NBlindness::NEngine{
         
         private : std::uint32_t VIdentifier;
 
-        public : CCharacter(TTF_Font* PFont , char PCode);
+        private : CCharacter(TTF_Font* PFont , char PCode);
         public : std::uint32_t FIdentifier() const;
         public : ~CCharacter();
     };
