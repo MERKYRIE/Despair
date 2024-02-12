@@ -13,6 +13,9 @@ namespace NBlindness::NEngine{
         private : SDL_GLContext VContext;
         private : float VRatio;
         private : float VInversedRatio;
+        private : std::uint32_t VVertex;
+        private : std::uint32_t VFragment;
+        private : std::uint32_t VProgram;
         private : std::vector<std::shared_ptr<CFont>> VFonts;
         private : std::vector<std::shared_ptr<CTexture>> VTextures;
 

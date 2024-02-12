@@ -90,6 +90,7 @@ namespace NBlindness::NEngine{
             }
         }
 
+        /*
         VList = glGenLists(1);
         glNewList(VList , GL_COMPILE);
         for(std::uintmax_t LX{0} ; LX < VWidth ; LX++){
@@ -100,15 +101,18 @@ namespace NBlindness::NEngine{
             }
         }
         glEndList();
+        */
     }
 
     void CWorld::FUpdate(){
         glEnable(GL_DEPTH_TEST);
+        /*
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         gluPerspective(90.0 , GVideo.FRatio() , 0.25 , 1'000.0);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
+        */
         if(GInput.FKeyPressed(SDL_SCANCODE_A)){
             VRotation += 90.0;
             if(VRotation >= 360.0){
@@ -129,8 +133,10 @@ namespace NBlindness::NEngine{
             VForwardX = static_cast<std::int8_t>(std::round(+std::cos((90.0 + VRotation) * std::numbers::pi_v<double> / 180.0)));
             VForwardY = static_cast<std::int8_t>(std::round(+std::sin((90.0 + VRotation) * std::numbers::pi_v<double> / 180.0)));
         }
+        /*
         glRotated(-90.0 , 1.0 , 0.0 , 0.0);
         glRotated(-VRotation , 0.0 , 0.0 , 1.0);
+        */
         if(GInput.FKeyPressed(SDL_SCANCODE_S)){
             if(
                 VSpace[VIntegralX][VIntegralY][VIntegralZ]
@@ -153,16 +159,18 @@ namespace NBlindness::NEngine{
                 VIntegralY = static_cast<std::uintmax_t>(std::round(VRealY - 0.5));
             }
         }
+        /*
         glTranslated(-VRealX , -VRealY , -VRealZ);
         glCallList(VList);
         std::array<float , 4> LLightPosition{static_cast<float>(VRealX) , static_cast<float>(VRealY) , static_cast<float>(VRealZ) , 1.0F};
         glLightfv(GL_LIGHT0 , GL_POSITION , LLightPosition.data());
         std::array<float , 3> LLightSpotDirection{static_cast<float>(VForwardX) , static_cast<float>(VForwardY) , 0.0F};
         glLightfv(GL_LIGHT0 , GL_SPOT_DIRECTION , LLightSpotDirection.data());
+        */
     }
 
     void CWorld::FDeinitialize(){
-        glDeleteLists(VList , 1);
+        //glDeleteLists(VList , 1);
     }
 
     std::uintmax_t CWorld::FWidth(){

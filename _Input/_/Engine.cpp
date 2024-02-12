@@ -1,6 +1,3 @@
-#pragma comment(lib , "glu32.lib")
-#pragma comment(lib , "opengl32.lib")
-
 #pragma comment(lib , "..\\OpenAssetImportLibrary\\assimp-vc143-mt.lib")
 #pragma comment(lib , "..\\SimpleDirectMediaLayer\\sdl2.lib")
 #pragma comment(lib , "..\\SimpleDirectMediaLayer\\sdl2main.lib")
@@ -8,8 +5,9 @@
 #pragma comment(lib , "..\\SimpleDirectMediaLayer\\Mixer\\sdl2_mixer.lib")
 #pragma comment(lib , "..\\SimpleDirectMediaLayer\\TrueTypeFont\\sdl2_ttf.lib")
 
-#include"Engine.hpp"
+#define GLAD_GL_IMPLEMENTATION
 
+#include"Engine.hpp"
 #include"Engine\\Audio.hpp"
 #include"Engine\\Debug.hpp"
 #include"Engine\\Input.hpp"

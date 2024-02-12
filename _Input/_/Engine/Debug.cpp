@@ -40,7 +40,7 @@ namespace NBlindness::NEngine{
 
     void CDebug::FOpenGraphicsLibraryError(const std::source_location& PLocation){
         std::uint32_t LCode{glGetError()};
-        FError(LCode , std::string{} + "Open Graphics Library - " + reinterpret_cast<const char*>(gluErrorString(LCode)) , PLocation);
+        FError(LCode , std::string{} + "Open Graphics Library - " + std::to_string(LCode) , PLocation);
     }
 
     void CDebug::FOpenAssetImportLibraryError(const void* PHandle , const std::source_location& PLocation){
@@ -49,7 +49,7 @@ namespace NBlindness::NEngine{
 
     bool CDebug::FOpenGraphicsLibraryWarning(const std::source_location& PLocation){
         std::uint32_t LCode{glGetError()};
-        return FWarning(LCode , std::string{} + "Open Graphics Library - " + reinterpret_cast<const char*>(gluErrorString(LCode)) , PLocation);
+        return FWarning(LCode , std::string{} + "Open Graphics Library - " + std::to_string(LCode) , PLocation);
     }
 
     bool CDebug::FOpenAssetImportLibraryWarning(const void* PHandle , const std::source_location& PLocation){
@@ -58,7 +58,7 @@ namespace NBlindness::NEngine{
 
     bool CDebug::FOpenGraphicsLibraryInformation(const std::source_location& PLocation){
         std::uint32_t LCode{glGetError()};
-        return FInformation(LCode , std::string{} + "Open Graphics Library - " + reinterpret_cast<const char*>(gluErrorString(LCode)) , PLocation);
+        return FInformation(LCode , std::string{} + "Open Graphics Library - " + std::to_string(LCode) , PLocation);
     }
 
     bool CDebug::FOpenAssetImportLibraryInformation(const void* PHandle , const std::source_location& PLocation){

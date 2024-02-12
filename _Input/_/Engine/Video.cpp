@@ -6,8 +6,9 @@
 
 namespace NBlindness::NEngine{
     void CVideo::FInitialize(){
-        GDebug.FSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 2));
-        GDebug.FSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 1));
+        GDebug.FSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 3));
+        GDebug.FSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 3));
+        GDebug.FSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK , SDL_GL_CONTEXT_PROFILE_CORE));
         GDebug.FSimpleDirectMediaLayerHandleError(VWindow = SDL_CreateWindow("Blindness" , 0 , 0 , 1600 , 900 , SDL_WINDOW_OPENGL));
         GDebug.FSimpleDirectMediaLayerHandleError(VContext = SDL_GL_CreateContext(VWindow));
         GDebug.FSimpleDirectMediaLayerCodeError(SDL_GL_SetSwapInterval(0));
@@ -16,13 +17,55 @@ namespace NBlindness::NEngine{
         VRatio = static_cast<float>(LDisplayMode.w) / static_cast<float>(LDisplayMode.h);
         VInversedRatio = static_cast<float>(LDisplayMode.h) / static_cast<float>(LDisplayMode.w);
         GDebug.FSimpleDirectMediaLayerCodeError(SDL_SetRelativeMouseMode(SDL_TRUE));
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_LIGHTING);
-        glEnable(GL_LIGHT0);
+        GDebug.FError(gladLoadGL(reinterpret_cast<GLADloadfunc>(SDL_GL_GetProcAddress)) < 30003);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_FRONT);
+        std::int32_t LSuccess;
+        std::int32_t LLength;
+        std::string LLog;
+        std::fstream LFile;
+        std::stringstream LStream;
+        std::string LString;
+        char* LArray;
+        LFile.open("Program\\Vertex.ogl" , std::ios::in);
+        VVertex = glCreateShader(GL_VERTEX_SHADER);
+        LStream << LFile.rdbuf();
+        LString = LStream.str();
+        LArray = LString.data();
+        glShaderSource(VVertex , 1 , &LArray , nullptr);
+        glCompileShader(VVertex);
+        glGetShaderiv(VVertex , GL_COMPILE_STATUS , &LSuccess);
+        glGetShaderiv(VVertex , GL_INFO_LOG_LENGTH , &LLength);
+        LLog.resize(LLength);
+        glGetShaderInfoLog(VVertex , LLength , nullptr , LLog.data());
+        GDebug.FError(!LSuccess , "Open Graphics Library - " + LLog);
+        LFile.open("Program\\Fragment.ogl" , std::ios::in);
+        VFragment = glCreateShader(GL_FRAGMENT_SHADER);
+        LStream << LFile.rdbuf();
+        LString = LStream.str();
+        LArray = LString.data();
+        glShaderSource(VFragment , 1 , &LArray , nullptr);
+        glCompileShader(VFragment);
+        glGetShaderiv(VFragment , GL_COMPILE_STATUS , &LSuccess);
+        glGetShaderiv(VFragment , GL_INFO_LOG_LENGTH , &LLength);
+        LLog.resize(LLength);
+        glGetShaderInfoLog(VFragment , LLength , nullptr , LLog.data());
+        GDebug.FError(!LSuccess , "Open Graphics Library - " + LLog);
+        VProgram = glCreateProgram();
+        glAttachShader(VProgram , VVertex);
+        glAttachShader(VProgram , VFragment);
+        glLinkProgram(VProgram);
+        glGetProgramiv(VProgram , GL_LINK_STATUS , &LSuccess);
+        glGetProgramiv(VProgram , GL_INFO_LOG_LENGTH , &LLength);
+        LLog.resize(LLength);
+        glGetProgramInfoLog(VProgram , LLength , nullptr , LLog.data());
+        GDebug.FError(!LSuccess , "Open Graphics Library - " + LLog);
+        glUseProgram(VProgram);
+        /*
+        glEnable(GL_LIGHTING);
+        glEnable(GL_LIGHT0);
         glShadeModel(GL_SMOOTH);
         std::array<float , 4> LLightModelAmbient{-0.1F , -0.1F , -0.1F , 1.0F};
         glLightModelfv(GL_LIGHT_MODEL_AMBIENT , LLightModelAmbient.data());
@@ -58,6 +101,7 @@ namespace NBlindness::NEngine{
         glMaterialfv(GL_FRONT , GL_EMISSION , LMaterialEmission.data());
         std::array<float , 1> LMaterialShininess{0.0F};
         glMaterialfv(GL_FRONT , GL_SHININESS , LMaterialShininess.data());
+        */
         GDebug.FOpenGraphicsLibraryError();
         GDebug.FSimpleDirectMediaLayerCodeError(TTF_Init());
         for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Typeface"}){
@@ -88,6 +132,11 @@ namespace NBlindness::NEngine{
         IMG_Quit();
         VFonts.clear();
         TTF_Quit();
+        glDetachShader(VProgram , VFragment);
+        glDetachShader(VProgram , VVertex);
+        glDeleteShader(VVertex);
+        glDeleteShader(VFragment);
+        glDeleteProgram(VProgram);
         SDL_GL_DeleteContext(VContext);
         SDL_DestroyWindow(VWindow);
     }

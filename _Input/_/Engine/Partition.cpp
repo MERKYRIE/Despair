@@ -73,6 +73,7 @@ namespace NBlindness::NEngine{
     const CPartition& CPartition::FRender(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ) const{
         if(VLeftward){
             glBindTexture(GL_TEXTURE_2D , VLeftward);
+            /*
             glBegin(GL_QUADS);
                 glTexCoord2d(0.0 , 1.0);
                 glVertex3d(PX + 0.0 , PY + 0.0 , PZ + 0.0);
@@ -83,8 +84,10 @@ namespace NBlindness::NEngine{
                 glTexCoord2d(1.0 , 1.0);
                 glVertex3d(PX + 0.0 , PY + 1.0 , PZ + 0.0);
             glEnd();
+            */
         }
         if(VRightward){
+            /*
             glBindTexture(GL_TEXTURE_2D , VRightward);
             glBegin(GL_QUADS);
                 glTexCoord2d(0.0 , 1.0);
@@ -96,8 +99,10 @@ namespace NBlindness::NEngine{
                 glTexCoord2d(1.0 , 1.0);
                 glVertex3d(PX + 1.0 , PY + 0.0 , PZ + 0.0);
             glEnd();
+            */
         }
         if(VBackward){
+            /*
             glBindTexture(GL_TEXTURE_2D , VBackward);
             glBegin(GL_QUADS);
                 glTexCoord2d(0.0 , 1.0);
@@ -109,9 +114,11 @@ namespace NBlindness::NEngine{
                 glTexCoord2d(1.0 , 1.0);
                 glVertex3d(PX + 0.0 , PY + 0.0 , PZ + 0.0);
             glEnd();
+            */
         }
         if(VForward){
             glBindTexture(GL_TEXTURE_2D , VForward);
+            /*
             glBegin(GL_QUADS);
                 glTexCoord2d(0.0 , 1.0);
                 glVertex3d(PX + 0.0 , PY + 1.0 , PZ + 0.0);
@@ -122,9 +129,11 @@ namespace NBlindness::NEngine{
                 glTexCoord2d(1.0 , 1.0);
                 glVertex3d(PX + 1.0 , PY + 1.0 , PZ + 0.0);
             glEnd();
+            */
         }
         if(VDownward){
             glBindTexture(GL_TEXTURE_2D , VDownward);
+            /*
             glBegin(GL_QUADS);
                 glTexCoord2d(0.0 , 1.0);
                 glVertex3d(PX + 0.0 , PY + 0.0 , PZ + 0.0);
@@ -135,9 +144,11 @@ namespace NBlindness::NEngine{
                 glTexCoord2d(1.0 , 1.0);
                 glVertex3d(PX + 1.0 , PY + 0.0 , PZ + 0.0);
             glEnd();
+            */
         }
         if(VUpward){
             glBindTexture(GL_TEXTURE_2D , VUpward);
+            /*
             glBegin(GL_QUADS);
                 glTexCoord2d(0.0 , 1.0);
                 glVertex3d(PX + 0.0 , PY + 1.0 , PZ + 1.0);
@@ -148,6 +159,7 @@ namespace NBlindness::NEngine{
                 glTexCoord2d(1.0 , 1.0);
                 glVertex3d(PX + 1.0 , PY + 1.0 , PZ + 1.0);
             glEnd();
+            */
         }
         return *this;
     }
