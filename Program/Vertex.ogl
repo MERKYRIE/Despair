@@ -1,3 +1,15 @@
-Vertex shader 1
-Vertex shader 2
-Vertex shader 3
+#version 460 core
+
+layout(location = 0) in vec3 ITranslation;
+layout(location = 1) in vec2 ITexture;
+
+layout(location = 2) out vec2 OTexture;
+
+uniform mat4 UModel;
+uniform mat4 UView;
+uniform mat4 UProjection;
+
+void main(){
+    gl_Position = UProjection * UView * UModel * vec4(ITranslation , 1.0);
+    OTexture = vec2(ITexture.x , ITexture.y);
+}

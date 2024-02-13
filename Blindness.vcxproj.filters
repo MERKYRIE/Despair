@@ -1,91 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="_Input\_\Engine\Audio.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine\Debug.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine\Input.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine\World.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine\Time.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine\Video.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine.hpp" />
-    <ClInclude Include="_Input\_\Game.hpp" />
-    <ClInclude Include="_Input\_\Engine\Character.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine\Font.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine\Sound.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine\Texture.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine\Track.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Engine\Partition.hpp">
-      <Filter>Engine</Filter>
-    </ClInclude>
+    <ClInclude Include="_Input\_\Blindness.hpp" />
+    <ClInclude Include="_Input\_\Audio.hpp" />
+    <ClInclude Include="_Input\_\Character.hpp" />
+    <ClInclude Include="_Input\_\Debug.hpp" />
+    <ClInclude Include="_Input\_\Font.hpp" />
+    <ClInclude Include="_Input\_\Input.hpp" />
+    <ClInclude Include="_Input\_\Partition.hpp" />
+    <ClInclude Include="_Input\_\Sound.hpp" />
+    <ClInclude Include="_Input\_\Texture.hpp" />
+    <ClInclude Include="_Input\_\Time.hpp" />
+    <ClInclude Include="_Input\_\Track.hpp" />
+    <ClInclude Include="_Input\_\Video.hpp" />
+    <ClInclude Include="_Input\_\World.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="_Input\_\Engine\Audio.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine\Debug.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine\Input.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine\World.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine\Time.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine\Video.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine.cpp" />
-    <ClCompile Include="_Input\_\Game.cpp" />
-    <ClCompile Include="_Input\_\Engine\Character.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine\Font.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine\Sound.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine\Texture.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine\Track.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Engine\Partition.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Engine">
-      <UniqueIdentifier>{c12fa761-dc42-4998-91ae-0dfb4446dad6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{4dd6af32-7c2e-455e-87bb-454e9e739b52}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="_Input\_\Blindness.cpp" />
+    <ClCompile Include="_Input\_\Audio.cpp" />
+    <ClCompile Include="_Input\_\Character.cpp" />
+    <ClCompile Include="_Input\_\Debug.cpp" />
+    <ClCompile Include="_Input\_\Font.cpp" />
+    <ClCompile Include="_Input\_\Input.cpp" />
+    <ClCompile Include="_Input\_\Partition.cpp" />
+    <ClCompile Include="_Input\_\Sound.cpp" />
+    <ClCompile Include="_Input\_\Texture.cpp" />
+    <ClCompile Include="_Input\_\Time.cpp" />
+    <ClCompile Include="_Input\_\Track.cpp" />
+    <ClCompile Include="_Input\_\Video.cpp" />
+    <ClCompile Include="_Input\_\World.cpp" />
   </ItemGroup>
 </Project>

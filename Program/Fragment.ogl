@@ -1,3 +1,11 @@
-Fragment shader 1
-Fragment shader 2
-Fragment shader 3
+#version 460 core
+
+layout(location = 2) in vec2 ITexture;
+
+layout(location = 3) out vec4 OColor;
+
+uniform sampler2D UTexture;
+
+void main(){
+	   OColor = texture(UTexture , ITexture);
+}

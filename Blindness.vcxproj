@@ -19,36 +19,34 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="_Input\_\Engine.hpp" />
-    <ClInclude Include="_Input\_\Engine\Audio.hpp" />
-    <ClInclude Include="_Input\_\Engine\Character.hpp" />
-    <ClInclude Include="_Input\_\Engine\Debug.hpp" />
-    <ClInclude Include="_Input\_\Engine\Font.hpp" />
-    <ClInclude Include="_Input\_\Engine\Input.hpp" />
-    <ClInclude Include="_Input\_\Engine\World.hpp" />
-    <ClInclude Include="_Input\_\Engine\Partition.hpp" />
-    <ClInclude Include="_Input\_\Engine\Sound.hpp" />
-    <ClInclude Include="_Input\_\Engine\Texture.hpp" />
-    <ClInclude Include="_Input\_\Engine\Time.hpp" />
-    <ClInclude Include="_Input\_\Engine\Track.hpp" />
-    <ClInclude Include="_Input\_\Engine\Video.hpp" />
-    <ClInclude Include="_Input\_\Game.hpp" />
+    <ClInclude Include="_Input\_\Audio.hpp" />
+    <ClInclude Include="_Input\_\Character.hpp" />
+    <ClInclude Include="_Input\_\Debug.hpp" />
+    <ClInclude Include="_Input\_\Blindness.hpp" />
+    <ClInclude Include="_Input\_\Font.hpp" />
+    <ClInclude Include="_Input\_\Input.hpp" />
+    <ClInclude Include="_Input\_\Partition.hpp" />
+    <ClInclude Include="_Input\_\Sound.hpp" />
+    <ClInclude Include="_Input\_\Texture.hpp" />
+    <ClInclude Include="_Input\_\Time.hpp" />
+    <ClInclude Include="_Input\_\Track.hpp" />
+    <ClInclude Include="_Input\_\Video.hpp" />
+    <ClInclude Include="_Input\_\World.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="_Input\_\Engine.cpp" />
-    <ClCompile Include="_Input\_\Engine\Audio.cpp" />
-    <ClCompile Include="_Input\_\Engine\Character.cpp" />
-    <ClCompile Include="_Input\_\Engine\Debug.cpp" />
-    <ClCompile Include="_Input\_\Engine\Font.cpp" />
-    <ClCompile Include="_Input\_\Engine\Input.cpp" />
-    <ClCompile Include="_Input\_\Engine\World.cpp" />
-    <ClCompile Include="_Input\_\Engine\Partition.cpp" />
-    <ClCompile Include="_Input\_\Engine\Sound.cpp" />
-    <ClCompile Include="_Input\_\Engine\Texture.cpp" />
-    <ClCompile Include="_Input\_\Engine\Time.cpp" />
-    <ClCompile Include="_Input\_\Engine\Track.cpp" />
-    <ClCompile Include="_Input\_\Engine\Video.cpp" />
-    <ClCompile Include="_Input\_\Game.cpp" />
+    <ClCompile Include="_Input\_\Audio.cpp" />
+    <ClCompile Include="_Input\_\Character.cpp" />
+    <ClCompile Include="_Input\_\Debug.cpp" />
+    <ClCompile Include="_Input\_\Blindness.cpp" />
+    <ClCompile Include="_Input\_\Font.cpp" />
+    <ClCompile Include="_Input\_\Input.cpp" />
+    <ClCompile Include="_Input\_\Partition.cpp" />
+    <ClCompile Include="_Input\_\Sound.cpp" />
+    <ClCompile Include="_Input\_\Texture.cpp" />
+    <ClCompile Include="_Input\_\Time.cpp" />
+    <ClCompile Include="_Input\_\Track.cpp" />
+    <ClCompile Include="_Input\_\Video.cpp" />
+    <ClCompile Include="_Input\_\World.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
