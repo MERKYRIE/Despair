@@ -19,4 +19,7 @@
 #include"..\\SimpleDirectMediaLayer\\Image\\sdl_image.h"
 #include"..\\SimpleDirectMediaLayer\\Mixer\\sdl_mixer.h"
 #include"..\\SimpleDirectMediaLayer\\TrueTypeFont\\sdl_ttf.h"
+#include"..\\GraphicsLibraryMathematics\\glm.hpp"
+#include"..\\GraphicsLibraryMathematics\\gtc\\matrix_transform.hpp"
+#include"..\\GraphicsLibraryMathematics\\gtc\\type_ptr.hpp"
 #pragma warning(pop)

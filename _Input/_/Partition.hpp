@@ -2,62 +2,26 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness::NWorld{
-    struct SCube{
-        std::uint32_t VTextureNegativeX;
-        std::uint32_t VTexturePositiveX;
-        std::uint32_t VTextureNegativeY;
-        std::uint32_t VTexturePositiveY;
-        std::uint32_t VTextureNegativeZ;
-        std::uint32_t VTexturePositiveZ;
-        std::uint32_t VVertexArrayObject;
-        std::uint32_t VVertexBufferObject;
-        std::uint32_t VElementBufferObject;
-    };
+namespace NBlindness{
+    class CPartition{
+        private : std::uint32_t VTextureNegativeX;
+        private : std::uint32_t VTexturePositiveX;
+        private : std::uint32_t VTextureNegativeY;
+        private : std::uint32_t VTexturePositiveY;
+        private : std::uint32_t VTextureNegativeZ;
+        private : std::uint32_t VTexturePositiveZ;
 
-    inline SCube* GCube;
-
-    namespace NCube{
-        inline constexpr std::array<double , 20> GSquareNegativeX{
-            0.0 , 0.0 , 0.0 , 0.0 , 1.0 ,
-            0.0 , 0.0 , 1.0 , 0.0 , 0.0 ,
-            0.0 , 1.0 , 1.0 , 1.0 , 0.0 ,
-            0.0 , 1.0 , 0.0 , 1.0 , 1.0
-        };
-        inline constexpr std::array<double , 20> GSquarePositiveX{
-            1.0 , 1.0 , 0.0 , 0.0 , 1.0 ,
-            1.0 , 1.0 , 1.0 , 0.0 , 0.0 ,
-            1.0 , 0.0 , 1.0 , 1.0 , 0.0 ,
-            1.0 , 0.0 , 0.0 , 1.0 , 1.0
-        };
-        inline constexpr std::array<double , 20> GSquareNegativeY{
-            1.0 , 0.0 , 0.0 , 0.0 , 1.0 ,
-            1.0 , 0.0 , 1.0 , 0.0 , 0.0 ,
-            0.0 , 0.0 , 1.0 , 1.0 , 0.0 ,
-            0.0 , 0.0 , 0.0 , 1.0 , 1.0
-        };
-        inline constexpr std::array<double , 20> GSquarePositiveY{
-            0.0 , 1.0 , 0.0 , 0.0 , 1.0 ,
-            0.0 , 1.0 , 1.0 , 0.0 , 0.0 ,
-            1.0 , 1.0 , 1.0 , 1.0 , 0.0 ,
-            1.0 , 1.0 , 0.0 , 1.0 , 1.0
-        };
-        inline constexpr std::array<double , 20> GSquareNegativeZ{
-            0.0 , 0.0 , 0.0 , 0.0 , 1.0 ,
-            0.0 , 1.0 , 0.0 , 0.0 , 0.0 ,
-            1.0 , 1.0 , 0.0 , 1.0 , 0.0 ,
-            1.0 , 0.0 , 0.0 , 1.0 , 1.0
-        };
-        inline constexpr std::array<double , 20> GSquarePositiveZ{
-            0.0 , 1.0 , 1.0 , 0.0 , 1.0 ,
-            0.0 , 0.0 , 1.0 , 0.0 , 0.0 ,
-            1.0 , 0.0 , 1.0 , 1.0 , 0.0 ,
-            1.0 , 1.0 , 1.0 , 1.0 , 1.0
-        };
-        
-        bool FCanBeGenerated(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
-        bool FGenerate(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
-        void FRender(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
-        bool FIsCollisionDetected(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
+        public : CPartition(
+            std::uint32_t PTextureNegativeX ,
+            std::uint32_t PTexturePositiveX ,
+            std::uint32_t PTextureNegativeY ,
+            std::uint32_t PTexturePositiveY ,
+            std::uint32_t PTextureNegativeZ ,
+            std::uint32_t PTexturePositiveZ
+        );
+        public : bool FCanBeGenerated(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
+        public : bool FGenerate(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
+        public : void FRender(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
+        public : bool FIsCollisionDetected(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
     };
 }

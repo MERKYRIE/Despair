@@ -5,11 +5,11 @@ layout(location = 1) in vec2 ITexture;
 
 layout(location = 2) out vec2 OTexture;
 
-uniform mat4 UModel;
-uniform mat4 UView;
-uniform mat4 UProjection;
+layout(location = 3) uniform mat4 UProjection;
+layout(location = 4) uniform mat4 UView;
+layout(location = 5) uniform mat4 UModel;
 
 void main(){
-    gl_Position = UProjection * UView * UModel * vec4(ITranslation , 1.0);
-    OTexture = vec2(ITexture.x , ITexture.y);
+    gl_Position = UProjection * UView * UModel * vec4(ITranslation , 1.0F);
+    OTexture = ITexture;
 }

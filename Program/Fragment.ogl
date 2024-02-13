@@ -2,9 +2,9 @@
 
 layout(location = 2) in vec2 ITexture;
 
-layout(location = 3) out vec4 OColor;
+layout(location = 6) out vec4 OColor;
 
-uniform sampler2D UTexture;
+layout(location = 7) uniform sampler2D UTexture;
 
 void main(){
 	   OColor = texture(UTexture , ITexture);

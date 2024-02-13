@@ -3,8 +3,24 @@
 #include"Debug.hpp"
 #include"World.hpp"
 
-namespace NBlindness::NWorld::NCube{
-    bool FCanBeGenerated(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
+namespace NBlindness{
+    CPartition::CPartition(
+        std::uint32_t PTextureNegativeX ,
+        std::uint32_t PTexturePositiveX ,
+        std::uint32_t PTextureNegativeY ,
+        std::uint32_t PTexturePositiveY ,
+        std::uint32_t PTextureNegativeZ ,
+        std::uint32_t PTexturePositiveZ
+    ){
+        VTextureNegativeX = PTextureNegativeX;
+        VTexturePositiveX = PTexturePositiveX;
+        VTextureNegativeY = PTextureNegativeY;
+        VTexturePositiveY = PTexturePositiveY;
+        VTextureNegativeZ = PTextureNegativeZ;
+        VTexturePositiveZ = PTexturePositiveZ;
+    }
+    
+    bool CPartition::FCanBeGenerated(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
         return(
             PX == std::clamp<std::uintmax_t>(PX , 0 , GWorld.FDistanceAlongX() - 1) &&
             PY == std::clamp<std::uintmax_t>(PY , 0 , GWorld.FDistanceAlongY() - 1) &&
@@ -12,36 +28,36 @@ namespace NBlindness::NWorld::NCube{
         );
     }
 
-    bool FGenerate(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
+    bool CPartition::FGenerate(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
         switch(PX - GWorld.FTranslationIntegralX()){
             case -1:
-                if(!GCube->VTextureNegativeX && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveX){
+                if(!VTextureNegativeX && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveX){
                     return false;
                 }
-                GCube->VTextureNegativeX = 0;
+                VTextureNegativeX = 0;
                 GWorld.FPartition(PX , PY , PZ).VTexturePositiveX = 0;
             return true;
             case +1:
-                if(!GCube->VTexturePositiveX && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeX){
+                if(!VTexturePositiveX && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeX){
                     return false;
                 }
-                GCube->VTexturePositiveX = 0;
+                VTexturePositiveX = 0;
                 GWorld.FPartition(PX , PY , PZ).VTextureNegativeX = 0;
             return true;
         }
         switch(PY - GWorld.FTranslationIntegralY()){
             case -1:
-                if(!GCube->VTextureNegativeY && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveY){
+                if(!VTextureNegativeY && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveY){
                     return false;
                 }
-                GCube->VTextureNegativeY = 0;
+                VTextureNegativeY = 0;
                 GWorld.FPartition(PX , PY , PZ).VTexturePositiveY = 0;
             return true;
             case +1:
-                if(!GCube->VTexturePositiveY && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeY){
+                if(!VTexturePositiveY && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeY){
                     return false;
                 }
-                GCube->VTexturePositiveY = 0;
+                VTexturePositiveY = 0;
                 GWorld.FPartition(PX , PY , PZ).VTextureNegativeY = 0;
             return true;
         }
@@ -49,90 +65,40 @@ namespace NBlindness::NWorld::NCube{
         return false;
     }
 
-    void FRender(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
-        /*
+    void CPartition::FRender(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
         if(VTextureNegativeX){
+            glBindVertexArray(GWorld.FVertexArrayObjectNegativeX());
             glBindTexture(GL_TEXTURE_2D , VTextureNegativeX);
-            glBegin(GL_QUADS);
-                glTexCoord2d(0.0 , 1.0);
-                glVertex3d(PX + 0.0 , PY + 0.0 , PZ + 0.0);
-                glTexCoord2d(0.0 , 0.0);
-                glVertex3d(PX + 0.0 , PY + 0.0 , PZ + 1.0);
-                glTexCoord2d(1.0 , 0.0);
-                glVertex3d(PX + 0.0 , PY + 1.0 , PZ + 1.0);
-                glTexCoord2d(1.0 , 1.0);
-                glVertex3d(PX + 0.0 , PY + 1.0 , PZ + 0.0);
-            glEnd();
+            glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(VTexturePositiveX){
+            glBindVertexArray(GWorld.FVertexArrayObjectPositiveX());
             glBindTexture(GL_TEXTURE_2D , VTexturePositiveX);
-            glBegin(GL_QUADS);
-                glTexCoord2d(0.0 , 1.0);
-                glVertex3d(PX + 1.0 , PY + 1.0 , PZ + 0.0);
-                glTexCoord2d(0.0 , 0.0);
-                glVertex3d(PX + 1.0 , PY + 1.0 , PZ + 1.0);
-                glTexCoord2d(1.0 , 0.0);
-                glVertex3d(PX + 1.0 , PY + 0.0 , PZ + 1.0);
-                glTexCoord2d(1.0 , 1.0);
-                glVertex3d(PX + 1.0 , PY + 0.0 , PZ + 0.0);
-            glEnd();
+            glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(VTextureNegativeY){
+            glBindVertexArray(GWorld.FVertexArrayObjectNegativeY());
             glBindTexture(GL_TEXTURE_2D , VTextureNegativeY);
-            glBegin(GL_QUADS);
-                glTexCoord2d(0.0 , 1.0);
-                glVertex3d(PX + 1.0 , PY + 0.0 , PZ + 0.0);
-                glTexCoord2d(0.0 , 0.0);
-                glVertex3d(PX + 1.0 , PY + 0.0 , PZ + 1.0);
-                glTexCoord2d(1.0 , 0.0);
-                glVertex3d(PX + 0.0 , PY + 0.0 , PZ + 1.0);
-                glTexCoord2d(1.0 , 1.0);
-                glVertex3d(PX + 0.0 , PY + 0.0 , PZ + 0.0);
-            glEnd();
+            glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(VTexturePositiveY){
+            glBindVertexArray(GWorld.FVertexArrayObjectPositiveY());
             glBindTexture(GL_TEXTURE_2D , VTexturePositiveY);
-            glBegin(GL_QUADS);
-                glTexCoord2d(0.0 , 1.0);
-                glVertex3d(PX + 0.0 , PY + 1.0 , PZ + 0.0);
-                glTexCoord2d(0.0 , 0.0);
-                glVertex3d(PX + 0.0 , PY + 1.0 , PZ + 1.0);
-                glTexCoord2d(1.0 , 0.0);
-                glVertex3d(PX + 1.0 , PY + 1.0 , PZ + 1.0);
-                glTexCoord2d(1.0 , 1.0);
-                glVertex3d(PX + 1.0 , PY + 1.0 , PZ + 0.0);
-            glEnd();
+            glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(VTextureNegativeZ){
+            glBindVertexArray(GWorld.FVertexArrayObjectNegativeZ());
             glBindTexture(GL_TEXTURE_2D , VTextureNegativeZ);
-            glBegin(GL_QUADS);
-                glTexCoord2d(0.0 , 1.0);
-                glVertex3d(PX + 0.0 , PY + 0.0 , PZ + 0.0);
-                glTexCoord2d(0.0 , 0.0);
-                glVertex3d(PX + 0.0 , PY + 1.0 , PZ + 0.0);
-                glTexCoord2d(1.0 , 0.0);
-                glVertex3d(PX + 1.0 , PY + 1.0 , PZ + 0.0);
-                glTexCoord2d(1.0 , 1.0);
-                glVertex3d(PX + 1.0 , PY + 0.0 , PZ + 0.0);
-            glEnd();
+            glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(VTexturePositiveZ){
+            glBindVertexArray(GWorld.FVertexArrayObjectPositiveZ());
             glBindTexture(GL_TEXTURE_2D , VTexturePositiveZ);
-            glBegin(GL_QUADS);
-                glTexCoord2d(0.0 , 1.0);
-                glVertex3d(PX + 0.0 , PY + 1.0 , PZ + 1.0);
-                glTexCoord2d(0.0 , 0.0);
-                glVertex3d(PX + 0.0 , PY + 0.0 , PZ + 1.0);
-                glTexCoord2d(1.0 , 0.0);
-                glVertex3d(PX + 1.0 , PY + 0.0 , PZ + 1.0);
-                glTexCoord2d(1.0 , 1.0);
-                glVertex3d(PX + 1.0 , PY + 1.0 , PZ + 1.0);
-            glEnd();
+            glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
-        */
     }
 
-    bool FIsCollisionDetected(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
+    bool CPartition::FIsCollisionDetected(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
         if(
             PX != std::clamp<std::uintmax_t>(PX , 0 , GWorld.FDistanceAlongX() - 1) ||
             PY != std::clamp<std::uintmax_t>(PY , 0 , GWorld.FDistanceAlongY() - 1) ||
@@ -142,18 +108,18 @@ namespace NBlindness::NWorld::NCube{
         }
         switch(PX - GWorld.FTranslationIntegralX()){
             case -1:
-                return !GCube->VTextureNegativeX && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveX;
+                return !VTextureNegativeX && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveX;
             break;
             case +1:
-                return !GCube->VTexturePositiveX && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeX;
+                return !VTexturePositiveX && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeX;
             break;
         }
         switch(PY - GWorld.FTranslationIntegralY()){
             case -1:
-                return !GCube->VTextureNegativeY && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveY;
+                return !VTextureNegativeY && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveY;
             break;
             case +1:
-                return !GCube->VTexturePositiveY && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeY;
+                return !VTexturePositiveY && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeY;
             break;
         }
         return false;
