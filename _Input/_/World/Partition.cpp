@@ -1,10 +1,15 @@
 #include"Partition.hpp"
 
+#include"VertexArrayObject.hpp"
+
 #include"Debug.hpp"
 #include"World.hpp"
 
-namespace NBlindness{
+namespace NBlindness::NWorld{
     CPartition::CPartition(
+        std::uintmax_t PX ,
+        std::uintmax_t PY ,
+        std::uintmax_t PZ ,
         std::uint32_t PTextureNegativeX ,
         std::uint32_t PTexturePositiveX ,
         std::uint32_t PTextureNegativeY ,
@@ -12,6 +17,48 @@ namespace NBlindness{
         std::uint32_t PTextureNegativeZ ,
         std::uint32_t PTexturePositiveZ
     ){
+        VVertexArrayObjectNegativeX.reset(new NWorld::CVertexArrayObject{{
+            PX + 0.0F , PY + 0.0F , PZ + 0.0F , 0.0F , 1.0F ,
+            PX + 0.0F , PY + 0.0F , PZ + 1.0F , 0.0F , 0.0F ,
+            PX + 0.0F , PY + 1.0F , PZ + 1.0F , 1.0F , 0.0F ,
+            PX + 0.0F , PY + 1.0F , PZ + 0.0F , 1.0F , 1.0F
+        }
+        , {0 , 1 , 2 , 2 , 3 , 0}});
+        VVertexArrayObjectPositiveX.reset(new NWorld::CVertexArrayObject{{
+            PX + 1.0F , PY + 1.0F , PZ + 0.0F , 0.0F , 1.0F ,
+            PX + 1.0F , PY + 1.0F , PZ + 1.0F , 0.0F , 0.0F ,
+            PX + 1.0F , PY + 0.0F , PZ + 1.0F , 1.0F , 0.0F ,
+            PX + 1.0F , PY + 0.0F , PZ + 0.0F , 1.0F , 1.0F
+        }
+        , {0 , 1 , 2 , 2 , 3 , 0}});
+        VVertexArrayObjectNegativeY.reset(new NWorld::CVertexArrayObject{{
+            PX + 1.0F , PY + 0.0F , PZ + 0.0F , 0.0F , 1.0F ,
+            PX + 1.0F , PY + 0.0F , PZ + 1.0F , 0.0F , 0.0F ,
+            PX + 0.0F , PY + 0.0F , PZ + 1.0F , 1.0F , 0.0F ,
+            PX + 0.0F , PY + 0.0F , PZ + 0.0F , 1.0F , 1.0F
+        }
+        , {0 , 1 , 2 , 2 , 3 , 0}});
+        VVertexArrayObjectPositiveY.reset(new NWorld::CVertexArrayObject{{
+            PX + 0.0F , PY + 1.0F , PZ + 0.0F , 0.0F , 1.0F ,
+            PX + 0.0F , PY + 1.0F , PZ + 1.0F , 0.0F , 0.0F ,
+            PX + 1.0F , PY + 1.0F , PZ + 1.0F , 1.0F , 0.0F ,
+            PX + 1.0F , PY + 1.0F , PZ + 0.0F , 1.0F , 1.0F
+        }
+        , {0 , 1 , 2 , 2 , 3 , 0}});
+        VVertexArrayObjectNegativeZ.reset(new NWorld::CVertexArrayObject{{
+            PX + 0.0F , PY + 0.0F , PZ + 0.0F , 0.0F , 1.0F ,
+            PX + 0.0F , PY + 1.0F , PZ + 0.0F , 0.0F , 0.0F ,
+            PX + 1.0F , PY + 1.0F , PZ + 0.0F , 1.0F , 0.0F ,
+            PX + 1.0F , PY + 0.0F , PZ + 0.0F , 1.0F , 1.0F
+        }
+        , {0 , 1 , 2 , 2 , 3 , 0}});
+        VVertexArrayObjectPositiveZ.reset(new NWorld::CVertexArrayObject{{
+            PX + 0.0F , PY + 1.0F , PZ + 1.0F , 0.0F , 1.0F ,
+            PX + 0.0F , PY + 0.0F , PZ + 1.0F , 0.0F , 0.0F ,
+            PX + 1.0F , PY + 0.0F , PZ + 1.0F , 1.0F , 0.0F ,
+            PX + 1.0F , PY + 1.0F , PZ + 1.0F , 1.0F , 1.0F
+        }
+        , {0 , 1 , 2 , 2 , 3 , 0}});
         VTextureNegativeX = PTextureNegativeX;
         VTexturePositiveX = PTexturePositiveX;
         VTextureNegativeY = PTextureNegativeY;
@@ -67,32 +114,32 @@ namespace NBlindness{
 
     void CPartition::FRender(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
         if(VTextureNegativeX){
-            glBindVertexArray(GWorld.FVertexArrayObjectNegativeX());
+            glBindVertexArray(VVertexArrayObjectNegativeX->FIdentifier());
             glBindTexture(GL_TEXTURE_2D , VTextureNegativeX);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(VTexturePositiveX){
-            glBindVertexArray(GWorld.FVertexArrayObjectPositiveX());
+            glBindVertexArray(VVertexArrayObjectPositiveX->FIdentifier());
             glBindTexture(GL_TEXTURE_2D , VTexturePositiveX);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(VTextureNegativeY){
-            glBindVertexArray(GWorld.FVertexArrayObjectNegativeY());
+            glBindVertexArray(VVertexArrayObjectNegativeY->FIdentifier());
             glBindTexture(GL_TEXTURE_2D , VTextureNegativeY);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(VTexturePositiveY){
-            glBindVertexArray(GWorld.FVertexArrayObjectPositiveY());
+            glBindVertexArray(VVertexArrayObjectPositiveY->FIdentifier());
             glBindTexture(GL_TEXTURE_2D , VTexturePositiveY);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(VTextureNegativeZ){
-            glBindVertexArray(GWorld.FVertexArrayObjectNegativeZ());
+            glBindVertexArray(VVertexArrayObjectNegativeZ->FIdentifier());
             glBindTexture(GL_TEXTURE_2D , VTextureNegativeZ);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(VTexturePositiveZ){
-            glBindVertexArray(GWorld.FVertexArrayObjectPositiveZ());
+            glBindVertexArray(VVertexArrayObjectPositiveZ->FIdentifier());
             glBindTexture(GL_TEXTURE_2D , VTexturePositiveZ);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
@@ -123,5 +170,14 @@ namespace NBlindness{
             break;
         }
         return false;
+    }
+
+    CPartition::~CPartition(){
+        VVertexArrayObjectNegativeX.reset();
+        VVertexArrayObjectPositiveX.reset();
+        VVertexArrayObjectNegativeY.reset();
+        VVertexArrayObjectPositiveY.reset();
+        VVertexArrayObjectNegativeZ.reset();
+        VVertexArrayObjectPositiveZ.reset();
     }
 }

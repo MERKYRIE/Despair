@@ -2,7 +2,7 @@
 
 #include"Debug.hpp"
 
-namespace NBlindness{
+namespace NBlindness::NVideo{
     CCharacter::CCharacter(TTF_Font* PFont , char PCode){
         SDL_Surface* LSurface{TTF_RenderText_Blended(PFont , std::string{PCode}.c_str() , SDL_Color{.r{100} , .g{100} , .b{100} , .a{SDL_ALPHA_OPAQUE}})};
         GDebug.FSimpleDirectMediaLayerHandleError(LSurface);

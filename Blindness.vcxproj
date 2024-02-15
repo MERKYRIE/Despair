@@ -20,33 +20,41 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_Input\_\Audio.hpp" />
-    <ClInclude Include="_Input\_\Character.hpp" />
     <ClInclude Include="_Input\_\Debug.hpp" />
     <ClInclude Include="_Input\_\Blindness.hpp" />
-    <ClInclude Include="_Input\_\Font.hpp" />
     <ClInclude Include="_Input\_\Input.hpp" />
-    <ClInclude Include="_Input\_\Partition.hpp" />
     <ClInclude Include="_Input\_\Sound.hpp" />
-    <ClInclude Include="_Input\_\Texture.hpp" />
     <ClInclude Include="_Input\_\Time.hpp" />
     <ClInclude Include="_Input\_\Track.hpp" />
     <ClInclude Include="_Input\_\Video.hpp" />
+    <ClInclude Include="_Input\_\Video\Character.hpp" />
+    <ClInclude Include="_Input\_\Video\Font.hpp" />
+    <ClInclude Include="_Input\_\Video\Shader.hpp" />
+    <ClInclude Include="_Input\_\Video\Texture.hpp" />
     <ClInclude Include="_Input\_\World.hpp" />
+    <ClInclude Include="_Input\_\World\Partition.hpp" />
+    <ClInclude Include="_Input\_\World\VertexArrayObject.hpp" />
+    <ClInclude Include="_Input\_\World\VertexArrayObject\ElementBufferObject.hpp" />
+    <ClInclude Include="_Input\_\World\VertexArrayObject\VertexBufferObject.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="_Input\_\Audio.cpp" />
-    <ClCompile Include="_Input\_\Character.cpp" />
     <ClCompile Include="_Input\_\Debug.cpp" />
     <ClCompile Include="_Input\_\Blindness.cpp" />
-    <ClCompile Include="_Input\_\Font.cpp" />
     <ClCompile Include="_Input\_\Input.cpp" />
-    <ClCompile Include="_Input\_\Partition.cpp" />
     <ClCompile Include="_Input\_\Sound.cpp" />
-    <ClCompile Include="_Input\_\Texture.cpp" />
     <ClCompile Include="_Input\_\Time.cpp" />
     <ClCompile Include="_Input\_\Track.cpp" />
     <ClCompile Include="_Input\_\Video.cpp" />
+    <ClCompile Include="_Input\_\Video\Character.cpp" />
+    <ClCompile Include="_Input\_\Video\Font.cpp" />
+    <ClCompile Include="_Input\_\Video\Shader.cpp" />
+    <ClCompile Include="_Input\_\Video\Texture.cpp" />
     <ClCompile Include="_Input\_\World.cpp" />
+    <ClCompile Include="_Input\_\World\Partition.cpp" />
+    <ClCompile Include="_Input\_\World\VertexArrayObject.cpp" />
+    <ClCompile Include="_Input\_\World\VertexArrayObject\ElementBufferObject.cpp" />
+    <ClCompile Include="_Input\_\World\VertexArrayObject\VertexBufferObject.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

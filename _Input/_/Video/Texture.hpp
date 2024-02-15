@@ -2,7 +2,7 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness{
+namespace NBlindness::NVideo{
     class CTexture{
         private : friend class CVideo;
         

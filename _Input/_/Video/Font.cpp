@@ -4,7 +4,7 @@
 
 #include"Debug.hpp"
 
-namespace NBlindness{
+namespace NBlindness::NVideo{
     bool CFont::operator==(const std::string& PPath) const{
         return VPath == PPath;
     }

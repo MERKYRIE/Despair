@@ -1,8 +1,9 @@
 #include"Video.hpp"
 
 #include"Debug.hpp"
-#include"Font.hpp"
-#include"Texture.hpp"
+#include"Video\\Font.hpp"
+#include"Video\\Shader.hpp"
+#include"Video\\Texture.hpp"
 
 namespace NBlindness{
     void CVideo::FInitialize(){
@@ -17,49 +18,19 @@ namespace NBlindness{
         VRatio = static_cast<float>(LDisplayMode.w) / static_cast<float>(LDisplayMode.h);
         VInversedRatio = static_cast<float>(LDisplayMode.h) / static_cast<float>(LDisplayMode.w);
         GDebug.FSimpleDirectMediaLayerCodeError(SDL_SetRelativeMouseMode(SDL_TRUE));
-        GDebug.FError(gladLoadGL(reinterpret_cast<GLADloadfunc>(SDL_GL_GetProcAddress)) < 30003);
+        GDebug.FError(gladLoadGL(reinterpret_cast<GLADloadfunc>(SDL_GL_GetProcAddress)) != 40006);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_FRONT);
+        VVertex.reset(new NVideo::CShader{"\\Vertex.ogl" , GL_VERTEX_SHADER});
+        VFragment.reset(new NVideo::CShader{"\\Fragment.ogl" , GL_FRAGMENT_SHADER});
         std::int32_t LSuccess;
         std::int32_t LLength;
         std::string LLog;
-        std::fstream LFile;
-        std::stringstream LStream;
-        std::string LString;
-        char* LArray;
-        LFile.open("Program\\Vertex.ogl" , std::ios::in);
-        VVertex = glCreateShader(GL_VERTEX_SHADER);
-        LStream.str("");
-        LStream << LFile.rdbuf();
-        LString = LStream.str();
-        LArray = LString.data();
-        glShaderSource(VVertex , 1 , &LArray , nullptr);
-        glCompileShader(VVertex);
-        glGetShaderiv(VVertex , GL_COMPILE_STATUS , &LSuccess);
-        glGetShaderiv(VVertex , GL_INFO_LOG_LENGTH , &LLength);
-        LLog.resize(LLength);
-        glGetShaderInfoLog(VVertex , LLength , nullptr , LLog.data());
-        GDebug.FError(!LSuccess , "Open Graphics Library - " + LLog);
-        LFile.close();
-        LFile.open("Program\\Fragment.ogl" , std::ios::in);
-        VFragment = glCreateShader(GL_FRAGMENT_SHADER);
-        LStream.str("");
-        LStream << LFile.rdbuf();
-        LString = LStream.str();
-        LArray = LString.data();
-        glShaderSource(VFragment , 1 , &LArray , nullptr);
-        glCompileShader(VFragment);
-        glGetShaderiv(VFragment , GL_COMPILE_STATUS , &LSuccess);
-        glGetShaderiv(VFragment , GL_INFO_LOG_LENGTH , &LLength);
-        LLog.resize(LLength);
-        glGetShaderInfoLog(VFragment , LLength , nullptr , LLog.data());
-        GDebug.FError(!LSuccess , "Open Graphics Library - " + LLog);
-        LFile.close();
         VProgram = glCreateProgram();
-        glAttachShader(VProgram , VVertex);
-        glAttachShader(VProgram , VFragment);
+        glAttachShader(VProgram , VVertex->FIdentifier());
+        glAttachShader(VProgram , VFragment->FIdentifier());
         glLinkProgram(VProgram);
         glGetProgramiv(VProgram , GL_LINK_STATUS , &LSuccess);
         glGetProgramiv(VProgram , GL_INFO_LOG_LENGTH , &LLength);
@@ -71,14 +42,14 @@ namespace NBlindness{
         GDebug.FSimpleDirectMediaLayerCodeError(TTF_Init());
         for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Typeface"}){
             if(LEntry.path().extension() == ".ttf"){
-                VFonts.emplace_back(new CFont{LEntry.path().string()});
+                VFonts.emplace_back(new NVideo::CFont{LEntry.path().string()});
             }
         }
         VFonts.shrink_to_fit();
         GDebug.FSimpleDirectMediaLayerFlagsError(IMG_Init(IMG_INIT_PNG));
         for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Atlas"}){
             if(LEntry.path().extension() == ".png"){
-                VTextures.emplace_back(new CTexture{LEntry.path().string()});
+                VTextures.emplace_back(new NVideo::CTexture{LEntry.path().string()});
             }
         }
         VTextures.shrink_to_fit();
@@ -97,10 +68,8 @@ namespace NBlindness{
         IMG_Quit();
         VFonts.clear();
         TTF_Quit();
-        glDetachShader(VProgram , VFragment);
-        glDetachShader(VProgram , VVertex);
-        glDeleteShader(VVertex);
-        glDeleteShader(VFragment);
+        VFragment.reset();
+        VVertex.reset();
         glDeleteProgram(VProgram);
         SDL_GL_DeleteContext(VContext);
         SDL_DestroyWindow(VWindow);
@@ -114,17 +83,17 @@ namespace NBlindness{
         return VInversedRatio;
     }
 
-    const CFont& CVideo::FFont(const std::string& PPath){
-        std::vector<std::shared_ptr<CFont>>::iterator LIterator{
-            std::find_if(VFonts.begin() , VFonts.end() , [&PPath](const std::shared_ptr<CFont>& LPointer){return *LPointer == PPath;})
+    const NVideo::CFont& CVideo::FFont(const std::string& PPath){
+        std::vector<std::shared_ptr<NVideo::CFont>>::iterator LIterator{
+            std::find_if(VFonts.begin() , VFonts.end() , [&PPath](const std::shared_ptr<NVideo::CFont>& LPointer){return *LPointer == PPath;})
         };
         GDebug.FError(LIterator == VFonts.end());
         return **LIterator;
     }
 
-    const CTexture& CVideo::FTexture(const std::string& PPath){
-        std::vector<std::shared_ptr<CTexture>>::iterator LIterator{
-            std::find_if(VTextures.begin() , VTextures.end() , [&PPath](const std::shared_ptr<CTexture>& LPointer){return *LPointer == PPath;})
+    const NVideo::CTexture& CVideo::FTexture(const std::string& PPath){
+        std::vector<std::shared_ptr<NVideo::CTexture>>::iterator LIterator{
+            std::find_if(VTextures.begin() , VTextures.end() , [&PPath](const std::shared_ptr<NVideo::CTexture>& LPointer){return *LPointer == PPath;})
         };
         GDebug.FError(LIterator == VTextures.end());
         return **LIterator;

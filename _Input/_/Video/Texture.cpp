@@ -2,7 +2,7 @@
 
 #include"Debug.hpp"
 
-namespace NBlindness{
+namespace NBlindness::NVideo{
     bool CTexture::operator==(const std::string& PPath) const{
         return VPath == PPath;
     }
