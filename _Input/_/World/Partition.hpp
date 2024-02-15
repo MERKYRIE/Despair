@@ -30,8 +30,10 @@ namespace NBlindness::NWorld{
             std::uint32_t PTextureNegativeZ ,
             std::uint32_t PTexturePositiveZ
         );
-        public : bool FCanBeGenerated(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
-        public : bool FGenerate(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
+        public : bool FCanGenerateTransition(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
+        public : bool FGenerateNewTransition(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
+        public : bool FCanGenerateShaft(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
+        public : bool FGenerateNewShaft(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
         public : void FRender(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
         public : bool FIsCollisionDetected(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ);
         public : ~CPartition();

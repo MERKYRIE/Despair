@@ -67,15 +67,13 @@ namespace NBlindness::NWorld{
         VTexturePositiveZ = PTexturePositiveZ;
     }
     
-    bool CPartition::FCanBeGenerated(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
-        return(
-            PX == std::clamp<std::uintmax_t>(PX , 0 , GWorld.FDistanceAlongX() - 1) &&
+    bool CPartition::FCanGenerateTransition(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
+        return PX == std::clamp<std::uintmax_t>(PX , 0 , GWorld.FDistanceAlongX() - 1) &&
             PY == std::clamp<std::uintmax_t>(PY , 0 , GWorld.FDistanceAlongY() - 1) &&
-            PZ == std::clamp<std::uintmax_t>(PZ , 0 , GWorld.FDistanceAlongZ() - 1)
-        );
+            PZ == std::clamp<std::uintmax_t>(PZ , 0 , GWorld.FDistanceAlongZ() - 1);
     }
 
-    bool CPartition::FGenerate(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
+    bool CPartition::FGenerateNewTransition(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
         switch(PX - GWorld.FTranslationIntegralX()){
             case -1:
                 if(!VTextureNegativeX && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveX){
@@ -106,6 +104,36 @@ namespace NBlindness::NWorld{
                 }
                 VTexturePositiveY = 0;
                 GWorld.FPartition(PX , PY , PZ).VTextureNegativeY = 0;
+            return true;
+        }
+        GDebug.FError();
+        return false;
+    }
+
+    bool CPartition::FCanGenerateShaft(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
+        return (!VTextureNegativeX || !VTexturePositiveX || !VTextureNegativeY || !VTexturePositiveX) && (
+            !GWorld.FPartition(PX , PY , PZ).VTextureNegativeX ||
+            !GWorld.FPartition(PX , PY , PZ).VTexturePositiveX ||
+            !GWorld.FPartition(PX , PY , PZ).VTextureNegativeY ||
+            !GWorld.FPartition(PX , PY , PZ).VTexturePositiveX
+        );
+    }
+
+    bool CPartition::FGenerateNewShaft(std::uintmax_t PX , std::uintmax_t PY , std::uintmax_t PZ){
+        switch(PZ - GWorld.FTranslationIntegralZ()){
+            case -1:
+                if(!VTextureNegativeZ && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveZ){
+                    return false;
+                }
+                VTextureNegativeZ = 0;
+                GWorld.FPartition(PX , PY , PZ).VTexturePositiveZ = 0;
+            return true;
+            case +1:
+                if(!VTexturePositiveZ && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeZ){
+                    return false;
+                }
+                VTexturePositiveZ = 0;
+                GWorld.FPartition(PX , PY , PZ).VTextureNegativeZ = 0;
             return true;
         }
         GDebug.FError();
@@ -151,25 +179,33 @@ namespace NBlindness::NWorld{
             PY != std::clamp<std::uintmax_t>(PY , 0 , GWorld.FDistanceAlongY() - 1) ||
             PZ != std::clamp<std::uintmax_t>(PZ , 0 , GWorld.FDistanceAlongZ() - 1)
         ){
-            return false;
+            return true;
         }
         switch(PX - GWorld.FTranslationIntegralX()){
             case -1:
-                return !VTextureNegativeX && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveX;
+                return !(!VTextureNegativeX && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveX);
             break;
             case +1:
-                return !VTexturePositiveX && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeX;
+                return !(!VTexturePositiveX && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeX);
             break;
         }
         switch(PY - GWorld.FTranslationIntegralY()){
             case -1:
-                return !VTextureNegativeY && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveY;
+                return !(!VTextureNegativeY && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveY);
             break;
             case +1:
-                return !VTexturePositiveY && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeY;
+                return !(!VTexturePositiveY && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeY);
             break;
         }
-        return false;
+        switch(PZ - GWorld.FTranslationIntegralZ()){
+            case -1:
+                return !(!VTextureNegativeZ && !GWorld.FPartition(PX , PY , PZ).VTexturePositiveZ);
+            break;
+            case +1:
+                return !(!VTexturePositiveZ && !GWorld.FPartition(PX , PY , PZ).VTextureNegativeZ);
+            break;
+        }
+        return true;
     }
 
     CPartition::~CPartition(){

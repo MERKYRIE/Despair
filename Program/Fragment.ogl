@@ -2,10 +2,11 @@
 
 layout(location = 2) in vec2 ITexture;
 
-layout(location = 5) out vec4 OColor;
+out vec4 OColor;
 
-layout(location = 6) uniform sampler2D UTexture;
+layout(location = 5) uniform sampler2D UTexture;
+layout(location = 6) uniform float UDistance;
 
 void main(){
-	   OColor = texture(UTexture , ITexture);
+	   OColor = texture(UTexture , ITexture) * vec4(UDistance , UDistance , UDistance , 1.0F);
 }

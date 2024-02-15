@@ -11,7 +11,7 @@ namespace NBlindness{
     inline class CWorld{
         private : static constexpr std::uintmax_t VDistanceAlongX{100};
         private : static constexpr std::uintmax_t VDistanceAlongY{100};
-        private : static constexpr std::uintmax_t VDistanceAlongZ{1};
+        private : static constexpr std::uintmax_t VDistanceAlongZ{3};
         
         private : float VRotation;
         private : std::int8_t VDirectionBackwardX;
