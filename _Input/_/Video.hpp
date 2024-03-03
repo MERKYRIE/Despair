@@ -2,35 +2,38 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness{
-    namespace NVideo{
+namespace NBlindness
+{
+    namespace NVideo
+    {
         class CFont;
         class CShader;
         class CTexture;
     }
     
-    inline class CVideo{
+    inline class CVideo
+    {
         private : friend std::int32_t (::main(std::int32_t , char**));
 
-        private : SDL_Window* VWindow;
-        private : SDL_GLContext VContext;
-        private : float VRatio;
-        private : float VInversedRatio;
-        private : std::shared_ptr<NVideo::CShader> VVertex;
-        private : std::shared_ptr<NVideo::CShader> VFragment;
-        private : std::uint32_t VProgram;
-        private : std::vector<std::shared_ptr<NVideo::CFont>> VFonts;
-        private : std::vector<std::shared_ptr<NVideo::CTexture>> VTextures;
+        private : SDL_Window* FWindow;
+        private : SDL_GLContext FContext;
+        private : float FRatio;
+        private : float FInversedRatio;
+        private : std::shared_ptr<NVideo::CShader> FVertex;
+        private : std::shared_ptr<NVideo::CShader> FFragment;
+        private : std::uint32_t FProgram;
+        private : std::vector<std::shared_ptr<NVideo::CFont>> FFonts;
+        private : std::vector<std::shared_ptr<NVideo::CTexture>> FTextures;
 
-        private : void FInitialize();
-        private : void FPreupdate();
-        private : void FPostupdate();
-        private : void FDeinitialize();
+        private : void AInitialize();
+        private : void APreupdate();
+        private : void APostupdate();
+        private : void ADeinitialize();
 
-        public : float FRatio();
-        public : float FInversedRatio();
-        public : const NVideo::CFont& FFont(const std::string& PPath);
-        public : const NVideo::CTexture& FTexture(const std::string& PPath);
+        public : float OAccessRatio();
+        public : float OAccessInversedRatio();
+        public : const NVideo::CFont& OAccessFont(const std::string& PPath);
+        public : const NVideo::CTexture& OAccessTexture(const std::string& PPath);
     }
     GVideo;
 }

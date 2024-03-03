@@ -2,17 +2,19 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness::NVideo{
-    class CTexture{
+namespace NBlindness::NVideo
+{
+    class CTexture
+    {
         private : friend class CVideo;
         
-        private : std::string VPath;
-        private : std::uint32_t VIdentifier;
-
-        private : bool operator==(const std::string& PPath) const;
+        private : std::string FPath;
+        private : std::uint32_t FIdentifier;
 
         private : CTexture(const std::string& PPath);
-        public : std::uint32_t FIdentifier() const;
+        private : bool operator==(const std::string& PPath) const;
+
+        public : std::uint32_t OAccessIdentifier() const;
         public : ~CTexture();
     };
 }

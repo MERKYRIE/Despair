@@ -1,79 +1,88 @@
 #include"Input.hpp"
 
-namespace NBlindness{
-    void CInput::FUpdate(){
-        for(std::uint16_t LKey{0} ; LKey < 512 ; LKey++){
-            VKeyPressed[LKey] = false;
-            VKeyReleased[LKey] = false;
+namespace NBlindness
+{
+    void CInput::AUpdate()
+    {
+        for(std::uint16_t LKey{0} ; LKey < 512 ; LKey++)
+        {
+            FIsKeyPressed[LKey] = false;
+            FIsKeyReleased[LKey] = false;
         }
-        for(std::uint8_t LButton{0} ; LButton <= 4 ; LButton++){
-            VButtonPressed[LButton] = false;
-            VButtonReleased[LButton] = false;
+        for(std::uint8_t LButton{0} ; LButton <= 4 ; LButton++)
+        {
+            FIsButtonPressed[LButton] = false;
+            FIsButtonReleased[LButton] = false;
         }
-        VRelativeX = 0;
-        VXModified = false;
-        VRelativeY = 0;
-        VYModified = false;
-        VWheelState = 0;
-        VWheelModified = false;
-        VWheelDown = false;
-        VWheelUp = false;
+        FRelativeX = 0;
+        FIsXModified = false;
+        FRelativeY = 0;
+        FIsYModified = false;
+        FWheelState = 0;
+        FIsWheelModified = false;
+        FIsWheelDown = false;
+        FIsWheelUp = false;
         SDL_Event LEvent;
-        while(SDL_PollEvent(&LEvent)){
-            switch(LEvent.type){
+        while(SDL_PollEvent(&LEvent))
+        {
+            switch(LEvent.type)
+            {
                 case SDL_KEYDOWN:
-                    VKeyHeld[LEvent.key.keysym.scancode] = true;
-                    if(!LEvent.key.repeat){
-                        VKeyPressed[LEvent.key.keysym.scancode] = true;
+                    FIsKeyHeld[LEvent.key.keysym.scancode] = true;
+                    if(!LEvent.key.repeat)
+                    {
+                        FIsKeyPressed[LEvent.key.keysym.scancode] = true;
                     }
                 break;
                 case SDL_KEYUP:
-                    VKeyHeld[LEvent.key.keysym.scancode] = false;
-                    if(!LEvent.key.repeat){
-                        VKeyReleased[LEvent.key.keysym.scancode] = true;
+                    FIsKeyHeld[LEvent.key.keysym.scancode] = false;
+                    if(!LEvent.key.repeat)
+                    {
+                        FIsKeyReleased[LEvent.key.keysym.scancode] = true;
                     }
                 break;
                 case SDL_MOUSEBUTTONDOWN:
-                    VButtonHeld[LEvent.button.button - 1] = true;
-                    VButtonPressed[LEvent.button.button - 1] = true;
-                    VButtonReleased[LEvent.button.button - 1] = false;
-                    VPressedX[LEvent.button.button - 1] = LEvent.button.x;
-                    VPressedY[LEvent.button.button - 1] = LEvent.button.y;
+                    FIsButtonHeld[LEvent.button.button - 1] = true;
+                    FIsButtonPressed[LEvent.button.button - 1] = true;
+                    FIsButtonReleased[LEvent.button.button - 1] = false;
+                    FPressedX[LEvent.button.button - 1] = LEvent.button.x;
+                    FPressedY[LEvent.button.button - 1] = LEvent.button.y;
                 break;
                 case SDL_MOUSEBUTTONUP:
-                    VButtonHeld[LEvent.button.button - 1] = false;
-                    VButtonPressed[LEvent.button.button - 1] = false;
-                    VButtonReleased[LEvent.button.button - 1] = true;
-                    VReleasedX[LEvent.button.button - 1] = LEvent.button.x;
-                    VReleasedY[LEvent.button.button - 1] = LEvent.button.y;
+                    FIsButtonHeld[LEvent.button.button - 1] = false;
+                    FIsButtonPressed[LEvent.button.button - 1] = false;
+                    FIsButtonReleased[LEvent.button.button - 1] = true;
+                    FReleasedX[LEvent.button.button - 1] = LEvent.button.x;
+                    FReleasedY[LEvent.button.button - 1] = LEvent.button.y;
                 break;
                 case SDL_MOUSEMOTION:
-                    VAbsoluteX = LEvent.motion.x;
-                    VRelativeX = LEvent.motion.xrel;
-                    VXModified = VRelativeX;
-                    VAbsoluteY = LEvent.motion.y;
-                    VRelativeY = LEvent.motion.yrel;
-                    VYModified = VRelativeY;
+                    FAbsoluteX = LEvent.motion.x;
+                    FRelativeX = LEvent.motion.xrel;
+                    FIsXModified = FRelativeX;
+                    FAbsoluteY = LEvent.motion.y;
+                    FRelativeY = LEvent.motion.yrel;
+                    FIsYModified = FRelativeY;
                 break;
                 case SDL_MOUSEWHEEL:
-                    switch(LEvent.wheel.y){
+                    switch(LEvent.wheel.y)
+                    {
                         case -1:
-                            VWheelState = LEvent.wheel.y;
-                            VWheelModified = true;
-                            VWheelDown = true;
-                            VWheelUp = false;
+                            FWheelState = LEvent.wheel.y;
+                            FIsWheelModified = true;
+                            FIsWheelDown = true;
+                            FIsWheelUp = false;
                         break;
                         case 0:
-                            VWheelState = LEvent.wheel.y;
-                            VWheelModified = false;
-                            VWheelDown = false;
-                            VWheelUp = false;
+                            FWheelState = LEvent.wheel.y;
+                            FIsWheelModified = false;
+                            FIsWheelDown = false;
+                            FIsWheelUp = false;
                         break;
                         case +1:
-                            VWheelState = LEvent.wheel.y;
-                            VWheelModified = true;
-                            VWheelDown = false;
-                            VWheelUp = true;
+                            FWheelState = LEvent.wheel.y;
+                            FIsWheelModified = true;
+                            FIsWheelDown = false;
+                            FIsWheelUp = true;
                         break;
                     }
                 break;
@@ -81,83 +90,103 @@ namespace NBlindness{
         }
     }
 
-    bool CInput::FKeyHeld(std::uint16_t PKey){
-        return VKeyHeld[PKey];
+    bool CInput::OIsKeyHeld(std::uint16_t PKey)
+    {
+        return FIsKeyHeld[PKey];
     }
 
-    bool CInput::FKeyPressed(std::uint16_t PKey){
-        return VKeyPressed[PKey];
+    bool CInput::OIsKeyPressed(std::uint16_t PKey)
+    {
+        return FIsKeyPressed[PKey];
     }
 
-    bool CInput::FKeyReleased(std::uint16_t PKey){
-        return VKeyReleased[PKey];
+    bool CInput::OIsKeyReleased(std::uint16_t PKey)
+    {
+        return FIsKeyReleased[PKey];
     }
 
-    bool CInput::FButtonHeld(std::uint8_t PButton){
-        return VButtonHeld[PButton - 1];
+    bool CInput::OIsButtonHeld(std::uint8_t PButton)
+    {
+        return FIsButtonHeld[PButton - 1];
     }
 
-    bool CInput::FButtonPressed(std::uint8_t PButton){
-        return VButtonPressed[PButton - 1];
+    bool CInput::OIsButtonPressed(std::uint8_t PButton)
+    {
+        return FIsButtonPressed[PButton - 1];
     }
 
-    bool CInput::FButtonReleased(std::uint8_t PButton){
-        return VButtonHeld[PButton - 1];
+    bool CInput::OIsButtonReleased(std::uint8_t PButton)
+    {
+        return FIsButtonHeld[PButton - 1];
     }
 
-    std::int32_t CInput::FAbsoluteX(){
-        return VAbsoluteX;
+    std::int32_t CInput::OAbsoluteX()
+    {
+        return FAbsoluteX;
     }
 
-    std::int32_t CInput::FRelativeX(){
-        return VRelativeX;
+    std::int32_t CInput::ORelativeX()
+    {
+        return FRelativeX;
     }
 
-    bool CInput::FXModified(){
-        return VXModified;
+    bool CInput::OIsXModified()
+    {
+        return FIsXModified;
     }
 
-    std::int32_t CInput::FAbsoluteY(){
-        return VAbsoluteY;
+    std::int32_t CInput::OAbsoluteY()
+    {
+        return FAbsoluteY;
     }
 
-    std::int32_t CInput::FRelativeY(){
-        return VRelativeY;
+    std::int32_t CInput::ORelativeY()
+    {
+        return FRelativeY;
     }
 
-    bool CInput::FYModified(){
-        return VYModified;
+    bool CInput::OIsYModified()
+    {
+        return FIsYModified;
     }
 
-    std::int32_t CInput::FPressedX(std::uint8_t PButton){
-        return VPressedX[PButton - 1];
+    std::int32_t CInput::OPressedX(std::uint8_t PButton)
+    {
+        return FPressedX[PButton - 1];
     }
 
-    std::int32_t CInput::FPressedY(std::uint8_t PButton){
-        return VPressedY[PButton - 1];
+    std::int32_t CInput::OPressedY(std::uint8_t PButton)
+    {
+        return FPressedY[PButton - 1];
     }
 
-    std::int32_t CInput::FReleasedX(std::uint8_t PButton){
-        return VReleasedX[PButton - 1];
+    std::int32_t CInput::OReleasedX(std::uint8_t PButton)
+    {
+        return FReleasedX[PButton - 1];
     }
 
-    std::int32_t CInput::FReleasedY(std::uint8_t PButton){
-        return VReleasedY[PButton - 1];
+    std::int32_t CInput::OReleasedY(std::uint8_t PButton)
+    {
+        return FReleasedY[PButton - 1];
     }
 
-    std::int32_t CInput::FWheelState(){
-        return VWheelState;
+    std::int32_t CInput::OWheelState()
+    {
+        return FWheelState;
     }
 
-    bool CInput::FWheelModified(){
-        return VWheelModified;
+    bool CInput::OIsWheelModified()
+    {
+        return FIsWheelModified;
     }
 
-    bool CInput::FWheelDown(){
-        return VWheelDown;
+    bool CInput::OIsWheelDown()
+    {
+        return FIsWheelDown;
     }
 
-    bool CInput::FWheelUp(){
-        return VWheelUp;
+    bool CInput::OIsWheelUp()
+    {
+        return FIsWheelUp;
     }
 }

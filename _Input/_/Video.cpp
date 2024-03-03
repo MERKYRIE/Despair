@@ -5,97 +5,112 @@
 #include"Video\\Shader.hpp"
 #include"Video\\Texture.hpp"
 
-namespace NBlindness{
-    void CVideo::FInitialize(){
-        GDebug.FSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 4));
-        GDebug.FSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 6));
-        GDebug.FSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK , SDL_GL_CONTEXT_PROFILE_CORE));
-        GDebug.FSimpleDirectMediaLayerHandleError(VWindow = SDL_CreateWindow("Blindness" , 0 , 0 , 1600 , 900 , SDL_WINDOW_OPENGL));
-        GDebug.FSimpleDirectMediaLayerHandleError(VContext = SDL_GL_CreateContext(VWindow));
-        GDebug.FSimpleDirectMediaLayerCodeError(SDL_GL_SetSwapInterval(0));
+namespace NBlindness
+{
+    void CVideo::AInitialize()
+    {
+        GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 4));
+        GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 6));
+        GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK , SDL_GL_CONTEXT_PROFILE_CORE));
+        GDebug.OSimpleDirectMediaLayerHandleError(FWindow = SDL_CreateWindow("Blindness" , 0 , 0 , 1600 , 900 , SDL_WINDOW_OPENGL));
+        GDebug.OSimpleDirectMediaLayerHandleError(FContext = SDL_GL_CreateContext(FWindow));
+        GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetSwapInterval(0));
         SDL_DisplayMode LDisplayMode;
-        GDebug.FSimpleDirectMediaLayerCodeError(SDL_GetWindowDisplayMode(VWindow , &LDisplayMode));
-        VRatio = static_cast<float>(LDisplayMode.w) / static_cast<float>(LDisplayMode.h);
-        VInversedRatio = static_cast<float>(LDisplayMode.h) / static_cast<float>(LDisplayMode.w);
-        GDebug.FSimpleDirectMediaLayerCodeError(SDL_SetRelativeMouseMode(SDL_TRUE));
-        GDebug.FError(gladLoadGL(reinterpret_cast<GLADloadfunc>(SDL_GL_GetProcAddress)) != 40006);
+        GDebug.OSimpleDirectMediaLayerCodeError(SDL_GetWindowDisplayMode(FWindow , &LDisplayMode));
+        FRatio = static_cast<float>(LDisplayMode.w) / static_cast<float>(LDisplayMode.h);
+        FInversedRatio = static_cast<float>(LDisplayMode.h) / static_cast<float>(LDisplayMode.w);
+        GDebug.OSimpleDirectMediaLayerCodeError(SDL_SetRelativeMouseMode(SDL_TRUE));
+        GDebug.OError(gladLoadGL(reinterpret_cast<GLADloadfunc>(SDL_GL_GetProcAddress)) != 40006);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_FRONT);
-        VVertex.reset(new NVideo::CShader{"\\Vertex.ogl" , GL_VERTEX_SHADER});
-        VFragment.reset(new NVideo::CShader{"\\Fragment.ogl" , GL_FRAGMENT_SHADER});
+        FVertex.reset(new NVideo::CShader{"\\Vertex.ogl" , GL_VERTEX_SHADER});
+        FFragment.reset(new NVideo::CShader{"\\Fragment.ogl" , GL_FRAGMENT_SHADER});
         std::int32_t LSuccess;
         std::int32_t LLength;
         std::string LLog;
-        VProgram = glCreateProgram();
-        glAttachShader(VProgram , VVertex->FIdentifier());
-        glAttachShader(VProgram , VFragment->FIdentifier());
-        glLinkProgram(VProgram);
-        glGetProgramiv(VProgram , GL_LINK_STATUS , &LSuccess);
-        glGetProgramiv(VProgram , GL_INFO_LOG_LENGTH , &LLength);
+        FProgram = glCreateProgram();
+        glAttachShader(FProgram , FVertex->OAccessIdentifier());
+        glAttachShader(FProgram , FFragment->OAccessIdentifier());
+        glLinkProgram(FProgram);
+        glGetProgramiv(FProgram , GL_LINK_STATUS , &LSuccess);
+        glGetProgramiv(FProgram , GL_INFO_LOG_LENGTH , &LLength);
         LLog.resize(LLength);
-        glGetProgramInfoLog(VProgram , LLength , nullptr , LLog.data());
-        GDebug.FError(!LSuccess , "Open Graphics Library - " + LLog);
-        glUseProgram(VProgram);
-        GDebug.FOpenGraphicsLibraryError();
-        GDebug.FSimpleDirectMediaLayerCodeError(TTF_Init());
-        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Typeface"}){
-            if(LEntry.path().extension() == ".ttf"){
-                VFonts.emplace_back(new NVideo::CFont{LEntry.path().string()});
+        glGetProgramInfoLog(FProgram , LLength , nullptr , LLog.data());
+        GDebug.OError(!LSuccess , "Open Graphics Library - " + LLog);
+        glUseProgram(FProgram);
+        GDebug.OOpenGraphicsLibraryError();
+        GDebug.OSimpleDirectMediaLayerCodeError(TTF_Init());
+        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Typeface"})
+        {
+            if(LEntry.path().extension() == ".ttf")
+            {
+                FFonts.emplace_back(new NVideo::CFont{LEntry.path().string()});
             }
         }
-        VFonts.shrink_to_fit();
-        GDebug.FSimpleDirectMediaLayerFlagsError(IMG_Init(IMG_INIT_PNG));
-        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Atlas"}){
-            if(LEntry.path().extension() == ".png"){
-                VTextures.emplace_back(new NVideo::CTexture{LEntry.path().string()});
+        FFonts.shrink_to_fit();
+        GDebug.OSimpleDirectMediaLayerFlagsError(IMG_Init(IMG_INIT_PNG));
+        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Atlas"})
+        {
+            if(LEntry.path().extension() == ".png")
+            {
+                FTextures.emplace_back(new NVideo::CTexture{LEntry.path().string()});
             }
         }
-        VTextures.shrink_to_fit();
+        FTextures.shrink_to_fit();
     }
 
-    void CVideo::FPreupdate(){
+    void CVideo::APreupdate()
+    {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void CVideo::FPostupdate(){
-        SDL_GL_SwapWindow(VWindow);
+    void CVideo::APostupdate()
+    {
+        SDL_GL_SwapWindow(FWindow);
     }
 
-    void CVideo::FDeinitialize(){
-        VTextures.clear();
+    void CVideo::ADeinitialize()
+    {
+        FTextures.clear();
         IMG_Quit();
-        VFonts.clear();
+        FFonts.clear();
         TTF_Quit();
-        VFragment.reset();
-        VVertex.reset();
-        glDeleteProgram(VProgram);
-        SDL_GL_DeleteContext(VContext);
-        SDL_DestroyWindow(VWindow);
+        FFragment.reset();
+        FVertex.reset();
+        glDeleteProgram(FProgram);
+        SDL_GL_DeleteContext(FContext);
+        SDL_DestroyWindow(FWindow);
     }
 
-    float CVideo::FRatio(){
-        return VRatio;
+    float CVideo::OAccessRatio()
+    {
+        return FRatio;
     }
 
-    float CVideo::FInversedRatio(){
-        return VInversedRatio;
+    float CVideo::OAccessInversedRatio()
+    {
+        return FInversedRatio;
     }
 
-    const NVideo::CFont& CVideo::FFont(const std::string& PPath){
-        std::vector<std::shared_ptr<NVideo::CFont>>::iterator LIterator{
-            std::find_if(VFonts.begin() , VFonts.end() , [&PPath](const std::shared_ptr<NVideo::CFont>& LPointer){return *LPointer == PPath;})
+    const NVideo::CFont& CVideo::OAccessFont(const std::string& PPath)
+    {
+        std::vector<std::shared_ptr<NVideo::CFont>>::iterator LIterator
+        {
+            std::find_if(FFonts.begin() , FFonts.end() , [&PPath](const std::shared_ptr<NVideo::CFont>& LPointer){return *LPointer == PPath;})
         };
-        GDebug.FError(LIterator == VFonts.end());
+        GDebug.OError(LIterator == FFonts.end());
         return **LIterator;
     }
 
-    const NVideo::CTexture& CVideo::FTexture(const std::string& PPath){
-        std::vector<std::shared_ptr<NVideo::CTexture>>::iterator LIterator{
-            std::find_if(VTextures.begin() , VTextures.end() , [&PPath](const std::shared_ptr<NVideo::CTexture>& LPointer){return *LPointer == PPath;})
+    const NVideo::CTexture& CVideo::OAccessTexture(const std::string& PPath)
+    {
+        std::vector<std::shared_ptr<NVideo::CTexture>>::iterator LIterator
+        {
+            std::find_if(FTextures.begin() , FTextures.end() , [&PPath](const std::shared_ptr<NVideo::CTexture>& LPointer){return *LPointer == PPath;})
         };
-        GDebug.FError(LIterator == VTextures.end());
+        GDebug.OError(LIterator == FTextures.end());
         return **LIterator;
     }
 }

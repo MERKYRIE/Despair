@@ -2,23 +2,25 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness::NVideo{
+namespace NBlindness::NVideo
+{
     class CCharacter;
     
-    class CFont{
+    class CFont
+    {
         private : friend class CVideo;
         
-        private : std::string VPath;
-        private : std::vector<std::shared_ptr<CCharacter>> VDigits;
-        private : std::vector<std::shared_ptr<CCharacter>> VUppercases;
-        private : std::vector<std::shared_ptr<CCharacter>> VLowercases;
-
-        private : bool operator==(const std::string& PPath) const;
+        private : std::string FPath;
+        private : std::vector<std::shared_ptr<CCharacter>> FDigits;
+        private : std::vector<std::shared_ptr<CCharacter>> FUppercases;
+        private : std::vector<std::shared_ptr<CCharacter>> FLowercases;
 
         private : CFont(const std::string& PPath);
-        public : const CCharacter& FDigit(char PCode) const;
-        public : const CCharacter& FUppercase(char PCode) const;
-        public : const CCharacter& FLowercase(char PCode) const;
+        private : bool operator==(const std::string& PPath) const;
+
+        public : const CCharacter& OAccessDigit(char PCode) const;
+        public : const CCharacter& OAccessUppercase(char PCode) const;
+        public : const CCharacter& OAccessLowercase(char PCode) const;
         public : ~CFont();
     };
 }

@@ -2,43 +2,52 @@
 
 #include"Debug.hpp"
 
-namespace NBlindness{
-    bool CTrack::operator==(const std::string& PPath) const{
-        return VPath == PPath;
-    }
-    
-    CTrack::CTrack(const std::string& PPath){
-        VPath = PPath.substr(PPath.find('\\'));
-        GDebug.FSimpleDirectMediaLayerHandleError(VHandle = Mix_LoadMUS(PPath.c_str()));
+namespace NBlindness
+{
+    CTrack::CTrack(const std::string& PPath)
+    {
+        FPath = PPath.substr(PPath.find('\\'));
+        GDebug.OSimpleDirectMediaLayerHandleError(FHandle = Mix_LoadMUS(PPath.c_str()));
     }
 
-    const CTrack& CTrack::FPlay() const{
-        GDebug.FSimpleDirectMediaLayerCodeError(Mix_PlayMusic(VHandle , 0));
+    bool CTrack::operator==(const std::string& PPath) const
+    {
+        return FPath == PPath;
+    }
+
+    const CTrack& CTrack::OPlay() const
+    {
+        GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayMusic(FHandle , 0));
         return *this;
     }
 
-    const CTrack& CTrack::FPause() const{
+    const CTrack& CTrack::OPause() const
+    {
         Mix_PauseMusic();
         return *this;
     }
 
-    const CTrack& CTrack::FResume() const{
+    const CTrack& CTrack::OResume() const
+    {
         Mix_ResumeMusic();
         return *this;
     }
 
-    const CTrack& CTrack::FStop() const{
+    const CTrack& CTrack::OStop() const
+    {
         Mix_HaltMusic();
         return *this;
     }
 
-    const CTrack& CTrack::FVolume(std::uint8_t PValue) const{
+    const CTrack& CTrack::OModifyVolume(std::uint8_t PValue) const
+    {
         Mix_VolumeMusic(PValue);
-        GDebug.FError(Mix_VolumeMusic(SDL_QUERY) != PValue);
+        GDebug.OError(Mix_VolumeMusic(SDL_QUERY) != PValue);
         return *this;
     }
 
-    CTrack::~CTrack(){
-        Mix_FreeMusic(VHandle);
+    CTrack::~CTrack()
+    {
+        Mix_FreeMusic(FHandle);
     }
 }

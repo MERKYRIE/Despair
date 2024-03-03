@@ -2,32 +2,36 @@
 
 #include"Debug.hpp"
 
-namespace NBlindness::NVideo{
-    CShader::CShader(const std::string& PPath , std::uint32_t PType){
+namespace NBlindness::NVideo
+{
+    CShader::CShader(const std::string& PPath , std::uint32_t PType)
+    {
         std::fstream LFile{"Program" + PPath , std::ios::in};
-        VIdentifier = glCreateShader(PType);
+        FIdentifier = glCreateShader(PType);
         std::stringstream LStream;
         LStream << LFile.rdbuf();
         std::string LString{LStream.str()};
         char* LArray{LString.data()};
-        glShaderSource(VIdentifier , 1 , &LArray , nullptr);
-        glCompileShader(VIdentifier);
+        glShaderSource(FIdentifier , 1 , &LArray , nullptr);
+        glCompileShader(FIdentifier);
         std::int32_t LSuccess;
-        glGetShaderiv(VIdentifier , GL_COMPILE_STATUS , &LSuccess);
+        glGetShaderiv(FIdentifier , GL_COMPILE_STATUS , &LSuccess);
         std::int32_t LLength;
-        glGetShaderiv(VIdentifier , GL_INFO_LOG_LENGTH , &LLength);
+        glGetShaderiv(FIdentifier , GL_INFO_LOG_LENGTH , &LLength);
         std::string LLog;
         LLog.resize(LLength);
-        glGetShaderInfoLog(VIdentifier , LLength , nullptr , LLog.data());
-        GDebug.FError(!LSuccess , "Open Graphics Library - " + LLog);
+        glGetShaderInfoLog(FIdentifier , LLength , nullptr , LLog.data());
+        GDebug.OError(!LSuccess , "Open Graphics Library - " + LLog);
     }
 
-    std::uint32_t CShader::FIdentifier() const{
-        return VIdentifier;
+    std::uint32_t CShader::OAccessIdentifier() const
+    {
+        return FIdentifier;
     }
 
-    CShader::~CShader(){
-        glDeleteShader(VIdentifier);
-        GDebug.FOpenGraphicsLibraryError();
+    CShader::~CShader()
+    {
+        glDeleteShader(FIdentifier);
+        GDebug.OOpenGraphicsLibraryError();
     }
 }

@@ -11,25 +11,27 @@
 #include"Audio.hpp"
 #include"Debug.hpp"
 #include"Input.hpp"
-#include"World.hpp"
+#include"Space.hpp"
 #include"Time.hpp"
 #include"Video.hpp"
 
-std::int32_t main(std::int32_t , char**){
-    NBlindness::GDebug.FSimpleDirectMediaLayerCodeError(SDL_Init(SDL_INIT_EVERYTHING));
-    NBlindness::GAudio.FInitialize();
-    NBlindness::GVideo.FInitialize();
-    NBlindness::GWorld.FInitialize();
-    while(!NBlindness::GInput.FKeyHeld(SDL_SCANCODE_ESCAPE)){
-        NBlindness::GInput.FUpdate();
-        NBlindness::GTime.FUpdate();
-        NBlindness::GVideo.FPreupdate();
-        NBlindness::GWorld.FUpdate();
-        NBlindness::GVideo.FPostupdate();
+std::int32_t main(std::int32_t , char**)
+{
+    NBlindness::GDebug.OSimpleDirectMediaLayerCodeError(SDL_Init(SDL_INIT_EVERYTHING));
+    NBlindness::GAudio.AInitialize();
+    NBlindness::GVideo.AInitialize();
+    NBlindness::GSpace.AInitialize();
+    while(!NBlindness::GInput.OIsKeyHeld(SDL_SCANCODE_ESCAPE))
+    {
+        NBlindness::GInput.AUpdate();
+        NBlindness::GTime.AUpdate();
+        NBlindness::GVideo.APreupdate();
+        NBlindness::GSpace.AUpdate();
+        NBlindness::GVideo.APostupdate();
     };
-    NBlindness::GWorld.FDeinitialize();
-    NBlindness::GVideo.FDeinitialize();
-    NBlindness::GAudio.FDeinitialize();
+    NBlindness::GSpace.ADeinitialize();
+    NBlindness::GVideo.ADeinitialize();
+    NBlindness::GAudio.ADeinitialize();
     SDL_Quit();
     return 0;
 }

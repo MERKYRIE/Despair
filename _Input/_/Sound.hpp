@@ -2,19 +2,21 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness{
-    class CSound{
+namespace NBlindness
+{
+    class CSound
+    {
         private : friend class CAudio;
         
-        private : std::string VPath;
-        private : Mix_Chunk* VHandle;
-        private : std::int32_t VChannel;
-
-        private : bool operator==(const std::string& PPath) const;
+        private : std::string FPath;
+        private : Mix_Chunk* FHandle;
+        private : std::int32_t FChannel;
 
         private : CSound(const std::string& PPath);
-        public : const CSound& FPlay() const;
-        public : bool FPlaying() const;
+        private : bool operator==(const std::string& PPath) const;
+
+        public : const CSound& OPlay() const;
+        public : bool OIsPlaying() const;
         public : ~CSound();
     };
 }

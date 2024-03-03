@@ -2,21 +2,23 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness{
-    class CTrack{
+namespace NBlindness
+{
+    class CTrack
+    {
         private : friend class CAudio;
         
-        private : std::string VPath;
-        private : Mix_Music* VHandle;
-
-        private : bool operator==(const std::string& PPath) const;
+        private : std::string FPath;
+        private : Mix_Music* FHandle;
 
         private : CTrack(const std::string& PPath);
-        public : const CTrack& FPlay() const;
-        public : const CTrack& FPause() const;
-        public : const CTrack& FResume() const;
-        public : const CTrack& FStop() const;
-        public : const CTrack& FVolume(std::uint8_t PValue) const;
+        private : bool operator==(const std::string& PPath) const;
+
+        public : const CTrack& OPlay() const;
+        public : const CTrack& OPause() const;
+        public : const CTrack& OResume() const;
+        public : const CTrack& OStop() const;
+        public : const CTrack& OModifyVolume(std::uint8_t PValue) const;
         public : ~CTrack();
     };
 }

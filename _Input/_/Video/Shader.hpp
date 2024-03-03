@@ -2,14 +2,17 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness::NVideo{
-    class CShader{
+namespace NBlindness::NVideo
+{
+    class CShader
+    {
         private : friend class CVideo;
         
-        private : std::uint32_t VIdentifier;
+        private : std::uint32_t FIdentifier;
 
         private : CShader(const std::string& PPath , std::uint32_t PType);
-        public : std::uint32_t FIdentifier() const;
+
+        public : std::uint32_t OAccessIdentifier() const;
         public : ~CShader();
     };
 }
