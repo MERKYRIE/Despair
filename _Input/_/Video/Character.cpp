@@ -20,11 +20,10 @@ namespace NBlindness::NVideo
         SDL_FreeSurface(LSurface);
     }
 
-    std::uint32_t CCharacter::OAccessIdentifier() const
+    std::uint32_t CCharacter::OIdentifier() const
     {
         return FIdentifier;
     }
-
     CCharacter::~CCharacter()
     {
         glDeleteTextures(1 , &FIdentifier);

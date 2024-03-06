@@ -28,7 +28,6 @@ namespace NBlindness::NVideo
         FLowercases.shrink_to_fit();
         TTF_CloseFont(LFont);
     }
-
     bool CFont::operator==(const std::string& PPath) const
     {
         return FPath == PPath;
@@ -38,17 +37,14 @@ namespace NBlindness::NVideo
     {
         return *FDigits[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('0')];
     }
-
     const CCharacter& CFont::OAccessUppercase(char PCode) const
     {
         return *FUppercases[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('A')];
     }
-
     const CCharacter& CFont::OAccessLowercase(char PCode) const
     {
         return *FLowercases[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('a')];
     }
-
     CFont::~CFont()
     {
         FLowercases.clear();

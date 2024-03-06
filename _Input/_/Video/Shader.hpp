@@ -6,13 +6,13 @@ namespace NBlindness::NVideo
 {
     class CShader
     {
-        private : friend class CVideo;
+        friend class CVideo;
         
         private : std::uint32_t FIdentifier;
 
         private : CShader(const std::string& PPath , std::uint32_t PType);
+        private : std::uint32_t BIdentifier();
 
-        public : std::uint32_t OAccessIdentifier() const;
         public : ~CShader();
     };
 }

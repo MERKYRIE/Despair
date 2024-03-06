@@ -6,6 +6,8 @@ namespace NBlindness::NSpace
 {    
     class CPartition
     {
+        friend class CSpace;
+        
         private : std::uint32_t FTextureNegativeX;
         private : std::uint32_t FTexturePositiveX;
         private : std::uint32_t FTextureNegativeY;
@@ -13,7 +15,7 @@ namespace NBlindness::NSpace
         private : std::uint32_t FTextureNegativeZ;
         private : std::uint32_t FTexturePositiveZ;
 
-        public : CPartition
+        private : CPartition
         (
             std::uint32_t PTextureNegativeX ,
             std::uint32_t PTexturePositiveX ,
@@ -22,11 +24,11 @@ namespace NBlindness::NSpace
             std::uint32_t PTextureNegativeZ ,
             std::uint32_t PTexturePositiveZ
         );
-        public : bool OCanGenerateTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
-        public : bool OGenerateNewTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
-        public : bool OCanGenerateShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
-        public : bool OGenerateNewShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
-        public : void ORender(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
-        public : bool OIsCollisionDetected(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
+        private : bool BCanGenerateTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
+        private : bool BGenerateNewTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
+        private : bool BCanGenerateShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
+        private : bool BGenerateNewShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
+        private : void BRender(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
+        private : bool BIsCollisionDetected(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
     };
 }

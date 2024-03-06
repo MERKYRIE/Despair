@@ -11,7 +11,6 @@ namespace NBlindness::NSpace
         glBufferData(GL_ARRAY_BUFFER , sizeof(PVertices) , PVertices.data() , GL_STATIC_DRAW);
         GDebug.OOpenGraphicsLibraryError();
     }
-
     CVertexBufferObject::~CVertexBufferObject()
     {
         glDeleteBuffers(1 , &FIdentifier);

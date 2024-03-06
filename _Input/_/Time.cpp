@@ -2,19 +2,18 @@
 
 namespace NBlindness
 {
-    void CTime::AUpdate()
+    void CTime::BUpdate()
     {
         FLast = FAbsolute;
         FAbsolute = SDL_GetTicks();
         FRelative = FAbsolute - FLast;
     }
 
-    std::uint32_t CTime::OAccessAbsolute()
+    std::uint32_t CTime::OAbsolute()
     {
         return FAbsolute;
     }
-
-    std::uint32_t CTime::OAccessRelative()
+    std::uint32_t CTime::ORelative()
     {
         return FRelative;
     }

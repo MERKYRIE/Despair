@@ -4,7 +4,6 @@
 #include"VertexBufferObject.hpp"
 
 #include"Debug.hpp"
-#include"Space.hpp"
 
 namespace NBlindness::NSpace
 {
@@ -20,12 +19,10 @@ namespace NBlindness::NSpace
         glVertexAttribPointer(1 , 2 , GL_FLOAT , GL_FALSE , 5 * sizeof(float) , reinterpret_cast<void*>(3 * sizeof(float)));
         GDebug.OOpenGraphicsLibraryError();
     }
-
-    std::uint32_t CVertexArrayObject::OAccessIdentifier()
+    std::uint32_t CVertexArrayObject::OIdentifier()
     {
         return FIdentifier;
     }
-
     CVertexArrayObject::~CVertexArrayObject()
     {
         FElementBufferObject.reset();

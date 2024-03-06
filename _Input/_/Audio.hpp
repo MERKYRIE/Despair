@@ -4,21 +4,24 @@
 
 namespace NBlindness
 {
-    class CSound;
-    class CTrack;
+    namespace NAudio
+    {
+        class CSound;
+        class CTrack;
+    }
     
     inline class CAudio
     {
-        private : friend std::int32_t (::main(std::int32_t , char**));
+        friend std::int32_t (::main(std::int32_t , char**));
 
-        private : std::vector<std::shared_ptr<CSound>> FSounds;
-        private : std::vector<std::shared_ptr<CTrack>> FTracks;
+        private : std::vector<std::shared_ptr<NAudio::CSound>> FSounds;
+        private : std::vector<std::shared_ptr<NAudio::CTrack>> FTracks;
 
-        private : void AInitialize();
-        private : void ADeinitialize();
+        private : void BInitialize();
+        private : void BDeinitialize();
 
-        public : const CSound& OAccessSound(const std::string& PPath);
-        public : const CTrack& OAccessTrack(const std::string& PPath);
+        public : const NAudio::CSound& OAccessSound(const std::string& PPath);
+        public : const NAudio::CTrack& OAccessTrack(const std::string& PPath);
     }
     GAudio;
 }

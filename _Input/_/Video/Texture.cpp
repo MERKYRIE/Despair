@@ -20,17 +20,15 @@ namespace NBlindness::NVideo
         SDL_FreeSurface(LConverted);
         SDL_FreeSurface(LSurface);
     }
-
     bool CTexture::operator==(const std::string& PPath) const
     {
         return FPath == PPath;
     }
     
-    std::uint32_t CTexture::OAccessIdentifier() const
+    std::uint32_t CTexture::OIdentifier() const
     {
         return FIdentifier;
     }
-
     CTexture::~CTexture()
     {
         glDeleteTextures(1 , &FIdentifier);

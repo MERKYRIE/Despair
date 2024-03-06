@@ -23,8 +23,7 @@ namespace NBlindness::NVideo
         glGetShaderInfoLog(FIdentifier , LLength , nullptr , LLog.data());
         GDebug.OError(!LSuccess , "Open Graphics Library - " + LLog);
     }
-
-    std::uint32_t CShader::OAccessIdentifier() const
+    std::uint32_t CShader::BIdentifier()
     {
         return FIdentifier;
     }

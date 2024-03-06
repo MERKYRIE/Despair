@@ -11,7 +11,6 @@ namespace NBlindness::NSpace
         glBufferData(GL_ELEMENT_ARRAY_BUFFER , sizeof(PElements) , PElements.data() , GL_STATIC_DRAW);
         GDebug.OOpenGraphicsLibraryError();
     }
-
     CElementBufferObject::~CElementBufferObject()
     {
         glDeleteBuffers(1 , &FIdentifier);

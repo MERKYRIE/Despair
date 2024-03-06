@@ -18,20 +18,20 @@
 std::int32_t main(std::int32_t , char**)
 {
     NBlindness::GDebug.OSimpleDirectMediaLayerCodeError(SDL_Init(SDL_INIT_EVERYTHING));
-    NBlindness::GAudio.AInitialize();
-    NBlindness::GVideo.AInitialize();
-    NBlindness::GSpace.AInitialize();
+    NBlindness::GAudio.BInitialize();
+    NBlindness::GVideo.BInitialize();
+    NBlindness::GSpace.BInitialize();
     while(!NBlindness::GInput.OIsKeyHeld(SDL_SCANCODE_ESCAPE))
     {
-        NBlindness::GInput.AUpdate();
-        NBlindness::GTime.AUpdate();
-        NBlindness::GVideo.APreupdate();
-        NBlindness::GSpace.AUpdate();
-        NBlindness::GVideo.APostupdate();
+        NBlindness::GInput.BUpdate();
+        NBlindness::GTime.BUpdate();
+        NBlindness::GVideo.BPreupdate();
+        NBlindness::GSpace.BUpdate();
+        NBlindness::GVideo.BPostupdate();
     };
-    NBlindness::GSpace.ADeinitialize();
-    NBlindness::GVideo.ADeinitialize();
-    NBlindness::GAudio.ADeinitialize();
+    NBlindness::GSpace.BDeinitialize();
+    NBlindness::GVideo.BDeinitialize();
+    NBlindness::GAudio.BDeinitialize();
     SDL_Quit();
     return 0;
 }

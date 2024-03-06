@@ -12,12 +12,14 @@ namespace NBlindness
 
     inline class CSpace
     {
-        private : friend std::int32_t (::main(std::int32_t , char**));
+        friend std::int32_t (::main(std::int32_t , char**));
+
+        friend class NSpace::CPartition;
 
         private : std::vector<std::vector<std::vector<std::shared_ptr<NSpace::CPartition>>>> FMatrix;
-        private : std::intmax_t FDistanceAlongX;
-        private : std::intmax_t FDistanceAlongY;
-        private : std::intmax_t FDistanceAlongZ;
+        private : std::intmax_t FSizeX;
+        private : std::intmax_t FSizeY;
+        private : std::intmax_t FSizeZ;
         private : float FTranslationX;
         private : float FTranslationY;
         private : float FTranslationZ;
@@ -38,20 +40,23 @@ namespace NBlindness
         private : void IReevaluatePositionXY();
         private : void IReevaluatePositionZ();
 
-        private : void AInitialize();
-        private : void AUpdate();
-        private : void ADeinitialize();
+        private : void BInitialize();
+        private : void BUpdate();
+        private : void BDeinitialize();
 
-        public : std::intmax_t OAccessTranslationIntegralX();
-        public : std::intmax_t OAccessTranslationIntegralY();
-        public : std::intmax_t OAccessTranslationIntegralZ();
-        public : NSpace::CPartition& OAccessPartition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
-        public : const std::shared_ptr<NSpace::CVertexArrayObject>& OVertexArrayObjectNegativeX();
-        public : const std::shared_ptr<NSpace::CVertexArrayObject>& OVertexArrayObjectPositiveX();
-        public : const std::shared_ptr<NSpace::CVertexArrayObject>& OVertexArrayObjectNegativeY();
-        public : const std::shared_ptr<NSpace::CVertexArrayObject>& OVertexArrayObjectPositiveY();
-        public : const std::shared_ptr<NSpace::CVertexArrayObject>& OVertexArrayObjectNegativeZ();
-        public : const std::shared_ptr<NSpace::CVertexArrayObject>& OVertexArrayObjectPositiveZ();
+        private : std::intmax_t DSizeX();
+        private : std::intmax_t DSizeY();
+        private : std::intmax_t DSizeZ();
+        private : std::intmax_t DPositionX();
+        private : std::intmax_t DPositionY();
+        private : std::intmax_t DPositionZ();
+        private : const std::shared_ptr<NSpace::CVertexArrayObject>& DVertexArrayObjectNegativeX();
+        private : const std::shared_ptr<NSpace::CVertexArrayObject>& DVertexArrayObjectPositiveX();
+        private : const std::shared_ptr<NSpace::CVertexArrayObject>& DVertexArrayObjectNegativeY();
+        private : const std::shared_ptr<NSpace::CVertexArrayObject>& DVertexArrayObjectPositiveY();
+        private : const std::shared_ptr<NSpace::CVertexArrayObject>& DVertexArrayObjectNegativeZ();
+        private : const std::shared_ptr<NSpace::CVertexArrayObject>& DVertexArrayObjectPositiveZ();
+        private : NSpace::CPartition& DAccessPartition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
     }
     GSpace;
 }

@@ -13,7 +13,7 @@ namespace NBlindness
     
     inline class CVideo
     {
-        private : friend std::int32_t (::main(std::int32_t , char**));
+        friend std::int32_t (::main(std::int32_t , char**));
 
         private : SDL_Window* FWindow;
         private : SDL_GLContext FContext;
@@ -25,13 +25,13 @@ namespace NBlindness
         private : std::vector<std::shared_ptr<NVideo::CFont>> FFonts;
         private : std::vector<std::shared_ptr<NVideo::CTexture>> FTextures;
 
-        private : void AInitialize();
-        private : void APreupdate();
-        private : void APostupdate();
-        private : void ADeinitialize();
+        private : void BInitialize();
+        private : void BPreupdate();
+        private : void BPostupdate();
+        private : void BDeinitialize();
 
-        public : float OAccessRatio();
-        public : float OAccessInversedRatio();
+        public : float ORatio();
+        public : float OInversedRatio();
         public : const NVideo::CFont& OAccessFont(const std::string& PPath);
         public : const NVideo::CTexture& OAccessTexture(const std::string& PPath);
     }

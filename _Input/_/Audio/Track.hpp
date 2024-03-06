@@ -2,11 +2,11 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness
+namespace NBlindness::NAudio
 {
     class CTrack
     {
-        private : friend class CAudio;
+        friend class CAudio;
         
         private : std::string FPath;
         private : Mix_Music* FHandle;
@@ -18,7 +18,7 @@ namespace NBlindness
         public : const CTrack& OPause() const;
         public : const CTrack& OResume() const;
         public : const CTrack& OStop() const;
-        public : const CTrack& OModifyVolume(std::uint8_t PValue) const;
+        public : const CTrack& OAccessVolume(std::uint8_t PValue) const;
         public : ~CTrack();
     };
 }

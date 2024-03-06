@@ -6,16 +6,16 @@ namespace NBlindness
 {
     inline class CTime
     {
-        private : friend std::int32_t (::main(std::int32_t , char**));
+        friend std::int32_t (::main(std::int32_t , char**));
 
         private : std::uint32_t FLast;
         private : std::uint32_t FAbsolute;
         private : std::uint32_t FRelative;
 
-        private : void AUpdate();
+        private : void BUpdate();
 
-        public : std::uint32_t OAccessAbsolute();
-        public : std::uint32_t OAccessRelative();
+        public : std::uint32_t OAbsolute();
+        public : std::uint32_t ORelative();
     }
     GTime;
 }

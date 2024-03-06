@@ -2,11 +2,11 @@
 
 #include"Blindness.hpp"
 
-namespace NBlindness
+namespace NBlindness::NAudio
 {
     class CSound
     {
-        private : friend class CAudio;
+        friend class CAudio;
         
         private : std::string FPath;
         private : Mix_Chunk* FHandle;

@@ -8,7 +8,7 @@ namespace NBlindness::NVideo
     
     class CFont
     {
-        private : friend class CVideo;
+        friend class CVideo;
         
         private : std::string FPath;
         private : std::vector<std::shared_ptr<CCharacter>> FDigits;

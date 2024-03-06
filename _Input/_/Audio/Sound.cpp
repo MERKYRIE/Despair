@@ -2,7 +2,7 @@
 
 #include"Debug.hpp"
 
-namespace NBlindness
+namespace NBlindness::NAudio
 {
     CSound::CSound(const std::string& PPath)
     {
@@ -11,7 +11,6 @@ namespace NBlindness
         FChannel = Mix_AllocateChannels(SDL_QUERY);
         GDebug.OError(Mix_AllocateChannels(Mix_AllocateChannels(SDL_QUERY) + 1) != FChannel + 1);
     }
-
     bool CSound::operator==(const std::string& PPath) const
     {
         return FPath == PPath;
@@ -22,12 +21,10 @@ namespace NBlindness
         GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayChannel(FChannel , FHandle , 0) != FChannel);
         return *this;
     }
-
     bool CSound::OIsPlaying() const
     {
         return Mix_Playing(FChannel);
     }
-
     CSound::~CSound()
     {
         Mix_FreeChunk(FHandle);

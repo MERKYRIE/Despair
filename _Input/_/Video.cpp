@@ -7,7 +7,7 @@
 
 namespace NBlindness
 {
-    void CVideo::AInitialize()
+    void CVideo::BInitialize()
     {
         GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 4));
         GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 6));
@@ -31,8 +31,8 @@ namespace NBlindness
         std::int32_t LLength;
         std::string LLog;
         FProgram = glCreateProgram();
-        glAttachShader(FProgram , FVertex->OAccessIdentifier());
-        glAttachShader(FProgram , FFragment->OAccessIdentifier());
+        glAttachShader(FProgram , FVertex->BIdentifier());
+        glAttachShader(FProgram , FFragment->BIdentifier());
         glLinkProgram(FProgram);
         glGetProgramiv(FProgram , GL_LINK_STATUS , &LSuccess);
         glGetProgramiv(FProgram , GL_INFO_LOG_LENGTH , &LLength);
@@ -50,7 +50,7 @@ namespace NBlindness
             }
         }
         FFonts.shrink_to_fit();
-        GDebug.OSimpleDirectMediaLayerFlagsError(IMG_Init(IMG_INIT_PNG));
+        GDebug.OSimpleDirectMediaLayerMaskError(IMG_Init(IMG_INIT_PNG));
         for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Atlas"})
         {
             if(LEntry.path().extension() == ".png")
@@ -60,18 +60,15 @@ namespace NBlindness
         }
         FTextures.shrink_to_fit();
     }
-
-    void CVideo::APreupdate()
+    void CVideo::BPreupdate()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
-
-    void CVideo::APostupdate()
+    void CVideo::BPostupdate()
     {
         SDL_GL_SwapWindow(FWindow);
     }
-
-    void CVideo::ADeinitialize()
+    void CVideo::BDeinitialize()
     {
         FTextures.clear();
         IMG_Quit();
@@ -84,16 +81,14 @@ namespace NBlindness
         SDL_DestroyWindow(FWindow);
     }
 
-    float CVideo::OAccessRatio()
+    float CVideo::ORatio()
     {
         return FRatio;
     }
-
-    float CVideo::OAccessInversedRatio()
+    float CVideo::OInversedRatio()
     {
         return FInversedRatio;
     }
-
     const NVideo::CFont& CVideo::OAccessFont(const std::string& PPath)
     {
         std::vector<std::shared_ptr<NVideo::CFont>>::iterator LIterator
@@ -103,7 +98,6 @@ namespace NBlindness
         GDebug.OError(LIterator == FFonts.end());
         return **LIterator;
     }
-
     const NVideo::CTexture& CVideo::OAccessTexture(const std::string& PPath)
     {
         std::vector<std::shared_ptr<NVideo::CTexture>>::iterator LIterator

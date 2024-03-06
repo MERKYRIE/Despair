@@ -6,7 +6,7 @@ namespace NBlindness
 {
     inline class CInput
     {
-        private : friend std::int32_t (::main(std::int32_t , char**));
+        friend std::int32_t (::main(std::int32_t , char**));
 
         private : bool FIsKeyHeld[512];
         private : bool FIsKeyPressed[512];
@@ -29,7 +29,7 @@ namespace NBlindness
         private : bool FIsWheelDown;
         private : bool FIsWheelUp;
         
-        private : void AUpdate();
+        private : void BUpdate();
 
         public : bool OIsKeyHeld(std::uint16_t PKey);
         public : bool OIsKeyPressed(std::uint16_t PKey);
