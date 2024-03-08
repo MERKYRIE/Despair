@@ -26,162 +26,159 @@ namespace NBlindness::NSpace
     }
     bool CPartition::BCanGenerateTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
-        return PX == std::clamp<std::intmax_t>(PX , 0 , GSpace.DSizeX() - 1) &&
-            PY == std::clamp<std::intmax_t>(PY , 0 , GSpace.DSizeY() - 1) &&
-            PZ == std::clamp<std::intmax_t>(PZ , 0 , GSpace.DSizeZ() - 1);
+        return(GSpace.DDoesPartitionExist(PX , PY , PZ));
     }
     bool CPartition::BGenerateNewTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
-        switch(PX - GSpace.DPositionX())
+        switch(GSpace.DEvaluateOffsetX(PX))
         {
             case -1:
                 if(!FTextureNegativeX && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX)
                 {
-                    return false;
+                    return(false);
                 }
                 FTextureNegativeX = 0;
                 GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX = 0;
-            return true;
+            return(true);
             case +1:
                 if(!FTexturePositiveX && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeX)
                 {
-                    return false;
+                    return(false);
                 }
                 FTexturePositiveX = 0;
                 GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeX = 0;
-            return true;
+            return(true);
         }
-        switch(PY - GSpace.DPositionY())
+        switch(GSpace.DEvaluateOffsetY(PY))
         {
             case -1:
                 if(!FTextureNegativeY && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveY)
                 {
-                    return false;
+                    return(false);
                 }
                 FTextureNegativeY = 0;
                 GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveY = 0;
-            return true;
+            return(true);
             case +1:
                 if(!FTexturePositiveY && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeY)
                 {
-                    return false;
+                    return(false);
                 }
                 FTexturePositiveY = 0;
                 GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeY = 0;
-            return true;
+            return(true);
         }
         GDebug.OError();
-        return false;
+        return(false);
     }
     bool CPartition::BCanGenerateShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ){
-        return (!FTextureNegativeX || !FTexturePositiveX || !FTextureNegativeY || !FTexturePositiveX) && (
-            !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeX ||
-            !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX ||
-            !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeY ||
-            !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX
+        return
+        (
+            (!FTextureNegativeX || !FTexturePositiveX || !FTextureNegativeY || !FTexturePositiveX) &&
+            (
+                !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeX ||
+                !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX ||
+                !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeY ||
+                !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX
+            )
         );
     }
     bool CPartition::BGenerateNewShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
-        switch(PZ - GSpace.DPositionZ())
+        switch(GSpace.DEvaluateOffsetZ(PZ))
         {
             case -1:
                 if(!FTextureNegativeZ && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveZ)
                 {
-                    return false;
+                    return(false);
                 }
                 FTextureNegativeZ = 0;
                 GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveZ = 0;
-            return true;
+            return(true);
             case +1:
                 if(!FTexturePositiveZ && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeZ)
                 {
-                    return false;
+                    return(false);
                 }
                 FTexturePositiveZ = 0;
                 GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeZ = 0;
-            return true;
+            return(true);
         }
         GDebug.OError();
-        return false;
+        return(false);
     }
     void CPartition::BRender(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
         if(FTextureNegativeX)
         {
-            glBindVertexArray(GSpace.DVertexArrayObjectNegativeX()->OIdentifier());
+            GSpace.DBindVertexArrayObjectNegativeX();
             glBindTexture(GL_TEXTURE_2D , FTextureNegativeX);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(FTexturePositiveX)
         {
-            glBindVertexArray(GSpace.DVertexArrayObjectPositiveX()->OIdentifier());
+            GSpace.DBindVertexArrayObjectPositiveX();
             glBindTexture(GL_TEXTURE_2D , FTexturePositiveX);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(FTextureNegativeY)
         {
-            glBindVertexArray(GSpace.DVertexArrayObjectNegativeY()->OIdentifier());
+            GSpace.DBindVertexArrayObjectNegativeY();
             glBindTexture(GL_TEXTURE_2D , FTextureNegativeY);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(FTexturePositiveY)
         {
-            glBindVertexArray(GSpace.DVertexArrayObjectPositiveY()->OIdentifier());
+            GSpace.DBindVertexArrayObjectPositiveY();
             glBindTexture(GL_TEXTURE_2D , FTexturePositiveY);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(FTextureNegativeZ)
         {
-            glBindVertexArray(GSpace.DVertexArrayObjectNegativeZ()->OIdentifier());
+            GSpace.DBindVertexArrayObjectNegativeZ();
             glBindTexture(GL_TEXTURE_2D , FTextureNegativeZ);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
         if(FTexturePositiveZ)
         {
-            glBindVertexArray(GSpace.DVertexArrayObjectPositiveZ()->OIdentifier());
+            GSpace.DBindVertexArrayObjectPositiveZ();
             glBindTexture(GL_TEXTURE_2D , FTexturePositiveZ);
             glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
         }
     }
     bool CPartition::BIsCollisionDetected(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
-        if
-        (
-            PX != std::clamp<std::intmax_t>(PX , 0 , GSpace.DSizeX() - 1) ||
-            PY != std::clamp<std::intmax_t>(PY , 0 , GSpace.DSizeY() - 1) ||
-            PZ != std::clamp<std::intmax_t>(PZ , 0 , GSpace.DSizeZ() - 1)
-        )
+        if(!GSpace.DDoesPartitionExist(PX , PY , PZ))
         {
-            return true;
+            return(true);
         }
-        switch(PX - GSpace.DPositionX())
+        switch(GSpace.DEvaluateOffsetX(PX))
         {
             case -1:
-                return !(!FTextureNegativeX && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX);
+                return(!(!FTextureNegativeX && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX));
             break;
             case +1:
-                return !(!FTexturePositiveX && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeX);
+                return(!(!FTexturePositiveX && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeX));
             break;
         }
-        switch(PY - GSpace.DPositionY())
+        switch(GSpace.DEvaluateOffsetY(PY))
         {
             case -1:
-                return !(!FTextureNegativeY && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveY);
+                return(!(!FTextureNegativeY && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveY));
             break;
             case +1:
-                return !(!FTexturePositiveY && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeY);
+                return(!(!FTexturePositiveY && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeY));
             break;
         }
-        switch(PZ - GSpace.DPositionZ())
+        switch(GSpace.DEvaluateOffsetZ(PZ))
         {
             case -1:
-                return !(!FTextureNegativeZ && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveZ);
+                return(!(!FTextureNegativeZ && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveZ));
             break;
             case +1:
-                return !(!FTexturePositiveZ && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeZ);
+                return(!(!FTexturePositiveZ && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeZ));
             break;
         }
-        return true;
+        return(true);
     }
 }

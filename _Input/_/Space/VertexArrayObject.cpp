@@ -21,7 +21,7 @@ namespace NBlindness::NSpace
     }
     std::uint32_t CVertexArrayObject::OIdentifier()
     {
-        return FIdentifier;
+        return(FIdentifier);
     }
     CVertexArrayObject::~CVertexArrayObject()
     {

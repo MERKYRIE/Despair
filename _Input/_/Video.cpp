@@ -83,28 +83,28 @@ namespace NBlindness
 
     float CVideo::ORatio()
     {
-        return FRatio;
+        return(FRatio);
     }
     float CVideo::OInversedRatio()
     {
-        return FInversedRatio;
+        return(FInversedRatio);
     }
     const NVideo::CFont& CVideo::OAccessFont(const std::string& PPath)
     {
         std::vector<std::shared_ptr<NVideo::CFont>>::iterator LIterator
         {
-            std::find_if(FFonts.begin() , FFonts.end() , [&PPath](const std::shared_ptr<NVideo::CFont>& LPointer){return *LPointer == PPath;})
+            std::find_if(FFonts.begin() , FFonts.end() , [&PPath](const std::shared_ptr<NVideo::CFont>& LPointer){return(*LPointer == PPath);})
         };
         GDebug.OError(LIterator == FFonts.end());
-        return **LIterator;
+        return(**LIterator);
     }
     const NVideo::CTexture& CVideo::OAccessTexture(const std::string& PPath)
     {
         std::vector<std::shared_ptr<NVideo::CTexture>>::iterator LIterator
         {
-            std::find_if(FTextures.begin() , FTextures.end() , [&PPath](const std::shared_ptr<NVideo::CTexture>& LPointer){return *LPointer == PPath;})
+            std::find_if(FTextures.begin() , FTextures.end() , [&PPath](const std::shared_ptr<NVideo::CTexture>& LPointer){return(*LPointer == PPath);})
         };
         GDebug.OError(LIterator == FTextures.end());
-        return **LIterator;
+        return(**LIterator);
     }
 }

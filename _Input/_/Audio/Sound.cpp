@@ -13,17 +13,17 @@ namespace NBlindness::NAudio
     }
     bool CSound::operator==(const std::string& PPath) const
     {
-        return FPath == PPath;
+        return(FPath == PPath);
     }
 
     const CSound& CSound::OPlay() const
     {
         GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayChannel(FChannel , FHandle , 0) != FChannel);
-        return *this;
+        return(*this);
     }
     bool CSound::OIsPlaying() const
     {
-        return Mix_Playing(FChannel);
+        return(Mix_Playing(FChannel));
     }
     CSound::~CSound()
     {

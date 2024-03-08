@@ -45,18 +45,18 @@ namespace NBlindness
     {
         std::vector<std::shared_ptr<NAudio::CSound>>::iterator LIterator
         {
-            std::find_if(FSounds.begin() , FSounds.end() , [&PPath](const std::shared_ptr<NAudio::CSound>& LPointer){return *LPointer == PPath;})
+            std::find_if(FSounds.begin() , FSounds.end() , [&PPath](const std::shared_ptr<NAudio::CSound>& LPointer){return(*LPointer == PPath);})
         };
         GDebug.OError(LIterator == FSounds.end());
-        return **LIterator;
+        return(**LIterator);
     }
     const NAudio::CTrack& CAudio::OAccessTrack(const std::string& PPath)
     {
         std::vector<std::shared_ptr<NAudio::CTrack>>::iterator LIterator
         {
-            std::find_if(FTracks.begin() , FTracks.end() , [&PPath](const std::shared_ptr<NAudio::CTrack>& LPointer){return *LPointer == PPath;})
+            std::find_if(FTracks.begin() , FTracks.end() , [&PPath](const std::shared_ptr<NAudio::CTrack>& LPointer){return(*LPointer == PPath);})
         };
         GDebug.OError(LIterator == FTracks.end());
-        return **LIterator;
+        return(**LIterator);
     }
 }

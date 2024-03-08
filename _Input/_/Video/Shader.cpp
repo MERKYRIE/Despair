@@ -25,7 +25,7 @@ namespace NBlindness::NVideo
     }
     std::uint32_t CShader::BIdentifier()
     {
-        return FIdentifier;
+        return(FIdentifier);
     }
 
     CShader::~CShader()

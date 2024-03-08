@@ -30,20 +30,20 @@ namespace NBlindness::NVideo
     }
     bool CFont::operator==(const std::string& PPath) const
     {
-        return FPath == PPath;
+        return(FPath == PPath);
     }
 
     const CCharacter& CFont::OAccessDigit(char PCode) const
     {
-        return *FDigits[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('0')];
+        return(*FDigits[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('0')]);
     }
     const CCharacter& CFont::OAccessUppercase(char PCode) const
     {
-        return *FUppercases[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('A')];
+        return(*FUppercases[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('A')]);
     }
     const CCharacter& CFont::OAccessLowercase(char PCode) const
     {
-        return *FLowercases[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('a')];
+        return(*FLowercases[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('a')]);
     }
     CFont::~CFont()
     {

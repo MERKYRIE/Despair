@@ -22,12 +22,12 @@ namespace NBlindness::NVideo
     }
     bool CTexture::operator==(const std::string& PPath) const
     {
-        return FPath == PPath;
+        return(FPath == PPath);
     }
     
     std::uint32_t CTexture::OIdentifier() const
     {
-        return FIdentifier;
+        return(FIdentifier);
     }
     CTexture::~CTexture()
     {

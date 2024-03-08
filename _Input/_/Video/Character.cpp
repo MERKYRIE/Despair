@@ -22,7 +22,7 @@ namespace NBlindness::NVideo
 
     std::uint32_t CCharacter::OIdentifier() const
     {
-        return FIdentifier;
+        return(FIdentifier);
     }
     CCharacter::~CCharacter()
     {

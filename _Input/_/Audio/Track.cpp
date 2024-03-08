@@ -11,34 +11,34 @@ namespace NBlindness::NAudio
     }
     bool CTrack::operator==(const std::string& PPath) const
     {
-        return FPath == PPath;
+        return(FPath == PPath);
     }
 
     const CTrack& CTrack::OPlay() const
     {
         GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayMusic(FHandle , 0));
-        return *this;
+        return(*this);
     }
     const CTrack& CTrack::OPause() const
     {
         Mix_PauseMusic();
-        return *this;
+        return(*this);
     }
     const CTrack& CTrack::OResume() const
     {
         Mix_ResumeMusic();
-        return *this;
+        return(*this);
     }
     const CTrack& CTrack::OStop() const
     {
         Mix_HaltMusic();
-        return *this;
+        return(*this);
     }
     const CTrack& CTrack::OAccessVolume(std::uint8_t PValue) const
     {
         Mix_VolumeMusic(PValue);
         GDebug.OError(Mix_VolumeMusic(SDL_QUERY) != PValue);
-        return *this;
+        return(*this);
     }
     CTrack::~CTrack()
     {

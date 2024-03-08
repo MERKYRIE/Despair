@@ -33,5 +33,5 @@ std::int32_t main(std::int32_t , char**)
     NBlindness::GVideo.BDeinitialize();
     NBlindness::GAudio.BDeinitialize();
     SDL_Quit();
-    return 0;
+    return(0);
 }

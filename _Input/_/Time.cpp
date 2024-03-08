@@ -11,10 +11,10 @@ namespace NBlindness
 
     std::uint32_t CTime::OAbsolute()
     {
-        return FAbsolute;
+        return(FAbsolute);
     }
     std::uint32_t CTime::ORelative()
     {
-        return FRelative;
+        return(FRelative);
     }
 }

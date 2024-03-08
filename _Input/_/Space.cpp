@@ -31,11 +31,54 @@ namespace NBlindness
         FSizeX = 100;
         FSizeY = 100;
         FSizeZ = 3;
-        FRotation = 0.0F;
-        IReevaluateDirection();
         FTranslationX = 0.5F;
         FTranslationY = 0.5F;
         FTranslationZ = 1.5F;
+        FRotation = 0.0F;
+        IReevaluateDirection();
+        FVertexArrayObjectNegativeX.reset
+        (
+            new NSpace::CVertexArrayObject
+            {
+                {0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
+            }
+        );
+        FVertexArrayObjectPositiveX.reset
+        (
+            new NSpace::CVertexArrayObject
+            {
+                {1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
+            }
+        );
+        FVertexArrayObjectNegativeY.reset
+        (
+            new NSpace::CVertexArrayObject
+            {
+                {1.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
+            }
+        );
+        FVertexArrayObjectPositiveY.reset
+        (
+            new NSpace::CVertexArrayObject
+            {
+                {0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
+            }
+        );
+        FVertexArrayObjectNegativeZ.reset
+        (
+            new NSpace::CVertexArrayObject
+            {
+                {0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
+            }
+        );
+        FVertexArrayObjectPositiveZ.reset
+        (
+            new NSpace::CVertexArrayObject
+            {
+                {0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
+            }
+        );
+        FVision = 10;
         std::uint32_t LTextureNegativeX{GVideo.OAccessTexture("\\twall2_5.png").OIdentifier()};
         std::uint32_t LTexturePositiveX{GVideo.OAccessTexture("\\twall2_6.png").OIdentifier()};
         std::uint32_t LTextureNegativeY{GVideo.OAccessTexture("\\twall5_3.png").OIdentifier()};
@@ -45,13 +88,13 @@ namespace NBlindness
         FMatrix.resize(FSizeX);
         for(std::intmax_t LX{0} ; LX < FSizeX ; LX++)
         {
+            std::cout << "P" << LX << "\n";
             FMatrix[LX].resize(FSizeY);
             for(std::intmax_t LY{0} ; LY < FSizeY ; LY++)
             {
                 FMatrix[LX][LY].resize(FSizeZ);
                 for(std::intmax_t LZ{0} ; LZ < FSizeZ ; LZ++)
                 {
-                    std::cout << "Partition - " << LX << "." << LY << "." << LZ << "\n";
                     FMatrix[LX][LY][LZ].reset(new NSpace::CPartition{LTextureNegativeX , LTexturePositiveX , LTextureNegativeY , LTexturePositiveY , LTextureNegativeZ , LTexturePositiveZ});
                 }
                 FMatrix[LX][LY].shrink_to_fit();
@@ -61,11 +104,11 @@ namespace NBlindness
         FMatrix.shrink_to_fit();
         for(FPositionZ = 0 ; FPositionZ < FSizeZ ; FPositionZ++)
         {
+            std::cout << "T" << FPositionZ << "\n";
             IReevaluatePositionXY();
             std::intmax_t LGenerated{0};
             for(std::intmax_t LIteration{0} ; LIteration <= 1000 ; LIteration += LGenerated)
             {
-                std::cout << "Transition - " << FPositionZ << "." << LIteration << "\n";
                 std::random_device LGenerator;
                 std::uniform_int_distribution<std::intmax_t> LDistance{3 , 5};
                 std::intmax_t LRequested{LDistance(LGenerator)};
@@ -173,7 +216,7 @@ namespace NBlindness
         IReevaluatePositionZ();
         for(std::intmax_t LIteration{0} ; LIteration <= 9 ; LIteration++)
         {
-            std::cout << "Descent - " << LIteration << "\n";
+            std::cout << "D" << LIteration << "\n";
             bool LGenerated{false};
             while(!LGenerated)
             {
@@ -194,7 +237,7 @@ namespace NBlindness
         IReevaluatePositionZ();
         for(std::intmax_t LIteration{0} ; LIteration <= 9 ; LIteration++)
         {
-            std::cout << "Ascent - " << LIteration << "\n";
+            std::cout << "A" << LIteration << "\n";
             bool LGenerated{false};
             while(!LGenerated)
             {
@@ -214,48 +257,6 @@ namespace NBlindness
         }
         IReevaluatePositionXY();
         IReevaluatePositionZ();
-        FVertexArrayObjectNegativeX.reset
-        (
-            new NSpace::CVertexArrayObject
-            {
-                {0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
-            }
-        );
-        FVertexArrayObjectPositiveX.reset
-        (
-            new NSpace::CVertexArrayObject
-            {
-                {1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
-            }
-        );
-        FVertexArrayObjectNegativeY.reset
-        (
-            new NSpace::CVertexArrayObject
-            {
-                {1.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
-            }
-        );
-        FVertexArrayObjectPositiveY.reset
-        (
-            new NSpace::CVertexArrayObject
-            {
-                {0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
-            }
-        );
-        FVertexArrayObjectNegativeZ.reset
-        (
-            new NSpace::CVertexArrayObject
-            {
-                {0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
-            }
-        );
-        FVertexArrayObjectPositiveZ.reset
-        (
-            new NSpace::CVertexArrayObject
-            {
-                {0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
-            }
-        );
         GAudio.OAccessTrack("\\Mountain Realm - Grayshadow Ruins.mp3").OAccessVolume(16).OPlay();
     }
     void CSpace::BUpdate()
@@ -328,27 +329,27 @@ namespace NBlindness
         glUniformMatrix4fv(4 , 1 , GL_FALSE , &LView[0][0]);
         for
         (
-            std::intmax_t LX{std::clamp<std::intmax_t>(FPositionX - 10 , 0 , FSizeX - 1)}
+            std::intmax_t LX{std::clamp<std::intmax_t>(FPositionX - FVision , 0 , FSizeX - 1)}
             ;
-            LX < std::clamp<std::intmax_t>(FPositionX + 10 , 0 , FSizeX - 1)
+            LX < std::clamp<std::intmax_t>(FPositionX + FVision , 0 , FSizeX - 1)
             ;
             LX++
         )
         {
             for
             (
-                std::intmax_t LY{std::clamp<std::intmax_t>(FPositionY - 10 , 0 , FSizeY - 1)}
+                std::intmax_t LY{std::clamp<std::intmax_t>(FPositionY - FVision , 0 , FSizeY - 1)}
                 ;
-                LY < std::clamp<std::intmax_t>(FPositionY + 10 , 0 , FSizeY - 1)
+                LY < std::clamp<std::intmax_t>(FPositionY + FVision , 0 , FSizeY - 1)
                 ;
                 LY++
             )
             {
                 for
                 (
-                    std::intmax_t LZ{std::clamp<std::intmax_t>(FPositionZ - 10 , 0 , FSizeZ - 1)}
+                    std::intmax_t LZ{std::clamp<std::intmax_t>(FPositionZ - FVision , 0 , FSizeZ - 1)}
                     ;
-                    LZ < std::clamp<std::intmax_t>(FPositionZ + 10 , 0 , FSizeZ - 1)
+                    LZ < std::clamp<std::intmax_t>(FPositionZ + FVision , 0 , FSizeZ - 1)
                     ;
                     LZ++
                 )
@@ -373,56 +374,53 @@ namespace NBlindness
         FMatrix.clear();
     }
 
-    std::intmax_t CSpace::DSizeX()
-    {
-        return FSizeX;
-    }
-    std::intmax_t CSpace::DSizeY()
-    {
-        return FSizeX;
-    }
-    std::intmax_t CSpace::DSizeZ()
-    {
-        return FSizeX;
-    }
-    std::intmax_t CSpace::DPositionX()
-    {
-        return FPositionX;
-    }
-    std::intmax_t CSpace::DPositionY()
-    {
-        return FPositionY;
-    }
-    std::intmax_t CSpace::DPositionZ()
-    {
-        return FPositionZ;
-    }
-    const std::shared_ptr<NSpace::CVertexArrayObject>& CSpace::DVertexArrayObjectNegativeX()
-    {
-        return FVertexArrayObjectNegativeX;
-    }
-    const std::shared_ptr<NSpace::CVertexArrayObject>& CSpace::DVertexArrayObjectPositiveX()
-    {
-        return FVertexArrayObjectPositiveX;
-    }
-    const std::shared_ptr<NSpace::CVertexArrayObject>& CSpace::DVertexArrayObjectNegativeY()
-    {
-        return FVertexArrayObjectNegativeY;
-    }
-    const std::shared_ptr<NSpace::CVertexArrayObject>& CSpace::DVertexArrayObjectPositiveY()
-    {
-        return FVertexArrayObjectPositiveY;
-    }
-    const std::shared_ptr<NSpace::CVertexArrayObject>& CSpace::DVertexArrayObjectNegativeZ()
-    {
-        return FVertexArrayObjectNegativeZ;
-    }
-    const std::shared_ptr<NSpace::CVertexArrayObject>& CSpace::DVertexArrayObjectPositiveZ()
-    {
-        return FVertexArrayObjectPositiveZ;
-    }
     NSpace::CPartition& CSpace::DAccessPartition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
-        return *FMatrix[PX][PY][PZ];
+        return(*FMatrix[PX][PY][PZ]);
+    }
+    bool CSpace::DDoesPartitionExist(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
+    {
+        return
+        (
+            PX == std::clamp<std::intmax_t>(PX , 0 , FSizeX - 1) &&
+            PY == std::clamp<std::intmax_t>(PY , 0 , FSizeY - 1) &&
+            PZ == std::clamp<std::intmax_t>(PZ , 0 , FSizeZ - 1)
+        );
+    }
+    std::intmax_t CSpace::DEvaluateOffsetX(std::intmax_t PCoordinate)
+    {
+        return(PCoordinate - FPositionX);
+    }
+    std::intmax_t CSpace::DEvaluateOffsetY(std::intmax_t PCoordinate)
+    {
+        return(PCoordinate - FPositionY);
+    }
+    std::intmax_t CSpace::DEvaluateOffsetZ(std::intmax_t PCoordinate)
+    {
+        return(PCoordinate - FPositionZ);
+    }
+    void CSpace::DBindVertexArrayObjectNegativeX()
+    {
+        glBindVertexArray(FVertexArrayObjectNegativeX->OIdentifier());
+    }
+    void CSpace::DBindVertexArrayObjectPositiveX()
+    {
+        glBindVertexArray(FVertexArrayObjectPositiveX->OIdentifier());
+    }
+    void CSpace::DBindVertexArrayObjectNegativeY()
+    {
+        glBindVertexArray(FVertexArrayObjectNegativeY->OIdentifier());
+    }
+    void CSpace::DBindVertexArrayObjectPositiveY()
+    {
+        glBindVertexArray(FVertexArrayObjectPositiveY->OIdentifier());
+    }
+    void CSpace::DBindVertexArrayObjectNegativeZ()
+    {
+        glBindVertexArray(FVertexArrayObjectNegativeZ->OIdentifier());
+    }
+    void CSpace::DBindVertexArrayObjectPositiveZ()
+    {
+        glBindVertexArray(FVertexArrayObjectPositiveZ->OIdentifier());
     }
 }
