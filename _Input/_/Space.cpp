@@ -5,7 +5,6 @@
 #include"Debug.hpp"
 #include"Input.hpp"
 #include"Video.hpp"
-#include"Video\\Texture.hpp"
 #include"Space\\Partition.hpp"
 #include"Space\\VertexArrayObject.hpp"
 
@@ -79,12 +78,6 @@ namespace NBlindness
             }
         );
         FVision = 10;
-        std::uint32_t LTextureNegativeX{GVideo.OAccessTexture("\\twall2_5.png").OIdentifier()};
-        std::uint32_t LTexturePositiveX{GVideo.OAccessTexture("\\twall2_6.png").OIdentifier()};
-        std::uint32_t LTextureNegativeY{GVideo.OAccessTexture("\\twall5_3.png").OIdentifier()};
-        std::uint32_t LTexturePositiveY{GVideo.OAccessTexture("\\uwall1_2.png").OIdentifier()};
-        std::uint32_t LTextureNegativeZ{GVideo.OAccessTexture("\\sfloor4_5.png").OIdentifier()};
-        std::uint32_t LTexturePositiveZ{GVideo.OAccessTexture("\\plat_top1.png").OIdentifier()};
         FMatrix.resize(FSizeX);
         for(std::intmax_t LX{0} ; LX < FSizeX ; LX++)
         {
@@ -95,7 +88,7 @@ namespace NBlindness
                 FMatrix[LX][LY].resize(FSizeZ);
                 for(std::intmax_t LZ{0} ; LZ < FSizeZ ; LZ++)
                 {
-                    FMatrix[LX][LY][LZ].reset(new NSpace::CPartition{LTextureNegativeX , LTexturePositiveX , LTextureNegativeY , LTexturePositiveY , LTextureNegativeZ , LTexturePositiveZ});
+                    FMatrix[LX][LY][LZ].reset(new NSpace::CPartition);
                 }
                 FMatrix[LX][LY].shrink_to_fit();
             }

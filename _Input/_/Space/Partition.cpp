@@ -4,25 +4,19 @@
 
 #include"Debug.hpp"
 #include"Space.hpp"
+#include"Video.hpp"
+#include"Video\\Texture.hpp"
 
 namespace NBlindness::NSpace
 {
-    CPartition::CPartition
-    (
-        std::uint32_t PTextureNegativeX ,
-        std::uint32_t PTexturePositiveX ,
-        std::uint32_t PTextureNegativeY ,
-        std::uint32_t PTexturePositiveY ,
-        std::uint32_t PTextureNegativeZ ,
-        std::uint32_t PTexturePositiveZ
-    )
+    CPartition::CPartition()
     {
-        FTextureNegativeX = PTextureNegativeX;
-        FTexturePositiveX = PTexturePositiveX;
-        FTextureNegativeY = PTextureNegativeY;
-        FTexturePositiveY = PTexturePositiveY;
-        FTextureNegativeZ = PTextureNegativeZ;
-        FTexturePositiveZ = PTexturePositiveZ;
+        FTextureNegativeX = GVideo.OAccessRandomTexture().OIdentifier();
+        FTexturePositiveX = GVideo.OAccessRandomTexture().OIdentifier();
+        FTextureNegativeY = GVideo.OAccessRandomTexture().OIdentifier();
+        FTexturePositiveY = GVideo.OAccessRandomTexture().OIdentifier();
+        FTextureNegativeZ = GVideo.OAccessRandomTexture().OIdentifier();
+        FTexturePositiveZ = GVideo.OAccessRandomTexture().OIdentifier();
     }
     bool CPartition::BCanGenerateTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {

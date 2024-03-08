@@ -33,7 +33,8 @@ namespace NBlindness
         public : float ORatio();
         public : float OInversedRatio();
         public : const NVideo::CFont& OAccessFont(const std::string& PPath);
-        public : const NVideo::CTexture& OAccessTexture(const std::string& PPath);
+        public : const NVideo::CTexture& OAccessSpecificTexture(const std::string& PPath);
+        public : const NVideo::CTexture& OAccessRandomTexture();
     }
     GVideo;
 }

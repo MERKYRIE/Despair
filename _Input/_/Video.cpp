@@ -98,7 +98,7 @@ namespace NBlindness
         GDebug.OError(LIterator == FFonts.end());
         return(**LIterator);
     }
-    const NVideo::CTexture& CVideo::OAccessTexture(const std::string& PPath)
+    const NVideo::CTexture& CVideo::OAccessSpecificTexture(const std::string& PPath)
     {
         std::vector<std::shared_ptr<NVideo::CTexture>>::iterator LIterator
         {
@@ -106,5 +106,11 @@ namespace NBlindness
         };
         GDebug.OError(LIterator == FTextures.end());
         return(**LIterator);
+    }
+    const NVideo::CTexture& CVideo::OAccessRandomTexture()
+    {
+        std::random_device LGenerator;
+        std::uniform_int_distribution<std::uintmax_t> LDistributor{0 , FTextures.size() - 1};
+        return(*FTextures[LDistributor(LGenerator)]);
     }
 }
