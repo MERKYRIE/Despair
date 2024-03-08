@@ -32,7 +32,7 @@ namespace NBlindness::NSpace
     {
         switch(GSpace.DEvaluateOffsetX(PX))
         {
-            case -1:
+            case(-1):
                 if(!FTextureNegativeX && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX)
                 {
                     return(false);
@@ -40,7 +40,7 @@ namespace NBlindness::NSpace
                 FTextureNegativeX = 0;
                 GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX = 0;
             return(true);
-            case +1:
+            case(+1):
                 if(!FTexturePositiveX && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeX)
                 {
                     return(false);
@@ -51,7 +51,7 @@ namespace NBlindness::NSpace
         }
         switch(GSpace.DEvaluateOffsetY(PY))
         {
-            case -1:
+            case(-1):
                 if(!FTextureNegativeY && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveY)
                 {
                     return(false);
@@ -59,7 +59,7 @@ namespace NBlindness::NSpace
                 FTextureNegativeY = 0;
                 GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveY = 0;
             return(true);
-            case +1:
+            case(+1):
                 if(!FTexturePositiveY && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeY)
                 {
                     return(false);
@@ -87,7 +87,7 @@ namespace NBlindness::NSpace
     {
         switch(GSpace.DEvaluateOffsetZ(PZ))
         {
-            case -1:
+            case(-1):
                 if(!FTextureNegativeZ && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveZ)
                 {
                     return(false);
@@ -95,7 +95,7 @@ namespace NBlindness::NSpace
                 FTextureNegativeZ = 0;
                 GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveZ = 0;
             return(true);
-            case +1:
+            case(+1):
                 if(!FTexturePositiveZ && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeZ)
                 {
                     return(false);
@@ -154,28 +154,28 @@ namespace NBlindness::NSpace
         }
         switch(GSpace.DEvaluateOffsetX(PX))
         {
-            case -1:
+            case(-1):
                 return(!(!FTextureNegativeX && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveX));
             break;
-            case +1:
+            case(+1):
                 return(!(!FTexturePositiveX && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeX));
             break;
         }
         switch(GSpace.DEvaluateOffsetY(PY))
         {
-            case -1:
+            case(-1):
                 return(!(!FTextureNegativeY && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveY));
             break;
-            case +1:
+            case(+1):
                 return(!(!FTexturePositiveY && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeY));
             break;
         }
         switch(GSpace.DEvaluateOffsetZ(PZ))
         {
-            case -1:
+            case(-1):
                 return(!(!FTextureNegativeZ && !GSpace.DAccessPartition(PX , PY , PZ).FTexturePositiveZ));
             break;
-            case +1:
+            case(+1):
                 return(!(!FTexturePositiveZ && !GSpace.DAccessPartition(PX , PY , PZ).FTextureNegativeZ));
             break;
         }

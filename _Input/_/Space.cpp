@@ -115,7 +115,7 @@ namespace NBlindness
                 std::uniform_int_distribution<std::intmax_t> LDirection{0 , 3};
                 switch(LDirection(LGenerator))
                 {
-                    case 0:
+                    case(0):
                         LGenerated = 0;
                         while(LGenerated < LRequested){
                             if
@@ -138,7 +138,7 @@ namespace NBlindness
                             }
                         }
                     break;
-                    case 1:
+                    case(1):
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
@@ -162,7 +162,7 @@ namespace NBlindness
                             }
                         }
                     break;
-                    case 2:
+                    case(2):
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
@@ -186,7 +186,7 @@ namespace NBlindness
                             }
                         }
                     break;
-                    case 3:
+                    case(3):
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
