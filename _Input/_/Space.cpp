@@ -10,31 +10,27 @@
 
 namespace NBlindness
 {
-    void CSpace::IReevaluateDirection()
-    {
-        FDirectionX = static_cast<std::int8_t>(std::round(+std::cos((90.0F + FRotation) * std::numbers::pi_v<float> / 180.0F)));
-        FDirectionY = static_cast<std::int8_t>(std::round(+std::sin((90.0F + FRotation) * std::numbers::pi_v<float> / 180.0F)));
-    }
     void CSpace::IReevaluatePositionXY()
     {
-        FPositionX = static_cast<std::intmax_t>(std::round(FTranslationX - 0.5F));
-        FPositionY = static_cast<std::intmax_t>(std::round(FTranslationY - 0.5F));
+        FPositionX = FSizeX / 2;
+        FPositionY = FSizeY / 2;
     }
     void CSpace::IReevaluatePositionZ()
     {
-        FPositionZ = static_cast<std::intmax_t>(std::round(FTranslationZ - 0.5F));
+        FPositionZ = FSizeZ / 2;
     }
-    
+
     void CSpace::BInitialize()
     {
         FSizeX = 100;
         FSizeY = 100;
         FSizeZ = 3;
-        FTranslationX = 0.5F;
-        FTranslationY = 0.5F;
-        FTranslationZ = 1.5F;
-        FRotation = 0.0F;
-        IReevaluateDirection();
+        FPositionX = FSizeX / 2;
+        FPositionY = FSizeY / 2;
+        FPositionZ = FSizeZ / 2;
+        FDirectionX = 0;
+        FDirectionY = 1;
+        FVision = 10;
         FVertexArrayObjectNegativeX.reset
         (
             new NSpace::CVertexArrayObject
@@ -77,7 +73,6 @@ namespace NBlindness
                 {0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
             }
         );
-        FVision = 10;
         FMatrix.resize(FSizeX);
         for(std::intmax_t LX{0} ; LX < FSizeX ; LX++)
         {
@@ -110,19 +105,11 @@ namespace NBlindness
                 {
                     case(0):
                         LGenerated = 0;
-                        while(LGenerated < LRequested){
-                            if
-                            (
-                                FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition
-                                (
-                                    FPositionX + 1 , FPositionY , FPositionZ
-                                )
-                            )
+                        while(LGenerated < LRequested)
+                        {
+                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition
-                                (
-                                    FPositionX + 1 , FPositionY , FPositionZ
-                                );
+                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition(FPositionX + 1 , FPositionY , FPositionZ);
                                 FPositionX++;
                             }
                             else
@@ -135,18 +122,9 @@ namespace NBlindness
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if
-                            (
-                                FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition
-                                (
-                                    FPositionX , FPositionY + 1 , FPositionZ
-                                )
-                            )
+                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition
-                                (
-                                    FPositionX , FPositionY + 1 , FPositionZ
-                                );
+                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition(FPositionX , FPositionY + 1 , FPositionZ);
                                 FPositionY++;
                             }
                             else
@@ -159,18 +137,9 @@ namespace NBlindness
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if
-                            (
-                                FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition
-                                (
-                                    FPositionX - 1 , FPositionY , FPositionZ
-                                )
-                            )
+                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition
-                                (
-                                    FPositionX - 1 , FPositionY , FPositionZ
-                                );
+                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition(FPositionX - 1 , FPositionY , FPositionZ);
                                 FPositionX--;
                             }
                             else
@@ -183,18 +152,9 @@ namespace NBlindness
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if
-                            (
-                                FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition
-                                (
-                                    FPositionX , FPositionY - 1 , FPositionZ
-                                )
-                            )
+                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition
-                                (
-                                    FPositionX , FPositionY - 1 , FPositionZ
-                                );
+                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition(FPositionX , FPositionY - 1 , FPositionZ);
                                 FPositionY--;
                             }
                             else
@@ -220,10 +180,7 @@ namespace NBlindness
                 FPositionY = LY(LGenerator);
                 if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateShaft(FPositionX , FPositionY , FPositionZ - 1))
                 {
-                    LGenerated = FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewShaft
-                    (
-                        FPositionX , FPositionY , FPositionZ - 1
-                    );
+                    LGenerated = FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewShaft(FPositionX , FPositionY , FPositionZ - 1);
                 }
             }
         }
@@ -241,10 +198,7 @@ namespace NBlindness
                 FPositionY = LY(LGenerator);
                 if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateShaft(FPositionX , FPositionY , FPositionZ + 1))
                 {
-                    LGenerated = FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewShaft
-                    (
-                        FPositionX , FPositionY , FPositionZ + 1
-                    );
+                    LGenerated = FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewShaft(FPositionX , FPositionY , FPositionZ + 1);
                 }
             }
         }
@@ -256,59 +210,41 @@ namespace NBlindness
     {
         if(GInput.OIsKeyPressed(SDL_SCANCODE_A))
         {
-            FRotation += 90.0F;
-            if(FRotation >= 360.0F)
+            std::swap(FDirectionX , FDirectionY);
+            if(FDirectionX)
             {
-                FRotation -= 360.0F;
+                FDirectionX *= -1;
             }
-            IReevaluateDirection();
         }
         if(GInput.OIsKeyPressed(SDL_SCANCODE_D))
         {
-            FRotation -= 90.0F;
-            if(FRotation < 0.0F)
+            std::swap(FDirectionX , FDirectionY);
+            if(FDirectionY)
             {
-                FRotation += 360.0F;
+                FDirectionY *= -1;
             }
-            IReevaluateDirection();
         }
         if(GInput.OIsKeyPressed(SDL_SCANCODE_S))
         {
-            if
-            (
-                !FMatrix[FPositionX][FPositionY][FPositionZ]->BIsCollisionDetected
-                (
-                    FPositionX - FDirectionX , FPositionY - FDirectionY , FPositionZ
-                )
-            )
+            if(!FMatrix[FPositionX][FPositionY][FPositionZ]->BIsCollisionDetected(FPositionX - FDirectionX , FPositionY - FDirectionY , FPositionZ))
             {
-                FTranslationX -= FDirectionX;
-                FTranslationY -= FDirectionY;
-                IReevaluatePositionXY();
+                FPositionX -= FDirectionX;
+                FPositionY -= FDirectionY;
                 if(!FMatrix[FPositionX][FPositionY][FPositionZ]->BIsCollisionDetected(FPositionX , FPositionY , FPositionZ - 1))
                 {
-                    FTranslationZ--;
-                    IReevaluatePositionZ();
+                    FPositionZ--;
                 }
             }
         }
         if(GInput.OIsKeyPressed(SDL_SCANCODE_W))
         {
-            if
-            (
-                !FMatrix[FPositionX][FPositionY][FPositionZ]->BIsCollisionDetected
-                (
-                    FPositionX + FDirectionX , FPositionY + FDirectionY , FPositionZ
-                )
-            )
+            if(!FMatrix[FPositionX][FPositionY][FPositionZ]->BIsCollisionDetected(FPositionX + FDirectionX , FPositionY + FDirectionY , FPositionZ))
             {
-                FTranslationX += FDirectionX;
-                FTranslationY += FDirectionY;
-                IReevaluatePositionXY();
+                FPositionX += FDirectionX;
+                FPositionY += FDirectionY;
                 if(!FMatrix[FPositionX][FPositionY][FPositionZ]->BIsCollisionDetected(FPositionX , FPositionY , FPositionZ - 1))
                 {
-                    FTranslationZ--;
-                    IReevaluatePositionZ();
+                    FPositionZ--;
                 }
             }
         }
@@ -317,14 +253,25 @@ namespace NBlindness
         glUniformMatrix4fv(3 , 1 , GL_FALSE , &LProjection[0][0]);
         glm::mat4 LView{1.0F};
         LView = glm::rotate(LView , glm::radians(-90.0F) , glm::vec3{1.0F , 0.0F , 0.0F});
-        LView = glm::rotate(LView , glm::radians(-FRotation) , glm::vec3{0.0F , 0.0F , 1.0F});
-        LView = glm::translate(LView , -glm::vec3{FTranslationX , FTranslationY , FTranslationZ});
+        LView = glm::rotate
+        (
+            LView ,
+            glm::radians
+            (
+                static_cast<float>
+                (
+                    -std::round(std::acos(FDirectionX ? FDirectionX : 1) * 180.0F / std::numbers::pi_v<float> + std::asin(FDirectionY ? FDirectionY : 0) * 180.0F / std::numbers::pi_v<float> - 90.0F)
+                )
+            ) ,
+            glm::vec3{0.0F , 0.0F , 1.0F}
+        );
+        LView = glm::translate(LView , -glm::vec3{FPositionX + 0.5F , FPositionY + 0.5F , FPositionZ + 0.5F});
         glUniformMatrix4fv(4 , 1 , GL_FALSE , &LView[0][0]);
         for
         (
             std::intmax_t LX{std::clamp<std::intmax_t>(FPositionX - FVision , 0 , FSizeX - 1)}
             ;
-            LX < std::clamp<std::intmax_t>(FPositionX + FVision , 0 , FSizeX - 1)
+            LX <= std::clamp<std::intmax_t>(FPositionX + FVision , 0 , FSizeX - 1)
             ;
             LX++
         )
@@ -333,7 +280,7 @@ namespace NBlindness
             (
                 std::intmax_t LY{std::clamp<std::intmax_t>(FPositionY - FVision , 0 , FSizeY - 1)}
                 ;
-                LY < std::clamp<std::intmax_t>(FPositionY + FVision , 0 , FSizeY - 1)
+                LY <= std::clamp<std::intmax_t>(FPositionY + FVision , 0 , FSizeY - 1)
                 ;
                 LY++
             )
@@ -342,7 +289,7 @@ namespace NBlindness
                 (
                     std::intmax_t LZ{std::clamp<std::intmax_t>(FPositionZ - FVision , 0 , FSizeZ - 1)}
                     ;
-                    LZ < std::clamp<std::intmax_t>(FPositionZ + FVision , 0 , FSizeZ - 1)
+                    LZ <= std::clamp<std::intmax_t>(FPositionZ + FVision , 0 , FSizeZ - 1)
                     ;
                     LZ++
                 )
