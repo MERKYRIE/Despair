@@ -1,6 +1,6 @@
 #include"Time.hpp"
 
-namespace NBlindness
+namespace NDespair
 {
     void CTime::BUpdate()
     {

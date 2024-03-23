@@ -2,7 +2,7 @@
 
 #include"Debug.hpp"
 
-namespace NBlindness::NVideo
+namespace NDespair::NVideo
 {
     CShader::CShader(const std::string& PPath , std::uint32_t PType)
     {

@@ -1,6 +1,6 @@
 #include"Input.hpp"
 
-namespace NBlindness
+namespace NDespair
 {
     void CInput::BUpdate()
     {

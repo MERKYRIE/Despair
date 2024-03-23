@@ -2,7 +2,7 @@
 
 #include"Debug.hpp"
 
-namespace NBlindness::NVideo
+namespace NDespair::NVideo
 {
     CTexture::CTexture(const std::string& PPath)
     {

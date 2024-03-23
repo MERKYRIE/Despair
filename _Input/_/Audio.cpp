@@ -4,7 +4,7 @@
 #include"Audio\\Sound.hpp"
 #include"Audio\\Track.hpp"
 
-namespace NBlindness
+namespace NDespair
 {
     void CAudio::BInitialize()
     {

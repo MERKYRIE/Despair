@@ -7,7 +7,7 @@
 
 #define GLAD_GL_IMPLEMENTATION
 
-#include"Blindness.hpp"
+#include"Despair.hpp"
 #include"Audio.hpp"
 #include"Debug.hpp"
 #include"Input.hpp"
@@ -17,21 +17,21 @@
 
 std::int32_t main(std::int32_t , char**)
 {
-    NBlindness::GDebug.OSimpleDirectMediaLayerCodeError(SDL_Init(SDL_INIT_EVERYTHING));
-    NBlindness::GAudio.BInitialize();
-    NBlindness::GVideo.BInitialize();
-    NBlindness::GSpace.BInitialize();
-    while(!NBlindness::GInput.OIsKeyHeld(SDL_SCANCODE_ESCAPE))
+    NDespair::GDebug.OSimpleDirectMediaLayerCodeError(SDL_Init(SDL_INIT_EVERYTHING));
+    NDespair::GAudio.BInitialize();
+    NDespair::GVideo.BInitialize();
+    NDespair::GSpace.BInitialize();
+    while(!NDespair::GInput.OIsKeyHeld(SDL_SCANCODE_ESCAPE))
     {
-        NBlindness::GInput.BUpdate();
-        NBlindness::GTime.BUpdate();
-        NBlindness::GVideo.BPreupdate();
-        NBlindness::GSpace.BUpdate();
-        NBlindness::GVideo.BPostupdate();
+        NDespair::GInput.BUpdate();
+        NDespair::GTime.BUpdate();
+        NDespair::GVideo.BPreupdate();
+        NDespair::GSpace.BUpdate();
+        NDespair::GVideo.BPostupdate();
     };
-    NBlindness::GSpace.BDeinitialize();
-    NBlindness::GVideo.BDeinitialize();
-    NBlindness::GAudio.BDeinitialize();
+    NDespair::GSpace.BDeinitialize();
+    NDespair::GVideo.BDeinitialize();
+    NDespair::GAudio.BDeinitialize();
     SDL_Quit();
     return(0);
 }

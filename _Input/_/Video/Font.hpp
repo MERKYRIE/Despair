@@ -1,8 +1,8 @@
 #pragma once
 
-#include"Blindness.hpp"
+#include"Despair.hpp"
 
-namespace NBlindness::NVideo
+namespace NDespair::NVideo
 {
     class CCharacter;
     

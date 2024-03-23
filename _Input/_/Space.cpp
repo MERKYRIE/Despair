@@ -8,7 +8,7 @@
 #include"Space\\Partition.hpp"
 #include"Space\\VertexArrayObject.hpp"
 
-namespace NBlindness
+namespace NDespair
 {
     void CSpace::IReevaluatePositionXY()
     {

@@ -1,8 +1,8 @@
 #pragma once
 
-#include"Blindness.hpp"
+#include"Despair.hpp"
 
-namespace NBlindness
+namespace NDespair
 {
     inline class CInput
     {

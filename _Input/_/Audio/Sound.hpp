@@ -1,8 +1,8 @@
 #pragma once
 
-#include"Blindness.hpp"
+#include"Despair.hpp"
 
-namespace NBlindness::NAudio
+namespace NDespair::NAudio
 {
     class CSound
     {

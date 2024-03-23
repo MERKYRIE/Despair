@@ -5,14 +5,14 @@
 #include"Video\\Shader.hpp"
 #include"Video\\Texture.hpp"
 
-namespace NBlindness
+namespace NDespair
 {
     void CVideo::BInitialize()
     {
         GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 4));
         GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 6));
         GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK , SDL_GL_CONTEXT_PROFILE_CORE));
-        GDebug.OSimpleDirectMediaLayerHandleError(FWindow = SDL_CreateWindow("Blindness" , 0 , 0 , 1600 , 900 , SDL_WINDOW_OPENGL));
+        GDebug.OSimpleDirectMediaLayerHandleError(FWindow = SDL_CreateWindow("Despair" , 0 , 0 , 1600 , 900 , SDL_WINDOW_OPENGL));
         GDebug.OSimpleDirectMediaLayerHandleError(FContext = SDL_GL_CreateContext(FWindow));
         GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetSwapInterval(0));
         SDL_DisplayMode LDisplayMode;

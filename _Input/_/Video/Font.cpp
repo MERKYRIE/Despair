@@ -4,7 +4,7 @@
 
 #include"Debug.hpp"
 
-namespace NBlindness::NVideo
+namespace NDespair::NVideo
 {
     CFont::CFont(const std::string& PPath)
     {

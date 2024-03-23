@@ -5,7 +5,7 @@
 
 #include"Debug.hpp"
 
-namespace NBlindness::NSpace
+namespace NDespair::NSpace
 {
     CVertexArrayObject::CVertexArrayObject(const std::array<float , 120>& PVertices , const std::array<std::uint32_t , 36>& PElements)
     {
