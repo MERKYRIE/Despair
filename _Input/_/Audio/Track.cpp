@@ -2,46 +2,65 @@
 
 #include"Debug.hpp"
 
-namespace NDespair::NAudio
-{
-    CTrack::CTrack(const std::string& PPath)
-    {
-        FPath = PPath.substr(PPath.find('\\'));
-        GDebug.OSimpleDirectMediaLayerHandleError(FHandle = Mix_LoadMUS(PPath.c_str()));
-    }
-    bool CTrack::operator==(const std::string& PPath) const
-    {
-        return(FPath == PPath);
-    }
+#define _PSlot (*_GSlot)
 
-    const CTrack& CTrack::OPlay() const
+namespace NDespair::NAudio::NTrack
+{
+    struct SSlot
     {
-        GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayMusic(FHandle , 0));
-        return(*this);
+        std::string _IPath;
+        Mix_Music* _IHandle;
+    };
+
+    SSlot** _GSlot;
+    SSlot** _GReserve;
+
+    void FSlot(SSlot** _ASlot)
+    {
+        _GSlot = _ASlot;
     }
-    const CTrack& CTrack::OPause() const
+    void FSave()
+    {
+        _GReserve = _GSlot;
+    }
+    void FLoad()
+    {
+        _GSlot = _GReserve;
+    }
+    void FConstruct(const std::string& _APath)
+    {
+        _PSlot = new SSlot;
+        _PSlot->_IPath = _APath.substr(_APath.find('\\'));
+        GDebug.OSimpleDirectMediaLayerHandleError(_PSlot->_IHandle = Mix_LoadMUS(_APath.c_str()));
+    }
+    bool FEqual(const std::string& _APath)
+    {
+        return(_PSlot->_IPath == _APath);
+    }
+    void FPlay()
+    {
+        GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayMusic(_PSlot->_IHandle , 0));
+    }
+    void FPause()
     {
         Mix_PauseMusic();
-        return(*this);
     }
-    const CTrack& CTrack::OResume() const
+    void FResume()
     {
         Mix_ResumeMusic();
-        return(*this);
     }
-    const CTrack& CTrack::OStop() const
+    void FStop()
     {
         Mix_HaltMusic();
-        return(*this);
     }
-    const CTrack& CTrack::OAccessVolume(std::uint8_t PValue) const
+    void FAccessVolume(std::uint8_t _AValue)
     {
-        Mix_VolumeMusic(PValue);
-        GDebug.OError(Mix_VolumeMusic(SDL_QUERY) != PValue);
-        return(*this);
+        Mix_VolumeMusic(_AValue);
+        GDebug.OError(Mix_VolumeMusic(SDL_QUERY) != _AValue);
     }
-    CTrack::~CTrack()
+    void FDeconstruct()
     {
-        Mix_FreeMusic(FHandle);
+        Mix_FreeMusic(_PSlot->_IHandle);
+        delete _PSlot;
     }
 }

@@ -4,12 +4,6 @@
 
 namespace NDespair
 {
-    namespace NSpace
-    {
-        class CPartition;
-        class CVertexArrayObject;
-    }
-
     inline class CSpace
     {
         friend std::int32_t (::main(std::int32_t , char**));

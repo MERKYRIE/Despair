@@ -204,7 +204,9 @@ namespace NDespair
         }
         IReevaluatePositionXY();
         IReevaluatePositionZ();
-        GAudio.OAccessTrack("\\Mountain Realm - Grayshadow Ruins.mp3").OAccessVolume(16).OPlay();
+        NAudio::NTrack::FSlot(NAudio::FAccessTrack("\\Mountain Realm - Grayshadow Ruins.mp3"));
+        NAudio::NTrack::FAccessVolume(16);
+        NAudio::NTrack::FPlay();
     }
     void CSpace::BUpdate()
     {

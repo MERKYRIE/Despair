@@ -2,26 +2,10 @@
 
 #include"Despair.hpp"
 
-namespace NDespair
+namespace NDespair::NAudio
 {
-    namespace NAudio
-    {
-        class CSound;
-        class CTrack;
-    }
-    
-    inline class CAudio
-    {
-        friend std::int32_t (::main(std::int32_t , char**));
-
-        private : std::vector<std::shared_ptr<NAudio::CSound>> FSounds;
-        private : std::vector<std::shared_ptr<NAudio::CTrack>> FTracks;
-
-        private : void BInitialize();
-        private : void BDeinitialize();
-
-        public : const NAudio::CSound& OAccessSound(const std::string& PPath);
-        public : const NAudio::CTrack& OAccessTrack(const std::string& PPath);
-    }
-    GAudio;
+    void FInitialize();
+    NSound::SSlot** FAccessSound(const std::string& APath);
+    NTrack::SSlot** FAccessTrack(const std::string& APath);
+    void FDeinitialize();
 }

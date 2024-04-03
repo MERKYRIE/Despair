@@ -2,31 +2,55 @@
 
 #include"Debug.hpp"
 
-namespace NDespair::NAudio
-{
-    CSound::CSound(const std::string& PPath)
-    {
-        FPath = PPath.substr(PPath.find('\\'));
-        GDebug.OSimpleDirectMediaLayerHandleError(FHandle = Mix_LoadWAV(PPath.c_str()));
-        FChannel = Mix_AllocateChannels(SDL_QUERY);
-        GDebug.OError(Mix_AllocateChannels(Mix_AllocateChannels(SDL_QUERY) + 1) != FChannel + 1);
-    }
-    bool CSound::operator==(const std::string& PPath) const
-    {
-        return(FPath == PPath);
-    }
+#define _PSlot (*_GSlot)
 
-    const CSound& CSound::OPlay() const
+namespace NDespair::NAudio::NSound
+{
+    struct SSlot
     {
-        GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayChannel(FChannel , FHandle , 0) != FChannel);
-        return(*this);
+        std::string _IPath;
+        Mix_Chunk* _IHandle;
+        std::int32_t _IChannel;
+    };
+
+    SSlot** _GSlot;
+    SSlot** _GReserve;
+    
+    void FSlot(SSlot** _ASlot)
+    {
+        _GSlot = _ASlot;
     }
-    bool CSound::OIsPlaying() const
+    void FSave()
     {
-        return(Mix_Playing(FChannel));
+        _GReserve = _GSlot;
     }
-    CSound::~CSound()
+    void FLoad()
     {
-        Mix_FreeChunk(FHandle);
+        _GSlot = _GReserve;
+    }
+    void FConstruct(const std::string& _APath)
+    {
+        _PSlot = new SSlot;
+        _PSlot->_IPath = _APath.substr(_APath.find('\\'));
+        GDebug.OSimpleDirectMediaLayerHandleError(_PSlot->_IHandle = Mix_LoadWAV(_APath.c_str()));
+        _PSlot->_IChannel = Mix_AllocateChannels(SDL_QUERY);
+        GDebug.OError(Mix_AllocateChannels(Mix_AllocateChannels(SDL_QUERY) + 1) != _PSlot->_IChannel + 1);
+    }
+    bool FEqual(const std::string& _APath)
+    {
+        return(_PSlot->_IPath == _APath);
+    }
+    void FPlay()
+    {
+        GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayChannel(_PSlot->_IChannel , _PSlot->_IHandle , 0) != _PSlot->_IChannel);
+    }
+    bool FIsPlaying()
+    {
+        return(Mix_Playing(_PSlot->_IChannel));
+    }
+    void FDeconstruct()
+    {
+        Mix_FreeChunk(_PSlot->_IHandle);
+        delete _PSlot;
     }
 }

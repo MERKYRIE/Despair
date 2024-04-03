@@ -4,9 +4,6 @@
 
 namespace NDespair::NSpace
 {
-    class CVertexBufferObject;
-    class CElementBufferObject;
-
     class CVertexArrayObject
     {
         private : std::uint32_t FIdentifier;

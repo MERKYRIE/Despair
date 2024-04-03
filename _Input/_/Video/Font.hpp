@@ -4,8 +4,6 @@
 
 namespace NDespair::NVideo
 {
-    class CCharacter;
-    
     class CFont
     {
         friend class CVideo;

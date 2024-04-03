@@ -24,4 +24,33 @@
     #include"..\\GraphicsLibraryMathematics\\gtc\\type_ptr.hpp"
 #pragma warning(pop)
 
+namespace NDespair
+{
+    namespace NAudio
+    {
+        namespace NSound
+        {
+            struct SSlot;
+        }
+        namespace NTrack
+        {
+            struct SSlot;
+        }
+    }
+    namespace NSpace
+    {
+        class CElementBufferObject;
+        class CPartition;
+        class CVertexArrayObject;
+        class CVertexBufferObject;
+    }
+    namespace NVideo
+    {
+        class CCharacter;
+        class CFont;
+        class CShader;
+        class CTexture;
+    }
+}
+
 #pragma warning(disable : 26495)

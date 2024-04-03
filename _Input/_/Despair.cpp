@@ -18,7 +18,7 @@
 std::int32_t main(std::int32_t , char**)
 {
     NDespair::GDebug.OSimpleDirectMediaLayerCodeError(SDL_Init(SDL_INIT_EVERYTHING));
-    NDespair::GAudio.BInitialize();
+    NDespair::NAudio::FInitialize();
     NDespair::GVideo.BInitialize();
     NDespair::GSpace.BInitialize();
     while(!NDespair::GInput.OIsKeyHeld(SDL_SCANCODE_ESCAPE))
@@ -31,7 +31,7 @@ std::int32_t main(std::int32_t , char**)
     };
     NDespair::GSpace.BDeinitialize();
     NDespair::GVideo.BDeinitialize();
-    NDespair::GAudio.BDeinitialize();
+    NDespair::NAudio::FDeinitialize();
     SDL_Quit();
     return(0);
 }
