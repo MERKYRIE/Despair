@@ -2,65 +2,46 @@
 
 #include"Debug.hpp"
 
-#define _PSlot (*_GSlot)
-
-namespace NDespair::NAudio::NTrack
+namespace NDespair::NAudio
 {
-    struct SSlot
+    CTrack::CTrack(const std::string& PPath)
     {
-        std::string _IPath;
-        Mix_Music* _IHandle;
-    };
+        FPath = PPath.substr(PPath.find('\\'));
+        GDebug.OSimpleDirectMediaLayerHandleError(FHandle = Mix_LoadMUS(PPath.c_str()));
+    }
+    bool CTrack::operator==(const std::string& PPath) const
+    {
+        return(FPath == PPath);
+    }
 
-    SSlot** _GSlot;
-    SSlot** _GReserve;
-
-    void FSlot(SSlot** _ASlot)
+    const CTrack& CTrack::OPlay() const
     {
-        _GSlot = _ASlot;
+        GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayMusic(FHandle , 0));
+        return(*this);
     }
-    void FSave()
-    {
-        _GReserve = _GSlot;
-    }
-    void FLoad()
-    {
-        _GSlot = _GReserve;
-    }
-    void FConstruct(const std::string& _APath)
-    {
-        _PSlot = new SSlot;
-        _PSlot->_IPath = _APath.substr(_APath.find('\\'));
-        GDebug.OSimpleDirectMediaLayerHandleError(_PSlot->_IHandle = Mix_LoadMUS(_APath.c_str()));
-    }
-    bool FEqual(const std::string& _APath)
-    {
-        return(_PSlot->_IPath == _APath);
-    }
-    void FPlay()
-    {
-        GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayMusic(_PSlot->_IHandle , 0));
-    }
-    void FPause()
+    const CTrack& CTrack::OPause() const
     {
         Mix_PauseMusic();
+        return(*this);
     }
-    void FResume()
+    const CTrack& CTrack::OResume() const
     {
         Mix_ResumeMusic();
+        return(*this);
     }
-    void FStop()
+    const CTrack& CTrack::OStop() const
     {
         Mix_HaltMusic();
+        return(*this);
     }
-    void FAccessVolume(std::uint8_t _AValue)
+    const CTrack& CTrack::OAccessVolume(std::uint8_t PValue) const
     {
-        Mix_VolumeMusic(_AValue);
-        GDebug.OError(Mix_VolumeMusic(SDL_QUERY) != _AValue);
+        Mix_VolumeMusic(PValue);
+        GDebug.OError(Mix_VolumeMusic(SDL_QUERY) != PValue);
+        return(*this);
     }
-    void FDeconstruct()
+    CTrack::~CTrack()
     {
-        Mix_FreeMusic(_PSlot->_IHandle);
-        delete _PSlot;
+        Mix_FreeMusic(FHandle);
     }
 }

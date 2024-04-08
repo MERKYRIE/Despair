@@ -4,6 +4,13 @@
 
 namespace NDespair
 {
+    namespace NVideo
+    {
+        class CFont;
+        class CShader;
+        class CTexture;
+    }
+    
     inline class CVideo
     {
         friend std::int32_t (::main(std::int32_t , char**));
