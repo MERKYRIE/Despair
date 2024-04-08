@@ -21,16 +21,15 @@ namespace NDespair::NVideo
         std::string LLog;
         LLog.resize(LLength);
         glGetShaderInfoLog(FIdentifier , LLength , nullptr , LLog.data());
-        GDebug.OError(!LSuccess , "Open Graphics Library - " + LLog);
+        GDebug.AError(!LSuccess , "Open Graphics Library - " + LLog);
     }
-    std::uint32_t CShader::BIdentifier()
+    std::uint32_t CShader::AIdentifier()
     {
         return(FIdentifier);
     }
-
     CShader::~CShader()
     {
         glDeleteShader(FIdentifier);
-        GDebug.OOpenGraphicsLibraryError();
+        GDebug.AOpenGraphicsLibraryError();
     }
 }

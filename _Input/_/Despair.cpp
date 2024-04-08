@@ -17,21 +17,21 @@
 
 std::int32_t main(std::int32_t , char**)
 {
-    NDespair::GDebug.OSimpleDirectMediaLayerCodeError(SDL_Init(SDL_INIT_EVERYTHING));
-    NDespair::GAudio.BInitialize();
-    NDespair::GVideo.BInitialize();
-    NDespair::GSpace.BInitialize();
-    while(!NDespair::GInput.OIsKeyHeld(SDL_SCANCODE_ESCAPE))
+    NDespair::GDebug.ASimpleDirectMediaLayerCodeError(SDL_Init(SDL_INIT_EVERYTHING));
+    NDespair::GAudio.AInitialize();
+    NDespair::GVideo.AInitialize();
+    NDespair::GSpace.AInitialize();
+    while(!NDespair::GInput.AIsKeyHeld(SDL_SCANCODE_ESCAPE))
     {
-        NDespair::GInput.BUpdate();
-        NDespair::GTime.BUpdate();
-        NDespair::GVideo.BPreupdate();
-        NDespair::GSpace.BUpdate();
-        NDespair::GVideo.BPostupdate();
+        NDespair::GInput.AUpdate();
+        NDespair::GTime.AUpdate();
+        NDespair::GVideo.APreupdate();
+        NDespair::GSpace.AUpdate();
+        NDespair::GVideo.APostupdate();
     };
-    NDespair::GSpace.BDeinitialize();
-    NDespair::GVideo.BDeinitialize();
-    NDespair::GAudio.BDeinitialize();
+    NDespair::GSpace.ADeinitialize();
+    NDespair::GVideo.ADeinitialize();
+    NDespair::GAudio.ADeinitialize();
     SDL_Quit();
     return(0);
 }

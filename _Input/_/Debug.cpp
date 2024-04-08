@@ -39,81 +39,81 @@ namespace NDespair{
         }
     }
 
-    void CDebug::OError(bool PCondition , const std::string& PMessage , const std::source_location& PLocation)
+    void CDebug::AError(bool PCondition , const std::string& PMessage , const std::source_location& PLocation)
     {
         IAssert(PCondition , PMessage , SDL_MESSAGEBOX_ERROR , PLocation);
     }
-    bool CDebug::OWarning(bool PCondition , const std::string& PMessage , const std::source_location& PLocation)
+    bool CDebug::AWarning(bool PCondition , const std::string& PMessage , const std::source_location& PLocation)
     {
         IAssert(PCondition , PMessage , SDL_MESSAGEBOX_WARNING , PLocation);
         return(PCondition);
     }
-    bool CDebug::OInformation(bool PCondition , const std::string& PMessage , const std::source_location& PLocation)
+    bool CDebug::AInformation(bool PCondition , const std::string& PMessage , const std::source_location& PLocation)
     {
         IAssert(PCondition , PMessage , SDL_MESSAGEBOX_INFORMATION , PLocation);
         return(PCondition);
     }
-    void CDebug::OSimpleDirectMediaLayerCodeError(std::int32_t PValue , const std::source_location& PLocation)
+    void CDebug::ASimpleDirectMediaLayerCodeError(std::int32_t PValue , const std::source_location& PLocation)
     {
-        OError(PValue < 0 , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation);
+        AError(PValue < 0 , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation);
     }
-    bool CDebug::OSimpleDirectMediaLayerCodeWarning(std::int32_t PValue , const std::source_location& PLocation)
+    bool CDebug::ASimpleDirectMediaLayerCodeWarning(std::int32_t PValue , const std::source_location& PLocation)
     {
-        return(OWarning(PValue < 0 , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
+        return(AWarning(PValue < 0 , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
     }
-    bool CDebug::OSimpleDirectMediaLayerCodeInformation(std::int32_t PValue , const std::source_location& PLocation)
+    bool CDebug::ASimpleDirectMediaLayerCodeInformation(std::int32_t PValue , const std::source_location& PLocation)
     {
-        return(OInformation(PValue < 0 , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
+        return(AInformation(PValue < 0 , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
     }
-    void CDebug::OSimpleDirectMediaLayerMaskError(std::int32_t PValue , const std::source_location& PLocation)
+    void CDebug::ASimpleDirectMediaLayerMaskError(std::int32_t PValue , const std::source_location& PLocation)
     {
-        OError(!PValue , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation);
+        AError(!PValue , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation);
     }
-    bool CDebug::OSimpleDirectMediaLayerMaskWarning(std::int32_t PValue , const std::source_location& PLocation)
+    bool CDebug::ASimpleDirectMediaLayerMaskWarning(std::int32_t PValue , const std::source_location& PLocation)
     {
-        return(OWarning(!PValue , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
+        return(AWarning(!PValue , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
     }
-    bool CDebug::OSimpleDirectMediaLayerMaskInformation(std::int32_t PValue , const std::source_location& PLocation)
+    bool CDebug::ASimpleDirectMediaLayerMaskInformation(std::int32_t PValue , const std::source_location& PLocation)
     {
-        return(OInformation(!PValue , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
+        return(AInformation(!PValue , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
     }
-    void CDebug::OSimpleDirectMediaLayerHandleError(const void* PPointer , const std::source_location& PLocation)
+    void CDebug::ASimpleDirectMediaLayerHandleError(const void* PPointer , const std::source_location& PLocation)
     {
-        OError(!PPointer , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation);
+        AError(!PPointer , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation);
     }
-    bool CDebug::OSimpleDirectMediaLayerHandleWarning(const void* PPointer , const std::source_location& PLocation)
+    bool CDebug::ASimpleDirectMediaLayerHandleWarning(const void* PPointer , const std::source_location& PLocation)
     {
-        return(OWarning(!PPointer , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
+        return(AWarning(!PPointer , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
     }
-    bool CDebug::OSimpleDirectMediaLayerHandleInformation(const void* PPointer , const std::source_location& PLocation)
+    bool CDebug::ASimpleDirectMediaLayerHandleInformation(const void* PPointer , const std::source_location& PLocation)
     {
-        return(OInformation(!PPointer , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
+        return(AInformation(!PPointer , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
     }
-    void CDebug::OOpenGraphicsLibraryError(const std::source_location& PLocation)
+    void CDebug::AOpenGraphicsLibraryError(const std::source_location& PLocation)
     {
         std::uint32_t LCode{glGetError()};
-        OError(LCode , std::string{} + "Open Graphics Library - " + std::to_string(LCode) , PLocation);
+        AError(LCode , std::string{} + "Open Graphics Library - " + std::to_string(LCode) , PLocation);
     }
-    bool CDebug::OOpenGraphicsLibraryWarning(const std::source_location& PLocation)
+    bool CDebug::AOpenGraphicsLibraryWarning(const std::source_location& PLocation)
     {
         std::uint32_t LCode{glGetError()};
-        return(OWarning(LCode , std::string{} + "Open Graphics Library - " + std::to_string(LCode) , PLocation));
+        return(AWarning(LCode , std::string{} + "Open Graphics Library - " + std::to_string(LCode) , PLocation));
     }
-    bool CDebug::OOpenGraphicsLibraryInformation(const std::source_location& PLocation)
+    bool CDebug::AOpenGraphicsLibraryInformation(const std::source_location& PLocation)
     {
         std::uint32_t LCode{glGetError()};
-        return(OInformation(LCode , std::string{} + "Open Graphics Library - " + std::to_string(LCode) , PLocation));
+        return(AInformation(LCode , std::string{} + "Open Graphics Library - " + std::to_string(LCode) , PLocation));
     }
-    void CDebug::OOpenAssetImportLibraryError(const void* AHandle , const std::source_location& PLocation)
+    void CDebug::AOpenAssetImportLibraryError(const void* AHandle , const std::source_location& PLocation)
     {
-        OError(!AHandle , std::string{} + "Open Asset Import Library - " + aiGetErrorString() , PLocation);
+        AError(!AHandle , std::string{} + "Open Asset Import Library - " + aiGetErrorString() , PLocation);
     }
-    bool CDebug::OOpenAssetImportLibraryWarning(const void* AHandle , const std::source_location& PLocation)
+    bool CDebug::AOpenAssetImportLibraryWarning(const void* AHandle , const std::source_location& PLocation)
     {
-        return(OWarning(!AHandle , std::string{} + "Open Asset Import Library - " + aiGetErrorString() , PLocation));
+        return(AWarning(!AHandle , std::string{} + "Open Asset Import Library - " + aiGetErrorString() , PLocation));
     }
-    bool CDebug::OOpenAssetImportLibraryInformation(const void* AHandle , const std::source_location& PLocation)
+    bool CDebug::AOpenAssetImportLibraryInformation(const void* AHandle , const std::source_location& PLocation)
     {
-        return(OInformation(!AHandle , std::string{} + "Open Asset Import Library - " + aiGetErrorString() , PLocation));
+        return(AInformation(!AHandle , std::string{} + "Open Asset Import Library - " + aiGetErrorString() , PLocation));
     }
 }

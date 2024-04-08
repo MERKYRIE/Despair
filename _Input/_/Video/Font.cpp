@@ -10,7 +10,7 @@ namespace NDespair::NVideo
     {
         FPath = PPath.substr(PPath.find('\\'));
         TTF_Font* LFont{TTF_OpenFont(PPath.c_str() , 64)};
-        GDebug.OSimpleDirectMediaLayerHandleError(LFont);
+        GDebug.ASimpleDirectMediaLayerHandleError(LFont);
         for(char LDigit{'0'} ; LDigit <= '9' ; LDigit++)
         {
             FDigits.emplace_back(new CCharacter{LFont , LDigit});
@@ -28,22 +28,21 @@ namespace NDespair::NVideo
         FLowercases.shrink_to_fit();
         TTF_CloseFont(LFont);
     }
-    bool CFont::operator==(const std::string& PPath) const
+    bool CFont::AEqual(const std::string& PPath)
     {
         return(FPath == PPath);
     }
-
-    const CCharacter& CFont::OAccessDigit(char PCode) const
+    CCharacter* CFont::AAccessDigit(char PCode)
     {
-        return(*FDigits[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('0')]);
+        return(FDigits[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('0')].get());
     }
-    const CCharacter& CFont::OAccessUppercase(char PCode) const
+    CCharacter* CFont::AAccessUppercase(char PCode)
     {
-        return(*FUppercases[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('A')]);
+        return(FUppercases[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('A')].get());
     }
-    const CCharacter& CFont::OAccessLowercase(char PCode) const
+    CCharacter* CFont::AAccessLowercase(char PCode)
     {
-        return(*FLowercases[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('a')]);
+        return(FLowercases[static_cast<std::int64_t>(PCode) - static_cast<std::int64_t>('a')].get());
     }
     CFont::~CFont()
     {

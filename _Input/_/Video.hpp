@@ -4,17 +4,8 @@
 
 namespace NDespair
 {
-    namespace NVideo
-    {
-        class CFont;
-        class CShader;
-        class CTexture;
-    }
-    
     inline class CVideo
     {
-        friend std::int32_t (::main(std::int32_t , char**));
-
         private : SDL_Window* FWindow;
         private : SDL_GLContext FContext;
         private : float FRatio;
@@ -25,16 +16,15 @@ namespace NDespair
         private : std::vector<std::shared_ptr<NVideo::CFont>> FFonts;
         private : std::vector<std::shared_ptr<NVideo::CTexture>> FTextures;
 
-        private : void BInitialize();
-        private : void BPreupdate();
-        private : void BPostupdate();
-        private : void BDeinitialize();
-
-        public : float ORatio();
-        public : float OInversedRatio();
-        public : const NVideo::CFont& OAccessFont(const std::string& PPath);
-        public : const NVideo::CTexture& OAccessSpecificTexture(const std::string& PPath);
-        public : const NVideo::CTexture& OAccessRandomTexture();
+        public : void AInitialize();
+        public : void APreupdate();
+        public : float ARatio();
+        public : float AInversedRatio();
+        public : NVideo::CFont* AAccessFont(const std::string& PPath);
+        public : NVideo::CTexture* AAccessSpecificTexture(const std::string& PPath);
+        public : NVideo::CTexture* AAccessRandomTexture();
+        public : void APostupdate();
+        public : void ADeinitialize();
     }
     GVideo;
 }

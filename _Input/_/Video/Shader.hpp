@@ -6,13 +6,10 @@ namespace NDespair::NVideo
 {
     class CShader
     {
-        friend class CVideo;
-        
         private : std::uint32_t FIdentifier;
 
-        private : CShader(const std::string& PPath , std::uint32_t PType);
-        private : std::uint32_t BIdentifier();
-
+        public : CShader(const std::string& PPath , std::uint32_t PType);
+        public : std::uint32_t AIdentifier();
         public : ~CShader();
     };
 }

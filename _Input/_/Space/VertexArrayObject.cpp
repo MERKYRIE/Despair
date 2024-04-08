@@ -17,9 +17,9 @@ namespace NDespair::NSpace
         glVertexAttribPointer(0 , 3 , GL_FLOAT , GL_FALSE , 5 * sizeof(float) , reinterpret_cast<void*>(0 * sizeof(float)));
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1 , 2 , GL_FLOAT , GL_FALSE , 5 * sizeof(float) , reinterpret_cast<void*>(3 * sizeof(float)));
-        GDebug.OOpenGraphicsLibraryError();
+        GDebug.AOpenGraphicsLibraryError();
     }
-    std::uint32_t CVertexArrayObject::OIdentifier()
+    std::uint32_t CVertexArrayObject::AIdentifier()
     {
         return(FIdentifier);
     }
@@ -28,6 +28,6 @@ namespace NDespair::NSpace
         FElementBufferObject.reset();
         FVertexBufferObject.reset();
         glDeleteVertexArrays(1 , &FIdentifier);
-        GDebug.OOpenGraphicsLibraryError();
+        GDebug.AOpenGraphicsLibraryError();
     }
 }

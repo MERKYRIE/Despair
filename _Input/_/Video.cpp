@@ -7,20 +7,20 @@
 
 namespace NDespair
 {
-    void CVideo::BInitialize()
+    void CVideo::AInitialize()
     {
-        GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 4));
-        GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 6));
-        GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK , SDL_GL_CONTEXT_PROFILE_CORE));
-        GDebug.OSimpleDirectMediaLayerHandleError(FWindow = SDL_CreateWindow("Despair" , 0 , 0 , 1600 , 900 , SDL_WINDOW_OPENGL));
-        GDebug.OSimpleDirectMediaLayerHandleError(FContext = SDL_GL_CreateContext(FWindow));
-        GDebug.OSimpleDirectMediaLayerCodeError(SDL_GL_SetSwapInterval(0));
+        GDebug.ASimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 4));
+        GDebug.ASimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 6));
+        GDebug.ASimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK , SDL_GL_CONTEXT_PROFILE_CORE));
+        GDebug.ASimpleDirectMediaLayerHandleError(FWindow = SDL_CreateWindow("Despair" , 0 , 0 , 1600 , 900 , SDL_WINDOW_OPENGL));
+        GDebug.ASimpleDirectMediaLayerHandleError(FContext = SDL_GL_CreateContext(FWindow));
+        GDebug.ASimpleDirectMediaLayerCodeError(SDL_GL_SetSwapInterval(0));
         SDL_DisplayMode LDisplayMode;
-        GDebug.OSimpleDirectMediaLayerCodeError(SDL_GetWindowDisplayMode(FWindow , &LDisplayMode));
+        GDebug.ASimpleDirectMediaLayerCodeError(SDL_GetWindowDisplayMode(FWindow , &LDisplayMode));
         FRatio = static_cast<float>(LDisplayMode.w) / static_cast<float>(LDisplayMode.h);
         FInversedRatio = static_cast<float>(LDisplayMode.h) / static_cast<float>(LDisplayMode.w);
-        GDebug.OSimpleDirectMediaLayerCodeError(SDL_SetRelativeMouseMode(SDL_TRUE));
-        GDebug.OError(gladLoadGL(reinterpret_cast<GLADloadfunc>(SDL_GL_GetProcAddress)) != 40006);
+        GDebug.ASimpleDirectMediaLayerCodeError(SDL_SetRelativeMouseMode(SDL_TRUE));
+        GDebug.AError(gladLoadGL(reinterpret_cast<GLADloadfunc>(SDL_GL_GetProcAddress)) != 40006);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_CULL_FACE);
@@ -31,17 +31,17 @@ namespace NDespair
         std::int32_t LLength;
         std::string LLog;
         FProgram = glCreateProgram();
-        glAttachShader(FProgram , FVertex->BIdentifier());
-        glAttachShader(FProgram , FFragment->BIdentifier());
+        glAttachShader(FProgram , FVertex->AIdentifier());
+        glAttachShader(FProgram , FFragment->AIdentifier());
         glLinkProgram(FProgram);
         glGetProgramiv(FProgram , GL_LINK_STATUS , &LSuccess);
         glGetProgramiv(FProgram , GL_INFO_LOG_LENGTH , &LLength);
         LLog.resize(LLength);
         glGetProgramInfoLog(FProgram , LLength , nullptr , LLog.data());
-        GDebug.OError(!LSuccess , "Open Graphics Library - " + LLog);
+        GDebug.AError(!LSuccess , "Open Graphics Library - " + LLog);
         glUseProgram(FProgram);
-        GDebug.OOpenGraphicsLibraryError();
-        GDebug.OSimpleDirectMediaLayerCodeError(TTF_Init());
+        GDebug.AOpenGraphicsLibraryError();
+        GDebug.ASimpleDirectMediaLayerCodeError(TTF_Init());
         for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Typeface"})
         {
             if(LEntry.path().extension() == ".ttf")
@@ -50,7 +50,7 @@ namespace NDespair
             }
         }
         FFonts.shrink_to_fit();
-        GDebug.OSimpleDirectMediaLayerMaskError(IMG_Init(IMG_INIT_PNG));
+        GDebug.ASimpleDirectMediaLayerMaskError(IMG_Init(IMG_INIT_PNG));
         for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Atlas"})
         {
             if(LEntry.path().extension() == ".png")
@@ -60,15 +60,47 @@ namespace NDespair
         }
         FTextures.shrink_to_fit();
     }
-    void CVideo::BPreupdate()
+    void CVideo::APreupdate()
     {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
-    void CVideo::BPostupdate()
+    float CVideo::ARatio()
+    {
+        return(FRatio);
+    }
+    float CVideo::AInversedRatio()
+    {
+        return(FInversedRatio);
+    }
+    NVideo::CFont* CVideo::AAccessFont(const std::string& PPath)
+    {
+        std::vector<std::shared_ptr<NVideo::CFont>>::iterator LIterator
+        {
+            std::find_if(FFonts.begin() , FFonts.end() , [&PPath](const std::shared_ptr<NVideo::CFont>& LPointer){return(LPointer->AEqual(PPath));})
+        };
+        GDebug.AError(LIterator == FFonts.end());
+        return(LIterator->get());
+    }
+    NVideo::CTexture* CVideo::AAccessSpecificTexture(const std::string& PPath)
+    {
+        std::vector<std::shared_ptr<NVideo::CTexture>>::iterator LIterator
+        {
+            std::find_if(FTextures.begin() , FTextures.end() , [&PPath](const std::shared_ptr<NVideo::CTexture>& LPointer){return(LPointer->AEqual(PPath));})
+        };
+        GDebug.AError(LIterator == FTextures.end());
+        return(LIterator->get());
+    }
+    NVideo::CTexture* CVideo::AAccessRandomTexture()
+    {
+        std::random_device LGenerator;
+        std::uniform_int_distribution<std::uintmax_t> LDistributor{0 , FTextures.size() - 1};
+        return(FTextures[LDistributor(LGenerator)].get());
+    }
+    void CVideo::APostupdate()
     {
         SDL_GL_SwapWindow(FWindow);
     }
-    void CVideo::BDeinitialize()
+    void CVideo::ADeinitialize()
     {
         FTextures.clear();
         IMG_Quit();
@@ -79,38 +111,5 @@ namespace NDespair
         glDeleteProgram(FProgram);
         SDL_GL_DeleteContext(FContext);
         SDL_DestroyWindow(FWindow);
-    }
-
-    float CVideo::ORatio()
-    {
-        return(FRatio);
-    }
-    float CVideo::OInversedRatio()
-    {
-        return(FInversedRatio);
-    }
-    const NVideo::CFont& CVideo::OAccessFont(const std::string& PPath)
-    {
-        std::vector<std::shared_ptr<NVideo::CFont>>::iterator LIterator
-        {
-            std::find_if(FFonts.begin() , FFonts.end() , [&PPath](const std::shared_ptr<NVideo::CFont>& LPointer){return(*LPointer == PPath);})
-        };
-        GDebug.OError(LIterator == FFonts.end());
-        return(**LIterator);
-    }
-    const NVideo::CTexture& CVideo::OAccessSpecificTexture(const std::string& PPath)
-    {
-        std::vector<std::shared_ptr<NVideo::CTexture>>::iterator LIterator
-        {
-            std::find_if(FTextures.begin() , FTextures.end() , [&PPath](const std::shared_ptr<NVideo::CTexture>& LPointer){return(*LPointer == PPath);})
-        };
-        GDebug.OError(LIterator == FTextures.end());
-        return(**LIterator);
-    }
-    const NVideo::CTexture& CVideo::OAccessRandomTexture()
-    {
-        std::random_device LGenerator;
-        std::uniform_int_distribution<std::uintmax_t> LDistributor{0 , FTextures.size() - 1};
-        return(*FTextures[LDistributor(LGenerator)]);
     }
 }

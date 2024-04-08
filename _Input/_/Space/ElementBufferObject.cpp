@@ -9,11 +9,11 @@ namespace NDespair::NSpace
         glGenBuffers(1 , &FIdentifier);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER , FIdentifier);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER , sizeof(PElements) , PElements.data() , GL_STATIC_DRAW);
-        GDebug.OOpenGraphicsLibraryError();
+        GDebug.AOpenGraphicsLibraryError();
     }
     CElementBufferObject::~CElementBufferObject()
     {
         glDeleteBuffers(1 , &FIdentifier);
-        GDebug.OOpenGraphicsLibraryError();
+        GDebug.AOpenGraphicsLibraryError();
     }
 }

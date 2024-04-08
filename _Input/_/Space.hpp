@@ -4,18 +4,8 @@
 
 namespace NDespair
 {
-    namespace NSpace
-    {
-        class CPartition;
-        class CVertexArrayObject;
-    }
-
     inline class CSpace
     {
-        friend std::int32_t (::main(std::int32_t , char**));
-
-        friend class NSpace::CPartition;
-
         private : std::intmax_t FSizeX;
         private : std::intmax_t FSizeY;
         private : std::intmax_t FSizeZ;
@@ -36,21 +26,20 @@ namespace NDespair
         private : void IReevaluatePositionXY();
         private : void IReevaluatePositionZ();
 
-        private : void BInitialize();
-        private : void BUpdate();
-        private : void BDeinitialize();
-
-        private : NSpace::CPartition& DAccessPartition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
-        private : bool DDoesPartitionExist(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
-        private : std::intmax_t DEvaluateOffsetX(std::intmax_t PCoordinate);
-        private : std::intmax_t DEvaluateOffsetY(std::intmax_t PCoordinate);
-        private : std::intmax_t DEvaluateOffsetZ(std::intmax_t PCoordinate);
-        private : void DBindVertexArrayObjectNegativeX();
-        private : void DBindVertexArrayObjectPositiveX();
-        private : void DBindVertexArrayObjectNegativeY();
-        private : void DBindVertexArrayObjectPositiveY();
-        private : void DBindVertexArrayObjectNegativeZ();
-        private : void DBindVertexArrayObjectPositiveZ();
+        public : void AInitialize();
+        public : void AUpdate();
+        public : NSpace::CPartition& AAccessPartition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
+        public : bool ADoesPartitionExist(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
+        public : std::intmax_t AEvaluateOffsetX(std::intmax_t PCoordinate);
+        public : std::intmax_t AEvaluateOffsetY(std::intmax_t PCoordinate);
+        public : std::intmax_t AEvaluateOffsetZ(std::intmax_t PCoordinate);
+        public : void ABindVertexArrayObjectNegativeX();
+        public : void ABindVertexArrayObjectPositiveX();
+        public : void ABindVertexArrayObjectNegativeY();
+        public : void ABindVertexArrayObjectPositiveY();
+        public : void ABindVertexArrayObjectNegativeZ();
+        public : void ABindVertexArrayObjectPositiveZ();
+        public : void ADeinitialize();
     }
     GSpace;
 }

@@ -25,3 +25,32 @@
 #pragma warning(pop)
 
 #pragma warning(disable : 26495)
+
+namespace NDespair
+{
+    class CAudio;
+    namespace NAudio
+    {
+        class CSound;
+        class CTrack;
+    }
+    class CDebug;
+    class CInput;
+    class CSpace;
+    namespace NSpace
+    {
+        class CElementBufferObject;
+        class CPartition;
+        class CVertexArrayObject;
+        class CVertexBufferObject;
+    }
+    class CTime;
+    class CVideo;
+    namespace NVideo
+    {
+        class CCharacter;
+        class CFont;
+        class CShader;
+        class CTexture;
+    }
+}

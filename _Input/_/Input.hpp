@@ -6,8 +6,6 @@ namespace NDespair
 {
     inline class CInput
     {
-        friend std::int32_t (::main(std::int32_t , char**));
-
         private : bool FIsKeyHeld[512];
         private : bool FIsKeyPressed[512];
         private : bool FIsKeyReleased[512];
@@ -29,28 +27,27 @@ namespace NDespair
         private : bool FIsWheelDown;
         private : bool FIsWheelUp;
         
-        private : void BUpdate();
-
-        public : bool OIsKeyHeld(std::uint16_t PKey);
-        public : bool OIsKeyPressed(std::uint16_t PKey);
-        public : bool OIsKeyReleased(std::uint16_t PKey);
-        public : bool OIsButtonHeld(std::uint8_t PButton);
-        public : bool OIsButtonPressed(std::uint8_t PButton);
-        public : bool OIsButtonReleased(std::uint8_t PButton);
-        public : std::int32_t OAbsoluteX();
-        public : std::int32_t ORelativeX();
-        public : bool OIsXModified();
-        public : std::int32_t OAbsoluteY();
-        public : std::int32_t ORelativeY();
-        public : bool OIsYModified();
-        public : std::int32_t OPressedX(std::uint8_t PButton);
-        public : std::int32_t OPressedY(std::uint8_t PButton);
-        public : std::int32_t OReleasedX(std::uint8_t PButton);
-        public : std::int32_t OReleasedY(std::uint8_t PButton);
-        public : std::int32_t OWheelState();
-        public : bool OIsWheelModified();
-        public : bool OIsWheelDown();
-        public : bool OIsWheelUp();
+        public : void AUpdate();
+        public : bool AIsKeyHeld(std::uint16_t PKey);
+        public : bool AIsKeyPressed(std::uint16_t PKey);
+        public : bool AIsKeyReleased(std::uint16_t PKey);
+        public : bool AIsButtonHeld(std::uint8_t PButton);
+        public : bool AIsButtonPressed(std::uint8_t PButton);
+        public : bool AIsButtonReleased(std::uint8_t PButton);
+        public : std::int32_t AAbsoluteX();
+        public : std::int32_t ARelativeX();
+        public : bool AIsXModified();
+        public : std::int32_t AAbsoluteY();
+        public : std::int32_t ARelativeY();
+        public : bool AIsYModified();
+        public : std::int32_t APressedX(std::uint8_t PButton);
+        public : std::int32_t APressedY(std::uint8_t PButton);
+        public : std::int32_t AReleasedX(std::uint8_t PButton);
+        public : std::int32_t AReleasedY(std::uint8_t PButton);
+        public : std::int32_t AWheelState();
+        public : bool AIsWheelModified();
+        public : bool AIsWheelDown();
+        public : bool AIsWheelUp();
     }
     GInput;
 }

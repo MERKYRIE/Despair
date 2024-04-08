@@ -7,21 +7,20 @@ namespace NDespair::NAudio
     CSound::CSound(const std::string& PPath)
     {
         FPath = PPath.substr(PPath.find('\\'));
-        GDebug.OSimpleDirectMediaLayerHandleError(FHandle = Mix_LoadWAV(PPath.c_str()));
+        GDebug.ASimpleDirectMediaLayerHandleError(FHandle = Mix_LoadWAV(PPath.c_str()));
         FChannel = Mix_AllocateChannels(SDL_QUERY);
-        GDebug.OError(Mix_AllocateChannels(Mix_AllocateChannels(SDL_QUERY) + 1) != FChannel + 1);
+        GDebug.AError(Mix_AllocateChannels(Mix_AllocateChannels(SDL_QUERY) + 1) != FChannel + 1);
     }
-    bool CSound::operator==(const std::string& PPath) const
+    bool CSound::AEqual(const std::string& PPath)
     {
         return(FPath == PPath);
     }
-
-    const CSound& CSound::OPlay() const
+    CSound* CSound::APlay()
     {
-        GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayChannel(FChannel , FHandle , 0) != FChannel);
-        return(*this);
+        GDebug.ASimpleDirectMediaLayerCodeError(Mix_PlayChannel(FChannel , FHandle , 0) != FChannel);
+        return(this);
     }
-    bool CSound::OIsPlaying() const
+    bool CSound::AIsPlaying()
     {
         return(Mix_Playing(FChannel));
     }

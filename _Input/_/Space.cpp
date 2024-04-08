@@ -20,7 +20,7 @@ namespace NDespair
         FPositionZ = FSizeZ / 2;
     }
 
-    void CSpace::BInitialize()
+    void CSpace::AInitialize()
     {
         FSizeX = 100;
         FSizeY = 100;
@@ -107,9 +107,9 @@ namespace NDespair
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ))
+                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition(FPositionX + 1 , FPositionY , FPositionZ);
+                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewTransition(FPositionX + 1 , FPositionY , FPositionZ);
                                 FPositionX++;
                             }
                             else
@@ -122,9 +122,9 @@ namespace NDespair
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ))
+                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition(FPositionX , FPositionY + 1 , FPositionZ);
+                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewTransition(FPositionX , FPositionY + 1 , FPositionZ);
                                 FPositionY++;
                             }
                             else
@@ -137,9 +137,9 @@ namespace NDespair
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ))
+                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition(FPositionX - 1 , FPositionY , FPositionZ);
+                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewTransition(FPositionX - 1 , FPositionY , FPositionZ);
                                 FPositionX--;
                             }
                             else
@@ -152,9 +152,9 @@ namespace NDespair
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ))
+                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewTransition(FPositionX , FPositionY - 1 , FPositionZ);
+                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewTransition(FPositionX , FPositionY - 1 , FPositionZ);
                                 FPositionY--;
                             }
                             else
@@ -178,9 +178,9 @@ namespace NDespair
                 std::uniform_int_distribution<std::intmax_t> LY{0 , FSizeY - 1};
                 FPositionX = LX(LGenerator);
                 FPositionY = LY(LGenerator);
-                if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateShaft(FPositionX , FPositionY , FPositionZ - 1))
+                if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateShaft(FPositionX , FPositionY , FPositionZ - 1))
                 {
-                    LGenerated = FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewShaft(FPositionX , FPositionY , FPositionZ - 1);
+                    LGenerated = FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewShaft(FPositionX , FPositionY , FPositionZ - 1);
                 }
             }
         }
@@ -196,19 +196,19 @@ namespace NDespair
                 std::uniform_int_distribution<std::intmax_t> LY{0 , FSizeY - 1};
                 FPositionX = LX(LGenerator);
                 FPositionY = LY(LGenerator);
-                if(FMatrix[FPositionX][FPositionY][FPositionZ]->BCanGenerateShaft(FPositionX , FPositionY , FPositionZ + 1))
+                if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateShaft(FPositionX , FPositionY , FPositionZ + 1))
                 {
-                    LGenerated = FMatrix[FPositionX][FPositionY][FPositionZ]->BGenerateNewShaft(FPositionX , FPositionY , FPositionZ + 1);
+                    LGenerated = FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewShaft(FPositionX , FPositionY , FPositionZ + 1);
                 }
             }
         }
         IReevaluatePositionXY();
         IReevaluatePositionZ();
-        GAudio.OAccessTrack("\\Mountain Realm - Grayshadow Ruins.mp3").OAccessVolume(16).OPlay();
+        GAudio.AAccessTrack("\\Mountain Realm - Grayshadow Ruins.mp3")->AAccessVolume(16)->APlay();
     }
-    void CSpace::BUpdate()
+    void CSpace::AUpdate()
     {
-        if(GInput.OIsKeyPressed(SDL_SCANCODE_A))
+        if(GInput.AIsKeyPressed(SDL_SCANCODE_A))
         {
             std::swap(FDirectionX , FDirectionY);
             if(FDirectionX)
@@ -216,7 +216,7 @@ namespace NDespair
                 FDirectionX *= -1;
             }
         }
-        if(GInput.OIsKeyPressed(SDL_SCANCODE_D))
+        if(GInput.AIsKeyPressed(SDL_SCANCODE_D))
         {
             std::swap(FDirectionX , FDirectionY);
             if(FDirectionY)
@@ -224,32 +224,32 @@ namespace NDespair
                 FDirectionY *= -1;
             }
         }
-        if(GInput.OIsKeyPressed(SDL_SCANCODE_S))
+        if(GInput.AIsKeyPressed(SDL_SCANCODE_S))
         {
-            if(!FMatrix[FPositionX][FPositionY][FPositionZ]->BIsCollisionDetected(FPositionX - FDirectionX , FPositionY - FDirectionY , FPositionZ))
+            if(!FMatrix[FPositionX][FPositionY][FPositionZ]->AIsCollisionDetected(FPositionX - FDirectionX , FPositionY - FDirectionY , FPositionZ))
             {
                 FPositionX -= FDirectionX;
                 FPositionY -= FDirectionY;
-                if(!FMatrix[FPositionX][FPositionY][FPositionZ]->BIsCollisionDetected(FPositionX , FPositionY , FPositionZ - 1))
+                if(!FMatrix[FPositionX][FPositionY][FPositionZ]->AIsCollisionDetected(FPositionX , FPositionY , FPositionZ - 1))
                 {
                     FPositionZ--;
                 }
             }
         }
-        if(GInput.OIsKeyPressed(SDL_SCANCODE_W))
+        if(GInput.AIsKeyPressed(SDL_SCANCODE_W))
         {
-            if(!FMatrix[FPositionX][FPositionY][FPositionZ]->BIsCollisionDetected(FPositionX + FDirectionX , FPositionY + FDirectionY , FPositionZ))
+            if(!FMatrix[FPositionX][FPositionY][FPositionZ]->AIsCollisionDetected(FPositionX + FDirectionX , FPositionY + FDirectionY , FPositionZ))
             {
                 FPositionX += FDirectionX;
                 FPositionY += FDirectionY;
-                if(!FMatrix[FPositionX][FPositionY][FPositionZ]->BIsCollisionDetected(FPositionX , FPositionY , FPositionZ - 1))
+                if(!FMatrix[FPositionX][FPositionY][FPositionZ]->AIsCollisionDetected(FPositionX , FPositionY , FPositionZ - 1))
                 {
                     FPositionZ--;
                 }
             }
         }
         glEnable(GL_DEPTH_TEST);
-        glm::mat4 LProjection{glm::perspective(glm::radians(90.0F) , GVideo.ORatio() , 0.25F , 1'000.0F)};
+        glm::mat4 LProjection{glm::perspective(glm::radians(90.0F) , GVideo.ARatio() , 0.25F , 1'000.0F)};
         glUniformMatrix4fv(3 , 1 , GL_FALSE , &LProjection[0][0]);
         glm::mat4 LView{1.0F};
         LView = glm::rotate(LView , glm::radians(-90.0F) , glm::vec3{1.0F , 0.0F , 0.0F});
@@ -298,27 +298,16 @@ namespace NDespair
                     glm::mat4 LModel{1.0F};
                     LModel = glm::translate(LModel , glm::vec3{LX , LY , LZ});
                     glUniformMatrix4fv(5 , 1 , GL_FALSE , &LModel[0][0]);
-                    FMatrix[LX][LY][LZ]->BRender(LX , LY , LZ);
+                    FMatrix[LX][LY][LZ]->ARender(LX , LY , LZ);
                 }
             }
         }
     }
-    void CSpace::BDeinitialize()
-    {
-        FVertexArrayObjectPositiveZ.reset();
-        FVertexArrayObjectNegativeZ.reset();
-        FVertexArrayObjectPositiveY.reset();
-        FVertexArrayObjectNegativeY.reset();
-        FVertexArrayObjectPositiveX.reset();
-        FVertexArrayObjectNegativeX.reset();
-        FMatrix.clear();
-    }
-
-    NSpace::CPartition& CSpace::DAccessPartition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
+    NSpace::CPartition& CSpace::AAccessPartition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
         return(*FMatrix[PX][PY][PZ]);
     }
-    bool CSpace::DDoesPartitionExist(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
+    bool CSpace::ADoesPartitionExist(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
         return
         (
@@ -327,40 +316,50 @@ namespace NDespair
             PZ == std::clamp<std::intmax_t>(PZ , 0 , FSizeZ - 1)
         );
     }
-    std::intmax_t CSpace::DEvaluateOffsetX(std::intmax_t PCoordinate)
+    std::intmax_t CSpace::AEvaluateOffsetX(std::intmax_t PCoordinate)
     {
         return(PCoordinate - FPositionX);
     }
-    std::intmax_t CSpace::DEvaluateOffsetY(std::intmax_t PCoordinate)
+    std::intmax_t CSpace::AEvaluateOffsetY(std::intmax_t PCoordinate)
     {
         return(PCoordinate - FPositionY);
     }
-    std::intmax_t CSpace::DEvaluateOffsetZ(std::intmax_t PCoordinate)
+    std::intmax_t CSpace::AEvaluateOffsetZ(std::intmax_t PCoordinate)
     {
         return(PCoordinate - FPositionZ);
     }
-    void CSpace::DBindVertexArrayObjectNegativeX()
+    void CSpace::ABindVertexArrayObjectNegativeX()
     {
-        glBindVertexArray(FVertexArrayObjectNegativeX->OIdentifier());
+        glBindVertexArray(FVertexArrayObjectNegativeX->AIdentifier());
     }
-    void CSpace::DBindVertexArrayObjectPositiveX()
+    void CSpace::ABindVertexArrayObjectPositiveX()
     {
-        glBindVertexArray(FVertexArrayObjectPositiveX->OIdentifier());
+        glBindVertexArray(FVertexArrayObjectPositiveX->AIdentifier());
     }
-    void CSpace::DBindVertexArrayObjectNegativeY()
+    void CSpace::ABindVertexArrayObjectNegativeY()
     {
-        glBindVertexArray(FVertexArrayObjectNegativeY->OIdentifier());
+        glBindVertexArray(FVertexArrayObjectNegativeY->AIdentifier());
     }
-    void CSpace::DBindVertexArrayObjectPositiveY()
+    void CSpace::ABindVertexArrayObjectPositiveY()
     {
-        glBindVertexArray(FVertexArrayObjectPositiveY->OIdentifier());
+        glBindVertexArray(FVertexArrayObjectPositiveY->AIdentifier());
     }
-    void CSpace::DBindVertexArrayObjectNegativeZ()
+    void CSpace::ABindVertexArrayObjectNegativeZ()
     {
-        glBindVertexArray(FVertexArrayObjectNegativeZ->OIdentifier());
+        glBindVertexArray(FVertexArrayObjectNegativeZ->AIdentifier());
     }
-    void CSpace::DBindVertexArrayObjectPositiveZ()
+    void CSpace::ABindVertexArrayObjectPositiveZ()
     {
-        glBindVertexArray(FVertexArrayObjectPositiveZ->OIdentifier());
+        glBindVertexArray(FVertexArrayObjectPositiveZ->AIdentifier());
+    }
+    void CSpace::ADeinitialize()
+    {
+        FVertexArrayObjectPositiveZ.reset();
+        FVertexArrayObjectNegativeZ.reset();
+        FVertexArrayObjectPositiveY.reset();
+        FVertexArrayObjectNegativeY.reset();
+        FVertexArrayObjectPositiveX.reset();
+        FVertexArrayObjectNegativeX.reset();
+        FMatrix.clear();
     }
 }

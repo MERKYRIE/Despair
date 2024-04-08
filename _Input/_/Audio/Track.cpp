@@ -7,38 +7,37 @@ namespace NDespair::NAudio
     CTrack::CTrack(const std::string& PPath)
     {
         FPath = PPath.substr(PPath.find('\\'));
-        GDebug.OSimpleDirectMediaLayerHandleError(FHandle = Mix_LoadMUS(PPath.c_str()));
+        GDebug.ASimpleDirectMediaLayerHandleError(FHandle = Mix_LoadMUS(PPath.c_str()));
     }
-    bool CTrack::operator==(const std::string& PPath) const
+    bool CTrack::AEqual(const std::string& PPath)
     {
         return(FPath == PPath);
     }
-
-    const CTrack& CTrack::OPlay() const
+    CTrack* CTrack::APlay()
     {
-        GDebug.OSimpleDirectMediaLayerCodeError(Mix_PlayMusic(FHandle , 0));
-        return(*this);
+        GDebug.ASimpleDirectMediaLayerCodeError(Mix_PlayMusic(FHandle , 0));
+        return(this);
     }
-    const CTrack& CTrack::OPause() const
+    CTrack* CTrack::APause()
     {
         Mix_PauseMusic();
-        return(*this);
+        return(this);
     }
-    const CTrack& CTrack::OResume() const
+    CTrack* CTrack::AResume()
     {
         Mix_ResumeMusic();
-        return(*this);
+        return(this);
     }
-    const CTrack& CTrack::OStop() const
+    CTrack* CTrack::AStop()
     {
         Mix_HaltMusic();
-        return(*this);
+        return(this);
     }
-    const CTrack& CTrack::OAccessVolume(std::uint8_t PValue) const
+    CTrack* CTrack::AAccessVolume(std::uint8_t PValue)
     {
         Mix_VolumeMusic(PValue);
-        GDebug.OError(Mix_VolumeMusic(SDL_QUERY) != PValue);
-        return(*this);
+        GDebug.AError(Mix_VolumeMusic(SDL_QUERY) != PValue);
+        return(this);
     }
     CTrack::~CTrack()
     {

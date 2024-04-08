@@ -4,9 +4,6 @@
 
 namespace NDespair::NSpace
 {
-    class CVertexBufferObject;
-    class CElementBufferObject;
-
     class CVertexArrayObject
     {
         private : std::uint32_t FIdentifier;
@@ -14,7 +11,7 @@ namespace NDespair::NSpace
         private : std::shared_ptr<CElementBufferObject> FElementBufferObject;
 
         public : CVertexArrayObject(const std::array<float , 120>& PVertices , const std::array<std::uint32_t , 36>& PElements);
-        public : std::uint32_t OIdentifier();
+        public : std::uint32_t AIdentifier();
         public : ~CVertexArrayObject();
     };
 }
