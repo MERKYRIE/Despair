@@ -2,7 +2,7 @@
 
 #include"Debug.hpp"
 
-namespace NDespair::NSpace
+namespace NDespair::NVideo
 {
     CVertexBufferObject::CVertexBufferObject(const std::array<float , 120>& PVertices)
     {

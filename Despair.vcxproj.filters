@@ -20,23 +20,20 @@
     <ClInclude Include="_Input\_\Video\Shader.hpp">
       <Filter>Video</Filter>
     </ClInclude>
-    <ClInclude Include="_Input\_\Space\Partition.hpp">
-      <Filter>Space</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Space\VertexArrayObject.hpp">
-      <Filter>Space</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Space\ElementBufferObject.hpp">
-      <Filter>Space</Filter>
-    </ClInclude>
-    <ClInclude Include="_Input\_\Space\VertexBufferObject.hpp">
-      <Filter>Space</Filter>
-    </ClInclude>
     <ClInclude Include="_Input\_\Audio\Sound.hpp">
       <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="_Input\_\Audio\Track.hpp">
       <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Video\ElementBufferObject.hpp">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Video\VertexArrayObject.hpp">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="_Input\_\Video\VertexBufferObject.hpp">
+      <Filter>Video</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -59,31 +56,25 @@
     <ClCompile Include="_Input\_\Video\Shader.cpp">
       <Filter>Video</Filter>
     </ClCompile>
-    <ClCompile Include="_Input\_\Space\Partition.cpp">
-      <Filter>Space</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Space\VertexArrayObject.cpp">
-      <Filter>Space</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Space\ElementBufferObject.cpp">
-      <Filter>Space</Filter>
-    </ClCompile>
-    <ClCompile Include="_Input\_\Space\VertexBufferObject.cpp">
-      <Filter>Space</Filter>
-    </ClCompile>
     <ClCompile Include="_Input\_\Audio\Sound.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
     <ClCompile Include="_Input\_\Audio\Track.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="_Input\_\Video\ElementBufferObject.cpp">
+      <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Video\VertexArrayObject.cpp">
+      <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="_Input\_\Video\VertexBufferObject.cpp">
+      <Filter>Video</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Video">
       <UniqueIdentifier>{b56b467c-0b6a-4820-bbfd-8cd2b9c9b854}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Space">
-      <UniqueIdentifier>{e82766e0-8ce4-4721-9f90-d3d036f33951}</UniqueIdentifier>
     </Filter>
     <Filter Include="Audio">
       <UniqueIdentifier>{09b06b53-b49b-4e95-94df-05db01aa4ca5}</UniqueIdentifier>

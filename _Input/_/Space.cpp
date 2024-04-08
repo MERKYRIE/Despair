@@ -5,8 +5,8 @@
 #include"Debug.hpp"
 #include"Input.hpp"
 #include"Video.hpp"
-#include"Space\\Partition.hpp"
-#include"Space\\VertexArrayObject.hpp"
+#include"Video\\Texture.hpp"
+#include"Video\\VertexArrayObject.hpp"
 
 namespace NDespair
 {
@@ -18,6 +18,157 @@ namespace NDespair
     void CSpace::IReevaluatePositionZ()
     {
         FPositionZ = FSizeZ / 2;
+    }
+    bool CSpace::IDoesPartitionExist(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
+    {
+        return
+        (
+            PX == std::clamp<std::intmax_t>(PX , 0 , FSizeX - 1) &&
+            PY == std::clamp<std::intmax_t>(PY , 0 , FSizeY - 1) &&
+            PZ == std::clamp<std::intmax_t>(PZ , 0 , FSizeZ - 1)
+        );
+    }
+    std::intmax_t CSpace::IEvaluateOffsetX(std::intmax_t PCoordinate)
+    {
+        return(PCoordinate - FPositionX);
+    }
+    std::intmax_t CSpace::IEvaluateOffsetY(std::intmax_t PCoordinate)
+    {
+        return(PCoordinate - FPositionY);
+    }
+    std::intmax_t CSpace::IEvaluateOffsetZ(std::intmax_t PCoordinate)
+    {
+        return(PCoordinate - FPositionZ);
+    }
+    bool CSpace::ICanGenerateTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
+    {
+        return(IDoesPartitionExist(PX , PY , PZ));
+    }
+    bool CSpace::IGenerateNewTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
+    {
+        switch(IEvaluateOffsetX(PX))
+        {
+            case(-1):
+                if(!FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeX && !FMatrix[PX][PY][PZ].FTexturePositiveX)
+                {
+                    return(false);
+                }
+                FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeX = nullptr;
+                FMatrix[PX][PY][PZ].FTexturePositiveX = nullptr;
+            return(true);
+            case(+1):
+                if(!FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveX && !FMatrix[PX][PY][PZ].FTextureNegativeX)
+                {
+                    return(false);
+                }
+                FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveX = nullptr;
+                FMatrix[PX][PY][PZ].FTextureNegativeX = nullptr;
+            return(true);
+        }
+        switch(IEvaluateOffsetY(PY))
+        {
+            case(-1):
+                if(!FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeY && !FMatrix[PX][PY][PZ].FTexturePositiveY)
+                {
+                    return(false);
+                }
+                FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeY = nullptr;
+                FMatrix[PX][PY][PZ].FTexturePositiveY = nullptr;
+            return(true);
+            case(+1):
+                if(!FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveY && !FMatrix[PX][PY][PZ].FTextureNegativeY)
+                {
+                    return(false);
+                }
+                FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveY = nullptr;
+                FMatrix[PX][PY][PZ].FTextureNegativeY = nullptr;
+            return(true);
+        }
+        GDebug.AError();
+        return(false);
+    }
+    bool CSpace::ICanGenerateShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ){
+        return
+        (
+            (
+                !FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeX
+                ||
+                !FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveX
+                ||
+                !FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeY
+                ||
+                !FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveX
+            )
+            &&
+            (
+                !FMatrix[PX][PY][PZ].FTextureNegativeX
+                ||
+                !FMatrix[PX][PY][PZ].FTexturePositiveX
+                ||
+                !FMatrix[PX][PY][PZ].FTextureNegativeY
+                ||
+                !FMatrix[PX][PY][PZ].FTexturePositiveX
+            )
+        );
+    }
+    bool CSpace::IGenerateNewShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
+    {
+        switch(IEvaluateOffsetZ(PZ))
+        {
+            case(-1):
+                if(!FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeZ && !FMatrix[PX][PY][PZ].FTexturePositiveZ)
+                {
+                    return(false);
+                }
+                FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeZ = nullptr;
+                FMatrix[PX][PY][PZ].FTexturePositiveZ = nullptr;
+            return(true);
+            case(+1):
+                if(!FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveZ && !FMatrix[PX][PY][PZ].FTextureNegativeZ)
+                {
+                    return(false);
+                }
+                FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveZ = nullptr;
+                FMatrix[PX][PY][PZ].FTextureNegativeZ = nullptr;
+            return(true);
+        }
+        GDebug.AError();
+        return(false);
+    }
+    bool CSpace::IIsCollisionDetected(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
+    {
+        if(!IDoesPartitionExist(PX , PY , PZ))
+        {
+            return(true);
+        }
+        switch(IEvaluateOffsetX(PX))
+        {
+            case(-1):
+                return(!(!FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeX && !FMatrix[PX][PY][PZ].FTexturePositiveX));
+            break;
+            case(+1):
+                return(!(!FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveX && !FMatrix[PX][PY][PZ].FTextureNegativeX));
+            break;
+        }
+        switch(IEvaluateOffsetY(PY))
+        {
+            case(-1):
+                return(!(!FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeY && !FMatrix[PX][PY][PZ].FTexturePositiveY));
+            break;
+            case(+1):
+                return(!(!FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveY && !FMatrix[PX][PY][PZ].FTextureNegativeY));
+            break;
+        }
+        switch(IEvaluateOffsetZ(PZ))
+        {
+            case(-1):
+                return(!(!FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeZ && !FMatrix[PX][PY][PZ].FTexturePositiveZ));
+            break;
+            case(+1):
+                return(!(!FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveZ && !FMatrix[PX][PY][PZ].FTextureNegativeZ));
+            break;
+        }
+        return(true);
     }
 
     void CSpace::AInitialize()
@@ -33,42 +184,42 @@ namespace NDespair
         FVision = 10;
         FVertexArrayObjectNegativeX.reset
         (
-            new NSpace::CVertexArrayObject
+            new NVideo::CVertexArrayObject
             {
                 {0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
             }
         );
         FVertexArrayObjectPositiveX.reset
         (
-            new NSpace::CVertexArrayObject
+            new NVideo::CVertexArrayObject
             {
                 {1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
             }
         );
         FVertexArrayObjectNegativeY.reset
         (
-            new NSpace::CVertexArrayObject
+            new NVideo::CVertexArrayObject
             {
                 {1.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
             }
         );
         FVertexArrayObjectPositiveY.reset
         (
-            new NSpace::CVertexArrayObject
+            new NVideo::CVertexArrayObject
             {
                 {0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
             }
         );
         FVertexArrayObjectNegativeZ.reset
         (
-            new NSpace::CVertexArrayObject
+            new NVideo::CVertexArrayObject
             {
                 {0.0F , 0.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
             }
         );
         FVertexArrayObjectPositiveZ.reset
         (
-            new NSpace::CVertexArrayObject
+            new NVideo::CVertexArrayObject
             {
                 {0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
             }
@@ -83,7 +234,12 @@ namespace NDespair
                 FMatrix[LX][LY].resize(FSizeZ);
                 for(std::intmax_t LZ{0} ; LZ < FSizeZ ; LZ++)
                 {
-                    FMatrix[LX][LY][LZ].reset(new NSpace::CPartition);
+                    FMatrix[LX][LY][LZ].FTextureNegativeX = GVideo.AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTexturePositiveX = GVideo.AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTextureNegativeY = GVideo.AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTexturePositiveY = GVideo.AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTextureNegativeZ = GVideo.AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTexturePositiveZ = GVideo.AAccessRandomTexture();
                 }
                 FMatrix[LX][LY].shrink_to_fit();
             }
@@ -107,9 +263,9 @@ namespace NDespair
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ))
+                            if(ICanGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewTransition(FPositionX + 1 , FPositionY , FPositionZ);
+                                LGenerated += IGenerateNewTransition(FPositionX + 1 , FPositionY , FPositionZ);
                                 FPositionX++;
                             }
                             else
@@ -122,9 +278,9 @@ namespace NDespair
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ))
+                            if(ICanGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewTransition(FPositionX , FPositionY + 1 , FPositionZ);
+                                LGenerated += IGenerateNewTransition(FPositionX , FPositionY + 1 , FPositionZ);
                                 FPositionY++;
                             }
                             else
@@ -137,9 +293,9 @@ namespace NDespair
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ))
+                            if(ICanGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewTransition(FPositionX - 1 , FPositionY , FPositionZ);
+                                LGenerated += IGenerateNewTransition(FPositionX - 1 , FPositionY , FPositionZ);
                                 FPositionX--;
                             }
                             else
@@ -152,9 +308,9 @@ namespace NDespair
                         LGenerated = 0;
                         while(LGenerated < LRequested)
                         {
-                            if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ))
+                            if(ICanGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ))
                             {
-                                LGenerated += FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewTransition(FPositionX , FPositionY - 1 , FPositionZ);
+                                LGenerated += IGenerateNewTransition(FPositionX , FPositionY - 1 , FPositionZ);
                                 FPositionY--;
                             }
                             else
@@ -178,9 +334,9 @@ namespace NDespair
                 std::uniform_int_distribution<std::intmax_t> LY{0 , FSizeY - 1};
                 FPositionX = LX(LGenerator);
                 FPositionY = LY(LGenerator);
-                if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateShaft(FPositionX , FPositionY , FPositionZ - 1))
+                if(ICanGenerateShaft(FPositionX , FPositionY , FPositionZ - 1))
                 {
-                    LGenerated = FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewShaft(FPositionX , FPositionY , FPositionZ - 1);
+                    LGenerated = IGenerateNewShaft(FPositionX , FPositionY , FPositionZ - 1);
                 }
             }
         }
@@ -196,9 +352,9 @@ namespace NDespair
                 std::uniform_int_distribution<std::intmax_t> LY{0 , FSizeY - 1};
                 FPositionX = LX(LGenerator);
                 FPositionY = LY(LGenerator);
-                if(FMatrix[FPositionX][FPositionY][FPositionZ]->ACanGenerateShaft(FPositionX , FPositionY , FPositionZ + 1))
+                if(ICanGenerateShaft(FPositionX , FPositionY , FPositionZ + 1))
                 {
-                    LGenerated = FMatrix[FPositionX][FPositionY][FPositionZ]->AGenerateNewShaft(FPositionX , FPositionY , FPositionZ + 1);
+                    LGenerated = IGenerateNewShaft(FPositionX , FPositionY , FPositionZ + 1);
                 }
             }
         }
@@ -226,11 +382,11 @@ namespace NDespair
         }
         if(GInput.AIsKeyPressed(SDL_SCANCODE_S))
         {
-            if(!FMatrix[FPositionX][FPositionY][FPositionZ]->AIsCollisionDetected(FPositionX - FDirectionX , FPositionY - FDirectionY , FPositionZ))
+            if(!IIsCollisionDetected(FPositionX - FDirectionX , FPositionY - FDirectionY , FPositionZ))
             {
                 FPositionX -= FDirectionX;
                 FPositionY -= FDirectionY;
-                if(!FMatrix[FPositionX][FPositionY][FPositionZ]->AIsCollisionDetected(FPositionX , FPositionY , FPositionZ - 1))
+                if(!IIsCollisionDetected(FPositionX , FPositionY , FPositionZ - 1))
                 {
                     FPositionZ--;
                 }
@@ -238,11 +394,11 @@ namespace NDespair
         }
         if(GInput.AIsKeyPressed(SDL_SCANCODE_W))
         {
-            if(!FMatrix[FPositionX][FPositionY][FPositionZ]->AIsCollisionDetected(FPositionX + FDirectionX , FPositionY + FDirectionY , FPositionZ))
+            if(!IIsCollisionDetected(FPositionX + FDirectionX , FPositionY + FDirectionY , FPositionZ))
             {
                 FPositionX += FDirectionX;
                 FPositionY += FDirectionY;
-                if(!FMatrix[FPositionX][FPositionY][FPositionZ]->AIsCollisionDetected(FPositionX , FPositionY , FPositionZ - 1))
+                if(!IIsCollisionDetected(FPositionX , FPositionY , FPositionZ - 1))
                 {
                     FPositionZ--;
                 }
@@ -298,59 +454,45 @@ namespace NDespair
                     glm::mat4 LModel{1.0F};
                     LModel = glm::translate(LModel , glm::vec3{LX , LY , LZ});
                     glUniformMatrix4fv(5 , 1 , GL_FALSE , &LModel[0][0]);
-                    FMatrix[LX][LY][LZ]->ARender(LX , LY , LZ);
+                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeX)
+                    {
+                        glBindVertexArray(FVertexArrayObjectNegativeX->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeX->AIdentifier());
+                        glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
+                    }
+                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveX)
+                    {
+                        glBindVertexArray(FVertexArrayObjectPositiveX->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveX->AIdentifier());
+                        glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
+                    }
+                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeY)
+                    {
+                        glBindVertexArray(FVertexArrayObjectNegativeY->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeY->AIdentifier());
+                        glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
+                    }
+                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveY)
+                    {
+                        glBindVertexArray(FVertexArrayObjectPositiveY->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveY->AIdentifier());
+                        glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
+                    }
+                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeZ)
+                    {
+                        glBindVertexArray(FVertexArrayObjectNegativeZ->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeZ->AIdentifier());
+                        glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
+                    }
+                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveZ)
+                    {
+                        glBindVertexArray(FVertexArrayObjectPositiveZ->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveZ->AIdentifier());
+                        glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
+                    }
                 }
             }
         }
-    }
-    NSpace::CPartition& CSpace::AAccessPartition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
-    {
-        return(*FMatrix[PX][PY][PZ]);
-    }
-    bool CSpace::ADoesPartitionExist(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
-    {
-        return
-        (
-            PX == std::clamp<std::intmax_t>(PX , 0 , FSizeX - 1) &&
-            PY == std::clamp<std::intmax_t>(PY , 0 , FSizeY - 1) &&
-            PZ == std::clamp<std::intmax_t>(PZ , 0 , FSizeZ - 1)
-        );
-    }
-    std::intmax_t CSpace::AEvaluateOffsetX(std::intmax_t PCoordinate)
-    {
-        return(PCoordinate - FPositionX);
-    }
-    std::intmax_t CSpace::AEvaluateOffsetY(std::intmax_t PCoordinate)
-    {
-        return(PCoordinate - FPositionY);
-    }
-    std::intmax_t CSpace::AEvaluateOffsetZ(std::intmax_t PCoordinate)
-    {
-        return(PCoordinate - FPositionZ);
-    }
-    void CSpace::ABindVertexArrayObjectNegativeX()
-    {
-        glBindVertexArray(FVertexArrayObjectNegativeX->AIdentifier());
-    }
-    void CSpace::ABindVertexArrayObjectPositiveX()
-    {
-        glBindVertexArray(FVertexArrayObjectPositiveX->AIdentifier());
-    }
-    void CSpace::ABindVertexArrayObjectNegativeY()
-    {
-        glBindVertexArray(FVertexArrayObjectNegativeY->AIdentifier());
-    }
-    void CSpace::ABindVertexArrayObjectPositiveY()
-    {
-        glBindVertexArray(FVertexArrayObjectPositiveY->AIdentifier());
-    }
-    void CSpace::ABindVertexArrayObjectNegativeZ()
-    {
-        glBindVertexArray(FVertexArrayObjectNegativeZ->AIdentifier());
-    }
-    void CSpace::ABindVertexArrayObjectPositiveZ()
-    {
-        glBindVertexArray(FVertexArrayObjectPositiveZ->AIdentifier());
     }
     void CSpace::ADeinitialize()
     {

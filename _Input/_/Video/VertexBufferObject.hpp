@@ -2,7 +2,7 @@
 
 #include"Despair.hpp"
 
-namespace NDespair::NSpace
+namespace NDespair::NVideo
 {
     class CVertexBufferObject
     {

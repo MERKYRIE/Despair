@@ -37,20 +37,16 @@ namespace NDespair
     class CDebug;
     class CInput;
     class CSpace;
-    namespace NSpace
-    {
-        class CElementBufferObject;
-        class CPartition;
-        class CVertexArrayObject;
-        class CVertexBufferObject;
-    }
     class CTime;
     class CVideo;
     namespace NVideo
     {
         class CCharacter;
+        class CElementBufferObject;
         class CFont;
         class CShader;
         class CTexture;
+        class CVertexArrayObject;
+        class CVertexBufferObject;
     }
 }

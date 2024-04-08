@@ -2,7 +2,7 @@
 
 #include"Debug.hpp"
 
-namespace NDespair::NSpace
+namespace NDespair::NVideo
 {
     CElementBufferObject::CElementBufferObject(const std::array<std::uint32_t , 36>& PElements)
     {
