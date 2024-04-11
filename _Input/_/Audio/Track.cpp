@@ -9,7 +9,7 @@ namespace NDespair::NAudio
         FPath = PPath.substr(PPath.find('\\'));
         GDebug.ASimpleDirectMediaLayerHandleError(FHandle = Mix_LoadMUS(PPath.c_str()));
     }
-    bool CTrack::AEqual(const std::string& PPath)
+    bool CTrack::AIs(const std::string& PPath)
     {
         return(FPath == PPath);
     }

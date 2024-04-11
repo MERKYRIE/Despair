@@ -42,7 +42,7 @@ namespace NDespair
         glUseProgram(FProgram);
         GDebug.AOpenGraphicsLibraryError();
         GDebug.ASimpleDirectMediaLayerCodeError(TTF_Init());
-        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Typeface"})
+        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Fonts"})
         {
             if(LEntry.path().extension() == ".ttf")
             {
@@ -51,7 +51,7 @@ namespace NDespair
         }
         FFonts.shrink_to_fit();
         GDebug.ASimpleDirectMediaLayerMaskError(IMG_Init(IMG_INIT_PNG));
-        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Atlas"})
+        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Textures"})
         {
             if(LEntry.path().extension() == ".png")
             {
@@ -76,7 +76,7 @@ namespace NDespair
     {
         std::vector<std::shared_ptr<NVideo::CFont>>::iterator LIterator
         {
-            std::find_if(FFonts.begin() , FFonts.end() , [&PPath](const std::shared_ptr<NVideo::CFont>& LPointer){return(LPointer->AEqual(PPath));})
+            std::find_if(FFonts.begin() , FFonts.end() , [&PPath](std::shared_ptr<NVideo::CFont>& LPointer){return(LPointer->AEqual(PPath));})
         };
         GDebug.AError(LIterator == FFonts.end());
         return(LIterator->get());
@@ -85,7 +85,7 @@ namespace NDespair
     {
         std::vector<std::shared_ptr<NVideo::CTexture>>::iterator LIterator
         {
-            std::find_if(FTextures.begin() , FTextures.end() , [&PPath](const std::shared_ptr<NVideo::CTexture>& LPointer){return(LPointer->AEqual(PPath));})
+            std::find_if(FTextures.begin() , FTextures.end() , [&PPath](std::shared_ptr<NVideo::CTexture>& LPointer){return(LPointer->AEqual(PPath));})
         };
         GDebug.AError(LIterator == FTextures.end());
         return(LIterator->get());

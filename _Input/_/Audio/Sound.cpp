@@ -11,7 +11,7 @@ namespace NDespair::NAudio
         FChannel = Mix_AllocateChannels(SDL_QUERY);
         GDebug.AError(Mix_AllocateChannels(Mix_AllocateChannels(SDL_QUERY) + 1) != FChannel + 1);
     }
-    bool CSound::AEqual(const std::string& PPath)
+    bool CSound::AIs(const std::string& PPath)
     {
         return(FPath == PPath);
     }

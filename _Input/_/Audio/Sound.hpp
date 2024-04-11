@@ -11,7 +11,7 @@ namespace NDespair::NAudio
         private : std::int32_t FChannel;
 
         public : CSound(const std::string& PPath);
-        public : bool AEqual(const std::string& PPath);
+        public : bool AIs(const std::string& PPath);
         public : CSound* APlay();
         public : bool AIsPlaying();
         public : ~CSound();

@@ -16,7 +16,7 @@ namespace NDespair
         GDebug.AError(!Mix_QuerySpec(&LFrequency , &LFormat , &LChannels));
         GDebug.AError(LFrequency != MIX_DEFAULT_FREQUENCY || LFormat != MIX_DEFAULT_FORMAT || LChannels != MIX_DEFAULT_CHANNELS);
         GDebug.AError(Mix_AllocateChannels(0));
-        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Soundpack"})
+        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Sounds"})
         {
             if(LEntry.path().extension() == ".wav")
             {
@@ -24,7 +24,7 @@ namespace NDespair
             }
         }
         FSounds.shrink_to_fit();
-        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Soundtrack"})
+        for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Tracks"})
         {
             if(LEntry.path().extension() == ".mp3")
             {
@@ -37,7 +37,7 @@ namespace NDespair
     {
         std::vector<std::shared_ptr<NAudio::CSound>>::iterator LIterator
         {
-            std::find_if(FSounds.begin() , FSounds.end() , [&PPath](const std::shared_ptr<NAudio::CSound>& LPointer){return(LPointer->AEqual(PPath));})
+            std::find_if(FSounds.begin() , FSounds.end() , [&](std::shared_ptr<NAudio::CSound>& LPointer){return(LPointer->AIs(PPath));})
         };
         return(LIterator->get());
     }
@@ -45,7 +45,7 @@ namespace NDespair
     {
         std::vector<std::shared_ptr<NAudio::CTrack>>::iterator LIterator
         {
-            std::find_if(FTracks.begin() , FTracks.end() , [&PPath](const std::shared_ptr<NAudio::CTrack>& LPointer){return(LPointer->AEqual(PPath));})
+            std::find_if(FTracks.begin() , FTracks.end() , [&](std::shared_ptr<NAudio::CTrack>& LPointer){return(LPointer->AIs(PPath));})
         };
         return(LIterator->get());
     }

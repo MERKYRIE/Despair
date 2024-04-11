@@ -6,7 +6,7 @@ namespace NDespair::NVideo
 {
     CShader::CShader(const std::string& PPath , std::uint32_t PType)
     {
-        std::fstream LFile{"Program" + PPath , std::ios::in};
+        std::fstream LFile{"Shaders" + PPath , std::ios::in};
         FIdentifier = glCreateShader(PType);
         std::stringstream LStream;
         LStream << LFile.rdbuf();

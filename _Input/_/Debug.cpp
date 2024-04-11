@@ -11,26 +11,45 @@ namespace NDespair{
                 ||
                 SDL_ShowSimpleMessageBox
                 (
-                    PFlags , "Debug" ,
+                    PFlags
+                    ,
+                    "Debug"
+                    ,
                     (
-                        std::string{} +
-                        "File - " + PLocation.file_name() + "\n" +
-                        "Function - " + PLocation.function_name() + "\n" +
-                        "Line - " + std::to_string(PLocation.line()) + "\n" +
-                        "Column - " + std::to_string(PLocation.column()) + "\n" +
+                        std::string{}
+                        +
+                        "File - " + PLocation.file_name() + "\n"
+                        +
+                        "Function - " + PLocation.function_name() + "\n"
+                        +
+                        "Line - " + std::to_string(PLocation.line()) + "\n"
+                        +
+                        "Column - " + std::to_string(PLocation.column()) + "\n"
+                        +
                         PMessage
                     )
-                    .data() , nullptr
+                    .
+                    data()
+                    ,
+                    nullptr
                 )
-                < 0
+                <
+                0
             )
             {
-                std::cout << "Debug:" << "\n"
-                          << "    File - " << PLocation.file_name() << "\n"
-                          << "    Function - " << PLocation.function_name() << "\n"
-                          << "    Line - " << PLocation.line() << "\n"
-                          << "    Column - " << PLocation.column() << "\n"
-                          << PMessage << "\n\n";
+                std::cout
+                <<
+                "Debug:" << "\n"
+                <<
+                "    File - " << PLocation.file_name() << "\n"
+                <<
+                "    Function - " << PLocation.function_name() << "\n"
+                <<
+                "    Line - " << PLocation.line() << "\n"
+                <<
+                "    Column - " << PLocation.column() << "\n"
+                <<
+                PMessage << "\n\n";
             }
             if(PFlags & SDL_MESSAGEBOX_ERROR)
             {
@@ -77,15 +96,15 @@ namespace NDespair{
     {
         return(AInformation(!PValue , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
     }
-    void CDebug::ASimpleDirectMediaLayerHandleError(const void* PPointer , const std::source_location& PLocation)
+    void CDebug::ASimpleDirectMediaLayerHandleError(void* PPointer , const std::source_location& PLocation)
     {
         AError(!PPointer , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation);
     }
-    bool CDebug::ASimpleDirectMediaLayerHandleWarning(const void* PPointer , const std::source_location& PLocation)
+    bool CDebug::ASimpleDirectMediaLayerHandleWarning(void* PPointer , const std::source_location& PLocation)
     {
         return(AWarning(!PPointer , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
     }
-    bool CDebug::ASimpleDirectMediaLayerHandleInformation(const void* PPointer , const std::source_location& PLocation)
+    bool CDebug::ASimpleDirectMediaLayerHandleInformation(void* PPointer , const std::source_location& PLocation)
     {
         return(AInformation(!PPointer , std::string{} + "Simple DirectMedia Layer - " + SDL_GetError() , PLocation));
     }
@@ -104,15 +123,15 @@ namespace NDespair{
         std::uint32_t LCode{glGetError()};
         return(AInformation(LCode , std::string{} + "Open Graphics Library - " + std::to_string(LCode) , PLocation));
     }
-    void CDebug::AOpenAssetImportLibraryError(const void* AHandle , const std::source_location& PLocation)
+    void CDebug::AOpenAssetImportLibraryError(void* AHandle , const std::source_location& PLocation)
     {
         AError(!AHandle , std::string{} + "Open Asset Import Library - " + aiGetErrorString() , PLocation);
     }
-    bool CDebug::AOpenAssetImportLibraryWarning(const void* AHandle , const std::source_location& PLocation)
+    bool CDebug::AOpenAssetImportLibraryWarning(void* AHandle , const std::source_location& PLocation)
     {
         return(AWarning(!AHandle , std::string{} + "Open Asset Import Library - " + aiGetErrorString() , PLocation));
     }
-    bool CDebug::AOpenAssetImportLibraryInformation(const void* AHandle , const std::source_location& PLocation)
+    bool CDebug::AOpenAssetImportLibraryInformation(void* AHandle , const std::source_location& PLocation)
     {
         return(AInformation(!AHandle , std::string{} + "Open Asset Import Library - " + aiGetErrorString() , PLocation));
     }

@@ -17,15 +17,15 @@ namespace NDespair
         public : void ASimpleDirectMediaLayerMaskError(std::int32_t PValue , const std::source_location& PLocation = std::source_location::current());
         public : bool ASimpleDirectMediaLayerMaskWarning(std::int32_t PValue , const std::source_location& PLocation = std::source_location::current());
         public : bool ASimpleDirectMediaLayerMaskInformation(std::int32_t PValue , const std::source_location& PLocation = std::source_location::current());
-        public : void ASimpleDirectMediaLayerHandleError(const void* PPointer , const std::source_location& PLocation = std::source_location::current());
-        public : bool ASimpleDirectMediaLayerHandleWarning(const void* PPointer , const std::source_location& PLocation = std::source_location::current());
-        public : bool ASimpleDirectMediaLayerHandleInformation(const void* PPointer , const std::source_location& PLocation = std::source_location::current());
+        public : void ASimpleDirectMediaLayerHandleError(void* PPointer , const std::source_location& PLocation = std::source_location::current());
+        public : bool ASimpleDirectMediaLayerHandleWarning(void* PPointer , const std::source_location& PLocation = std::source_location::current());
+        public : bool ASimpleDirectMediaLayerHandleInformation(void* PPointer , const std::source_location& PLocation = std::source_location::current());
         public : void AOpenGraphicsLibraryError(const std::source_location& PLocation = std::source_location::current());
         public : bool AOpenGraphicsLibraryWarning(const std::source_location& PLocation = std::source_location::current());
         public : bool AOpenGraphicsLibraryInformation(const std::source_location& PLocation = std::source_location::current());
-        public : void AOpenAssetImportLibraryError(const void* PHandle , const std::source_location& PLocation = std::source_location::current());
-        public : bool AOpenAssetImportLibraryWarning(const void* PHandle , const std::source_location& PLocation = std::source_location::current());
-        public : bool AOpenAssetImportLibraryInformation(const void* PHandle , const std::source_location& PLocation = std::source_location::current());
+        public : void AOpenAssetImportLibraryError(void* PHandle , const std::source_location& PLocation = std::source_location::current());
+        public : bool AOpenAssetImportLibraryWarning(void* PHandle , const std::source_location& PLocation = std::source_location::current());
+        public : bool AOpenAssetImportLibraryInformation(void* PHandle , const std::source_location& PLocation = std::source_location::current());
     }
     GDebug;
 }

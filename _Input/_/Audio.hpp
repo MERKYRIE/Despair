@@ -6,8 +6,6 @@ namespace NDespair
 {
     inline class CAudio
     {
-        friend std::int32_t (::main(std::int32_t , char**));
-
         private : std::vector<std::shared_ptr<NAudio::CSound>> FSounds;
         private : std::vector<std::shared_ptr<NAudio::CTrack>> FTracks;
 

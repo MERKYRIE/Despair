@@ -23,8 +23,10 @@ namespace NDespair
     {
         return
         (
-            PX == std::clamp<std::intmax_t>(PX , 0 , FSizeX - 1) &&
-            PY == std::clamp<std::intmax_t>(PY , 0 , FSizeY - 1) &&
+            PX == std::clamp<std::intmax_t>(PX , 0 , FSizeX - 1)
+            &&
+            PY == std::clamp<std::intmax_t>(PY , 0 , FSizeY - 1)
+            &&
             PZ == std::clamp<std::intmax_t>(PZ , 0 , FSizeZ - 1)
         );
     }
@@ -411,14 +413,16 @@ namespace NDespair
         LView = glm::rotate(LView , glm::radians(-90.0F) , glm::vec3{1.0F , 0.0F , 0.0F});
         LView = glm::rotate
         (
-            LView ,
+            LView
+            ,
             glm::radians
             (
                 static_cast<float>
                 (
                     -std::round(std::acos(FDirectionX ? FDirectionX : 1) * 180.0F / std::numbers::pi_v<float> + std::asin(FDirectionY ? FDirectionY : 0) * 180.0F / std::numbers::pi_v<float> - 90.0F)
                 )
-            ) ,
+            )
+            ,
             glm::vec3{0.0F , 0.0F , 1.0F}
         );
         LView = glm::translate(LView , -glm::vec3{FPositionX + 0.5F , FPositionY + 0.5F , FPositionZ + 0.5F});
@@ -502,6 +506,5 @@ namespace NDespair
         FVertexArrayObjectNegativeY.reset();
         FVertexArrayObjectPositiveX.reset();
         FVertexArrayObjectNegativeX.reset();
-        FMatrix.clear();
     }
 }
