@@ -1,10 +1,10 @@
 #pragma once
 
-#include"Despair.hpp"
+#include"Core.hpp"
 
 namespace NDespair
 {
-    inline class CSpace
+    class CSpace
     {
         private : struct SPartition
         {
@@ -40,14 +40,12 @@ namespace NDespair
         private : std::intmax_t IEvaluateOffsetY(std::intmax_t PCoordinate);
         private : std::intmax_t IEvaluateOffsetZ(std::intmax_t PCoordinate);
         private : bool ICanGenerateTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
-        private : bool IGenerateNewTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
+        private : bool IGenerateTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
         private : bool ICanGenerateShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
-        private : bool IGenerateNewShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
+        private : bool IGenerateShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
         private : bool IIsCollisionDetected(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
 
-        public : void AInitialize();
+        public : CSpace();
         public : void AUpdate();
-        public : void ADeinitialize();
-    }
-    GSpace;
+    };
 }

@@ -24,8 +24,6 @@
     #include"..\\GraphicsLibraryMathematics\\gtc\\type_ptr.hpp"
 #pragma warning(pop)
 
-#pragma warning(disable : 26495)
-
 namespace NDespair
 {
     class CAudio;
@@ -50,3 +48,25 @@ namespace NDespair
         class CVertexBufferObject;
     }
 }
+
+namespace NDespair
+{
+    class CCore
+    {
+        public : CCore();
+        public : ~CCore();
+    };
+}
+
+namespace NDespair
+{
+    inline std::shared_ptr<CDebug> GDebug;
+    inline std::shared_ptr<CTime> GTime;
+    inline std::shared_ptr<CCore> GCore;
+    inline std::shared_ptr<CAudio> GAudio;
+    inline std::shared_ptr<CInput> GInput;
+    inline std::shared_ptr<CVideo> GVideo;
+    inline std::shared_ptr<CSpace> GSpace;
+}
+
+#pragma warning(disable : 26495)

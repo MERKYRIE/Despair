@@ -9,11 +9,11 @@ namespace NDespair::NVideo
         glGenBuffers(1 , &FIdentifier);
         glBindBuffer(GL_ARRAY_BUFFER , FIdentifier);
         glBufferData(GL_ARRAY_BUFFER , sizeof(PVertices) , PVertices.data() , GL_STATIC_DRAW);
-        GDebug.AOpenGraphicsLibraryError();
+        GDebug->AOpenGraphicsLibraryError();
     }
     CVertexBufferObject::~CVertexBufferObject()
     {
         glDeleteBuffers(1 , &FIdentifier);
-        GDebug.AOpenGraphicsLibraryError();
+        GDebug->AOpenGraphicsLibraryError();
     }
 }

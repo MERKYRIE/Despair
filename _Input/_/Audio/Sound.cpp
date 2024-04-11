@@ -7,9 +7,9 @@ namespace NDespair::NAudio
     CSound::CSound(const std::string& PPath)
     {
         FPath = PPath.substr(PPath.find('\\'));
-        GDebug.ASimpleDirectMediaLayerHandleError(FHandle = Mix_LoadWAV(PPath.c_str()));
+        GDebug->ASimpleDirectMediaLayerHandleError(FHandle = Mix_LoadWAV(PPath.c_str()));
         FChannel = Mix_AllocateChannels(SDL_QUERY);
-        GDebug.AError(Mix_AllocateChannels(Mix_AllocateChannels(SDL_QUERY) + 1) != FChannel + 1);
+        GDebug->AError(Mix_AllocateChannels(Mix_AllocateChannels(SDL_QUERY) + 1) != FChannel + 1);
     }
     bool CSound::AIs(const std::string& PPath)
     {
@@ -17,7 +17,7 @@ namespace NDespair::NAudio
     }
     CSound* CSound::APlay()
     {
-        GDebug.ASimpleDirectMediaLayerCodeError(Mix_PlayChannel(FChannel , FHandle , 0) != FChannel);
+        GDebug->ASimpleDirectMediaLayerCodeError(Mix_PlayChannel(FChannel , FHandle , 0) != FChannel);
         return(this);
     }
     bool CSound::AIsPlaying()

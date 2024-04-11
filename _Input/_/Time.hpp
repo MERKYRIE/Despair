@@ -1,10 +1,10 @@
 #pragma once
 
-#include"Despair.hpp"
+#include"Core.hpp"
 
 namespace NDespair
 {
-    inline class CTime
+    class CTime
     {
         private : std::uint32_t FLast;
         private : std::uint32_t FAbsolute;
@@ -13,6 +13,5 @@ namespace NDespair
         public : void AUpdate();
         public : std::uint32_t AAbsolute();
         public : std::uint32_t ARelative();
-    }
-    GTime;
+    };
 }

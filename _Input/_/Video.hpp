@@ -1,10 +1,10 @@
 #pragma once
 
-#include"Despair.hpp"
+#include"Core.hpp"
 
 namespace NDespair
 {
-    inline class CVideo
+    class CVideo
     {
         private : SDL_Window* FWindow;
         private : SDL_GLContext FContext;
@@ -16,7 +16,7 @@ namespace NDespair
         private : std::vector<std::shared_ptr<NVideo::CFont>> FFonts;
         private : std::vector<std::shared_ptr<NVideo::CTexture>> FTextures;
 
-        public : void AInitialize();
+        public : CVideo();
         public : void APreupdate();
         public : float ARatio();
         public : float AInversedRatio();
@@ -24,7 +24,6 @@ namespace NDespair
         public : NVideo::CTexture* AAccessSpecificTexture(const std::string& PPath);
         public : NVideo::CTexture* AAccessRandomTexture();
         public : void APostupdate();
-        public : void ADeinitialize();
-    }
-    GVideo;
+        public : ~CVideo();
+    };
 }

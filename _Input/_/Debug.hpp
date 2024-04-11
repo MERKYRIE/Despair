@@ -1,10 +1,10 @@
 #pragma once
 
-#include"Despair.hpp"
+#include"Core.hpp"
 
 namespace NDespair
 {
-    inline class CDebug
+    class CDebug
     {
         private : void IAssert(bool PCondition , const std::string& PMessage , SDL_MessageBoxFlags PFlags , const std::source_location& PLocation);
 
@@ -26,6 +26,5 @@ namespace NDespair
         public : void AOpenAssetImportLibraryError(void* PHandle , const std::source_location& PLocation = std::source_location::current());
         public : bool AOpenAssetImportLibraryWarning(void* PHandle , const std::source_location& PLocation = std::source_location::current());
         public : bool AOpenAssetImportLibraryInformation(void* PHandle , const std::source_location& PLocation = std::source_location::current());
-    }
-    GDebug;
+    };
 }

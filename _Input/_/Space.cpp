@@ -46,7 +46,7 @@ namespace NDespair
     {
         return(IDoesPartitionExist(PX , PY , PZ));
     }
-    bool CSpace::IGenerateNewTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
+    bool CSpace::IGenerateTransition(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
         switch(IEvaluateOffsetX(PX))
         {
@@ -86,7 +86,7 @@ namespace NDespair
                 FMatrix[PX][PY][PZ].FTextureNegativeY = nullptr;
             return(true);
         }
-        GDebug.AError();
+        GDebug->AError();
         return(false);
     }
     bool CSpace::ICanGenerateShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ){
@@ -113,7 +113,7 @@ namespace NDespair
             )
         );
     }
-    bool CSpace::IGenerateNewShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
+    bool CSpace::IGenerateShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
         switch(IEvaluateOffsetZ(PZ))
         {
@@ -134,7 +134,7 @@ namespace NDespair
                 FMatrix[PX][PY][PZ].FTextureNegativeZ = nullptr;
             return(true);
         }
-        GDebug.AError();
+        GDebug->AError();
         return(false);
     }
     bool CSpace::IIsCollisionDetected(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
@@ -173,7 +173,7 @@ namespace NDespair
         return(true);
     }
 
-    void CSpace::AInitialize()
+    CSpace::CSpace()
     {
         FSizeX = 100;
         FSizeY = 100;
@@ -236,12 +236,12 @@ namespace NDespair
                 FMatrix[LX][LY].resize(FSizeZ);
                 for(std::intmax_t LZ{0} ; LZ < FSizeZ ; LZ++)
                 {
-                    FMatrix[LX][LY][LZ].FTextureNegativeX = GVideo.AAccessRandomTexture();
-                    FMatrix[LX][LY][LZ].FTexturePositiveX = GVideo.AAccessRandomTexture();
-                    FMatrix[LX][LY][LZ].FTextureNegativeY = GVideo.AAccessRandomTexture();
-                    FMatrix[LX][LY][LZ].FTexturePositiveY = GVideo.AAccessRandomTexture();
-                    FMatrix[LX][LY][LZ].FTextureNegativeZ = GVideo.AAccessRandomTexture();
-                    FMatrix[LX][LY][LZ].FTexturePositiveZ = GVideo.AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTextureNegativeX = GVideo->AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTexturePositiveX = GVideo->AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTextureNegativeY = GVideo->AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTexturePositiveY = GVideo->AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTextureNegativeZ = GVideo->AAccessRandomTexture();
+                    FMatrix[LX][LY][LZ].FTexturePositiveZ = GVideo->AAccessRandomTexture();
                 }
                 FMatrix[LX][LY].shrink_to_fit();
             }
@@ -267,7 +267,7 @@ namespace NDespair
                         {
                             if(ICanGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ))
                             {
-                                LGenerated += IGenerateNewTransition(FPositionX + 1 , FPositionY , FPositionZ);
+                                LGenerated += IGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ);
                                 FPositionX++;
                             }
                             else
@@ -282,7 +282,7 @@ namespace NDespair
                         {
                             if(ICanGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ))
                             {
-                                LGenerated += IGenerateNewTransition(FPositionX , FPositionY + 1 , FPositionZ);
+                                LGenerated += IGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ);
                                 FPositionY++;
                             }
                             else
@@ -297,7 +297,7 @@ namespace NDespair
                         {
                             if(ICanGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ))
                             {
-                                LGenerated += IGenerateNewTransition(FPositionX - 1 , FPositionY , FPositionZ);
+                                LGenerated += IGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ);
                                 FPositionX--;
                             }
                             else
@@ -312,7 +312,7 @@ namespace NDespair
                         {
                             if(ICanGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ))
                             {
-                                LGenerated += IGenerateNewTransition(FPositionX , FPositionY - 1 , FPositionZ);
+                                LGenerated += IGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ);
                                 FPositionY--;
                             }
                             else
@@ -338,7 +338,7 @@ namespace NDespair
                 FPositionY = LY(LGenerator);
                 if(ICanGenerateShaft(FPositionX , FPositionY , FPositionZ - 1))
                 {
-                    LGenerated = IGenerateNewShaft(FPositionX , FPositionY , FPositionZ - 1);
+                    LGenerated = IGenerateShaft(FPositionX , FPositionY , FPositionZ - 1);
                 }
             }
         }
@@ -356,17 +356,17 @@ namespace NDespair
                 FPositionY = LY(LGenerator);
                 if(ICanGenerateShaft(FPositionX , FPositionY , FPositionZ + 1))
                 {
-                    LGenerated = IGenerateNewShaft(FPositionX , FPositionY , FPositionZ + 1);
+                    LGenerated = IGenerateShaft(FPositionX , FPositionY , FPositionZ + 1);
                 }
             }
         }
         IReevaluatePositionXY();
         IReevaluatePositionZ();
-        GAudio.AAccessTrack("\\Mountain Realm - Grayshadow Ruins.mp3")->AAccessVolume(16)->APlay();
+        GAudio->AAccessTrack("\\Mountain Realm - Grayshadow Ruins.mp3")->AAccessVolume(16)->APlay();
     }
     void CSpace::AUpdate()
     {
-        if(GInput.AIsKeyPressed(SDL_SCANCODE_A))
+        if(GInput->AIsKeyPressed(SDL_SCANCODE_A))
         {
             std::swap(FDirectionX , FDirectionY);
             if(FDirectionX)
@@ -374,7 +374,7 @@ namespace NDespair
                 FDirectionX *= -1;
             }
         }
-        if(GInput.AIsKeyPressed(SDL_SCANCODE_D))
+        if(GInput->AIsKeyPressed(SDL_SCANCODE_D))
         {
             std::swap(FDirectionX , FDirectionY);
             if(FDirectionY)
@@ -382,7 +382,7 @@ namespace NDespair
                 FDirectionY *= -1;
             }
         }
-        if(GInput.AIsKeyPressed(SDL_SCANCODE_S))
+        if(GInput->AIsKeyPressed(SDL_SCANCODE_S))
         {
             if(!IIsCollisionDetected(FPositionX - FDirectionX , FPositionY - FDirectionY , FPositionZ))
             {
@@ -394,7 +394,7 @@ namespace NDespair
                 }
             }
         }
-        if(GInput.AIsKeyPressed(SDL_SCANCODE_W))
+        if(GInput->AIsKeyPressed(SDL_SCANCODE_W))
         {
             if(!IIsCollisionDetected(FPositionX + FDirectionX , FPositionY + FDirectionY , FPositionZ))
             {
@@ -407,7 +407,7 @@ namespace NDespair
             }
         }
         glEnable(GL_DEPTH_TEST);
-        glm::mat4 LProjection{glm::perspective(glm::radians(90.0F) , GVideo.ARatio() , 0.25F , 1'000.0F)};
+        glm::mat4 LProjection{glm::perspective(glm::radians(90.0F) , GVideo->ARatio() , 0.25F , 1'000.0F)};
         glUniformMatrix4fv(3 , 1 , GL_FALSE , &LProjection[0][0]);
         glm::mat4 LView{1.0F};
         LView = glm::rotate(LView , glm::radians(-90.0F) , glm::vec3{1.0F , 0.0F , 0.0F});
@@ -497,14 +497,5 @@ namespace NDespair
                 }
             }
         }
-    }
-    void CSpace::ADeinitialize()
-    {
-        FVertexArrayObjectPositiveZ.reset();
-        FVertexArrayObjectNegativeZ.reset();
-        FVertexArrayObjectPositiveY.reset();
-        FVertexArrayObjectNegativeY.reset();
-        FVertexArrayObjectPositiveX.reset();
-        FVertexArrayObjectNegativeX.reset();
     }
 }

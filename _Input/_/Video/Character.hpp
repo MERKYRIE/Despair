@@ -1,6 +1,6 @@
 #pragma once
 
-#include"Despair.hpp"
+#include"Core.hpp"
 
 namespace NDespair::NVideo
 {

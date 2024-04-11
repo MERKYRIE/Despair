@@ -1,10 +1,10 @@
 #pragma once
 
-#include"Despair.hpp"
+#include"Core.hpp"
 
 namespace NDespair
 {
-    inline class CInput
+    class CInput
     {
         private : bool FIsKeyHeld[512];
         private : bool FIsKeyPressed[512];
@@ -48,6 +48,5 @@ namespace NDespair
         public : bool AIsWheelModified();
         public : bool AIsWheelDown();
         public : bool AIsWheelUp();
-    }
-    GInput;
+    };
 }
