@@ -1,13 +1,14 @@
 #pragma once
 
-#include"Core.hpp"
+#include"Despair.hpp"
 
 namespace NDespair
 {
-    class CDebug
+    inline class CDebug
     {
         private : void IAssert(bool PCondition , const std::string& PMessage , SDL_MessageBoxFlags PFlags , const std::source_location& PLocation);
 
+        public : CDebug();
         public : void AError(bool PCondition = true , const std::string& PMessage = "" , const std::source_location& PLocation = std::source_location::current());
         public : bool AWarning(bool PCondition = true , const std::string& PMessage = "" , const std::source_location& PLocation = std::source_location::current());
         public : bool AInformation(bool PCondition = true , const std::string& PMessage = "" , const std::source_location& PLocation = std::source_location::current());
@@ -26,5 +27,6 @@ namespace NDespair
         public : void AOpenAssetImportLibraryError(void* PHandle , const std::source_location& PLocation = std::source_location::current());
         public : bool AOpenAssetImportLibraryWarning(void* PHandle , const std::source_location& PLocation = std::source_location::current());
         public : bool AOpenAssetImportLibraryInformation(void* PHandle , const std::source_location& PLocation = std::source_location::current());
-    };
+    }
+    *GDebug;
 }

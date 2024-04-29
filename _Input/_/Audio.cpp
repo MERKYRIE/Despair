@@ -8,6 +8,7 @@ namespace NDespair
 {
     CAudio::CAudio()
     {
+        GAudio = this;
         GDebug->ASimpleDirectMediaLayerMaskError(Mix_Init(MIX_INIT_MP3));
         GDebug->ASimpleDirectMediaLayerCodeError(Mix_OpenAudioDevice(MIX_DEFAULT_FREQUENCY , MIX_DEFAULT_FORMAT , MIX_DEFAULT_CHANNELS , 2048 , nullptr , 0));
         std::int32_t LFrequency;

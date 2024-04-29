@@ -58,6 +58,10 @@ namespace NDespair{
         }
     }
 
+    CDebug::CDebug()
+    {
+        GDebug = this;
+    }
     void CDebug::AError(bool PCondition , const std::string& PMessage , const std::source_location& PLocation)
     {
         IAssert(PCondition , PMessage , SDL_MESSAGEBOX_ERROR , PLocation);

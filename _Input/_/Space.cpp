@@ -175,6 +175,7 @@ namespace NDespair
 
     CSpace::CSpace()
     {
+        GSpace = this;
         FSizeX = 100;
         FSizeY = 100;
         FSizeZ = 3;

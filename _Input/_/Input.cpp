@@ -2,6 +2,36 @@
 
 namespace NDespair
 {
+    CInput::CInput()
+    {
+        GInput = this;
+        for(std::uint16_t LKey{0} ; LKey < 512 ; LKey++)
+        {
+            FIsKeyHeld[LKey] = false;
+            FIsKeyPressed[LKey] = false;
+            FIsKeyReleased[LKey] = false;
+        }
+        for(std::uint8_t LButton{0} ; LButton <= 4 ; LButton++)
+        {
+            FIsButtonHeld[LButton] = false;
+            FIsButtonPressed[LButton] = false;
+            FIsButtonReleased[LButton] = false;
+            FPressedX[LButton] = 0;
+            FPressedY[LButton] = 0;
+            FReleasedX[LButton] = 0;
+            FReleasedY[LButton] = 0;
+        }
+        FAbsoluteX = 0;
+        FRelativeX = 0;
+        FIsXModified = false;
+        FAbsoluteY = 0;
+        FRelativeY = 0;
+        FIsYModified = false;
+        FWheelState = 0;
+        FIsWheelModified = false;
+        FIsWheelDown = false;
+        FIsWheelUp = false;
+    }
     void CInput::AUpdate()
     {
         for(std::uint16_t LKey{0} ; LKey < 512 ; LKey++)

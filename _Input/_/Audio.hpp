@@ -1,10 +1,10 @@
 #pragma once
 
-#include"Core.hpp"
+#include"Despair.hpp"
 
 namespace NDespair
 {
-    class CAudio
+    inline class CAudio
     {
         private : std::vector<std::shared_ptr<NAudio::CSound>> FSounds;
         private : std::vector<std::shared_ptr<NAudio::CTrack>> FTracks;
@@ -13,5 +13,6 @@ namespace NDespair
         public : NAudio::CSound* AAccessSound(const std::string& PPath);
         public : NAudio::CTrack* AAccessTrack(const std::string& PPath);
         public : ~CAudio();
-    };
+    }
+    *GAudio;
 }

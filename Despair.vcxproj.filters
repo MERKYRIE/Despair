@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="_Input\_\Core.hpp" />
+    <ClInclude Include="_Input\_\Despair.hpp" />
     <ClInclude Include="_Input\_\Audio.hpp" />
     <ClInclude Include="_Input\_\Debug.hpp" />
     <ClInclude Include="_Input\_\Input.hpp" />
@@ -35,9 +35,10 @@
     <ClInclude Include="_Input\_\Video\VertexBufferObject.hpp">
       <Filter>Video</Filter>
     </ClInclude>
+    <ClInclude Include="_Input\_\Network.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="_Input\_\Core.cpp" />
+    <ClCompile Include="_Input\_\Despair.cpp" />
     <ClCompile Include="_Input\_\Audio.cpp" />
     <ClCompile Include="_Input\_\Debug.cpp" />
     <ClCompile Include="_Input\_\Input.cpp" />
@@ -71,6 +72,7 @@
     <ClCompile Include="_Input\_\Video\VertexBufferObject.cpp">
       <Filter>Video</Filter>
     </ClCompile>
+    <ClCompile Include="_Input\_\Network.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Video">

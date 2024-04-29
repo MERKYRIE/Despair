@@ -1,10 +1,10 @@
 #pragma once
 
-#include"Core.hpp"
+#include"Despair.hpp"
 
 namespace NDespair
 {
-    class CSpace
+    inline class CSpace
     {
         private : struct SPartition
         {
@@ -47,5 +47,6 @@ namespace NDespair
 
         public : CSpace();
         public : void AUpdate();
-    };
+    }
+    *GSpace;
 }

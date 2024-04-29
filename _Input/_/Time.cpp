@@ -2,6 +2,13 @@
 
 namespace NDespair
 {
+    CTime::CTime()
+    {
+        GTime = this;
+        FLast = 0;
+        FAbsolute = 0;
+        FRelative = 0;
+    }
     void CTime::AUpdate()
     {
         FLast = FAbsolute;

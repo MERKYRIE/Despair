@@ -1,10 +1,10 @@
 #pragma once
 
-#include"Core.hpp"
+#include"Despair.hpp"
 
 namespace NDespair
 {
-    class CVideo
+    inline class CVideo
     {
         private : SDL_Window* FWindow;
         private : SDL_GLContext FContext;
@@ -25,5 +25,6 @@ namespace NDespair
         public : NVideo::CTexture* AAccessRandomTexture();
         public : void APostupdate();
         public : ~CVideo();
-    };
+    }
+    *GVideo;
 }
