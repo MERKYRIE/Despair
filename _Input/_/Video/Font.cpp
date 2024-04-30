@@ -10,7 +10,7 @@ namespace NDespair::NVideo
     {
         FPath = PPath.substr(PPath.find('\\'));
         TTF_Font* LFont{TTF_OpenFont(PPath.c_str() , 64)};
-        GDebug->ASimpleDirectMediaLayerHandleError(LFont);
+        GDebug->AAssertSimpleDirectMediaLayerHandle(LFont);
         for(char LDigit{'0'} ; LDigit <= '9' ; LDigit++)
         {
             FDigits.emplace_back(new CCharacter{LFont , LDigit});

@@ -1,48 +1,57 @@
 #include"Video.hpp"
 
-#include"Debug.hpp"
 #include"Video\\Font.hpp"
 #include"Video\\Shader.hpp"
 #include"Video\\Texture.hpp"
+
+#include"Debug.hpp"
+#include"Network.hpp"
 
 namespace NDespair
 {
     CVideo::CVideo()
     {
         GVideo = this;
-        GDebug->ASimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 4));
-        GDebug->ASimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 6));
-        GDebug->ASimpleDirectMediaLayerCodeError(SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK , SDL_GL_CONTEXT_PROFILE_CORE));
-        GDebug->ASimpleDirectMediaLayerHandleError(FWindow = SDL_CreateWindow("Despair" , 0 , 0 , 1600 , 900 , SDL_WINDOW_OPENGL));
-        GDebug->ASimpleDirectMediaLayerHandleError(FContext = SDL_GL_CreateContext(FWindow));
-        GDebug->ASimpleDirectMediaLayerCodeError(SDL_GL_SetSwapInterval(0));
+        GDebug->AAssertSimpleDirectMediaLayerCode(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 4));
+        GDebug->AAssertSimpleDirectMediaLayerCode(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 6));
+        GDebug->AAssertSimpleDirectMediaLayerCode(SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK , SDL_GL_CONTEXT_PROFILE_CORE));
+        if(GNetwork->AMode() == "Server")
+        {
+            GDebug->AAssertSimpleDirectMediaLayerHandle(FWindow = SDL_CreateWindow(GNetwork->AMode().data() , 9 , 31 , 640 , 480 , SDL_WINDOW_OPENGL));
+        }
+        if(GNetwork->AMode() == "Client")
+        {
+            GDebug->AAssertSimpleDirectMediaLayerHandle(FWindow = SDL_CreateWindow(GNetwork->AMode().data() , 9 , 31 , 640 , 480 , SDL_WINDOW_OPENGL));
+        }
+        GDebug->AAssertSimpleDirectMediaLayerHandle(FContext = SDL_GL_CreateContext(FWindow));
+        GDebug->AAssertSimpleDirectMediaLayerCode(SDL_GL_SetSwapInterval(0));
         SDL_DisplayMode LDisplayMode;
-        GDebug->ASimpleDirectMediaLayerCodeError(SDL_GetWindowDisplayMode(FWindow , &LDisplayMode));
+        GDebug->AAssertSimpleDirectMediaLayerCode(SDL_GetWindowDisplayMode(FWindow , &LDisplayMode));
         FRatio = static_cast<float>(LDisplayMode.w) / static_cast<float>(LDisplayMode.h);
-        FInversedRatio = static_cast<float>(LDisplayMode.h) / static_cast<float>(LDisplayMode.w);
-        GDebug->ASimpleDirectMediaLayerCodeError(SDL_SetRelativeMouseMode(SDL_TRUE));
-        GDebug->AError(gladLoadGL(reinterpret_cast<GLADloadfunc>(SDL_GL_GetProcAddress)) != 40006);
+        FRatioInversed = static_cast<float>(LDisplayMode.h) / static_cast<float>(LDisplayMode.w);
+        //GDebug->ASimpleDirectMediaLayerCodeError(SDL_SetRelativeMouseMode(SDL_TRUE));
+        GDebug->AAssert(gladLoadGL(reinterpret_cast<GLADloadfunc>(SDL_GL_GetProcAddress)) != 40006);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_FRONT);
-        FVertex.reset(new NVideo::CShader{"\\Vertex.ogl" , GL_VERTEX_SHADER});
-        FFragment.reset(new NVideo::CShader{"\\Fragment.ogl" , GL_FRAGMENT_SHADER});
+        FShaderVertex.reset(new NVideo::CShader{"\\Vertex.ogl" , GL_VERTEX_SHADER});
+        FShaderFragment.reset(new NVideo::CShader{"\\Fragment.ogl" , GL_FRAGMENT_SHADER});
         std::int32_t LSuccess;
         std::int32_t LLength;
         std::string LLog;
         FProgram = glCreateProgram();
-        glAttachShader(FProgram , FVertex->AIdentifier());
-        glAttachShader(FProgram , FFragment->AIdentifier());
+        glAttachShader(FProgram , FShaderVertex->AIdentifier());
+        glAttachShader(FProgram , FShaderFragment->AIdentifier());
         glLinkProgram(FProgram);
         glGetProgramiv(FProgram , GL_LINK_STATUS , &LSuccess);
         glGetProgramiv(FProgram , GL_INFO_LOG_LENGTH , &LLength);
         LLog.resize(LLength);
         glGetProgramInfoLog(FProgram , LLength , nullptr , LLog.data());
-        GDebug->AError(!LSuccess , "Open Graphics Library - " + LLog);
+        GDebug->AAssert(!LSuccess , "Open Graphics Library - " + LLog);
         glUseProgram(FProgram);
-        GDebug->AOpenGraphicsLibraryError();
-        GDebug->ASimpleDirectMediaLayerCodeError(TTF_Init());
+        GDebug->AAssertOpenGraphicsLibrary();
+        GDebug->AAssertSimpleDirectMediaLayerCode(TTF_Init());
         for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Fonts"})
         {
             if(LEntry.path().extension() == ".ttf")
@@ -51,7 +60,7 @@ namespace NDespair
             }
         }
         FFonts.shrink_to_fit();
-        GDebug->ASimpleDirectMediaLayerMaskError(IMG_Init(IMG_INIT_PNG));
+        GDebug->AAssertSimpleDirectMediaLayerMask(IMG_Init(IMG_INIT_PNG));
         for(const std::filesystem::directory_entry& LEntry : std::filesystem::recursive_directory_iterator{"Textures"})
         {
             if(LEntry.path().extension() == ".png")
@@ -69,9 +78,9 @@ namespace NDespair
     {
         return(FRatio);
     }
-    float CVideo::AInversedRatio()
+    float CVideo::ARatioInversed()
     {
-        return(FInversedRatio);
+        return(FRatioInversed);
     }
     NVideo::CFont* CVideo::AAccessFont(const std::string& PPath)
     {
@@ -79,7 +88,7 @@ namespace NDespair
         {
             std::find_if(FFonts.begin() , FFonts.end() , [&PPath](std::shared_ptr<NVideo::CFont>& LPointer){return(LPointer->AEqual(PPath));})
         };
-        GDebug->AError(LIterator == FFonts.end());
+        GDebug->AAssert(LIterator == FFonts.end());
         return(LIterator->get());
     }
     NVideo::CTexture* CVideo::AAccessSpecificTexture(const std::string& PPath)
@@ -88,7 +97,7 @@ namespace NDespair
         {
             std::find_if(FTextures.begin() , FTextures.end() , [&PPath](std::shared_ptr<NVideo::CTexture>& LPointer){return(LPointer->AEqual(PPath));})
         };
-        GDebug->AError(LIterator == FTextures.end());
+        GDebug->AAssert(LIterator == FTextures.end());
         return(LIterator->get());
     }
     NVideo::CTexture* CVideo::AAccessRandomTexture()
@@ -107,8 +116,8 @@ namespace NDespair
         IMG_Quit();
         FFonts.clear();
         TTF_Quit();
-        FFragment.reset();
-        FVertex.reset();
+        FShaderFragment.reset();
+        FShaderVertex.reset();
         glDeleteProgram(FProgram);
         SDL_GL_DeleteContext(FContext);
         SDL_DestroyWindow(FWindow);

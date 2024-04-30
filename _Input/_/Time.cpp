@@ -5,22 +5,22 @@ namespace NDespair
     CTime::CTime()
     {
         GTime = this;
-        FLast = 0;
-        FAbsolute = 0;
-        FRelative = 0;
+        FTimepointLast = 0;
+        FTimepointAbsolute = 0;
+        FTimepointRelative = 0;
     }
     void CTime::AUpdate()
     {
-        FLast = FAbsolute;
-        FAbsolute = SDL_GetTicks();
-        FRelative = FAbsolute - FLast;
+        FTimepointLast = FTimepointAbsolute;
+        FTimepointAbsolute = SDL_GetTicks();
+        FTimepointRelative = FTimepointAbsolute - FTimepointLast;
     }
     std::uint32_t CTime::AAbsolute()
     {
-        return(FAbsolute);
+        return(FTimepointAbsolute);
     }
     std::uint32_t CTime::ARelative()
     {
-        return(FRelative);
+        return(FTimepointRelative);
     }
 }

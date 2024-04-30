@@ -21,12 +21,12 @@
 std::int32_t main(std::int32_t , char**)
 {
     new NDespair::CDebug;
-    NDespair::GDebug->ASimpleDirectMediaLayerCodeError(SDL_Init(SDL_INIT_EVERYTHING));
-    new NDespair::CTime;
+    NDespair::GDebug->AAssertSimpleDirectMediaLayerCode(SDL_Init(SDL_INIT_EVERYTHING));
+    new NDespair::CNetwork;
     new NDespair::CAudio;
     new NDespair::CInput;
     new NDespair::CVideo;
-    new NDespair::CNetwork;
+    new NDespair::CTime;
     new NDespair::CSpace;
     while(!NDespair::GInput->AIsKeyHeld(SDL_SCANCODE_ESCAPE))
     {
@@ -37,11 +37,11 @@ std::int32_t main(std::int32_t , char**)
         NDespair::GVideo->APostupdate();
     };
     delete NDespair::GSpace;
-    delete NDespair::GNetwork;
+    delete NDespair::GTime;
     delete NDespair::GVideo;
     delete NDespair::GInput;
     delete NDespair::GAudio;
-    delete NDespair::GTime;
+    delete NDespair::GNetwork;
     SDL_Quit();
     delete NDespair::GDebug;
     return(0);

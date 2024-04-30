@@ -6,9 +6,9 @@ namespace NDespair
 {
     inline class CTime
     {
-        private : std::uint32_t FLast;
-        private : std::uint32_t FAbsolute;
-        private : std::uint32_t FRelative;
+        private : std::uint32_t FTimepointLast;
+        private : std::uint32_t FTimepointAbsolute;
+        private : std::uint32_t FTimepointRelative;
 
         public : CTime();
         public : void AUpdate();

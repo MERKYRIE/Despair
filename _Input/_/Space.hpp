@@ -35,6 +35,7 @@ namespace NDespair
 
         private : void IReevaluatePositionXY();
         private : void IReevaluatePositionZ();
+        private : void IReevaluatePositionXYZ();
         private : bool IDoesPartitionExist(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ);
         private : std::intmax_t IEvaluateOffsetX(std::intmax_t PCoordinate);
         private : std::intmax_t IEvaluateOffsetY(std::intmax_t PCoordinate);

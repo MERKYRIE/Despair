@@ -4,6 +4,7 @@
 #include"Audio\\Track.hpp"
 #include"Debug.hpp"
 #include"Input.hpp"
+#include"Network.hpp"
 #include"Video.hpp"
 #include"Video\\Texture.hpp"
 #include"Video\\VertexArrayObject.hpp"
@@ -18,6 +19,11 @@ namespace NDespair
     void CSpace::IReevaluatePositionZ()
     {
         FPositionZ = FSizeZ / 2;
+    }
+    void CSpace::IReevaluatePositionXYZ()
+    {
+        IReevaluatePositionXY();
+        IReevaluatePositionZ();
     }
     bool CSpace::IDoesPartitionExist(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
     {
@@ -86,7 +92,7 @@ namespace NDespair
                 FMatrix[PX][PY][PZ].FTextureNegativeY = nullptr;
             return(true);
         }
-        GDebug->AError();
+        GDebug->AAssert();
         return(false);
     }
     bool CSpace::ICanGenerateShaft(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ){
@@ -99,7 +105,7 @@ namespace NDespair
                 ||
                 !FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeY
                 ||
-                !FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveX
+                !FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveY
             )
             &&
             (
@@ -109,7 +115,7 @@ namespace NDespair
                 ||
                 !FMatrix[PX][PY][PZ].FTextureNegativeY
                 ||
-                !FMatrix[PX][PY][PZ].FTexturePositiveX
+                !FMatrix[PX][PY][PZ].FTexturePositiveY
             )
         );
     }
@@ -134,7 +140,7 @@ namespace NDespair
                 FMatrix[PX][PY][PZ].FTextureNegativeZ = nullptr;
             return(true);
         }
-        GDebug->AError();
+        GDebug->AAssert();
         return(false);
     }
     bool CSpace::IIsCollisionDetected(std::intmax_t PX , std::intmax_t PY , std::intmax_t PZ)
@@ -179,9 +185,7 @@ namespace NDespair
         FSizeX = 100;
         FSizeY = 100;
         FSizeZ = 3;
-        FPositionX = FSizeX / 2;
-        FPositionY = FSizeY / 2;
-        FPositionZ = FSizeZ / 2;
+        IReevaluatePositionXYZ();
         FDirectionX = 0;
         FDirectionY = 1;
         FVision = 10;
@@ -227,143 +231,195 @@ namespace NDespair
                 {0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 1.0F} , {0 , 1 , 2 , 2 , 3 , 0}
             }
         );
-        FMatrix.resize(FSizeX);
-        for(std::intmax_t LX{0} ; LX < FSizeX ; LX++)
+        if(GNetwork->AMode() == "Server")
         {
-            std::cout << "P" << LX << "\n";
-            FMatrix[LX].resize(FSizeY);
-            for(std::intmax_t LY{0} ; LY < FSizeY ; LY++)
+            std::cout << "Waiting for space to generate... (restart it if you are seeing this message for more than a second, it's a bug)" << "\n";
+            FMatrix.resize(FSizeX);
+            for(std::intmax_t LX{0} ; LX < FSizeX ; LX++)
             {
-                FMatrix[LX][LY].resize(FSizeZ);
-                for(std::intmax_t LZ{0} ; LZ < FSizeZ ; LZ++)
+                //std::cout << "P" << LX << "\n";
+                FMatrix[LX].resize(FSizeY);
+                for(std::intmax_t LY{0} ; LY < FSizeY ; LY++)
                 {
-                    FMatrix[LX][LY][LZ].FTextureNegativeX = GVideo->AAccessRandomTexture();
-                    FMatrix[LX][LY][LZ].FTexturePositiveX = GVideo->AAccessRandomTexture();
-                    FMatrix[LX][LY][LZ].FTextureNegativeY = GVideo->AAccessRandomTexture();
-                    FMatrix[LX][LY][LZ].FTexturePositiveY = GVideo->AAccessRandomTexture();
-                    FMatrix[LX][LY][LZ].FTextureNegativeZ = GVideo->AAccessRandomTexture();
-                    FMatrix[LX][LY][LZ].FTexturePositiveZ = GVideo->AAccessRandomTexture();
+                    FMatrix[LX][LY].resize(FSizeZ);
+                    for(std::intmax_t LZ{0} ; LZ < FSizeZ ; LZ++)
+                    {
+                        FMatrix[LX][LY][LZ].FTextureNegativeX = GVideo->AAccessRandomTexture();
+                        FMatrix[LX][LY][LZ].FTexturePositiveX = GVideo->AAccessRandomTexture();
+                        FMatrix[LX][LY][LZ].FTextureNegativeY = GVideo->AAccessRandomTexture();
+                        FMatrix[LX][LY][LZ].FTexturePositiveY = GVideo->AAccessRandomTexture();
+                        FMatrix[LX][LY][LZ].FTextureNegativeZ = GVideo->AAccessRandomTexture();
+                        FMatrix[LX][LY][LZ].FTexturePositiveZ = GVideo->AAccessRandomTexture();
+                    }
+                    FMatrix[LX][LY].shrink_to_fit();
                 }
-                FMatrix[LX][LY].shrink_to_fit();
+                FMatrix[LX].shrink_to_fit();
             }
-            FMatrix[LX].shrink_to_fit();
-        }
-        FMatrix.shrink_to_fit();
-        for(FPositionZ = 0 ; FPositionZ < FSizeZ ; FPositionZ++)
-        {
-            std::cout << "T" << FPositionZ << "\n";
-            IReevaluatePositionXY();
-            std::intmax_t LGenerated{0};
-            for(std::intmax_t LIteration{0} ; LIteration <= 1000 ; LIteration += LGenerated)
+            FMatrix.shrink_to_fit();
+            for(FPositionZ = 0 ; FPositionZ < FSizeZ ; FPositionZ++)
             {
-                std::random_device LGenerator;
-                std::uniform_int_distribution<std::intmax_t> LDistance{3 , 5};
-                std::intmax_t LRequested{LDistance(LGenerator)};
-                std::uniform_int_distribution<std::intmax_t> LDirection{0 , 3};
-                switch(LDirection(LGenerator))
+                //std::cout << "T" << FPositionZ << "\n";
+                IReevaluatePositionXY();
+                std::intmax_t LGenerated{0};
+                for(std::intmax_t LIteration{0} ; LIteration <= 1000 ; LIteration += LGenerated)
                 {
-                    case(0):
-                        LGenerated = 0;
-                        while(LGenerated < LRequested)
-                        {
-                            if(ICanGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ))
+                    std::random_device LGenerator;
+                    std::uniform_int_distribution<std::intmax_t> LDistance{3 , 5};
+                    std::intmax_t LRequested{LDistance(LGenerator)};
+                    std::uniform_int_distribution<std::intmax_t> LDirection{0 , 3};
+                    switch(LDirection(LGenerator))
+                    {
+                        case(0):
+                            LGenerated = 0;
+                            while(LGenerated < LRequested)
                             {
-                                LGenerated += IGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ);
-                                FPositionX++;
+                                if(ICanGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ))
+                                {
+                                    LGenerated += IGenerateTransition(FPositionX + 1 , FPositionY , FPositionZ);
+                                    FPositionX++;
+                                }
+                                else
+                                {
+                                    break;
+                                }
                             }
-                            else
+                        break;
+                        case(1):
+                            LGenerated = 0;
+                            while(LGenerated < LRequested)
                             {
-                                break;
+                                if(ICanGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ))
+                                {
+                                    LGenerated += IGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ);
+                                    FPositionY++;
+                                }
+                                else
+                                {
+                                    break;
+                                }
                             }
-                        }
-                    break;
-                    case(1):
-                        LGenerated = 0;
-                        while(LGenerated < LRequested)
-                        {
-                            if(ICanGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ))
+                        break;
+                        case(2):
+                            LGenerated = 0;
+                            while(LGenerated < LRequested)
                             {
-                                LGenerated += IGenerateTransition(FPositionX , FPositionY + 1 , FPositionZ);
-                                FPositionY++;
+                                if(ICanGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ))
+                                {
+                                    LGenerated += IGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ);
+                                    FPositionX--;
+                                }
+                                else
+                                {
+                                    break;
+                                }
                             }
-                            else
+                        break;
+                        case(3):
+                            LGenerated = 0;
+                            while(LGenerated < LRequested)
                             {
-                                break;
+                                if(ICanGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ))
+                                {
+                                    LGenerated += IGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ);
+                                    FPositionY--;
+                                }
+                                else
+                                {
+                                    break;
+                                }
                             }
-                        }
-                    break;
-                    case(2):
-                        LGenerated = 0;
-                        while(LGenerated < LRequested)
-                        {
-                            if(ICanGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ))
-                            {
-                                LGenerated += IGenerateTransition(FPositionX - 1 , FPositionY , FPositionZ);
-                                FPositionX--;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                    break;
-                    case(3):
-                        LGenerated = 0;
-                        while(LGenerated < LRequested)
-                        {
-                            if(ICanGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ))
-                            {
-                                LGenerated += IGenerateTransition(FPositionX , FPositionY - 1 , FPositionZ);
-                                FPositionY--;
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                    break;
-                }
-            }
-        }
-        IReevaluatePositionZ();
-        for(std::intmax_t LIteration{0} ; LIteration <= 9 ; LIteration++)
-        {
-            std::cout << "D" << LIteration << "\n";
-            bool LGenerated{false};
-            while(!LGenerated)
-            {
-                std::random_device LGenerator;
-                std::uniform_int_distribution<std::intmax_t> LX{0 , FSizeX - 1};
-                std::uniform_int_distribution<std::intmax_t> LY{0 , FSizeY - 1};
-                FPositionX = LX(LGenerator);
-                FPositionY = LY(LGenerator);
-                if(ICanGenerateShaft(FPositionX , FPositionY , FPositionZ - 1))
-                {
-                    LGenerated = IGenerateShaft(FPositionX , FPositionY , FPositionZ - 1);
+                        break;
+                    }
                 }
             }
-        }
-        IReevaluatePositionZ();
-        for(std::intmax_t LIteration{0} ; LIteration <= 9 ; LIteration++)
-        {
-            std::cout << "A" << LIteration << "\n";
-            bool LGenerated{false};
-            while(!LGenerated)
+            IReevaluatePositionZ();
+            for(std::intmax_t LIteration{0} ; LIteration <= 9 ; LIteration++)
             {
-                std::random_device LGenerator;
-                std::uniform_int_distribution<std::intmax_t> LX{0 , FSizeX - 1};
-                std::uniform_int_distribution<std::intmax_t> LY{0 , FSizeY - 1};
-                FPositionX = LX(LGenerator);
-                FPositionY = LY(LGenerator);
-                if(ICanGenerateShaft(FPositionX , FPositionY , FPositionZ + 1))
+                //std::cout << "D" << LIteration << "\n";
+                bool LGenerated{false};
+                while(!LGenerated)
                 {
-                    LGenerated = IGenerateShaft(FPositionX , FPositionY , FPositionZ + 1);
+                    std::random_device LGenerator;
+                    std::uniform_int_distribution<std::intmax_t> LX{0 , FSizeX - 1};
+                    std::uniform_int_distribution<std::intmax_t> LY{0 , FSizeY - 1};
+                    FPositionX = LX(LGenerator);
+                    FPositionY = LY(LGenerator);
+                    if(ICanGenerateShaft(FPositionX , FPositionY , FPositionZ - 1))
+                    {
+                        LGenerated = IGenerateShaft(FPositionX , FPositionY , FPositionZ - 1);
+                    }
                 }
             }
+            IReevaluatePositionZ();
+            for(std::intmax_t LIteration{0} ; LIteration <= 9 ; LIteration++)
+            {
+                //std::cout << "A" << LIteration << "\n";
+                bool LGenerated{false};
+                while(!LGenerated)
+                {
+                    std::random_device LGenerator;
+                    std::uniform_int_distribution<std::intmax_t> LX{0 , FSizeX - 1};
+                    std::uniform_int_distribution<std::intmax_t> LY{0 , FSizeY - 1};
+                    FPositionX = LX(LGenerator);
+                    FPositionY = LY(LGenerator);
+                    if(ICanGenerateShaft(FPositionX , FPositionY , FPositionZ + 1))
+                    {
+                        LGenerated = IGenerateShaft(FPositionX , FPositionY , FPositionZ + 1);
+                    }
+                }
+            }
+            IReevaluatePositionXYZ();
+            std::cout << "Space generated successfully!" << "\n";
+            for(std::intmax_t LX{0} ; LX < FSizeX ; LX++)
+            {
+                for(std::intmax_t LY{0} ; LY < FSizeY ; LY++)
+                {
+                    for(std::intmax_t LZ{0} ; LZ < FSizeZ ; LZ++)
+                    {
+                        GNetwork->ASend(FMatrix[LX][LY][LZ].FTextureNegativeX ? FMatrix[LX][LY][LZ].FTextureNegativeX->APath() : "");
+                        GNetwork->ASend(FMatrix[LX][LY][LZ].FTexturePositiveX ? FMatrix[LX][LY][LZ].FTexturePositiveX->APath() : "");
+                        GNetwork->ASend(FMatrix[LX][LY][LZ].FTextureNegativeY ? FMatrix[LX][LY][LZ].FTextureNegativeY->APath() : "");
+                        GNetwork->ASend(FMatrix[LX][LY][LZ].FTexturePositiveY ? FMatrix[LX][LY][LZ].FTexturePositiveY->APath() : "");
+                        GNetwork->ASend(FMatrix[LX][LY][LZ].FTextureNegativeZ ? FMatrix[LX][LY][LZ].FTextureNegativeZ->APath() : "");
+                        GNetwork->ASend(FMatrix[LX][LY][LZ].FTexturePositiveZ ? FMatrix[LX][LY][LZ].FTexturePositiveZ->APath() : "");
+                    }
+                }
+            }
+            return;
         }
-        IReevaluatePositionXY();
-        IReevaluatePositionZ();
-        GAudio->AAccessTrack("\\Mountain Realm - Grayshadow Ruins.mp3")->AAccessVolume(16)->APlay();
+        if(GNetwork->AMode() == "Client")
+        {
+            FMatrix.resize(FSizeX);
+            for(std::intmax_t LX{0} ; LX < FSizeX ; LX++)
+            {
+                FMatrix[LX].resize(FSizeY);
+                for(std::intmax_t LY{0} ; LY < FSizeY ; LY++)
+                {
+                    FMatrix[LX][LY].resize(FSizeZ);
+                    for(std::intmax_t LZ{0} ; LZ < FSizeZ ; LZ++)
+                    {
+                        std::string LTexture;
+                        LTexture = GNetwork->AReceive();
+                        FMatrix[LX][LY][LZ].FTextureNegativeX = !LTexture.empty() ? GVideo->AAccessSpecificTexture(LTexture) : nullptr;
+                        LTexture = GNetwork->AReceive();
+                        FMatrix[LX][LY][LZ].FTexturePositiveX = !LTexture.empty() ? GVideo->AAccessSpecificTexture(LTexture) : nullptr;
+                        LTexture = GNetwork->AReceive();
+                        FMatrix[LX][LY][LZ].FTextureNegativeY = !LTexture.empty() ? GVideo->AAccessSpecificTexture(LTexture) : nullptr;
+                        LTexture = GNetwork->AReceive();
+                        FMatrix[LX][LY][LZ].FTexturePositiveY = !LTexture.empty() ? GVideo->AAccessSpecificTexture(LTexture) : nullptr;
+                        LTexture = GNetwork->AReceive();
+                        FMatrix[LX][LY][LZ].FTextureNegativeZ = !LTexture.empty() ? GVideo->AAccessSpecificTexture(LTexture) : nullptr;
+                        LTexture = GNetwork->AReceive();
+                        FMatrix[LX][LY][LZ].FTexturePositiveZ = !LTexture.empty() ? GVideo->AAccessSpecificTexture(LTexture) : nullptr;
+                    }
+                    FMatrix[LX][LY].shrink_to_fit();
+                }
+                FMatrix[LX].shrink_to_fit();
+            }
+            FMatrix.shrink_to_fit();
+            GAudio->AAccessTrack("\\Mountain Realm - Grayshadow Ruins.mp3")->AAccessVolume(16)->APlay();
+            return;
+        }
     }
     void CSpace::AUpdate()
     {
@@ -459,40 +515,40 @@ namespace NDespair
                     glm::mat4 LModel{1.0F};
                     LModel = glm::translate(LModel , glm::vec3{LX , LY , LZ});
                     glUniformMatrix4fv(5 , 1 , GL_FALSE , &LModel[0][0]);
-                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeX)
+                    if(FMatrix[LX][LY][LZ].FTextureNegativeX)
                     {
                         glBindVertexArray(FVertexArrayObjectNegativeX->AIdentifier());
-                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeX->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[LX][LY][LZ].FTextureNegativeX->AIdentifier());
                         glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
                     }
-                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveX)
+                    if(FMatrix[LX][LY][LZ].FTexturePositiveX)
                     {
                         glBindVertexArray(FVertexArrayObjectPositiveX->AIdentifier());
-                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveX->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[LX][LY][LZ].FTexturePositiveX->AIdentifier());
                         glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
                     }
-                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeY)
+                    if(FMatrix[LX][LY][LZ].FTextureNegativeY)
                     {
                         glBindVertexArray(FVertexArrayObjectNegativeY->AIdentifier());
-                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeY->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[LX][LY][LZ].FTextureNegativeY->AIdentifier());
                         glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
                     }
-                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveY)
+                    if(FMatrix[LX][LY][LZ].FTexturePositiveY)
                     {
                         glBindVertexArray(FVertexArrayObjectPositiveY->AIdentifier());
-                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveY->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[LX][LY][LZ].FTexturePositiveY->AIdentifier());
                         glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
                     }
-                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeZ)
+                    if(FMatrix[LX][LY][LZ].FTextureNegativeZ)
                     {
                         glBindVertexArray(FVertexArrayObjectNegativeZ->AIdentifier());
-                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTextureNegativeZ->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[LX][LY][LZ].FTextureNegativeZ->AIdentifier());
                         glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
                     }
-                    if(FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveZ)
+                    if(FMatrix[LX][LY][LZ].FTexturePositiveZ)
                     {
                         glBindVertexArray(FVertexArrayObjectPositiveZ->AIdentifier());
-                        glBindTexture(GL_TEXTURE_2D , FMatrix[FPositionX][FPositionY][FPositionZ].FTexturePositiveZ->AIdentifier());
+                        glBindTexture(GL_TEXTURE_2D , FMatrix[LX][LY][LZ].FTexturePositiveZ->AIdentifier());
                         glDrawElements(GL_TRIANGLES , 6 , GL_UNSIGNED_INT , nullptr);
                     }
                 }

@@ -9,9 +9,9 @@ namespace NDespair
         private : SDL_Window* FWindow;
         private : SDL_GLContext FContext;
         private : float FRatio;
-        private : float FInversedRatio;
-        private : std::shared_ptr<NVideo::CShader> FVertex;
-        private : std::shared_ptr<NVideo::CShader> FFragment;
+        private : float FRatioInversed;
+        private : std::shared_ptr<NVideo::CShader> FShaderVertex;
+        private : std::shared_ptr<NVideo::CShader> FShaderFragment;
         private : std::uint32_t FProgram;
         private : std::vector<std::shared_ptr<NVideo::CFont>> FFonts;
         private : std::vector<std::shared_ptr<NVideo::CTexture>> FTextures;
@@ -19,7 +19,7 @@ namespace NDespair
         public : CVideo();
         public : void APreupdate();
         public : float ARatio();
-        public : float AInversedRatio();
+        public : float ARatioInversed();
         public : NVideo::CFont* AAccessFont(const std::string& PPath);
         public : NVideo::CTexture* AAccessSpecificTexture(const std::string& PPath);
         public : NVideo::CTexture* AAccessRandomTexture();
