@@ -23,6 +23,11 @@ namespace NDespair::NVideo
     {
         return(FIdentifier);
     }
+    CCharacter* CCharacter::ABind()
+    {
+        glBindTexture(GL_TEXTURE_2D , FIdentifier);
+        return this;
+    }
     CCharacter::~CCharacter()
     {
         glDeleteTextures(1 , &FIdentifier);

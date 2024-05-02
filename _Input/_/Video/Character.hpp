@@ -10,6 +10,7 @@ namespace NDespair::NVideo
 
         public : CCharacter(TTF_Font* PFont , char PCode);
         public : std::uint32_t AIdentifier();
+        public : CCharacter* ABind();
         public : ~CCharacter();
     };
 }

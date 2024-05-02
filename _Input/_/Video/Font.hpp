@@ -12,7 +12,8 @@ namespace NDespair::NVideo
         private : std::vector<std::shared_ptr<CCharacter>> FLowercases;
 
         public : CFont(const std::string& PPath);
-        public : bool AEqual(const std::string& PPath);
+        public : std::string APath();
+        public : bool AIs(const std::string& PPath);
         public : CCharacter* AAccessDigit(char PCode);
         public : CCharacter* AAccessUppercase(char PCode);
         public : CCharacter* AAccessLowercase(char PCode);

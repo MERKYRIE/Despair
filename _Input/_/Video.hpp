@@ -20,6 +20,7 @@ namespace NDespair
         public : void APreupdate();
         public : float ARatio();
         public : float ARatioInversed();
+        public : std::uint32_t AProgram();
         public : NVideo::CFont* AAccessFont(const std::string& PPath);
         public : NVideo::CTexture* AAccessSpecificTexture(const std::string& PPath);
         public : NVideo::CTexture* AAccessRandomTexture();

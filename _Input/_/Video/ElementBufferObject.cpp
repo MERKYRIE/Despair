@@ -4,7 +4,7 @@
 
 namespace NDespair::NVideo
 {
-    CElementBufferObject::CElementBufferObject(const std::array<std::uint32_t , 36>& PElements)
+    CElementBufferObject::CElementBufferObject(const std::array<std::uint32_t , 6>& PElements)
     {
         glGenBuffers(1 , &FIdentifier);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER , FIdentifier);

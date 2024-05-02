@@ -28,7 +28,11 @@ namespace NDespair::NVideo
         FLowercases.shrink_to_fit();
         TTF_CloseFont(LFont);
     }
-    bool CFont::AEqual(const std::string& PPath)
+    std::string CFont::APath()
+    {
+        return FPath;
+    }
+    bool CFont::AIs(const std::string& PPath)
     {
         return(FPath == PPath);
     }

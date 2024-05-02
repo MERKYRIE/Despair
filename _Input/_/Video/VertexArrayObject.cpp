@@ -7,7 +7,7 @@
 
 namespace NDespair::NVideo
 {
-    CVertexArrayObject::CVertexArrayObject(const std::array<float , 120>& PVertices , const std::array<std::uint32_t , 36>& PElements)
+    CVertexArrayObject::CVertexArrayObject(const std::array<float , 20>& PVertices , const std::array<std::uint32_t , 6>& PElements)
     {
         glGenVertexArrays(1 , &FIdentifier);
         glBindVertexArray(FIdentifier);
@@ -22,6 +22,11 @@ namespace NDespair::NVideo
     std::uint32_t CVertexArrayObject::AIdentifier()
     {
         return(FIdentifier);
+    }
+    CVertexArrayObject* CVertexArrayObject::ABind()
+    {
+        glBindVertexArray(FIdentifier);
+        return this;
     }
     CVertexArrayObject::~CVertexArrayObject()
     {

@@ -15,14 +15,7 @@ namespace NDespair
         GDebug->AAssertSimpleDirectMediaLayerCode(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION , 4));
         GDebug->AAssertSimpleDirectMediaLayerCode(SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION , 6));
         GDebug->AAssertSimpleDirectMediaLayerCode(SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK , SDL_GL_CONTEXT_PROFILE_CORE));
-        if(GNetwork->AMode() == "Server")
-        {
-            GDebug->AAssertSimpleDirectMediaLayerHandle(FWindow = SDL_CreateWindow(GNetwork->AMode().data() , 9 , 31 , 640 , 480 , SDL_WINDOW_OPENGL));
-        }
-        if(GNetwork->AMode() == "Client")
-        {
-            GDebug->AAssertSimpleDirectMediaLayerHandle(FWindow = SDL_CreateWindow(GNetwork->AMode().data() , 9 , 31 , 640 , 480 , SDL_WINDOW_OPENGL));
-        }
+        GDebug->AAssertSimpleDirectMediaLayerHandle(FWindow = SDL_CreateWindow(GNetwork->AMode().data() , 9 , 31 , 640 , 480 , SDL_WINDOW_OPENGL));
         GDebug->AAssertSimpleDirectMediaLayerHandle(FContext = SDL_GL_CreateContext(FWindow));
         GDebug->AAssertSimpleDirectMediaLayerCode(SDL_GL_SetSwapInterval(0));
         SDL_DisplayMode LDisplayMode;
@@ -41,8 +34,8 @@ namespace NDespair
         std::int32_t LLength;
         std::string LLog;
         FProgram = glCreateProgram();
-        glAttachShader(FProgram , FShaderVertex->AIdentifier());
-        glAttachShader(FProgram , FShaderFragment->AIdentifier());
+        FShaderVertex->AAttach();
+        FShaderFragment->AAttach();
         glLinkProgram(FProgram);
         glGetProgramiv(FProgram , GL_LINK_STATUS , &LSuccess);
         glGetProgramiv(FProgram , GL_INFO_LOG_LENGTH , &LLength);
@@ -82,11 +75,15 @@ namespace NDespair
     {
         return(FRatioInversed);
     }
+    std::uint32_t CVideo::AProgram()
+    {
+        return FProgram;
+    }
     NVideo::CFont* CVideo::AAccessFont(const std::string& PPath)
     {
         std::vector<std::shared_ptr<NVideo::CFont>>::iterator LIterator
         {
-            std::find_if(FFonts.begin() , FFonts.end() , [&PPath](std::shared_ptr<NVideo::CFont>& LPointer){return(LPointer->AEqual(PPath));})
+            std::find_if(FFonts.begin() , FFonts.end() , [&PPath](std::shared_ptr<NVideo::CFont>& LPointer){return(LPointer->AIs(PPath));})
         };
         GDebug->AAssert(LIterator == FFonts.end());
         return(LIterator->get());
@@ -95,7 +92,7 @@ namespace NDespair
     {
         std::vector<std::shared_ptr<NVideo::CTexture>>::iterator LIterator
         {
-            std::find_if(FTextures.begin() , FTextures.end() , [&PPath](std::shared_ptr<NVideo::CTexture>& LPointer){return(LPointer->AEqual(PPath));})
+            std::find_if(FTextures.begin() , FTextures.end() , [&PPath](std::shared_ptr<NVideo::CTexture>& LPointer){return(LPointer->AIs(PPath));})
         };
         GDebug->AAssert(LIterator == FTextures.end());
         return(LIterator->get());

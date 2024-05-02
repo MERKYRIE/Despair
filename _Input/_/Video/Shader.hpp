@@ -10,6 +10,7 @@ namespace NDespair::NVideo
 
         public : CShader(const std::string& PPath , std::uint32_t PType);
         public : std::uint32_t AIdentifier();
+        public : CShader* AAttach();
         public : ~CShader();
     };
 }

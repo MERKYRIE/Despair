@@ -10,8 +10,9 @@ namespace NDespair::NVideo
         private : std::shared_ptr<CVertexBufferObject> FVertexBufferObject;
         private : std::shared_ptr<CElementBufferObject> FElementBufferObject;
 
-        public : CVertexArrayObject(const std::array<float , 120>& PVertices , const std::array<std::uint32_t , 36>& PElements);
+        public : CVertexArrayObject(const std::array<float , 20>& PVertices , const std::array<std::uint32_t , 6>& PElements);
         public : std::uint32_t AIdentifier();
+        public : CVertexArrayObject* ABind();
         public : ~CVertexArrayObject();
     };
 }

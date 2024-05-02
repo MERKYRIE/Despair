@@ -4,7 +4,7 @@
 
 namespace NDespair::NVideo
 {
-    CVertexBufferObject::CVertexBufferObject(const std::array<float , 120>& PVertices)
+    CVertexBufferObject::CVertexBufferObject(const std::array<float , 20>& PVertices)
     {
         glGenBuffers(1 , &FIdentifier);
         glBindBuffer(GL_ARRAY_BUFFER , FIdentifier);

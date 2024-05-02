@@ -10,9 +10,10 @@ namespace NDespair::NVideo
         private : std::uint32_t FIdentifier;
 
         public : CTexture(const std::string& PPath);
-        public : bool AEqual(const std::string& PPath);
         public : std::string APath();
+        public : bool AIs(const std::string& PPath);
         public : std::uint32_t AIdentifier();
+        public : CTexture* ABind();
         public : ~CTexture();
     };
 }

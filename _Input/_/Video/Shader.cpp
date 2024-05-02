@@ -1,6 +1,7 @@
 #include"Shader.hpp"
 
 #include"Debug.hpp"
+#include"Video.hpp"
 
 namespace NDespair::NVideo
 {
@@ -26,6 +27,11 @@ namespace NDespair::NVideo
     std::uint32_t CShader::AIdentifier()
     {
         return(FIdentifier);
+    }
+    CShader* CShader::AAttach()
+    {
+        glAttachShader(GVideo->AProgram() , FIdentifier);
+        return this;
     }
     CShader::~CShader()
     {

@@ -10,6 +10,7 @@ namespace NDespair::NAudio
         private : Mix_Music* FHandle;
 
         public : CTrack(const std::string& PPath);
+        public : std::string APath();
         public : bool AIs(const std::string& PPath);
         public : CTrack* APlay();
         public : CTrack* APause();

@@ -20,17 +20,22 @@ namespace NDespair::NVideo
         SDL_FreeSurface(LConverted);
         SDL_FreeSurface(LSurface);
     }
-    bool CTexture::AEqual(const std::string& PPath)
-    {
-        return(FPath == PPath);
-    }
     std::string CTexture::APath()
     {
         return FPath;
     }
+    bool CTexture::AIs(const std::string& PPath)
+    {
+        return(FPath == PPath);
+    }
     std::uint32_t CTexture::AIdentifier()
     {
         return(FIdentifier);
+    }
+    CTexture* CTexture::ABind()
+    {
+        glBindTexture(GL_TEXTURE_2D , FIdentifier);
+        return this;
     }
     CTexture::~CTexture()
     {
