@@ -5,6 +5,7 @@
 #include"Debug.hpp"
 #include"Input.hpp"
 #include"Network.hpp"
+#include"Time.hpp"
 #include"Video.hpp"
 #include"Video\\Texture.hpp"
 #include"Video\\VertexArrayObject.hpp"
@@ -142,7 +143,8 @@ namespace NDespair
             }
         }
     }
-    bool CSpace::ICanGenerateTransitionVertical(const std::intmax_t& PX , const std::intmax_t& PY , const std::intmax_t& PZ){
+    bool CSpace::ICanGenerateTransitionVertical(const std::intmax_t& PX , const std::intmax_t& PY , const std::intmax_t& PZ)
+    {
         return
         (
             (
@@ -248,6 +250,7 @@ namespace NDespair
         (
             FVertexArrayObjectPositiveZ , {0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 0.0F , 1.0F , 0.0F , 1.0F , 1.0F , 0.0F , 1.0F , 1.0F , 1.0F , 1.0F , 1.0F}
         );
+        FTimer = 0;
         if(GNetwork->AMode() == "Server")
         {
             std::cout << "Waiting for space to generate... (restart it if you are seeing this message for more than a second, it's a bug)" << "\n";
@@ -420,6 +423,84 @@ namespace NDespair
         );
         LView = glm::translate(LView , -glm::vec3{FTranslationX + 0.5F , FTranslationY + 0.5F , FTranslationZ + 0.5F});
         glUniformMatrix4fv(4 , 1 , GL_FALSE , &LView[0][0]);
+        FTimer += GTime->ARelative();
+        if(FTimer >= 5000)
+        {
+            FTimer = 0;
+            for
+            (
+                std::intmax_t LX{std::clamp<std::intmax_t>(FTranslationX - FVision , 0 , FSizeX - 1)}
+                ;
+                LX <= std::clamp<std::intmax_t>(FTranslationX + FVision , 0 , FSizeX - 1)
+                ;
+                LX++
+            )
+            {
+                for
+                (
+                    std::intmax_t LY{std::clamp<std::intmax_t>(FTranslationY - FVision , 0 , FSizeY - 1)}
+                    ;
+                    LY <= std::clamp<std::intmax_t>(FTranslationY + FVision , 0 , FSizeY - 1)
+                    ;
+                    LY++
+                )
+                {
+                        if(!(GTime->AAbsolute() / 5000 % 2))
+                        {
+                            if(!FMatrix[LX][LY][0].FTextureNegativeZ)
+                            {
+                                FMatrix[LX][LY][0].FTextureNegativeZ = FMatrix[LX][LY][1].FTextureNegativeZ;
+                                FMatrix[LX][LY][0].FTexturePositiveZ = nullptr;
+                                FMatrix[LX][LY][1].FTextureNegativeZ = nullptr;
+                                if(FTranslationX == LX && FTranslationY == LY)
+                                {
+                                    FTranslationZ = 0;
+                                }
+                                continue;
+                            }
+                            if(!FMatrix[LX][LY][1].FTextureNegativeZ)
+                            {
+                                FMatrix[LX][LY][0].FTexturePositiveZ = FMatrix[LX][LY][0].FTextureNegativeZ;
+                                FMatrix[LX][LY][1].FTextureNegativeZ = FMatrix[LX][LY][0].FTextureNegativeZ;
+                                FMatrix[LX][LY][0].FTextureNegativeZ = nullptr;
+                                if(FTranslationX == LX && FTranslationY == LY)
+                                {
+                                    FTranslationZ = 1;
+                                }
+                                continue;
+                            }
+                        }
+                        if(GTime->AAbsolute() / 5000 % 2)
+                        {
+                            std::random_device LGenerator;
+                            std::intmax_t LDeltaX{std::uniform_int_distribution<std::intmax_t>{-1 , +1}(LGenerator)};
+                            std::intmax_t LDeltaY{std::uniform_int_distribution<std::intmax_t>{-1 , +1}(LGenerator)};
+                            if(!FMatrix[LX][LY][0].FTextureNegativeZ)
+                            {
+                                std::swap(FMatrix[LX][LY][0].FTextureNegativeZ , FMatrix[LX + LDeltaX][LY + LDeltaY][0].FTextureNegativeZ);
+                                std::swap(FMatrix[LX][LY][0].FTexturePositiveZ , FMatrix[LX + LDeltaX][LY + LDeltaY][0].FTexturePositiveZ);
+                                if(FTranslationX == LX && FTranslationY == LY && FTranslationZ == 0)
+                                {
+                                    FTranslationX += LDeltaX;
+                                    FTranslationY += LDeltaY;
+                                }
+                                continue;
+                            }
+                            if(!FMatrix[LX][LY][1].FTextureNegativeZ)
+                            {
+                                std::swap(FMatrix[LX][LY][1].FTextureNegativeZ , FMatrix[LX + LDeltaX][LY + LDeltaY][1].FTextureNegativeZ);
+                                std::swap(FMatrix[LX][LY][1].FTexturePositiveZ , FMatrix[LX + LDeltaX][LY + LDeltaY][1].FTexturePositiveZ);
+                                if(FTranslationX == LX && FTranslationY == LY && FTranslationZ == 1)
+                                {
+                                    FTranslationX += LDeltaX;
+                                    FTranslationY += LDeltaY;
+                                }
+                                continue;
+                            }
+                        }
+                }
+            }
+        }
         for
         (
             std::intmax_t LX{std::clamp<std::intmax_t>(FTranslationX - FVision , 0 , FSizeX - 1)}

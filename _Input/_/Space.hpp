@@ -31,6 +31,7 @@ namespace NDespair
         private : std::shared_ptr<NVideo::CVertexArrayObject> FVertexArrayObjectPositiveY;
         private : std::shared_ptr<NVideo::CVertexArrayObject> FVertexArrayObjectNegativeZ;
         private : std::shared_ptr<NVideo::CVertexArrayObject> FVertexArrayObjectPositiveZ;
+        private : std::intmax_t FTimer;
         private : std::vector<std::vector<std::vector<SPartition>>> FMatrix;
 
         private : void IReevaluateTranslation(std::intmax_t& PTranslation , const std::intmax_t& PSize);
